@@ -1,0 +1,75 @@
+/* --------- AJUSTES PARA TELAS GRANDES --------- */
+
+/* Define a altura total do container para ocupar todo o espaço vertical */
+.container {
+    height: 100%;    
+}
+
+/* Estilização da barra lateral */
+.sidenav {
+    width: 13rem; /* Define a largura fixa da barra lateral */
+    background: rgb(39, 141, 45); /* Tom verde escuro para o fundo */
+}
+
+/* Estilização para imagens */
+img{
+    width: 100%; /* Imagem ocupa toda a largura do container */
+    height: 12rem; /* Altura fixa da imagem */ 
+}
+
+ /* Ajustes específicos para ícones */
+ .sidenav i {
+    margin: 1rem 0.5rem 1.5rem 0.2rem; /* Margens dos ícones */
+    font-size: 1.254rem; /* Ajuste do tamanho do ícone */   
+ }
+ 
+ /* Estilo para o texto do link */
+ .link-text {
+    font-size: 22.5px;
+    font-weight: 50;
+ }
+
+ .menu {
+    margin: 0.5rem 1rem 1rem 1rem; /* Margens do botão */
+    color: white; 
+    background-color: rgb(39, 141, 45); /* Tom verde escuro para o botão */;
+ }
+ 
+ /* --------- AJUSTE RESPONSIVO PARA TELAS MENORES --------- */
+@media (max-width: 768px) {
+
+    .container {
+        flex-direction: column; /* Alinha os itens em coluna para melhor aproveitamento de espaço */
+    }
+
+   .sidenav {
+       width: 2.6rem; /* Reduz a largura para mostrar apenas ícones */
+   }
+
+   .sidenav-content {
+       flex: 1;
+       padding: 1rem;
+   }
+
+   .sidenav img {
+       display: none; /* Oculta imagem */
+   }
+
+   .sidenav .link-text {
+       display: none; /* Oculta o texto */
+   }
+
+   .sidenav a {
+        padding: 1rem 0; /* Ajusta o espaçamento ao redor do ícone */
+        margin-top: 0.7rem;
+   }
+
+   .sidenav i {
+       font-size: 1.9rem; /* Ajuste do tamanho do ícone para tela menor */
+       margin-right: 0; /* Remove o espaçamento extra */
+       margin-top: rem;
+   }
+   .menu {
+    display: none; /* Oculta o botão de menu em telas menores */
+ }
+}

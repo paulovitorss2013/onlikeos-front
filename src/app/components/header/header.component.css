@@ -1,0 +1,31 @@
+.container {
+    margin-top: 1rem;
+}
+
+/* Estilos do h1 (título principal) */
+h1 {
+    color: black; /* Define a cor do texto como preto */
+    padding: 0.5rem 15%; /* Reduz o espaçamento interno (padding) do título */
+    border-radius: 2rem; /* Arredonda os cantos do elemento h1 */
+    font-size: 1.3rem; /* Define o tamanho da fonte */
+    text-align: center; /* Centraliza o texto dentro do h1 */
+
+    /* Redução do tamanho do fundo */
+    width: fit-content; /* Ajusta a largura para o conteúdo, reduzindo o background */
+    margin: 0 auto; /* Centraliza o h1 no container */
+    
+    /* Efeitos adicionais */
+    background: linear-gradient(90deg, #398541 0%, rgba(0, 0, 0, 0) 100%); /* Gradiente preto com verde escuro */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Adiciona uma leve sombra para destaque */
+}
+/* --------- AJUSTE RESPONSIVO PARA TELAS MENORES --------- */
+
+@media (max-width: 768px) {
+    h1 {
+        padding: 0.1rem 5%; /* Reduz o espaçamento interno (padding) do título */
+        border-radius: 3rem; /* Arredonda os cantos do elemento h1 */
+        font-size: 1rem; /* Define o tamanho da fonte */
+        text-align: center; /* Centraliza o texto dentro do h1 */
+        margin: auto;
+    }
+}
