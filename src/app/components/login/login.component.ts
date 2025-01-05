@@ -14,25 +14,37 @@ export class LoginComponent implements OnInit {
   
   constructor(
     private toast: ToastrService,
-    private service: AuthService,
-    private router: Router
+    private service: AuthService
   ) {}
   
   creds: Credenciais = {
     email: '',
-    senha: '',
+    senha: ''
   };
 
   ngOnInit(): void {}
 
-  // MÉTODO PARA O LOGIN
+  // MÉTODO PARA LOGIN
 
-  logar() {
-  
-    this.toast.error('Usuário e/ou senha inválido(s)!', 'Login');
-    this.creds.senha= '';
+  logar(): void {
+    this.service.authenticate(this.creds).subscribe(
+      resposta => {
+        const authorization = resposta.headers.get('Authorization');
+        if (authorization) {
+          this.toast.info(authorization);
+        } else {
+          this.toast.error('Cabeçalho de autorização não encontrado');
+        }
+      },
+      () => {
+        this.toast.error('Usuário e/ou senha inválidos');
+      }
+    );
   }
   
+
+
+
  // GRUPO DE CONTROLE DE FORMULÁRIOS
 
   loginForm = new FormGroup({
