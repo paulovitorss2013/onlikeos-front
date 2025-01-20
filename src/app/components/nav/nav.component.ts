@@ -12,6 +12,6 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     //NAVEGANDO PARA A ROTA HOME
-    this.router.navigate(['login'])
+    this.router.navigate(['']) 
   }
 }
