@@ -42,14 +42,17 @@ export class LoginComponent implements OnInit {
   // MÉTODO PARA LOGAR NO SISTEMA
 
   logar(): void {
+
+    // FAZENDO A VALIDAÇÃO DOS CAMPOS PARA ATIVAR O BOTÃO DE LOGAR
     this.creds.email = this.loginForm.get('email')?.getRawValue() ?? '';
     this.creds.senha = this.loginForm.get('senha')?.getRawValue() ?? '';
-  
     if (!this.validaCampos()) {
       this.toast.warning('Por favor, preencha todos os campos corretamente.');
       return;
     }
-  
+    
+    // CHAMANDO O SERVIÇ
+
     this.service.authenticate(this.creds).subscribe({
       next: (resposta) => {
         console.log('Resposta completa da API:', resposta); // Verificar a resposta da API
@@ -57,7 +60,6 @@ export class LoginComponent implements OnInit {
           const authorization = resposta.headers.get('Authorization')!;
           console.log('Cabeçalho Authorization recebido:', authorization); // Verificar o token
           this.service.successfulLogin(authorization.substring(7));
-          console.log('Token armazenado com sucesso. Redirecionando para home...');
           this.router.navigate(['home']).then(() => {
             console.log('Redirecionado para home com sucesso.');
           }).catch((err) => {

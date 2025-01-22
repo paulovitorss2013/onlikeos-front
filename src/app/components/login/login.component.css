@@ -1,4 +1,4 @@
-/* Ajuste global para layout responsivo */
+/* AJUSTE GLOBAL PARA LAYOUT RESPONSIVO */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -19,7 +19,7 @@ html, body {
     padding: 2vh;
 }
 
-/* Formulário compacto e adaptável */
+/* FORMULÁRIO COMPACTO E ADAPTÁVEL */
 .form {
     width: 90%;
     max-width: 30rem;
@@ -30,14 +30,14 @@ html, body {
     overflow-y: auto;
 }
 
-/* Título adaptável */
+/* TÍTULO ADAPTÁVEL */
 h1 {
     text-align: center;
     margin: clamp(1rem, 2vh, 1.5rem) 0;
     font-size: clamp(1.2rem, 1vw + 1rem, 1.5rem);
 }
 
-/* Imagem responsiva */
+/* IMAGEM RESPONSIVA */
 img {
     height: auto;
     max-height: 10rem;
@@ -46,13 +46,13 @@ img {
     display: block;
 }
 
-/* Campos de entrada */
+/* ESTILO CAMPOS DE ENTRADA */
 .full-width {
     width: 100%;
     margin-top: clamp(0.5rem, 1vh, 0.8rem);
 }
 
-/* Botão */
+/* ESTILO DO BOTÃO */
 button {
     margin-top: clamp(1rem, 2vh, 1.2rem);
     background-color: rgb(39, 141, 45);
@@ -61,7 +61,7 @@ button {
     padding: clamp(0.6rem, 1vh, 0.8rem);
     width: 100%;
 }
-/* Controle da cor dinâmica do botão */
+/* CONTROLE DA COR DINÂMICA DO BOTÃO */
 .disabled-button {
     background-color: #e0e0e0; /* Cinza claro */
     color: #9e9e9e; /* Texto cinza */

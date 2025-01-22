@@ -1,20 +1,20 @@
 /* --------- AJUSTES PARA TELAS GRANDES --------- */
 
-/* Estilos para o card */
+/* ESTILOS PARA O CARD */
 .card {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave para destacar o card */
     width: 90%;
     margin: auto;
 }
 
-/* Estilo para a imagem do card */
+/* ESTILO PARA A IMAGEM DO CARD */
 .card img {
     width: 30%; /* Ocupa toda a largura disponível do contêiner */
     margin: 1rem auto; /* Ajusta o espaçamento ao redor */
     display: flex; /* Garante que a imagem seja tratada como um bloco */
 }
 
-/* Estilo para ações do card */
+/* ESTILO PARA AÇÕES DO CARD */
 mat-card-actions {
     display: flex;
     justify-content: center; /* Centraliza os botões horizontalmente */
@@ -24,7 +24,7 @@ mat-card-actions {
     width: 100%;
 }
 
-/* Estilo para os botões */
+/* ESTILO PARA OS BOTÕES */
 mat-card-actions button {
     background-color: rgb(39, 141, 45); /* Tom verde escuro */
     color: rgb(0, 0, 0); /* Cor do texto */
@@ -35,7 +35,7 @@ mat-card-actions button {
     cursor: pointer; /* Altera o cursor para indicar que é clicável */
 }
 
-/* Efeito de hover para os botões */
+/* EFEITO DE HOVER PARA OS BOTÕES */
 mat-card-actions button:hover {
     background-color: #6ac26a; /* Tom mais claro ao passar o mouse */
 }

@@ -1,29 +1,29 @@
 /* --------- AJUSTES PARA TELAS GRANDES --------- */
 
-/* Define a altura total do container para ocupar todo o espaço vertical */
+/* DEFINE A ALTURA TOTAL DO CONTAINER PARA OCUPAR TODO O ESPAÇO VERTICAL */
 .container {
     height: 100%;    
 }
 
-/* Estilização da barra lateral */
+/* ESTILIZAÇÃO DA BARRA LATERAL */
 .sidenav {
     width: 13rem; /* Define a largura fixa da barra lateral */
     background: rgb(39, 141, 45); /* Tom verde escuro para o fundo */
 }
 
-/* Estilização para imagens */
+/* ESTILIZAÇÃO PARA IMAGENS */
 img{
     width: 100%; /* Imagem ocupa toda a largura do container */
     height: 12rem; /* Altura fixa da imagem */ 
 }
 
- /* Ajustes específicos para ícones */
+ /* AJUSTES ESPECÍFICOS PARA ÍCONES */
  .sidenav i {
     margin: 1rem 0.5rem 1.5rem 0.2rem; /* Margens dos ícones */
     font-size: 1.254rem; /* Ajuste do tamanho do ícone */   
  }
  
- /* Estilo para o texto do link */
+ /* ESTILO PARA O TEXTO DO ÍCONE */
  .link-text {
     font-size: 22.5px;
     font-weight: 50;

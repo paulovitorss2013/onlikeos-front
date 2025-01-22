@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // PARA REALIZAR REQUISIÇÕES HTTP
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // IMPORTS PARA COMPONENTES DO ANGULAR MATERIAL
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -27,7 +28,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 
-
 // PARA HABILITAR ANIMAÇÕES ASSÍNCRONAS NO ANGULAR
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
@@ -42,6 +42,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { TecnicoListComponent } from './components/tecnico/tecnico-list/tecnico-list.component';
 import { LoginComponent } from './components/login/login.component';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+
+// IMPORTA O INTERCEPTOR DE AUTENTICAÇÃO
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -74,12 +77,13 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
     MatTabGroup,
     //CONFIGURAÇÃO DO SERVIÇO DE MENSAGEM
     ToastrModule.forRoot({
-      timeOut:4000,
-      closeButton:true,
-      progressBar:true
+      timeOut: 4000,
+      closeButton: true,
+      progressBar: true
     })
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, // Registra o AuthInterceptor
     provideClientHydration(),
     provideAnimationsAsync(),
     provideHttpClient(withFetch())  // Habilita o uso da API fetch

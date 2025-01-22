@@ -11,14 +11,14 @@ const routes: Routes = [
   {
     path: '',
     component: NavComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard.canActivate],
     children: [
       { path: 'home', component: HomeComponent },
       { path: 'tecnicos', component: TecnicoListComponent },
-      { path: '', redirectTo: 'home', pathMatch: 'full' }, // Redireciona para home
+      { path: '', redirectTo: 'home', pathMatch: 'full' }, // REDIRECIONA PARA HOME
     ],
   },
-  { path: '**', redirectTo: 'login' }, // Rota coringa para rotas inexistentes
+  { path: '**', redirectTo: 'login' }, // ROTA CORINGA PARA AS OUTRAS ROTAS
 ];
 
 @NgModule({
