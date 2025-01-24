@@ -2,37 +2,44 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Tecnico } from '../../../models/tecnico';
+import { TecnicoService } from '../../../services/tecnico.service';
 
 @Component({
   selector: 'app-tecnico-list',
   templateUrl: './tecnico-list.component.html',
   styleUrls: ['./tecnico-list.component.css'] // Correção aqui
 })
-export class TecnicoListComponent implements OnInit, AfterViewInit {
+export class TecnicoListComponent implements OnInit {
 
-  ELEMENT_DATA: Tecnico[] = [
-    {
-      id: 1,
-      nome: 'Onlike',
-      cpf: '123.456.789-10',
-      email: 'onliketelecom@gmail.com',
-      senha: '1234',
-      perfils:['0'],
-      dataCriacao: '01/01/2023'
-    }
-  ]
+  ELEMENT_DATA: Tecnico[] = []
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['nome', 'cpf', 'acoes'];
   dataSource = new MatTableDataSource<Tecnico>(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor() {}
+  constructor(
+    private service:TecnicoService
 
-  ngOnInit(): void {}
+  ) {}
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
+  ngOnInit(): void {
+    this.findAll();
   }
-}
 
+  // MÉTODO PARA BUSCAR TODOS OS TÉCNICOS
+
+  findAll() {
+    this.service.findAll().subscribe(resposta => {
+      this.ELEMENT_DATA = resposta;
+      this.dataSource = new MatTableDataSource<Tecnico>(this.ELEMENT_DATA);
+      this.dataSource.paginator = this.paginator; // Associa o paginator aqui
+    });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+}

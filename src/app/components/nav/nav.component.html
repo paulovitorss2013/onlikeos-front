@@ -24,11 +24,6 @@
             </a>
 
             <a mat-list-item routerLink="/">
-                <i class="material-icons">wifi</i>
-                <span class="link-text">Rede</span>
-            </a>
-
-            <a mat-list-item routerLink="/">
                 <i class="material-icons">home_repair_service</i>
                 <span class="link-text">Chamados</span>
             </a>
@@ -44,14 +39,11 @@
 
         <app-header></app-header>
 
-        <button Class="menu" (click)="drawer.toggle()" mat-icon-button>
-            
-            
+    <button Class="menu" (click)="drawer.toggle()" mat-icon-button>
             <mat-icon>menu</mat-icon>
-            
-        </button>
+    </button>
 
-        <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 
     </div>
 

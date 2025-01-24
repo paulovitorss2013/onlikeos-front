@@ -7,6 +7,7 @@ import { AuthService } from '../services/auth.service';
   providedIn: 'root',
 })
 export class AuthGuard {
+  // MÉTODO PARA VERIFICAR SE O USUÁRIO PODE ACESSAR A ROTA
   static canActivate() {
     const authService = inject(AuthService);
     const router = inject(Router);

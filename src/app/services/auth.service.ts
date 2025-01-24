@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Credenciais } from '../models/credenciais';
 import { HttpClient } from '@angular/common/http';
 import { API_CONFIG } from '../config/api.config';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,10 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
   jwtService: JwtHelperService = new JwtHelperService();
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object // INJETA O IDENTIFICADOR DA PLATAFORMA
+  ) {}
 
   // REALIZA A AUTENTICAÇÃO DO USUÁRIO
   authenticate(creds: Credenciais) {
@@ -20,19 +24,26 @@ export class AuthService {
     });
   }
 
-  // SALVA O TOKEN NO LOCAL STORAGE
+  // SALVA O TOKEN NO LOCAL STORAGE (VERIFICA SE ESTÁ NO NAVEGADOR)
   successfulLogin(authToken: string): void {
-    localStorage.setItem('token', authToken);
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('token', authToken);
+    }
   }
 
-  // VERIFICA SE O USUÁRIO ESTÁ AUTENTICADO
+  // VERIFICA SE O USUÁRIO ESTÁ AUTENTICADO (VERIFICA SE ESTÁ NO NAVEGADOR)
   isAuthenticate(): boolean {
-    const token = localStorage.getItem('token');
-    return token ? !this.jwtService.isTokenExpired(token) : false;
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('token');
+      return token ? !this.jwtService.isTokenExpired(token) : false;
+    }
+    return false; // RETORNA FALSO SE NÃO ESTIVER NO NAVEGADOR
   }
 
-  // MÉTODO PARA LIMPAR O TOKEN AO SAIR DO SISTEMA
-  logout () {
-    localStorage.clear();
+  // MÉTODO PARA LIMPAR O TOKEN AO SAIR DO SISTEMA (VERIFICA SE ESTÁ NO NAVEGADOR)
+  logout(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.clear();
+    }
   }
 }
