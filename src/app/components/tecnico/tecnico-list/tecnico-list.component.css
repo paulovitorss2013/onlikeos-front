@@ -33,3 +33,14 @@ h1 {
     text-align: center; /* Centraliza o texto */
     margin-bottom: 1.5rem; /* Espaçamento inferior para separar o título dos outros elementos */
 }
+
+/* ESTILIZA O ÍCONE EDITAR */
+.edit {
+    color: rgb(39, 141, 45);
+}
+
+/* ESTILIZA O ÍCONE EXCLUIR */
+.delete {
+    color: rgb(207, 80, 63)
+}
+   
