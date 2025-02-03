@@ -1,31 +1,35 @@
-/* AJUSTE PARA TELAS MAIORES */
+/* --------- AJUSTES PARA TELAS GRANDES --------- */
 
+/* ESTILIZA A CLASSE .CONTAINER */
 .container {
-    width: 90%;
-    margin: auto;
+    width: 90%; /* Define a largura do container para ocupar 90% da largura da tela */
+    margin: auto; /* Centraliza o container horizontalmente */
 }
 
+/* ESTILIZA A TABELA */
 table {
-    width: 100%;
+    width: 100%; /* Faz a tabela ocupar toda a largura disponível do container */
 }
 
+/* DEFINE O CAMPO DE FORMULÁRIO DO ANGULAR MATERIAL */
 mat-form-field {
-    width: 100%;
+    width: 100%; /* Faz o campo de formulário ocupar toda a largura disponível */
 }
 
 /* ESTILO PARA OS BOTÕES */
 button {
-    background-color: rgb(39, 141, 45); /* Tom verde escuro */
-    color: rgb(0, 0, 0); /* Cor do texto */
-    border-radius: 5px; /* Bordas arredondadas */
-    padding: 0.5rem 1.5rem; /* Ajusta o espaçamento interno */
-    font-size: 0.8rem; /* Tamanho de fonte adequado */
-    cursor: pointer; /* Altera o cursor para indicar que é clicável */
-    margin: 0  1.5rem 1.5rem 0;
+    background-color: rgb(39, 141, 45); /* Define um tom verde escuro para o fundo do botão */
+    color: white !important; /* Define a cor do texto como branco e usa !important para garantir que não seja sobrescrito */
+    border-radius: 5px; /* Arredonda as bordas do botão */
+    padding: 0.5rem 1.5rem; /* Define o espaçamento interno do botão (vertical e horizontal) */
+    font-size: 0.8rem; /* Ajusta o tamanho da fonte */
+    cursor: pointer; /* Altera o cursor para indicar que o botão é clicável */
+    margin: 0 1.5rem 1.5rem 0; /* Adiciona espaçamento externo à direita e abaixo do botão */
 }
 
+/* ESTILIZA O TÍTULO PRINCIPAL (H1) */
 h1 {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 1,5rem;
+    width: 100%; /* Faz o título ocupar toda a largura disponível */
+    text-align: center; /* Centraliza o texto */
+    margin-bottom: 1.5rem; /* Espaçamento inferior para separar o título dos outros elementos */
 }

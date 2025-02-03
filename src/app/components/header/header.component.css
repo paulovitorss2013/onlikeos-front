@@ -28,6 +28,6 @@ h1 {
         border-radius: 3rem; /* Arredonda os cantos do elemento h1 */
         font-size: 1rem; /* Define o tamanho da fonte */
         text-align: center; /* Centraliza o texto dentro do h1 */
-        margin: auto;
+        margin: auto; /* ajuste automático da margem */
     }
 }

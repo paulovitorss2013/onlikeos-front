@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
       },
       error: (erro) => {
         console.error('Erro ao autenticar:', erro); // Verificar possíveis erros na autenticação
-        this.toast.error('Usuário e/ou senha inválido(s)');
+        this.toast.error('Usuário e/ou senha inválido(s)', "Login");
       },
     });
   }

@@ -16,16 +16,18 @@ export class NavComponent implements OnInit {
     private toast:ToastrService) {}
 
   ngOnInit(): void {
-    //NAVEGANDO PARA A ROTA HOME
-    this.router.navigate(['']) 
+    //NAVEGANDO PARA A ROTA HOME (DEFINE A PÁGINA DE START)
+    this.router.navigate(['tecnicos/create']) 
   }
 
   // MÉTODO PARA SAIR DO SISTEMA
-
   logout() {
-    this.router.navigate(['login'])
-    this.authService.logout();
-    this.toast.info('Você saiu do sistema, até mais!', 'logout', {timeOut:4500})
+    const confirmacao = window.confirm("Tem certeza que deseja sair?");
+    if (confirmacao) {
+      this.router.navigate(['login']);
+      this.authService.logout();
+      this.toast.info('Você saiu do sistema, até mais!', 'Logout', { timeOut: 4500 });
+    }
   }
 
 }

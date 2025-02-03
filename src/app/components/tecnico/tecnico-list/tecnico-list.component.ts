@@ -7,7 +7,7 @@ import { TecnicoService } from '../../../services/tecnico.service';
 @Component({
   selector: 'app-tecnico-list',
   templateUrl: './tecnico-list.component.html',
-  styleUrls: ['./tecnico-list.component.css'] // Correção aqui
+  styleUrls: ['./tecnico-list.component.css']
 })
 export class TecnicoListComponent implements OnInit {
 
@@ -28,15 +28,15 @@ export class TecnicoListComponent implements OnInit {
   }
 
   // MÉTODO PARA BUSCAR TODOS OS TÉCNICOS
-
   findAll() {
     this.service.findAll().subscribe(resposta => {
       this.ELEMENT_DATA = resposta;
       this.dataSource = new MatTableDataSource<Tecnico>(this.ELEMENT_DATA);
-      this.dataSource.paginator = this.paginator; // Associa o paginator aqui
+      this.dataSource.paginator = this.paginator;
     });
   }
 
+  // APLICA FILTRO PARA A BUSCA DE TODOS OS TÉCNICOS
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

@@ -1,69 +1,72 @@
 /* AJUSTE GLOBAL PARA LAYOUT RESPONSIVO */
+
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho do elemento */
+    margin: 0; /* Remove margens padrão */
+    padding: 0; /* Remove padding padrão */
 }
 
 html, body {
-    height: 100%;
-    overflow: hidden;
+    height: 100%; /* Define altura total para ocupar toda a tela */
+    overflow: hidden; /* Impede a rolagem da página */
 }
 
 .container {
-    min-height: 100vh;
-    background-color: rgb(39, 141, 45);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2vh;
+    min-height: 100vh; /* Garante que o container ocupe toda a altura da tela */
+    background-color: rgb(39, 141, 45); /* Define a cor de fundo */
+    display: flex; /* Usa flexbox para alinhamento */
+    align-items: center; /* Centraliza verticalmente os itens */
+    justify-content: center; /* Centraliza horizontalmente os itens */
+    padding: 2vh; /* Adiciona espaçamento interno relativo à altura da tela */
 }
 
 /* FORMULÁRIO COMPACTO E ADAPTÁVEL */
 .form {
-    width: 90%;
-    max-width: 30rem;
-    background-color: rgb(235, 235, 235);
-    padding: clamp(2rem, 4vw, 3rem);
-    border-radius: 0.8rem;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    overflow-y: auto;
+    width: 90%; /* Define largura relativa à tela */
+    max-width: 30rem; /* Limita a largura máxima */
+    background-color: rgb(235, 235, 235); /* Define cor de fundo */
+    padding: clamp(2rem, 4vw, 3rem); /* Ajusta o espaçamento interno de forma responsiva */
+    border-radius: 0.8rem; /* Arredonda as bordas */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona sombra para efeito de elevação */
+    overflow-y: auto; /* Habilita rolagem vertical se necessário */
 }
 
 /* TÍTULO ADAPTÁVEL */
 h1 {
-    text-align: center;
-    margin: clamp(1rem, 2vh, 1.5rem) 0;
-    font-size: clamp(1.2rem, 1vw + 1rem, 1.5rem);
+    text-align: center; /* Centraliza o texto */
+    margin: clamp(1rem, 2vh, 1.5rem) 0; /* Define espaçamento superior e inferior responsivo */
+    font-size: clamp(1.2rem, 1vw + 1rem, 1.5rem); /* Ajusta o tamanho da fonte de forma responsiva */
 }
 
 /* IMAGEM RESPONSIVA */
 img {
-    height: auto;
-    max-height: 10rem;
-    width: 80%;
-    margin: 1vh auto;
-    display: block;
+    height: auto; /* Mantém a proporção da imagem */
+    max-height: 10rem; /* Limita a altura máxima */
+    width: 80%; /* Define a largura relativa ao container */
+    margin: 1vh auto; /* Adiciona margem superior e centraliza horizontalmente */
+    display: block; /* Remove espaçamentos extras de inline elements */
 }
 
 /* ESTILO CAMPOS DE ENTRADA */
 .full-width {
-    width: 100%;
-    margin-top: clamp(0.5rem, 1vh, 0.8rem);
+    width: 100%; /* Faz o input ocupar toda a largura disponível */
+    margin-top: clamp(0.5rem, 1vh, 0.8rem); /* Define margem superior responsiva */
 }
 
 /* ESTILO DO BOTÃO */
 button {
-    margin-top: clamp(1rem, 2vh, 1.2rem);
-    background-color: rgb(39, 141, 45);
-    font-weight: 500;
-    font-size: clamp(1rem, 1.5vw, 1.2rem);
-    padding: clamp(0.6rem, 1vh, 0.8rem);
-    width: 100%;
+    margin-top: clamp(1rem, 2vh, 1.2rem); /* Define margem superior responsiva */
+    background-color: rgb(39, 141, 45); /* Define cor de fundo */
+    color: rgb(255, 255, 255); /* Define cor do texto */
+    font-weight: 500; /* Define espessura do texto */
+    font-size: clamp(1rem, 1.5vw, 1.2rem); /* Ajusta tamanho da fonte de forma responsiva */
+    padding: clamp(0.6rem, 1vh, 0.8rem); /* Ajusta espaçamento interno */
+    width: 100%; /* Faz o botão ocupar toda a largura do container */
 }
+
 /* CONTROLE DA COR DINÂMICA DO BOTÃO */
 .disabled-button {
-    background-color: #e0e0e0; /* Cinza claro */
-    color: #9e9e9e; /* Texto cinza */
-    cursor: not-allowed; /* Alterar o cursor */
-  }
+    background-color: #e0e0e0; /* Cinza claro quando desativado */
+    color: #9e9e9e; /* Texto cinza quando desativado */
+    cursor: not-allowed; /* Altera o cursor para indicar indisponibilidade */
+}

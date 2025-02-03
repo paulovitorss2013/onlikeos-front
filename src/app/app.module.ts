@@ -1,18 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
-// PARA TRABALHAR COM FORMULÁRIOS NO ANGULAR
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-// PARA REALIZAR REQUISIÇÕES HTTP
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-// IMPORTS PARA COMPONENTES DO ANGULAR MATERIAL
+// Angular Material
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -27,23 +22,27 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatTabsModule } from '@angular/material/tabs';
 
-// PARA HABILITAR ANIMAÇÕES ASSÍNCRONAS NO ANGULAR
+// ngx-mask para mascaramento de CPF e telefone
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+
+// Animações assíncronas do Angular
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
-// MÓDULO PARA UTILIZAR COMPONENTES DE SELEÇÃO DE DATA
-import { MatDatepickerModule } from '@angular/material/datepicker';
+// Toastr para notificações
+import { ToastrModule } from 'ngx-toastr';
 
-// IMPORT DOS COMPONENTES
-import { MatTabGroup } from '@angular/material/tabs';
+// Componentes
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TecnicoListComponent } from './components/tecnico/tecnico-list/tecnico-list.component';
 import { LoginComponent } from './components/login/login.component';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { TecnicoCreateComponent } from './components/tecnico/tecnico-create/tecnico-create.component';
 
-// IMPORTA O INTERCEPTOR DE AUTENTICAÇÃO
+// Interceptor de autenticação
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
@@ -54,6 +53,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     HeaderComponent,
     TecnicoListComponent,
     LoginComponent,
+    TecnicoCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +62,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+
+    // Angular Material
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
@@ -69,13 +71,19 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     MatListModule,
     MatCardModule,
     MatTableModule,
+    MatCheckboxModule,
     MatSelectModule,
     MatInputModule,
     MatDatepickerModule,
     MatPaginatorModule,
     MatSnackBarModule,
-    MatTabGroup,
-    //CONFIGURAÇÃO DO SERVIÇO DE MENSAGEM
+    MatTabsModule,
+
+    // ngx-mask
+    NgxMaskDirective,
+    NgxMaskPipe,
+
+    // Configuração do Toastr
     ToastrModule.forRoot({
       timeOut: 4000,
       closeButton: true,
@@ -83,10 +91,11 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     })
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, // Registra o AuthInterceptor
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, // Interceptor de autenticação
     provideClientHydration(),
     provideAnimationsAsync(),
-    provideHttpClient(withFetch())  // Habilita o uso da API fetch
+    provideHttpClient(withFetch()),  // Habilita API fetch
+    provideNgxMask() // Ativa ngx-mask para mascaramento
   ],
   bootstrap: [AppComponent]
 })

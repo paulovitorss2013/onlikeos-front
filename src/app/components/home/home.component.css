@@ -27,12 +27,13 @@ mat-card-actions {
 /* ESTILO PARA OS BOTÕES */
 mat-card-actions button {
     background-color: rgb(39, 141, 45); /* Tom verde escuro */
-    color: rgb(0, 0, 0); /* Cor do texto */
+    color: rgb(255, 255, 255);
     border: none; /* Remove bordas padrão */
     border-radius: 5px; /* Bordas arredondadas */
     padding: 0.5rem 1.5rem; /* Ajusta o espaçamento interno */
     font-size: 0.8rem; /* Tamanho de fonte adequado */
     cursor: pointer; /* Altera o cursor para indicar que é clicável */
+    
 }
 
 /* EFEITO DE HOVER PARA OS BOTÕES */

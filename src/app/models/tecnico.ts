@@ -3,7 +3,8 @@ export interface Tecnico {
     nome: String;
     cpf: String;
     email: String;
+    celular: String;
     senha: String;
-    perfils: String[];
+    perfis: any;
     dataCriacao: any;
 }

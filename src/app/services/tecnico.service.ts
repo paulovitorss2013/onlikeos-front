@@ -12,9 +12,13 @@ export class TecnicoService {
   constructor(private http: HttpClient) { }
   
   // MÉTODO PARA BUSCAR TODOS OS TÉCNICOS
-  
   findAll(): Observable <Tecnico[]> {
     return this.http.get<Tecnico[]>(`${API_CONFIG.baseUrl}/tecnicos`);
+  }
+
+  // MÉTODO PARA CRIAR UM TÉCNICO
+  create (tecnico: Tecnico): Observable<Tecnico> {
+    return this.http.post<Tecnico>(`${API_CONFIG.baseUrl}/tecnicos`, tecnico);
   }
 }
 
