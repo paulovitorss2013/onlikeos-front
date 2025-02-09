@@ -7,25 +7,34 @@
 
         <mat-form-field class="full-width" appearance="fill" name="email">
             <mat-label>E-mail</mat-label>
-            <input 
+            <input
                 formControlName="email"
-                matInput 
+                matInput
                 placeholder="Digite seu e-mail">
         </mat-form-field>
 
         <mat-form-field class="full-width" appearance="fill" name="senha">
             <mat-label>Senha</mat-label>
-            <input 
+            <input
                 formControlName="senha"
                 type="password"
-                matInput 
+                matInput
                 placeholder="Digite sua senha">
         </mat-form-field>
-        
-    <button 
-           (click)="logar()" [disabled]="!loginForm.valid" class="full-width mat-elevation-z4" mat-stroked-button 
-           [ngClass]="{'disabled-button': !loginForm.valid}"> ENTRAR
-    </button>
-    
+
+        <button
+        (click)="logar()"
+        [disabled]="!loginForm.valid || loading"
+        class="full-width mat-elevation-z4"
+        mat-stroked-button
+        [ngClass]="{'disabled-button': !loginForm.valid || loading}">
+
+        <span *ngIf="!loading">ENTRAR</span>
+        <span *ngIf="loading">
+          <i class="fa fa-spinner fa-spin"></i> Carregando...
+        </span>
+
+      </button>
+
     </form>
 </div>

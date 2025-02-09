@@ -5,6 +5,7 @@ import { Credenciais } from '../../models/credenciais';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { catchError, throwError, timeout } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,8 @@ export class LoginComponent implements OnInit {
     email: '',
     senha: ''
   };
+
+  loading: boolean = false;
 
   loginForm = new FormGroup({
     email: new FormControl(this.creds.email, [
@@ -32,7 +35,7 @@ export class LoginComponent implements OnInit {
     private toast: ToastrService,
     private service: AuthService,
     private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object // INJETA O IDENTIFICADOR DA PLATAFORMA
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit(): void {}
@@ -41,42 +44,54 @@ export class LoginComponent implements OnInit {
     return this.loginForm.valid;
   }
 
-  // MÉTODO PARA LOGAR NO SISTEMA
+  // INÍCIO DO MÉTODO PARA LOGAR NO SISTEMA
   logar(): void {
-    // FAZENDO A VALIDAÇÃO DOS CAMPOS PARA ATIVAR O BOTÃO DE LOGAR
-    this.creds.email = this.loginForm.get('email')?.getRawValue() ?? '';
-    this.creds.senha = this.loginForm.get('senha')?.getRawValue() ?? '';
+    // Atualiza as credenciais com os valores do formulário
+    this.creds.email = this.loginForm.get('email')?.value ?? '';
+    this.creds.senha = this.loginForm.get('senha')?.value ?? '';
+
     if (!this.validaCampos()) {
       this.toast.warning('Por favor, preencha todos os campos corretamente.');
       return;
     }
 
-    // CHAMANDO O SERVIÇO
-    this.service.authenticate(this.creds).subscribe({
-      next: (resposta) => {
-        console.log('Resposta completa da API:', resposta); // Verificar a resposta da API
-        if (resposta.headers && resposta.headers.get('Authorization')) {
-          const authorization = resposta.headers.get('Authorization')!;
-          console.log('Cabeçalho Authorization recebido:', authorization); // Verificar o token
+    this.loading = true; // Ativa o loading antes da requisição
 
-          // Verifica se estamos no navegador antes de acessar o localStorage
-          if (isPlatformBrowser(this.platformId)) {
-            this.service.successfulLogin(authorization.substring(7));
+    this.service.authenticate(this.creds)
+      .pipe(
+        timeout(8000), // Define um tempo máximo de 10 segundos para a requisição
+        catchError((erro) => {
+          this.loading = false; // Desativa o loading em caso de erro
+          if (erro.name === 'TimeoutError') {
+            this.toast.error('Tempo de resposta excedido!', 'Erro de conexão com o servidor');
           }
+          return throwError(() => erro);
+        })
+      )
+      .subscribe({
+        next: (resposta) => {
+          this.loading = false; // Desativa o loading quando receber resposta
 
-          this.router.navigate(['home']).then(() => {
-            console.log('Redirecionado para home com sucesso.');
-          }).catch((err) => {
-            console.error('Erro ao redirecionar para home:', err);
-          });
-        } else {
-          console.warn('Cabeçalho Authorization não encontrado na resposta da API.');
+          const authorization = resposta.headers?.get('Authorization');
+          if (authorization) {
+            this.service.successfulLogin(authorization.substring(7)); // Armazena o token
+            this.router.navigate(['home']).catch(() => {
+              this.toast.error('Erro ao redirecionar para a home.', 'Login');
+            });
+          } else {
+            this.toast.error('Erro ao processar a resposta do servidor.', 'Login');
+          }
+        },
+        error: (erro) => {
+          this.loading = false; // Desativa o loading quando houver erro
+
+          if (erro.status === 0) {
+            this.toast.error('Erro de conexão com o servidor.', 'Login');
+          } else if (erro.status === 403) {
+            this.toast.error('Usuário e/ou senha inválidos', 'Login');
+          }
         }
-      },
-      error: (erro) => {
-        console.error('Erro ao autenticar:', erro); // Verificar possíveis erros na autenticação
-        this.toast.error('Usuário e/ou senha inválido(s)', "Login");
-      },
-    });
+      });
   }
+  // FIM DO MÉTODO PARA LOGAR NO SISTEMA
 }
