@@ -4,15 +4,21 @@
   <form class="form" [formGroup]="form">
 
     <section>
-      <mat-checkbox class="margin" color="primary">ADMINISTRADOR</mat-checkbox>
-      <mat-checkbox class="margin" color="primary">TÉCNICO</mat-checkbox>
+      <mat-checkbox
+      (click)="addPerfil(0)"
+      class="margin"
+      color="primary">ADMINISTRADOR</mat-checkbox>
+      <mat-checkbox
+      (click)="addPerfil(2)"
+       class="margin"
+       color="primary">TÉCNICO</mat-checkbox>
     </section>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Nome</mat-label>
       <input matInput
-        placeholder="Entre 10 e 60 caracteres"
         formControlName="nome"
+        placeholder="Entre 10 e 60 caracteres"
         maxlength="60">
     </mat-form-field>
 

@@ -12,71 +12,67 @@ import { Router } from '@angular/router';
 })
 export class TecnicoCreateComponent implements OnInit {
 
-  // INSTANCIANDO UM TÉCNICO
-  tecnico: Tecnico = {
-    id: '',
-    nome: '',
-    cpf: '',
-    email: '',
-    celular:'',
-    senha:'',
-    perfis: [],
-    dataCriacao: ''
-  }
-
-   // GRUPO DE FORMULÁRIOS REATIVOS
-    form: FormGroup = new FormGroup({
-    nome: new FormControl(null, [Validators.required, Validators.minLength(10),]),
-    cpf: new FormControl(null, [Validators.required, Validators.minLength(11)]),
-    celular: new FormControl(null, [Validators.minLength(11)]),
-    email: new FormControl(null, [Validators.required, Validators.email]),
-    senha: new FormControl(null, [Validators.required, Validators.minLength(8)])
+  // Grupo de formulários reativos
+  form: FormGroup = new FormGroup({
+    nome: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    cpf: new FormControl('', [Validators.required, Validators.minLength(11)]),
+    celular: new FormControl('', [Validators.minLength(11)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    perfis: new FormControl([])
   });
+
   constructor(
-    private service:TecnicoService,
+    private service: TecnicoService,
     private toast: ToastrService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {}
 
-// MÉTODO PARA ADICIONAR O PERFIL DO TÉCNICO
-addPerfil(perfil: any): void {
-  if (!this.tecnico.perfis.includes(perfil)) {
-    this.tecnico.perfis.push(perfil);
+  // Método para adicionar o perfil do técnico
+  addPerfil(perfil: number): void {
+    const perfis = this.form.get('perfis')?.value as number[];
+    if (perfis.includes(perfil)) {
+      this.form.get('perfis')?.setValue(perfis.filter(p => p !== perfil));
+    } else {
+      this.form.get('perfis')?.setValue([...perfis, perfil]);
+    }
+    console.log('Perfis selecionados:', this.form.get('perfis')?.value);
   }
-}
 
-// MÉTODO PARA CRIAR UM TÉCNICO
+ // MÉTODO PARA CRIAR UM TÉCNICO
 create(): void {
-  this.service.create(this.tecnico).subscribe({
+  if (!this.validaCampos()) return
+
+  // Atualiza o objeto técnico com os valores do formulário
+  const tecnico: Tecnico = { ...this.form.value }
+
+  this.service.create(tecnico).subscribe({
     next: () => {
-      this.toast.success('Técnico cadastrado com sucesso', 'Cadastro');
+      this.toast.success('Técnico cadastrado com sucesso', 'Cadastro')
       this.router.navigate(['tecnicos'])
     },
     error: (ex) => {
-      if (ex.error && ex.error.errors) {
-
-        ex.error.errors.forEach((error: any) => {
-          this.toast.error(`${error.fieldName}: ${error.message}`, "Cadastro");
-        });
-      } else if (ex.error && ex.error.message) {
-        this.toast.error(ex.error.message, "Cadastro");
-      } else {
-        this.toast.error('Ocorreu um erro inesperado.', "Cadastro");
-      }
+      if (ex.error.errors)
+        ex.error.errors.forEach((element: { message: string }) =>
+          this.toast.error(element.message)
+        )
+      else this.toast.error(ex.error.message)
     }
-  });
-}
- // MÉTODO PARA CANCELAR A CRIAÇÃO DO TÉCNICO
- confirmarCancelamento(): void {
-  const confirmar = window.confirm('Deseja mesmo cancelar?');
-  if (confirmar) {
-    this.router.navigate(['tecnicos']);
-  }
+  })
 }
 
-// MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO
+
+
+  // Método para confirmar o cancelamento
+  confirmarCancelamento(): void {
+    if (window.confirm('Deseja mesmo cancelar?')) {
+      this.router.navigate(['tecnicos']);
+    }
+  }
+
+  // Método para validar os campos do formulário
   validaCampos(): boolean {
     return this.form.valid;
   }

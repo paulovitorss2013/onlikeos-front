@@ -10,8 +10,8 @@ import { Tecnico } from '../models/tecnico';
 export class TecnicoService {
 
   constructor(private http: HttpClient) { }
-  
-  // MÉTODO PARA BUSCAR TODOS OS TÉCNICOS
+
+  // MÉTODO PARA LISTAR TODOS OS TÉCNICOS
   findAll(): Observable <Tecnico[]> {
     return this.http.get<Tecnico[]>(`${API_CONFIG.baseUrl}/tecnicos`);
   }
@@ -21,5 +21,3 @@ export class TecnicoService {
     return this.http.post<Tecnico>(`${API_CONFIG.baseUrl}/tecnicos`, tecnico);
   }
 }
-
-
