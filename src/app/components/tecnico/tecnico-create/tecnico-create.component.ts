@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 })
 export class TecnicoCreateComponent implements OnInit {
 
-
   // INSTANCIANDO UM TÉCNICO
   tecnico: Tecnico = {
     id: '',
@@ -23,7 +22,6 @@ export class TecnicoCreateComponent implements OnInit {
     senha:'',
     perfis: [],
     dataCriacao: ''
-
   }
 
    // GRUPO DE FORMULÁRIOS REATIVOS
@@ -42,12 +40,12 @@ export class TecnicoCreateComponent implements OnInit {
 
   ngOnInit(): void {}
 
-   // MÉTODO PARA ADICIONAR O PERFIL DO TÉCNICO
-   addPerfil(perfil: any): void {
-    if (!this.tecnico.perfis.includes(perfil)) {
-      this.tecnico.perfis.push(perfil);
-    }
+// MÉTODO PARA ADICIONAR O PERFIL DO TÉCNICO
+addPerfil(perfil: any): void {
+  if (!this.tecnico.perfis.includes(perfil)) {
+    this.tecnico.perfis.push(perfil);
   }
+}
 
 // MÉTODO PARA CRIAR UM TÉCNICO
 create(): void {
@@ -70,8 +68,15 @@ create(): void {
     }
   });
 }
+ // MÉTODO PARA CANCELAR A CRIAÇÃO DO TÉCNICO
+ confirmarCancelamento(): void {
+  const confirmar = window.confirm('Deseja mesmo cancelar?');
+  if (confirmar) {
+    this.router.navigate(['tecnicos']);
+  }
+}
 
-  // MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO
+// MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO
   validaCampos(): boolean {
     return this.form.valid;
   }

@@ -1,6 +1,6 @@
 <div class="container">
   <h1>Listando os Técnicos</h1>
-  
+
   <button mat-button routerLink="create">CRIAR NOVO</button>
 
   <mat-form-field>
@@ -31,7 +31,7 @@
             <a routerLink="">
                 <i class="material-icons edit">edit</i>
             </a>
-            
+
             <a routerLink="">
               <i class="material-icons delete">delete</i>
             </a>
@@ -41,7 +41,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[100, 10, 20, 50]" showFirstLastButtons>
+    <mat-paginator [pageSizeOptions]="[30, 50, 20, 200]" showFirstLastButtons>
     </mat-paginator>
   </div>
 </div>
