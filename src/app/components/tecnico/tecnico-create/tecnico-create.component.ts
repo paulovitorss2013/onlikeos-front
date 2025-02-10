@@ -54,6 +54,7 @@ create(): void {
       this.router.navigate(['tecnicos'])
     },
     error: (ex) => {
+      console.log('Erro completo:', ex);
       if (ex.error.errors)
         ex.error.errors.forEach((element: { message: string }) =>
           this.toast.error(element.message)
@@ -62,8 +63,6 @@ create(): void {
     }
   })
 }
-
-
 
   // Método para confirmar o cancelamento
   confirmarCancelamento(): void {
