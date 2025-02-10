@@ -47,7 +47,7 @@ create(): void {
 
   // Atualiza o objeto técnico com os valores do formulário
   const tecnico: Tecnico = { ...this.form.value }
-
+  console.log('Perfis enviados:', tecnico.perfis); // Debug: verificar perfis antes do envio
   this.service.create(tecnico).subscribe({
     next: () => {
       this.toast.success('Técnico cadastrado com sucesso', 'Cadastro')
