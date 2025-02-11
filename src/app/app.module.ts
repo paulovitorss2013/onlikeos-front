@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-// Angular Material
+// ANGULAR MATERIAL
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -24,17 +24,19 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
-// ngx-mask para mascaramento de CPF e telefone
+
+// NGX-MASK PARA MASCARAMENTO DE CPF, TELEFONE E ETC...
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
-// Animações assíncronas do Angular
+// ANIMAÇÕES ASSÍNCRONAS DO ANGULAR
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
-// Toastr para notificações
+// TOASTR PARA NOTIFICAÇÕES
 import { ToastrModule } from 'ngx-toastr';
 
-// Componentes
+// COMPONENTES
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -42,7 +44,7 @@ import { TecnicoListComponent } from './components/tecnico/tecnico-list/tecnico-
 import { LoginComponent } from './components/login/login.component';
 import { TecnicoCreateComponent } from './components/tecnico/tecnico-create/tecnico-create.component';
 
-// Interceptor de autenticação
+// INTERCEPTOR DE AUTENTICAÇÃO
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
@@ -63,7 +65,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     HttpClientModule,
     BrowserAnimationsModule,
 
-    // Angular Material
+    // ANGULAR MATERIAL
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
@@ -79,11 +81,14 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     MatSnackBarModule,
     MatTabsModule,
 
-    // ngx-mask
+    // NGX-MASK
     NgxMaskDirective,
     NgxMaskPipe,
+    
+    // OUTROS MÓDULOS
+    MatTooltipModule, 
 
-    // Configuração do Toastr
+    // CONFIGURAÇÃO DO TOASTR
     ToastrModule.forRoot({
       timeOut: 4000,
       closeButton: true,
