@@ -3,13 +3,13 @@
   
     <form class="form" [formGroup]="form">
   
-      <section>
-        <mat-checkbox
-        (click)="addPerfil(0)"
+      <mat-checkbox
+        (click)="addPerfil(2)"
         class="margin"
-        color="primary">TORNAR ADMINISTRADOR</mat-checkbox>
-        
-      </section>
+        color="primary"
+        [checked]="form.value.perfis.includes(2)">
+        TORNAR ADMINISTRADOR
+      </mat-checkbox>
   
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Nome</mat-label>
