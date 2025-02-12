@@ -19,7 +19,7 @@ mat-form-field {
 /* ESTILO PARA OS BOTÕES */
 button {
     background-color: rgb(39, 141, 45); /* Define um tom verde escuro para o fundo do botão */
-    color: white !important; /* Define a cor do texto como branco e usa !important para garantir que não seja sobrescrito */
+    color: white; /* Define a cor do texto como branco e usa !important para garantir que não seja sobrescrito */
     border-radius: 5px; /* Arredonda as bordas do botão */
     padding: 0.5rem 1.5rem; /* Define o espaçamento interno do botão (vertical e horizontal) */
     font-size: 0.8rem; /* Ajusta o tamanho da fonte */
@@ -34,13 +34,14 @@ h1 {
     margin-bottom: 1.5rem; /* Espaçamento inferior para separar o título dos outros elementos */
 }
 
-/* ESTILIZA O ÍCONE EDITAR */
+/* ESTILIZA O ÍCONE VISUALIZAR */
 .edit {
     color: rgb(39, 141, 45);
+    margin-right: 1rem; /* Adiciona espaço à direita */
 }
 
 /* ESTILIZA O ÍCONE EXCLUIR */
 .delete {
-    color: rgb(207, 80, 63)
+    color: rgb(207, 80, 63);
 }
    

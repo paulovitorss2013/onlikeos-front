@@ -12,7 +12,19 @@ import { Router } from '@angular/router';
 })
 export class TecnicoCreateComponent implements OnInit {
 
-  // Grupo de formulários reativos
+ // INSTÂNCIA DO TÉCNICO
+ tecnico: Tecnico = {
+  id: '',
+  nome: '',
+  cpf: '',
+  email: '',
+  senha: '',
+  celular: '',
+  perfis: [],
+  dataCriacao:''
+ }
+
+  // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
     nome: new FormControl('', [Validators.required, Validators.minLength(10)]),
     cpf: new FormControl('', [Validators.required, Validators.minLength(11)]),
@@ -30,7 +42,7 @@ export class TecnicoCreateComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // Método para adicionar o perfil do técnico
+  // MÉTODO PARA ADICIONAR O PERFIL DO TÉCNICO
   addPerfil(perfil: number): void {
     const perfis = this.form.get('perfis')?.value as number[];
     if (perfis.includes(perfil)) {
@@ -38,7 +50,6 @@ export class TecnicoCreateComponent implements OnInit {
     } else {
       this.form.get('perfis')?.setValue([...perfis, perfil]);
     }
-    console.log('Perfis selecionados:', this.form.get('perfis')?.value);
   }
 
  // MÉTODO PARA CRIAR UM TÉCNICO
@@ -47,14 +58,12 @@ create(): void {
 
   // Atualiza o objeto técnico com os valores do formulário
   const tecnico: Tecnico = { ...this.form.value }
-  console.log('Perfis enviados:', tecnico.perfis); // Debug: verificar perfis antes do envio
   this.service.create(tecnico).subscribe({
     next: () => {
       this.toast.success('Técnico cadastrado com sucesso', 'Cadastro')
       this.router.navigate(['tecnicos'])
     },
     error: (ex) => {
-      console.log('Erro completo:', ex);
       if (ex.error.errors)
         ex.error.errors.forEach((element: { message: string }) =>
           this.toast.error(element.message)
@@ -64,14 +73,14 @@ create(): void {
   })
 }
 
-  // Método para confirmar o cancelamento
+  // MÉTODO PARA CONFIRMAR O CANCELAMENTO DAS AÇÕES
   confirmarCancelamento(): void {
     if (window.confirm('Deseja mesmo cancelar?')) {
       this.router.navigate(['tecnicos']);
     }
   }
 
-  // Método para validar os campos do formulário
+  // MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO
   validaCampos(): boolean {
     return this.form.valid;
   }

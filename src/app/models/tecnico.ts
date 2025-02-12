@@ -5,6 +5,6 @@ export interface Tecnico {
     email: String;
     celular: String;
     senha: String;
-    perfis: any;
+    perfis: [];
     dataCriacao: any;
 }
