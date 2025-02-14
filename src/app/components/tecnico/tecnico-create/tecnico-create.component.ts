@@ -34,6 +34,7 @@ export class TecnicoCreateComponent implements OnInit {
     perfis: new FormControl([])
   });
 
+  // CONSTRUTOR
   constructor(
     private service: TecnicoService,
     private toast: ToastrService,
@@ -55,8 +56,6 @@ export class TecnicoCreateComponent implements OnInit {
  // MÉTODO PARA CRIAR UM TÉCNICO
 create(): void {
   if (!this.validaCampos()) return
-
-  // Atualiza o objeto técnico com os valores do formulário
   const tecnico: Tecnico = { ...this.form.value }
   this.service.create(tecnico).subscribe({
     next: () => {
