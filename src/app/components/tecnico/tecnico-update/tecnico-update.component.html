@@ -1,8 +1,8 @@
 <div class="container mat-elevation-z8">
     <h1>Exibir ou Alterar Técnico</h1>
-  
+
     <form class="form" [formGroup]="form">
-  
+
       <mat-checkbox
         (click)="addPerfil(2)"
         class="margin"
@@ -10,7 +10,7 @@
         [checked]="form.value.perfis.includes(2)">
         TORNAR ADMINISTRADOR
       </mat-checkbox>
-  
+
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Nome</mat-label>
         <input matInput
@@ -18,7 +18,7 @@
           placeholder="Entre 10 e 60 caracteres"
           maxlength="60">
       </mat-form-field>
-  
+
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>CPF</mat-label>
         <input matInput
@@ -26,14 +26,14 @@
           formControlName="cpf"
           mask="000.000.000-00" />
       </mat-form-field>
-  
+
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>E-mail</mat-label>
         <input matInput
           placeholder="Digite o e-mail"
           formControlName="email">
       </mat-form-field>
-  
+
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Celular</mat-label>
         <input matInput
@@ -41,18 +41,17 @@
           formControlName="celular"
           mask="(00) 00000-0000" />
       </mat-form-field>
-  
+
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Senha</mat-label>
         <input matInput
           placeholder="Entre 8 e 64 caracteres"
           formControlName="senha" maxlength="64">
       </mat-form-field>
-  
+
       <button (click)="update()" [disabled]="!validaCampos()" mat-button class="btn-criar">SALVAR</button>
-  
+
       <button mat-button class="btn-cancelar" (click)="confirmarCancelamento()">CANCELAR</button>
-  
+
     </form>
   </div>
-  
