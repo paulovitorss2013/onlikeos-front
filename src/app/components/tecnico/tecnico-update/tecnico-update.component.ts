@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-tecnico-update',
   templateUrl: './tecnico-update.component.html',
-  styleUrl: './tecnico-update.component.css'
+  styleUrls: ['./tecnico-update.component.css']
 })
 export class TecnicoUpdateComponent implements OnInit {
 
@@ -29,8 +29,10 @@ export class TecnicoUpdateComponent implements OnInit {
     celular: new FormControl('', [Validators.minLength(11)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    perfis: new FormControl([])
+    perfis: new FormControl([]),
   });
+
+  isAdminFlag: boolean = false; // Variável para controlar se o técnico é admin
 
   constructor(
     private service: TecnicoService,
@@ -49,12 +51,17 @@ export class TecnicoUpdateComponent implements OnInit {
       this.router.navigate(['tecnicos']);
     }
   }
+
   // MÉTODO PARA BUSCAR O TÉCNICO PELO ID
   findById(): void {
     this.service.findById(this.tecnico.id).subscribe({
       next: (resposta) => {
         this.tecnico = resposta;
 
+        // Verificando se o perfil 'ADMIN' está presente nos perfis do técnico
+        this.isAdminFlag = resposta.perfis.includes('ADMIN');
+
+        // Atualizando o formulário
         this.form.patchValue({
           nome: resposta.nome,
           cpf: resposta.cpf,
@@ -63,6 +70,16 @@ export class TecnicoUpdateComponent implements OnInit {
           senha: resposta.senha,
           perfis: resposta.perfis || []
         });
+
+        // Se for ADMIN, marcar o checkbox automaticamente
+        if (this.isAdminFlag) {
+          // Garantir que o perfil 'ADMIN' (perfil 2) esteja no array de perfis
+          if (!this.form.value.perfis.includes(2)) {
+            this.form.patchValue({
+              perfis: [...this.form.value.perfis, 2]
+            });
+          }
+        }
       },
       error: (err) => {
         this.toast.error('Erro ao carregar os dados do técnico');
@@ -74,32 +91,26 @@ export class TecnicoUpdateComponent implements OnInit {
   addPerfil(perfil: number): void {
     const perfis = this.form.get('perfis')?.value as number[];
 
-    // Se o perfil "Administrador" (perfil 2) for adicionado, garante que o "Técnico" (perfil 0) está presente
     if (perfil === 2) {
-      // Se o perfil técnico (0) não estiver na lista, adicione-o
       if (!perfis.includes(0)) {
         this.form.get('perfis')?.setValue([0, ...perfis]);
       }
     } else {
-      // Se for outro perfil, apenas adicione-o ou remova-o
       if (perfis.includes(perfil)) {
         this.form.get('perfis')?.setValue(perfis.filter(p => p !== perfil));
       } else {
         this.form.get('perfis')?.setValue([...perfis, perfil]);
       }
     }
-    // Remover qualquer valor NaN (inválido) da lista de perfis
-    const validPerfis = this.form.get('perfis')?.value.filter((perfil: number) => !isNaN(perfil));
 
-    // Atualiza a lista de perfis com valores válidos
+    const validPerfis = this.form.get('perfis')?.value.filter((perfil: number) => !isNaN(perfil));
     this.form.get('perfis')?.setValue(validPerfis);
-  } //FINAL DO MÉTODO PARA ATUALIZAR O PERFIL DO TÉCNICO
+  }
 
   // MÉTÓDO PARA ATUALIZAR UM TÉCNICO
   update(): void {
     if (!this.validaCampos()) return;
 
-    // Filtra os perfis para garantir que apenas números válidos sejam enviados
     const perfisAtualizados = this.form.value.perfis.filter((perfil: number) => !isNaN(perfil));
 
     const tecnicoAtualizado: Tecnico = {
@@ -121,7 +132,7 @@ export class TecnicoUpdateComponent implements OnInit {
         else this.toast.error(ex.error.message);
       }
     });
-  } // FINAL DO MÉTODO PARA ATUALIZAR UM TÉCNICO
+  }
 
   // MÉTODO PARA CONFIRMAR O CANCELAMENTO DAS AÇÕES
   confirmarCancelamento(): void {

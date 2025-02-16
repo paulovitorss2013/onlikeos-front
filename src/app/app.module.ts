@@ -88,9 +88,9 @@ import { TecnicoDeleteComponent } from './components/tecnico/tecnico-delete/tecn
     // NGX-MASK
     NgxMaskDirective,
     NgxMaskPipe,
-    
+
     // OUTROS MÓDULOS
-    MatTooltipModule, 
+    MatTooltipModule,
 
     // CONFIGURAÇÃO DO TOASTR
     ToastrModule.forRoot({

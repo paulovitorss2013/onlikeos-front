@@ -1,57 +1,64 @@
 <div class="container mat-elevation-z8">
-    <h1>Exibir ou Alterar Técnico</h1>
+  <h1>Exibir ou Alterar Técnico</h1>
 
-    <form class="form" [formGroup]="form">
+  <form class="form" [formGroup]="form">
 
-      <mat-checkbox
-        (click)="addPerfil(2)"
-        class="margin"
-        color="primary"
-        [checked]="form.value.perfis.includes(2)">
-        TORNAR ADMINISTRADOR
-      </mat-checkbox>
+    <mat-checkbox
+  (click)="addPerfil(0)"
+  class="margin"
+  color="primary"
+  [checked]="form.value.perfis.includes(0)">
+  ADMIN
+</mat-checkbox>
 
-      <mat-form-field class="full-width" appearance="fill">
-        <mat-label>Nome</mat-label>
-        <input matInput
-          formControlName="nome"
-          placeholder="Entre 10 e 60 caracteres"
-          maxlength="60">
-      </mat-form-field>
+<mat-form-field *ngIf="isAdminFlag" class="full-width" appearance="fill">
+  <mat-label>Privilégios Atuais</mat-label>
+  <input matInput
+    [value]="'ADMINISTRADOR'"
+    readonly>
+</mat-form-field>
 
-      <mat-form-field class="full-width" appearance="fill">
-        <mat-label>CPF</mat-label>
-        <input matInput
-          placeholder="Ex: 000.000.000-00 (digite apenas números)"
-          formControlName="cpf"
-          mask="000.000.000-00" />
-      </mat-form-field>
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input matInput
+        formControlName="nome"
+        placeholder="Entre 10 e 60 caracteres"
+        maxlength="60">
+    </mat-form-field>
 
-      <mat-form-field class="full-width" appearance="fill">
-        <mat-label>E-mail</mat-label>
-        <input matInput
-          placeholder="Digite o e-mail"
-          formControlName="email">
-      </mat-form-field>
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>CPF</mat-label>
+      <input matInput
+        placeholder="Ex: 000.000.000-00 (digite apenas números)"
+        formControlName="cpf"
+        mask="000.000.000-00" />
+    </mat-form-field>
 
-      <mat-form-field class="full-width" appearance="fill">
-        <mat-label>Celular</mat-label>
-        <input matInput
-          placeholder="Ex: (00) 00000-0000 (digite apenas números)"
-          formControlName="celular"
-          mask="(00) 00000-0000" />
-      </mat-form-field>
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>E-mail</mat-label>
+      <input matInput
+        placeholder="Digite o e-mail"
+        formControlName="email">
+    </mat-form-field>
 
-      <mat-form-field class="full-width" appearance="fill">
-        <mat-label>Senha</mat-label>
-        <input matInput
-          placeholder="Entre 8 e 64 caracteres"
-          formControlName="senha" maxlength="64">
-      </mat-form-field>
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Celular</mat-label>
+      <input matInput
+        placeholder="Ex: (00) 00000-0000 (digite apenas números)"
+        formControlName="celular"
+        mask="(00) 00000-0000" />
+    </mat-form-field>
 
-      <button (click)="update()" [disabled]="!validaCampos()" mat-button class="btn-criar">SALVAR</button>
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Senha</mat-label>
+      <input matInput
+        placeholder="Entre 8 e 64 caracteres"
+        formControlName="senha" maxlength="64">
+    </mat-form-field>
 
-      <button mat-button class="btn-cancelar" (click)="confirmarCancelamento()">CANCELAR</button>
+    <button (click)="update()" [disabled]="!validaCampos()" mat-button class="btn-criar">SALVAR</button>
 
-    </form>
-  </div>
+    <button mat-button class="btn-cancelar" (click)="confirmarCancelamento()">CANCELAR</button>
+
+  </form>
+</div>

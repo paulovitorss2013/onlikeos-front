@@ -1,10 +1,10 @@
 export interface Tecnico {
     id?: any;
-    nome: String;
-    cpf: String;
-    email: String;
-    celular: String;
-    senha: String;
-    perfis: [];
+    nome: string;
+    cpf: string;
+    email: string;
+    celular: string;
+    senha: string;
+    perfis: string[];  // Alterado para um array de strings
     dataCriacao: any;
-}
+  }
