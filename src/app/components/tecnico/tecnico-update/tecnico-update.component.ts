@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./tecnico-update.component.css']
 })
 export class TecnicoUpdateComponent implements OnInit {
-
+  
   tecnico: Tecnico = {
     id: '',
     nome: '',
@@ -30,9 +30,9 @@ export class TecnicoUpdateComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
     perfis: new FormControl([]),
+    isAdmin: new FormControl(false),
+    privilegios: new FormControl({ value: '', disabled: true })
   });
-
-  isAdminFlag: boolean = false; // Variável para controlar se o técnico é admin
 
   constructor(
     private service: TecnicoService,
@@ -45,6 +45,7 @@ export class TecnicoUpdateComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.tecnico.id = id;
+      console.log('ID capturado da URL:', this.tecnico.id);
       this.findById();
     } else {
       this.toast.error('ID do técnico não encontrado');
@@ -52,48 +53,37 @@ export class TecnicoUpdateComponent implements OnInit {
     }
   }
 
-  // MÉTODO PARA BUSCAR O TÉCNICO PELO ID
   findById(): void {
     this.service.findById(this.tecnico.id).subscribe({
       next: (resposta) => {
         this.tecnico = resposta;
-
-        // Verificando se o perfil 'ADMIN' está presente nos perfis do técnico
-        this.isAdminFlag = resposta.perfis.includes('ADMIN');
-
-        // Atualizando o formulário
+        console.log('Dados recebidos:', this.tecnico);
+        const isAdmin = resposta.perfis.includes('ADMIN');
         this.form.patchValue({
           nome: resposta.nome,
           cpf: resposta.cpf,
           celular: resposta.celular,
           email: resposta.email,
           senha: resposta.senha,
-          perfis: resposta.perfis || []
+          perfis: resposta.perfis || [],
+          isAdmin: isAdmin,
+          privilegios: isAdmin ? 'Administrador' : ''
         });
-
-        // Se for ADMIN, marcar o checkbox automaticamente
-        if (this.isAdminFlag) {
-          // Garantir que o perfil 'ADMIN' (perfil 2) esteja no array de perfis
-          if (!this.form.value.perfis.includes(2)) {
-            this.form.patchValue({
-              perfis: [...this.form.value.perfis, 2]
-            });
-          }
-        }
+        console.log('Perfis recebidos:', this.form.get('perfis')?.value);
       },
       error: (err) => {
+        console.log('Erro ao buscar técnico:', err);
         this.toast.error('Erro ao carregar os dados do técnico');
       }
     });
   }
 
   // MÉTODO PARA ATUALIZAR O PERFIL DO TÉCNICO
-  addPerfil(perfil: number): void {
-    const perfis = this.form.get('perfis')?.value as number[];
-
-    if (perfil === 2) {
-      if (!perfis.includes(0)) {
-        this.form.get('perfis')?.setValue([0, ...perfis]);
+  addPerfil(perfil: string): void {
+    const perfis = this.form.get('perfis')?.value as string[];
+    if (perfil === 'ADMIN') {
+      if (!perfis.includes('ADMIN')) {
+        perfis.push('ADMIN');
       }
     } else {
       if (perfis.includes(perfil)) {
@@ -102,39 +92,61 @@ export class TecnicoUpdateComponent implements OnInit {
         this.form.get('perfis')?.setValue([...perfis, perfil]);
       }
     }
-
-    const validPerfis = this.form.get('perfis')?.value.filter((perfil: number) => !isNaN(perfil));
+    const validPerfis = this.form.get('perfis')?.value.filter((perfil: string) => perfil);
     this.form.get('perfis')?.setValue(validPerfis);
+    console.log('Perfis selecionados:', this.form.get('perfis')?.value);
   }
-
+  
   // MÉTÓDO PARA ATUALIZAR UM TÉCNICO
   update(): void {
     if (!this.validaCampos()) return;
-
-    const perfisAtualizados = this.form.value.perfis.filter((perfil: number) => !isNaN(perfil));
-
-    const tecnicoAtualizado: Tecnico = {
-      ...this.tecnico,
-      ...this.form.value,
-      perfis: perfisAtualizados
-    };
-    this.service.update(tecnicoAtualizado).subscribe({
+  
+    let perfis: string[] = this.form.value.perfis || [];
+  
+    // Filtra apenas valores numéricos válidos e descarta valores inválidos
+    let perfisConvertidos: number[] = perfis
+      .map(perfil => Number(perfil))
+      .filter(perfil => !isNaN(perfil));
+  
+    // Adiciona ou remove o ADMIN conforme o checkbox
+    if (this.form.value.isAdmin) {
+      if (!perfisConvertidos.includes(0)) {
+        perfisConvertidos.push(0);
+      }
+    } else {
+      perfisConvertidos = perfisConvertidos.filter(p => p !== 0);
+    }
+  
+    const tecnico: Tecnico = {
+      id: this.tecnico.id,
+      nome: this.form.value.nome,
+      cpf: this.form.value.cpf,
+      email: this.form.value.email,
+      celular: this.form.value.celular,
+      senha: this.form.value.senha,
+      perfis: perfisConvertidos.map(p => p.toString()),
+      dataCriacao: this.tecnico.dataCriacao 
+    };  
+    this.service.update(tecnico).subscribe({
       next: () => {
         this.toast.success('Técnico atualizado com sucesso', 'Atualização');
         this.router.navigate(['tecnicos']);
       },
       error: (ex) => {
-        console.log('Erro completo:', ex);
-        if (ex.error.errors)
+        if (ex.error?.errors) {
           ex.error.errors.forEach((element: { message: string }) =>
             this.toast.error(element.message)
           );
-        else this.toast.error(ex.error.message);
+        } else if (ex.error?.message) {
+          this.toast.error(ex.error.message);
+        } else {
+          this.toast.error('Erro desconhecido ao atualizar técnico.');
+        }
       }
     });
   }
-
-  // MÉTODO PARA CONFIRMAR O CANCELAMENTO DAS AÇÕES
+  
+  // MÉTÓDO CONFIRMAR O CANCELAMENTO DAS AÇÕES
   confirmarCancelamento(): void {
     if (window.confirm('Deseja mesmo cancelar?')) {
       this.router.navigate(['tecnicos']);

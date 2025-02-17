@@ -3,20 +3,13 @@
 
   <form class="form" [formGroup]="form">
 
-    <mat-checkbox
-  (click)="addPerfil(0)"
-  class="margin"
-  color="primary"
-  [checked]="form.value.perfis.includes(0)">
-  ADMIN
-</mat-checkbox>
-
-<mat-form-field *ngIf="isAdminFlag" class="full-width" appearance="fill">
-  <mat-label>Privilégios Atuais</mat-label>
-  <input matInput
-    [value]="'ADMINISTRADOR'"
-    readonly>
-</mat-form-field>
+    <section>
+      <mat-checkbox
+        formControlName="isAdmin"
+        class="margin"
+        color="primary">Perfil de Administrador</mat-checkbox>
+        
+    </section>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Nome</mat-label>
@@ -53,12 +46,14 @@
       <mat-label>Senha</mat-label>
       <input matInput
         placeholder="Entre 8 e 64 caracteres"
-        formControlName="senha" maxlength="64">
+        formControlName="senha" maxlength="64"
+        type="password">
     </mat-form-field>
 
-    <button (click)="update()" [disabled]="!validaCampos()" mat-button class="btn-criar">SALVAR</button>
+    <button (click)="update()" [disabled]="!validaCampos()" mat-button class="btn-atualizar">SALVAR</button>
 
     <button mat-button class="btn-cancelar" (click)="confirmarCancelamento()">CANCELAR</button>
 
-  </form>
+   </form>
+
 </div>

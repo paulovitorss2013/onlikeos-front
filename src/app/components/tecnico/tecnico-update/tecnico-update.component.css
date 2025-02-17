@@ -26,7 +26,7 @@ h1 {
 
 
 /* ESTILO PARA O BOTÃO "CRIAR" */
-button.btn-criar {
+button.btn-atualizar {
     background-color: rgb(39, 141, 45); /* Tom verde escuro */
     color: rgb(255, 255, 255); /* Texto branco para melhor contraste */
     border-radius: 5px; /* Bordas arredondadas */
@@ -39,7 +39,7 @@ button.btn-criar {
 }
 
 /* ESTILO PARA O BOTÃO CRIAR ENQUANTO ESTIVER DESABILITADO */
-.btn-criar:disabled {
+.btn-atualizar:disabled {
     background-color: rgb(200, 200, 200); /* Cor cinza */
     color: rgb(100, 100, 100); /* Texto um pouco mais escuro */
     cursor: not-allowed; /* Altera o cursor para indicar que não é clicável */
