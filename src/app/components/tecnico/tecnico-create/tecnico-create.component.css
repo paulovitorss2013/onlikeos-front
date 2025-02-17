@@ -1,5 +1,4 @@
 /* --------- AJUSTES PARA TELAS GRANDES --------- */
-
 .container {
     max-width: 600px; /* Define uma largura máxima para o formulário */
     margin: 0 auto; /* Centraliza o formulário horizontalmente */
@@ -60,3 +59,35 @@ button.btn-cancelar {
 }
 
 
+/* --------- AJUSTES PARA TELAS PEQUENAS E MÉDIAS (RESPONSIVIDADE) --------- */
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%; /* Aumenta a largura para telas menores */
+        padding: 10px; /* Reduz o padding para não perder espaço */
+    }
+
+    .form {
+        gap: 12px; /* Reduz o espaço entre os campos para telas menores */
+    }
+
+    button.btn-criar, button.btn-cancelar {
+        width: 100%; /* Faz os botões ocuparem toda a largura */
+        padding: 12px; /* Aumenta o padding para maior área clicável */
+        font-size: 1rem; /* Ajusta o tamanho da fonte */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem; /* Ajusta o tamanho do título */
+    }
+
+    .mat-form-field {
+        width: 100%; /* Garante que os campos de input ocupem a largura total */
+    }
+
+    button.btn-criar, button.btn-cancelar {
+        font-size: 1.1rem; /* Ajusta o tamanho da fonte nos botões */
+    }
+}
