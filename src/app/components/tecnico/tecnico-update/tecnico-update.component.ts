@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class TecnicoUpdateComponent implements OnInit {
   
+  // INSTÂNCIA DO TÉCNICO
   tecnico: Tecnico = {
     id: '',
     nome: '',
@@ -23,6 +24,7 @@ export class TecnicoUpdateComponent implements OnInit {
     dataCriacao: ''
   };
 
+  // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
     nome: new FormControl('', [Validators.required, Validators.minLength(10)]),
     cpf: new FormControl('', [Validators.required, Validators.minLength(11)]),
@@ -33,7 +35,8 @@ export class TecnicoUpdateComponent implements OnInit {
     isAdmin: new FormControl(false),
     privilegios: new FormControl({ value: '', disabled: true })
   });
-
+  
+  // CONSTRUTOR
   constructor(
     private service: TecnicoService,
     private toast: ToastrService,
@@ -53,6 +56,7 @@ export class TecnicoUpdateComponent implements OnInit {
     }
   }
 
+  // MÉTODO PARA BUSCAR O TÉCNICO E SEUS ATRIBUTOS POR ID
   findById(): void {
     this.service.findById(this.tecnico.id).subscribe({
       next: (resposta) => {
@@ -67,7 +71,6 @@ export class TecnicoUpdateComponent implements OnInit {
           senha: resposta.senha,
           perfis: resposta.perfis || [],
           isAdmin: isAdmin,
-          privilegios: isAdmin ? 'Administrador' : ''
         });
         console.log('Perfis recebidos:', this.form.get('perfis')?.value);
       },
@@ -102,13 +105,11 @@ export class TecnicoUpdateComponent implements OnInit {
     if (!this.validaCampos()) return;
   
     let perfis: string[] = this.form.value.perfis || [];
-  
-    // Filtra apenas valores numéricos válidos e descarta valores inválidos
+
     let perfisConvertidos: number[] = perfis
       .map(perfil => Number(perfil))
       .filter(perfil => !isNaN(perfil));
   
-    // Adiciona ou remove o ADMIN conforme o checkbox
     if (this.form.value.isAdmin) {
       if (!perfisConvertidos.includes(0)) {
         perfisConvertidos.push(0);
@@ -140,7 +141,7 @@ export class TecnicoUpdateComponent implements OnInit {
         } else if (ex.error?.message) {
           this.toast.error(ex.error.message);
         } else {
-          this.toast.error('Erro desconhecido ao atualizar técnico.');
+          this.toast.error('Erro desconhecido ao atualizar o técnico.');
         }
       }
     });
@@ -148,7 +149,7 @@ export class TecnicoUpdateComponent implements OnInit {
   
   // MÉTÓDO CONFIRMAR O CANCELAMENTO DAS AÇÕES
   confirmarCancelamento(): void {
-    if (window.confirm('Deseja mesmo cancelar?')) {
+    if (window.confirm('Sair sem salvar as alterações?')) {
       this.router.navigate(['tecnicos']);
     }
   }
