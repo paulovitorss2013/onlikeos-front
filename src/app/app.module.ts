@@ -36,18 +36,23 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 // TOASTR PARA NOTIFICAÇÕES
 import { ToastrModule } from 'ngx-toastr';
 
+import { LoginComponent } from './components/login/login.component';
+
+// INTERCEPTOR DE AUTENTICAÇÃO
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+
 // COMPONENTES
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
-import { TecnicoListComponent } from './components/tecnico/tecnico-list/tecnico-list.component';
-import { LoginComponent } from './components/login/login.component';
 import { TecnicoCreateComponent } from './components/tecnico/tecnico-create/tecnico-create.component';
-
-// INTERCEPTOR DE AUTENTICAÇÃO
-import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { TecnicoListComponent } from './components/tecnico/tecnico-list/tecnico-list.component';
 import { TecnicoUpdateComponent } from './components/tecnico/tecnico-update/tecnico-update.component';
 import { TecnicoDeleteComponent } from './components/tecnico/tecnico-delete/tecnico-delete.component';
+import { ClienteCreateComponent } from './components/cliente/cliente-create/cliente-create.component';
+import { ClienteListComponent } from './components/cliente/cliente-list/cliente-list.component';
+import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
+import { ClienteDeleteComponent } from './components/cliente/cliente-delete/cliente-delete.component';
 
 @NgModule({
   declarations: [
@@ -55,11 +60,15 @@ import { TecnicoDeleteComponent } from './components/tecnico/tecnico-delete/tecn
     NavComponent,
     HomeComponent,
     HeaderComponent,
-    TecnicoListComponent,
     LoginComponent,
     TecnicoCreateComponent,
+    TecnicoListComponent, 
     TecnicoUpdateComponent,
-    TecnicoDeleteComponent
+    TecnicoDeleteComponent,
+    ClienteCreateComponent,
+    ClienteListComponent,
+    ClienteUpdateComponent,
+    ClienteDeleteComponent
   ],
   imports: [
     BrowserModule,
@@ -100,11 +109,11 @@ import { TecnicoDeleteComponent } from './components/tecnico/tecnico-delete/tecn
     })
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, // Interceptor de autenticação
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     provideClientHydration(),
     provideAnimationsAsync(),
-    provideHttpClient(withFetch()),  // Habilita API fetch
-    provideNgxMask() // Ativa ngx-mask para mascaramento
+    provideHttpClient(withFetch()),
+    provideNgxMask()
   ],
   bootstrap: [AppComponent]
 })

@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TecnicoService } from '../../../services/tecnico.service';
-import { Tecnico } from '../../../models/tecnico';
+import { ClienteService } from '../../../services/cliente.service';
+import { Cliente } from '../../../models/cliente';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-tecnico-create',
-  templateUrl: './tecnico-create.component.html',
-  styleUrls: ['./tecnico-create.component.css']
+  selector: 'app-cliente-create',
+  templateUrl: './cliente-create.component.html',
+  styleUrls: ['./cliente-create.component.css']
 })
-export class TecnicoCreateComponent implements OnInit {
+export class ClienteCreateComponent implements OnInit {
 
  // INSTÂNCIA DO TÉCNICO
- tecnico: Tecnico = {
+ cliente: Cliente = {
   id: '',
   nome: '',
   cpf: '',
@@ -36,7 +36,7 @@ export class TecnicoCreateComponent implements OnInit {
 
   // CONSTRUTOR
   constructor(
-    private service: TecnicoService,
+    private service: ClienteService,
     private toast: ToastrService,
     private router: Router
   ) {}
@@ -56,11 +56,11 @@ export class TecnicoCreateComponent implements OnInit {
  // MÉTODO PARA CRIAR UM TÉCNICO
 create(): void {
   if (!this.validaCampos()) return
-  const tecnico: Tecnico = { ...this.form.value }
-  this.service.create(tecnico).subscribe({
+  const cliente: Cliente = { ...this.form.value }
+  this.service.create(cliente).subscribe({
     next: () => {
-      this.toast.success('Técnico cadastrado com sucesso!', 'Cadastro')
-      this.router.navigate(['tecnicos'])
+      this.toast.success('Cliente cadastrado com sucesso!', 'Cadastro')
+      this.router.navigate(['clientes'])
     },
     error: (ex) => {
       if (ex.error.errors)
@@ -75,7 +75,7 @@ create(): void {
   // MÉTODO PARA CONFIRMAR O CANCELAMENTO DAS AÇÕES
   confirmarCancelamento(): void {
     if (window.confirm('Deseja mesmo cancelar?')) {
-      this.router.navigate(['tecnicos']);
+      this.router.navigate(['clientes']);
     }
   }
 

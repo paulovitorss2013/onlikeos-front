@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TecnicoService } from '../../../services/tecnico.service';
-import { Tecnico } from '../../../models/tecnico';
+import { ClienteService } from '../../../services/cliente.service';
+import { Cliente } from '../../../models/cliente';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, of, tap } from 'rxjs';
 
 @Component({
-  selector: 'app-tecnico-delete',
-  templateUrl: './tecnico-delete.component.html',
-  styleUrl: './tecnico-delete.component.css'
+  selector: 'app-cliente-delete',
+  templateUrl: './cliente-delete.component.html',
+  styleUrl: './cliente-delete.component.css'
 })
-export class TecnicoDeleteComponent implements OnInit {
+export class ClienteDeleteComponent implements OnInit {
   
   // INSTÂNCIA DO TÉCNICO
-  tecnico: Tecnico = {
+  cliente: Cliente = {
     id: '',
     nome: '',
     cpf: '',
@@ -39,7 +39,7 @@ export class TecnicoDeleteComponent implements OnInit {
   
   // CONSTRUTOR
   constructor(
-    private service: TecnicoService,
+    private service: ClienteService,
     private toast: ToastrService,
     private router: Router,
     private route: ActivatedRoute
@@ -48,12 +48,12 @@ export class TecnicoDeleteComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.tecnico.id = id;
-      console.log('ID capturado da URL:', this.tecnico.id);
+      this.cliente.id = id;
+      console.log('ID capturado da URL:', this.cliente.id);
       this.findById();
     } else {
-      this.toast.error('ID do técnico não encontrado');
-      this.router.navigate(['tecnicos']);
+      this.toast.error('ID do cliente não encontrado');
+      this.router.navigate(['clientes']);
     }
     this.form.get('isAdmin')?.disable();
     this.form.get('nome')?.disable();
@@ -64,10 +64,10 @@ export class TecnicoDeleteComponent implements OnInit {
 
   // MÉTODO PARA BUSCAR O TÉCNICO E SEUS ATRIBUTOS POR ID
   findById(): void {
-    this.service.findById(this.tecnico.id).subscribe({
+    this.service.findById(this.cliente.id).subscribe({
       next: (resposta) => {
-        this.tecnico = resposta;
-        console.log('Dados recebidos:', this.tecnico);
+        this.cliente = resposta;
+        console.log('Dados recebidos:', this.cliente);
         const isAdmin = resposta.perfis.includes('ADMIN');
         this.form.patchValue({
           nome: resposta.nome,
@@ -81,18 +81,18 @@ export class TecnicoDeleteComponent implements OnInit {
         console.log('Perfis recebidos:', this.form.get('perfis')?.value);
       },
       error: (err) => {
-        console.log('Erro ao buscar técnico:', err);
-        this.toast.error('Erro ao carregar os dados do técnico.');
+        console.log('Erro ao buscar cliente:', err);
+        this.toast.error('Erro ao carregar os dados do cliente.');
       }
     });
   }
 
   // MÉTÓDO PARA DELETAR UM TÉCNICO
   delete(): void {
-    this.service.delete(this.tecnico.id).pipe(
+    this.service.delete(this.cliente.id).pipe(
       tap(() => {
-        this.toast.success('Técnico deletado com sucesso!', 'Delete');
-        this.router.navigate(['tecnicos']);
+        this.toast.success('Cliente deletado com sucesso!', 'Delete');
+        this.router.navigate(['clientes']);
       }),
       catchError((error) => {
         if (error?.error?.errors) {
@@ -102,7 +102,7 @@ export class TecnicoDeleteComponent implements OnInit {
         } else if (error?.error?.message) {
           this.toast.error(error.error.message);
         } else {
-          this.toast.error('Erro desconhecido ao deletar o técnico.');
+          this.toast.error('Erro desconhecido ao deletar o cliente.');
         }
         return of(null); 
       })
@@ -112,8 +112,8 @@ export class TecnicoDeleteComponent implements OnInit {
   
   // MÉTÓDO CONFIRMAR O CANCELAMENTO DAS AÇÕES
   confirmarCancelamento(): void {
-    if (window.confirm('Sair sem deletar o técnico?')) {
-      this.router.navigate(['tecnicos']);
+    if (window.confirm('Sair sem deletar o cliente?')) {
+      this.router.navigate(['clientes']);
     }
   }
 }

@@ -1,0 +1,93 @@
+/* --------- AJUSTES PARA TELAS GRANDES --------- */
+.container {
+    max-width: 600px; /* Define uma largura máxima para o formulário */
+    margin: 0 auto; /* Centraliza o formulário horizontalmente */
+    padding: 16px; /* Adiciona um espaço interno ao redor do conteúdo */
+    box-sizing: border-box; /* Inclui padding e borda no tamanho total */
+}
+
+.form {
+    display: flex; /* Usa Flexbox para layout */
+    flex-direction: column; /* Empilha os itens verticalmente */
+    gap: 16px; /* Espaçamento entre os campos */
+    width: 100%; /* Garante que os campos ocupem toda a largura */
+}
+
+h1 {
+    width: 100%; /* Faz o título ocupar toda a largura disponível */
+    text-align: center; /* Centraliza o texto */
+    margin-bottom: 1.5rem; /* Espaçamento inferior para separar o título dos outros elementos */
+}
+
+.full-width {
+    width: 100%; /* Os campos ocupam a largura total do contêiner */
+}
+
+
+/* ESTILO PARA O BOTÃO "CRIAR" */
+button.btn-criar {
+    background-color: rgb(39, 141, 45); /* Tom verde escuro */
+    color: rgb(255, 255, 255); /* Texto branco para melhor contraste */
+    border-radius: 5px; /* Bordas arredondadas */
+    padding: 0.5rem 1.5rem; /* Ajusta o espaçamento interno */
+    font-size: 0.9rem; /* Tamanho de fonte levemente maior */
+    cursor: pointer; /* Altera o cursor para indicar clicabilidade */
+    margin: 0; /* Elimina margens extras */
+    border: none; /* Remove a borda padrão */
+    transition: background-color 0.3s ease; /* Transição suave */
+}
+
+/* ESTILO PARA O BOTÃO CRIAR ENQUANTO ESTIVER DESABILITADO */
+.btn-criar:disabled {
+    background-color: rgb(200, 200, 200); /* Cor cinza */
+    color: rgb(100, 100, 100); /* Texto um pouco mais escuro */
+    cursor: not-allowed; /* Altera o cursor para indicar que não é clicável */
+    opacity: 0.7; /* Reduz a opacidade para reforçar o efeito desabilitado */
+}
+
+/* ESTILO PARA O BOTÃO "CANCELAR" */
+button.btn-cancelar {
+    background-color: rgb(207, 80, 63); /* Tom vermelho claro */
+    color: rgb(255, 255, 255); /* Texto branco */
+    border-radius: 5px; /* Bordas arredondadas */
+    padding: 0.5rem 1.5rem; /* Ajusta o espaçamento interno */
+    font-size: 0.9rem; /* Tamanho de fonte consistente */
+    cursor: pointer; /* Altera o cursor para indicar clicabilidade */
+    margin: 0; /* Elimina margens extras */
+    border: none; /* Remove a borda padrão */
+    transition: background-color 0.3s ease; /* Transição suave */
+}
+
+
+/* --------- AJUSTES PARA TELAS PEQUENAS E MÉDIAS (RESPONSIVIDADE) --------- */
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%; /* Aumenta a largura para telas menores */
+        padding: 10px; /* Reduz o padding para não perder espaço */
+    }
+
+    .form {
+        gap: 12px; /* Reduz o espaço entre os campos para telas menores */
+    }
+
+    button.btn-criar, button.btn-cancelar {
+        width: 100%; /* Faz os botões ocuparem toda a largura */
+        padding: 12px; /* Aumenta o padding para maior área clicável */
+        font-size: 1rem; /* Ajusta o tamanho da fonte */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem; /* Ajusta o tamanho do título */
+    }
+
+    .mat-form-field {
+        width: 100%; /* Garante que os campos de input ocupem a largura total */
+    }
+
+    button.btn-criar, button.btn-cancelar {
+        font-size: 1.1rem; /* Ajusta o tamanho da fonte nos botões */
+    }
+}
