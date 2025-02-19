@@ -3,13 +3,6 @@
 
   <form class="form" [formGroup]="form">
 
-    <section>
-      <mat-checkbox
-      (click)="addPerfil(0)"
-      class="margin"
-      color="primary">Perfil de Administrador</mat-checkbox>
-    </section>
-
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Nome</mat-label>
       <input matInput
@@ -39,13 +32,6 @@
         placeholder="Ex: (00) 00000-0000 (digite apenas números)"
         formControlName="celular"
         mask="(00) 00000-0000" />
-    </mat-form-field>
-
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Senha</mat-label>
-      <input matInput
-        placeholder="Entre 8 e 64 caracteres"
-        formControlName="senha" maxlength="64">
     </mat-form-field>
 
     <button (click)="create()" [disabled]="!validaCampos()" mat-button class="btn-criar">CRIAR</button>

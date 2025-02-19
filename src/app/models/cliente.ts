@@ -5,6 +5,5 @@ export interface Cliente {
   email: string;
   celular: string;
   senha: string;
-  perfis: string[];
   dataCriacao?: any;
 }

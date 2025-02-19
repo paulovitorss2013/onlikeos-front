@@ -20,7 +20,6 @@ export class ClienteUpdateComponent implements OnInit {
     email: '',
     senha: '',
     celular: '',
-    perfis: [],
     dataCriacao: ''
   };
 
@@ -31,8 +30,6 @@ export class ClienteUpdateComponent implements OnInit {
     celular: new FormControl('', [Validators.minLength(11)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    perfis: new FormControl([]),
-    isAdmin: new FormControl(false),
     privilegios: new FormControl({ value: '', disabled: true })
   });
   
@@ -62,15 +59,12 @@ export class ClienteUpdateComponent implements OnInit {
       next: (resposta) => {
         this.cliente = resposta;
         console.log('Dados recebidos:', this.cliente);
-        const isAdmin = resposta.perfis.includes('ADMIN');
         this.form.patchValue({
           nome: resposta.nome,
           cpf: resposta.cpf,
           celular: resposta.celular,
           email: resposta.email,
           senha: resposta.senha,
-          perfis: resposta.perfis || [],
-          isAdmin: isAdmin,
         });
         console.log('Perfis recebidos:', this.form.get('perfis')?.value);
       },
@@ -79,25 +73,6 @@ export class ClienteUpdateComponent implements OnInit {
         this.toast.error('Erro ao carregar os dados do cliente');
       }
     });
-  }
-
-  // MÉTODO PARA ATUALIZAR O PERFIL DO TÉCNICO
-  addPerfil(perfil: string): void {
-    const perfis = this.form.get('perfis')?.value as string[];
-    if (perfil === 'ADMIN') {
-      if (!perfis.includes('ADMIN')) {
-        perfis.push('ADMIN');
-      }
-    } else {
-      if (perfis.includes(perfil)) {
-        this.form.get('perfis')?.setValue(perfis.filter(p => p !== perfil));
-      } else {
-        this.form.get('perfis')?.setValue([...perfis, perfil]);
-      }
-    }
-    const validPerfis = this.form.get('perfis')?.value.filter((perfil: string) => perfil);
-    this.form.get('perfis')?.setValue(validPerfis);
-    console.log('Perfis selecionados:', this.form.get('perfis')?.value);
   }
   
   // MÉTÓDO PARA ATUALIZAR UM TÉCNICO
@@ -125,7 +100,6 @@ export class ClienteUpdateComponent implements OnInit {
       email: this.form.value.email,
       celular: this.form.value.celular,
       senha: this.form.value.senha,
-      perfis: perfisConvertidos.map(p => p.toString()),
       dataCriacao: this.cliente.dataCriacao 
     };  
     this.service.update(cliente).subscribe({

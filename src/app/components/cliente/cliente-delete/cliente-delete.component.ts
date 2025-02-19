@@ -21,7 +21,6 @@ export class ClienteDeleteComponent implements OnInit {
     email: '',
     senha: '',
     celular: '',
-    perfis: [],
     dataCriacao: ''
   };
 
@@ -32,8 +31,6 @@ export class ClienteDeleteComponent implements OnInit {
     celular: new FormControl('', [Validators.minLength(11)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    perfis: new FormControl([]),
-    isAdmin: new FormControl(false),
     privilegios: new FormControl({ value: '', disabled: true })
   });
   
@@ -68,15 +65,12 @@ export class ClienteDeleteComponent implements OnInit {
       next: (resposta) => {
         this.cliente = resposta;
         console.log('Dados recebidos:', this.cliente);
-        const isAdmin = resposta.perfis.includes('ADMIN');
         this.form.patchValue({
           nome: resposta.nome,
           cpf: resposta.cpf,
           celular: resposta.celular,
           email: resposta.email,
           senha: resposta.senha,
-          perfis: resposta.perfis || [],
-          isAdmin: isAdmin,
         });
         console.log('Perfis recebidos:', this.form.get('perfis')?.value);
       },

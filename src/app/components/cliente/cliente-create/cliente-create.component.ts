@@ -12,15 +12,14 @@ import { Router } from '@angular/router';
 })
 export class ClienteCreateComponent implements OnInit {
 
- // INSTÂNCIA DO TÉCNICO
+ // INSTÂNCIA DO CLIENTE
  cliente: Cliente = {
   id: '',
   nome: '',
   cpf: '',
   email: '',
-  senha: '',
+  senha: 'erNB1PZ@q*Wv76Fdr0TM',
   celular: '',
-  perfis: [],
   dataCriacao:''
  }
 
@@ -30,8 +29,7 @@ export class ClienteCreateComponent implements OnInit {
     cpf: new FormControl('', [Validators.required, Validators.minLength(11)]),
     celular: new FormControl('', [Validators.minLength(11)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    perfis: new FormControl([])
+    senha: new FormControl('', [Validators.minLength(8)])
   });
 
   // CONSTRUTOR
@@ -43,17 +41,7 @@ export class ClienteCreateComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // MÉTODO PARA ADICIONAR O PERFIL DO TÉCNICO
-  addPerfil(perfil: number): void {
-    const perfis = this.form.get('perfis')?.value as number[];
-    if (perfis.includes(perfil)) {
-      this.form.get('perfis')?.setValue(perfis.filter(p => p !== perfil));
-    } else {
-      this.form.get('perfis')?.setValue([...perfis, perfil]);
-    }
-  }
-
- // MÉTODO PARA CRIAR UM TÉCNICO
+ // MÉTODO PARA CRIAR UM CLIENTE
 create(): void {
   if (!this.validaCampos()) return
   const cliente: Cliente = { ...this.form.value }
