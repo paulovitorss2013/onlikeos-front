@@ -48,7 +48,6 @@ export class TecnicoUpdateComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.tecnico.id = id;
-      console.log('ID capturado da URL:', this.tecnico.id);
       this.findById();
     } else {
       this.toast.error('ID do técnico não encontrado');
@@ -61,7 +60,6 @@ export class TecnicoUpdateComponent implements OnInit {
     this.service.findById(this.tecnico.id).subscribe({
       next: (resposta) => {
         this.tecnico = resposta;
-        console.log('Dados recebidos:', this.tecnico);
         const isAdmin = resposta.perfis.includes('ADMIN');
         this.form.patchValue({
           nome: resposta.nome,
@@ -72,10 +70,8 @@ export class TecnicoUpdateComponent implements OnInit {
           perfis: resposta.perfis || [],
           isAdmin: isAdmin,
         });
-        console.log('Perfis recebidos:', this.form.get('perfis')?.value);
       },
       error: (err) => {
-        console.log('Erro ao buscar técnico:', err);
         this.toast.error('Erro ao carregar os dados do técnico');
       }
     });

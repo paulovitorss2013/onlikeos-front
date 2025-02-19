@@ -93,5 +93,4 @@ export class LoginComponent implements OnInit {
         }
       });
   }
-  // FIM DO MÉTODO PARA LOGAR NO SISTEMA
 }

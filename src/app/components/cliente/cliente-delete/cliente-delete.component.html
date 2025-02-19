@@ -7,8 +7,7 @@
         <mat-label>Nome</mat-label>
         <input matInput
           placeholder="Entre 10 e 60 caracteres"
-          formControlName="nome"
-          [disabled]="true">
+          formControlName="nome">
       </mat-form-field>
   
       <mat-form-field class="full-width" appearance="fill">
@@ -16,16 +15,14 @@
         <input matInput
           placeholder="Ex: 000.000.000-00 (digite apenas números)"
           formControlName="cpf"
-          mask="000.000.000-00"
-          [disabled]="true" />
+          mask="000.000.000-00" />
       </mat-form-field>
   
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>E-mail</mat-label>
         <input matInput
           placeholder="Digite o e-mail"
-          formControlName="email"
-          [disabled]="true">
+          formControlName="email">
       </mat-form-field>
   
       <mat-form-field class="full-width" appearance="fill">
@@ -33,8 +30,7 @@
         <input matInput
           placeholder="Ex: (00) 00000-0000 (digite apenas números)"
           formControlName="celular"
-          mask="(00) 00000-0000" 
-          [disabled]="true"/>
+          mask="(00) 00000-0000">
       </mat-form-field>
   
       <button (click)="delete()" mat-button class="btn-deletar">DELETAR</button>

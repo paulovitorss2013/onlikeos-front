@@ -13,7 +13,7 @@ import { catchError, of, tap } from 'rxjs';
 })
 export class ClienteDeleteComponent implements OnInit {
   
-  // INSTÂNCIA DO TÉCNICO
+  // INSTÂNCIA DO CLIENTE
   cliente: Cliente = {
     id: '',
     nome: '',
@@ -24,12 +24,12 @@ export class ClienteDeleteComponent implements OnInit {
     dataCriacao: ''
   };
 
-  // GRUPO DE FORMULÁRIOS REATIVOS
+  // GRUPO DE FORMULÁRIOS REATIVOS COM CAMPOS DESABILITADOS
   form: FormGroup = new FormGroup({
-    nome: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    cpf: new FormControl('', [Validators.required, Validators.minLength(11)]),
-    celular: new FormControl('', [Validators.minLength(11)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
+    nome: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.minLength(10)]),
+    cpf: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.minLength(11)]),
+    celular: new FormControl({ value: '', disabled: true }, [Validators.minLength(11)]),
+    email: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.email]),
     senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
     privilegios: new FormControl({ value: '', disabled: true })
   });
@@ -46,42 +46,33 @@ export class ClienteDeleteComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.cliente.id = id;
-      console.log('ID capturado da URL:', this.cliente.id);
       this.findById();
     } else {
       this.toast.error('ID do cliente não encontrado');
       this.router.navigate(['clientes']);
     }
-    this.form.get('isAdmin')?.disable();
-    this.form.get('nome')?.disable();
-    this.form.get('cpf')?.disable();
-    this.form.get('email')?.disable();
-    this.form.get('celular')?.disable();
   }
 
-  // MÉTODO PARA BUSCAR O TÉCNICO E SEUS ATRIBUTOS POR ID
+  // MÉTODO PARA BUSCAR O CLIENTE E SEUS ATRIBUTOS POR ID
   findById(): void {
     this.service.findById(this.cliente.id).subscribe({
       next: (resposta) => {
         this.cliente = resposta;
-        console.log('Dados recebidos:', this.cliente);
         this.form.patchValue({
           nome: resposta.nome,
           cpf: resposta.cpf,
           celular: resposta.celular,
           email: resposta.email,
-          senha: resposta.senha,
+          senha: resposta.senha
         });
-        console.log('Perfis recebidos:', this.form.get('perfis')?.value);
       },
-      error: (err) => {
-        console.log('Erro ao buscar cliente:', err);
+      error: () => {
         this.toast.error('Erro ao carregar os dados do cliente.');
       }
     });
   }
 
-  // MÉTÓDO PARA DELETAR UM TÉCNICO
+  // MÉTODO PARA DELETAR O CLIENTE
   delete(): void {
     this.service.delete(this.cliente.id).pipe(
       tap(() => {
@@ -98,13 +89,12 @@ export class ClienteDeleteComponent implements OnInit {
         } else {
           this.toast.error('Erro desconhecido ao deletar o cliente.');
         }
-        return of(null); 
+        return of(null);
       })
     ).subscribe();
   }
   
-  
-  // MÉTÓDO CONFIRMAR O CANCELAMENTO DAS AÇÕES
+  // MÉTODO PARA CONFIRMAR O CANCELAMENTO DAS AÇÕES
   confirmarCancelamento(): void {
     if (window.confirm('Sair sem deletar o cliente?')) {
       this.router.navigate(['clientes']);

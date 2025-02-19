@@ -30,7 +30,6 @@ export class ClienteUpdateComponent implements OnInit {
     celular: new FormControl('', [Validators.minLength(11)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    privilegios: new FormControl({ value: '', disabled: true })
   });
   
   // CONSTRUTOR
@@ -45,7 +44,6 @@ export class ClienteUpdateComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.cliente.id = id;
-      console.log('ID capturado da URL:', this.cliente.id);
       this.findById();
     } else {
       this.toast.error('ID do cliente não encontrado');
@@ -58,7 +56,6 @@ export class ClienteUpdateComponent implements OnInit {
     this.service.findById(this.cliente.id).subscribe({
       next: (resposta) => {
         this.cliente = resposta;
-        console.log('Dados recebidos:', this.cliente);
         this.form.patchValue({
           nome: resposta.nome,
           cpf: resposta.cpf,
@@ -66,10 +63,8 @@ export class ClienteUpdateComponent implements OnInit {
           email: resposta.email,
           senha: resposta.senha,
         });
-        console.log('Perfis recebidos:', this.form.get('perfis')?.value);
       },
       error: (err) => {
-        console.log('Erro ao buscar cliente:', err);
         this.toast.error('Erro ao carregar os dados do cliente');
       }
     });
@@ -77,22 +72,8 @@ export class ClienteUpdateComponent implements OnInit {
   
   // MÉTÓDO PARA ATUALIZAR UM TÉCNICO
   update(): void {
-    if (!this.validaCampos()) return;
-  
-    let perfis: string[] = this.form.value.perfis || [];
-
-    let perfisConvertidos: number[] = perfis
-      .map(perfil => Number(perfil))
-      .filter(perfil => !isNaN(perfil));
-  
-    if (this.form.value.isAdmin) {
-      if (!perfisConvertidos.includes(0)) {
-        perfisConvertidos.push(0);
-      }
-    } else {
-      perfisConvertidos = perfisConvertidos.filter(p => p !== 0);
-    }
-  
+    if (!this.validaCampos()) return;  
+    
     const cliente: Cliente = {
       id: this.cliente.id,
       nome: this.form.value.nome,
@@ -101,7 +82,7 @@ export class ClienteUpdateComponent implements OnInit {
       celular: this.form.value.celular,
       senha: this.form.value.senha,
       dataCriacao: this.cliente.dataCriacao 
-    };  
+    };
     this.service.update(cliente).subscribe({
       next: () => {
         this.toast.success('Cliente atualizado com sucesso', 'Atualização');
