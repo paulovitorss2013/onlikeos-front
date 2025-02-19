@@ -8,6 +8,7 @@ export interface Chamado {
     descricao: string;
     tecnico: any;
     cliente: any;
-    nomeCliente:string;
     nomeTecnico: string;
+    nomeCliente:string;
+    
 }
