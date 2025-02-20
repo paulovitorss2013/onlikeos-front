@@ -17,11 +17,14 @@ export class ClienteListComponent implements OnInit {
   dataSource = new MatTableDataSource<Cliente>(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
+  
+  // CONSTRUTOR
   constructor(
     private service: ClienteService,
     private paginatorIntl: MatPaginatorIntl
   ) 
+  
+  // PAGINATOR
   {
     this.paginatorIntl.itemsPerPageLabel = ''; 
     this.paginatorIntl.getRangeLabel = () => '';
@@ -31,6 +34,7 @@ export class ClienteListComponent implements OnInit {
     this.findAll();
   }
 
+  // MÉTODO PARA LISTAR TODOS OS CHAMADOS
   findAll() {
     this.service.findAll().subscribe(resposta => {
       this.ELEMENT_DATA = resposta;
@@ -39,6 +43,7 @@ export class ClienteListComponent implements OnInit {
     });
   }
 
+  // APLICANDO FILTRO PARA BUSCA
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

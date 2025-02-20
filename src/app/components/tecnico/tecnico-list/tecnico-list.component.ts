@@ -18,6 +18,7 @@ export class TecnicoListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  // CONSTRUTOR
   constructor(
     private service: TecnicoService,
     private paginatorIntl: MatPaginatorIntl
@@ -30,6 +31,7 @@ export class TecnicoListComponent implements OnInit {
     this.findAll();
   }
 
+  // MÉTODO PARA LISTAR TODOS OS TÉCNICOS
   findAll() {
     this.service.findAll().subscribe(resposta => {
       this.ELEMENT_DATA = resposta;
@@ -38,6 +40,7 @@ export class TecnicoListComponent implements OnInit {
     });
   }
 
+  // APLICAÇÃO DO FILTRO PARA BUSCA
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
