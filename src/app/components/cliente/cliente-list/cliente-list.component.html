@@ -9,7 +9,9 @@
   </mat-form-field>
 
   <div class="mat-elevation-z8">
+    
     <table mat-table [dataSource]="dataSource">
+      
       <ng-container matColumnDef="nome">
         <th mat-header-cell *matHeaderCellDef> Nome </th>
         <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
@@ -18,8 +20,7 @@
       <ng-container matColumnDef="cpf">
         <th mat-header-cell *matHeaderCellDef> CPF </th>
         <td mat-cell *matCellDef="let element"> 
-          {{ element.cpf | mask:'000.000.000-00' }}
-        </td>
+          {{ element.cpf | mask:'000.000.000-00' }}</td>
       </ng-container>
 
       <ng-container matColumnDef="email">
@@ -48,5 +49,6 @@
 
     <mat-paginator [pageSizeOptions]="[20, 50, 20, 200]" showFirstLastButtons>
     </mat-paginator>
-  </div>
+
+   </div>
 </div>

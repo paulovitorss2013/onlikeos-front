@@ -17,7 +17,7 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     //NAVEGANDO PARA A ROTA HOME (DEFINE A PÁGINA DE START)
-    this.router.navigate(['tecnicos']) 
+    this.router.navigate(['chamados']) 
   }
 
   // MÉTODO PARA SAIR DO SISTEMA

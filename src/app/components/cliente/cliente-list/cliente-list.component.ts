@@ -21,7 +21,8 @@ export class ClienteListComponent implements OnInit {
   constructor(
     private service: ClienteService,
     private paginatorIntl: MatPaginatorIntl
-  ) {
+  ) 
+  {
     this.paginatorIntl.itemsPerPageLabel = ''; 
     this.paginatorIntl.getRangeLabel = () => '';
   }
