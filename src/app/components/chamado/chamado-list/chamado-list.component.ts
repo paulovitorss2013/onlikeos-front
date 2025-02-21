@@ -16,7 +16,7 @@ export class ChamadoListComponent implements OnInit {
   FILTERED_DATA: Chamado[] = [];
 
   // COLUNAS DA TABELA
-  displayedColumns: string[] = ['id', 'titulo', 'cliente', 'tecnico', 'dataAbertura', 'prioridade', 'status', 'acoes'];
+  displayedColumns: string[] = ['id', 'cliente', 'tecnico', 'prioridade', 'status', 'acoes'];
   dataSource = new MatTableDataSource<Chamado>(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -84,20 +84,20 @@ export class ChamadoListComponent implements OnInit {
   // RETORNA A DESCRIÇÃO DO STATUS
   retornaStatus(status: number | string): string {
     const statusMap: { [key: number]: string } = {
-      0: 'ABERTO',
-      1: 'EM ANDAMENTO',
-      2: 'ENCERRADO'
+      0: 'Aberto',
+      1: 'Em Andamento',
+      2: 'Encerrado'
     };
-    return statusMap[Number(status)] || 'DESCONHECIDO';
+    return statusMap[Number(status)] || 'Desconhecido';
   }
 
   // RETORNA A DESCRIÇÃO DA PRIORIDADE
   retornaPrioridade(prioridade: number | string): string {
     const prioridadeMap: { [key: number]: string } = {
-      0: 'BAIXA',
-      1: 'MÉDIA',
-      2: 'ALTA'
+      0: 'Baixa',
+      1: 'Média',
+      2: 'Alta'
     };
-    return prioridadeMap[Number(prioridade)] || 'DESCONHECIDA';
+    return prioridadeMap[Number(prioridade)] || 'Desconhecida';
   }
 }
