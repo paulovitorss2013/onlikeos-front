@@ -6,15 +6,6 @@
     margin: auto; /* Centraliza o container horizontalmente */
 }
 
-/* ESTILIZA O CONTAINER DO TÍTULO E BOTÃO */
-.header-container {
-    display: flex;
-    align-items: center; /* Alinha os itens verticalmente */
-    justify-content: space-between; /* Distribui o espaço entre título e botão */
-    flex-wrap: wrap; /* Permite que os itens quebrem linha em telas menores */
-    margin-bottom: 1rem; /* Adiciona espaçamento abaixo */
-}
-
 /* ESTILIZA A TABELA */
 table {
     width: 100%; /* Faz a tabela ocupar toda a largura disponível do container */
@@ -28,7 +19,7 @@ mat-form-field {
 /* ESTILO PARA OS BOTÕES */
 button {
     background-color: rgb(39, 141, 45); /* Define um tom verde escuro para o fundo do botão */
-    color: white; /* Define a cor do texto como branco */
+    color: white; /* Define a cor do texto como branco e usa !important para garantir que não seja sobrescrito */
     border-radius: 5px; /* Arredonda as bordas do botão */
     padding: 0.5rem 1.5rem; /* Define o espaçamento interno do botão (vertical e horizontal) */
     font-size: 0.8rem; /* Ajusta o tamanho da fonte */
@@ -38,45 +29,17 @@ button {
 
 /* ESTILIZA O TÍTULO PRINCIPAL (H1) */
 h1 {
-    margin: 0;
-    font-size: 1.8rem;
+    width: 100%; /* Faz o título ocupar toda a largura disponível */
+    text-align: center; /* Centraliza o texto */
+    margin-bottom: 1.5rem; /* Espaçamento inferior para separar o título dos outros elementos */
 }
 
-/* ESTILIZA O CONTAINER DOS FILTROS */
-.filters {
-    display: flex;
-    flex-direction: column; /* Mantém os filtros em colunas */
-    gap: 1rem; /* Espaço entre as linhas de filtro */
-}
-
-/* ESTILIZA CADA LINHA DE FILTRO */
-.filter-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap; /* Permite quebra de linha em telas pequenas */
-}
-
-/* ESTILIZA O GRUPO DE BOTÕES DE RÁDIO COM ESPAÇAMENTO IGUAL */
-.radio-group {
-    display: flex;
-    justify-content: space-evenly; /* Distribui os botões de rádio com espaçamento igual */
-    flex-grow: 1; /* Faz com que todos os botões ocupem espaço igual */
-}
-
-/* ESTILIZA OS BOTÕES DE RÁDIO */
-mat-radio-button {
-    flex: 1; /* Garante que cada botão ocupe o mesmo espaço */
-    text-align: center; /* Centraliza o texto dentro do botão */
-    white-space: nowrap; /* Impede que o texto quebre em múltiplas linhas */
-}
-
-/* ESTILIZA OS ÍCONES */
+/* ESTILIZA O ÍCONE VISUALIZAR */
 .edit {
     color: rgb(39, 141, 45);
-    margin-right: 1rem;
+    margin-right: 1rem; /* Adiciona espaço à direita */
 }
 
-.delete {
-    color: rgb(207, 80, 63);
-}
+.filtro-titulo {
+    font-weight: bold;
+  }
