@@ -2,44 +2,77 @@
 
 /* ESTILIZA A CLASSE .CONTAINER */
 .container {
-    width: 90%; /* Define a largura do container para ocupar 90% da largura da tela */
-    margin: auto; /* Centraliza o container horizontalmente */
+    width: 90%; /* DEFINE A LARGURA DO CONTAINER PARA OCUPAR 90% DA TELA */
+    margin: auto; /* CENTRALIZA O CONTAINER HORIZONTALMENTE */
 }
 
 /* ESTILIZA A TABELA */
 table {
-    width: 100%; /* Faz a tabela ocupar toda a largura disponível do container */
+    width: 100%; /* FAZ A TABELA OCUPAR TODA A LARGURA DISPONÍVEL DO CONTAINER */
 }
 
 /* DEFINE O CAMPO DE FORMULÁRIO DO ANGULAR MATERIAL */
 mat-form-field {
-    width: 100%; /* Faz o campo de formulário ocupar toda a largura disponível */
+    width: 100%; /* FAZ O CAMPO DE FORMULÁRIO OCUPAR TODA A LARGURA DISPONÍVEL */
 }
 
 /* ESTILO PARA OS BOTÕES */
 button {
-    background-color: rgb(39, 141, 45); /* Define um tom verde escuro para o fundo do botão */
-    color: white; /* Define a cor do texto como branco e usa !important para garantir que não seja sobrescrito */
-    border-radius: 5px; /* Arredonda as bordas do botão */
-    padding: 0.5rem 1.5rem; /* Define o espaçamento interno do botão (vertical e horizontal) */
-    font-size: 0.8rem; /* Ajusta o tamanho da fonte */
-    cursor: pointer; /* Altera o cursor para indicar que o botão é clicável */
-    margin: 0 1.5rem 1.5rem 0; /* Adiciona espaçamento externo à direita e abaixo do botão */
+    background-color: rgb(39, 141, 45); /* DEFINE UM TOM VERDE ESCURO PARA O FUNDO DO BOTÃO */
+    color: white; /* DEFINE A COR DO TEXTO COMO BRANCO */
+    border-radius: 5px; /* ARREDONDA AS BORDAS DO BOTÃO */
+    padding: 0.5rem 1.5rem; /* DEFINE O ESPAÇAMENTO INTERNO DO BOTÃO (VERTICAL E HORIZONTAL) */
+    font-size: 0.8rem; /* AJUSTA O TAMANHO DA FONTE */
+    cursor: pointer; /* ALTERA O CURSOR PARA INDICAR QUE O BOTÃO É CLICÁVEL */
+    margin: 0 1.5rem 1.5rem 0; /* ADICIONA ESPAÇAMENTO EXTERNO À DIREITA E ABAIXO DO BOTÃO */
 }
 
 /* ESTILIZA O TÍTULO PRINCIPAL (H1) */
 h1 {
-    width: 100%; /* Faz o título ocupar toda a largura disponível */
-    text-align: center; /* Centraliza o texto */
-    margin-bottom: 1.5rem; /* Espaçamento inferior para separar o título dos outros elementos */
+    width: 100%; /* FAZ O TÍTULO OCUPAR TODA A LARGURA DISPONÍVEL */
+    text-align: center; /* CENTRALIZA O TEXTO */
+    margin-bottom: 1.5rem; /* ESPAÇAMENTO INFERIOR PARA SEPARAR O TÍTULO DOS OUTROS ELEMENTOS */
 }
 
 /* ESTILIZA O ÍCONE VISUALIZAR */
 .edit {
     color: rgb(39, 141, 45);
-    margin-right: 1rem; /* Adiciona espaço à direita */
+    margin-right: 1rem; /* ADICIONA ESPAÇO À DIREITA */
 }
 
+/* ESTILIZA O CONTAINER DOS FILTROS */
+.filtros-container {
+    width: 100%;
+    text-align: left; /* ALINHA OS FILTROS À ESQUERDA */
+    margin-bottom: 1rem; /* ADICIONA UM ESPAÇAMENTO EXTRA ABAIXO DOS FILTROS */
+}
+
+/* FORMATAÇÃO DO BLOCO DE FILTROS */
+.filter-row {
+    display: flex;
+    flex-direction: column; /* MANTÉM O TÍTULO EM CIMA E OS BOTÕES ABAIXO */
+    align-items: flex-start; /* ALINHA TUDO À ESQUERDA */
+    margin-bottom: 1rem; /* ESPAÇO ENTRE OS FILTROS */
+}
+
+/* ESTILIZA O TÍTULO DOS FILTROS */
 .filtro-titulo {
-    font-weight: bold;
-  }
+    font-weight: bold; /* TEXTO EM NEGRITO */
+    margin-bottom: 0.3rem; /* REDUZ O ESPAÇAMENTO ABAIXO DO TÍTULO */
+}
+
+/* ESTILIZA O GRUPO DE RADIO BUTTONS */
+.radio-group {
+    display: flex;
+    gap: 1rem; /* ADICIONA ESPAÇO ENTRE OS RADIO BUTTONS */
+}
+
+/* ESTILIZAÇÃO DOS RADIO BUTTONS */
+mat-radio-button {
+    display: flex;
+    align-items: center; /* MANTÉM ALINHADO VERTICALMENTE */
+    gap: 0.1rem; /* APROXIMA O TEXTO DO BOTÃO */
+    padding: 1px; /* ADICIONA UM PEQUENO ESPAÇO AO REDOR DO BOTÃO */
+    border-radius: 5px; /* ARREDONDA LEVEMENTE OS CANTOS DO ESPAÇO AO REDOR DO BOTÃO */
+    background-color: rgba(39, 141, 45, 0.1); /* FUNDO VERDE CLARINHO PARA DESTACAR OS RADIO BUTTONS */
+}

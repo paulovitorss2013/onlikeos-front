@@ -11,22 +11,24 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
   styleUrls: ['./cliente-list.component.css']
 })
 export class ClienteListComponent implements OnInit {
-
+  // DADOS ORIGINAIS E FILTRADOS
   ELEMENT_DATA: Cliente[] = []
+
+  // COLUNAS DA TABELA
   displayedColumns: string[] = ['nome', 'cpf', 'acoes'];
   dataSource = new MatTableDataSource<Cliente>(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  
+
   // CONSTRUTOR
   constructor(
     private service: ClienteService,
     private paginatorIntl: MatPaginatorIntl
-  ) 
-  
+  )
+
   // PAGINATOR
   {
-    this.paginatorIntl.itemsPerPageLabel = ''; 
+    this.paginatorIntl.itemsPerPageLabel = '';
     this.paginatorIntl.getRangeLabel = () => '';
   }
 
@@ -43,7 +45,7 @@ export class ClienteListComponent implements OnInit {
     });
   }
 
-  // APLICANDO FILTRO PARA BUSCA
+  // APLICA OS FILTROS SELECIONADOS
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

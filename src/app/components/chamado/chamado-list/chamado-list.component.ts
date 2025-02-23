@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chamado } from '../../../models/chamado';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { ChamadoService } from '../../../services/chamado.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { ChamadoService } from '../../../services/chamado.service';
   styleUrls: ['./chamado-list.component.css']
 })
 export class ChamadoListComponent implements OnInit {
-  
+
   // DADOS ORIGINAIS E FILTRADOS
   ELEMENT_DATA: Chamado[] = [];
   FILTERED_DATA: Chamado[] = [];
@@ -26,7 +26,12 @@ export class ChamadoListComponent implements OnInit {
   selectedPrioridade: number | null = null;
   filterText: string = '';
 
-  constructor(private service: ChamadoService) {}
+  // CONSTRUTOR
+  constructor(private service: ChamadoService, private paginatorIntl: MatPaginatorIntl) {
+    // CONFIGURANDO PAGINATOR PARA REMOVER TEXTOS PADRÃO
+    this.paginatorIntl.itemsPerPageLabel = '';
+    this.paginatorIntl.getRangeLabel = () => '';
+  }
 
   ngOnInit(): void {
     this.findAll();
@@ -46,9 +51,9 @@ export class ChamadoListComponent implements OnInit {
     this.FILTERED_DATA = this.ELEMENT_DATA.filter(element => {
       const matchesStatus = this.selectedStatus === null || Number(element.status) === this.selectedStatus;
       const matchesPrioridade = this.selectedPrioridade === null || this.selectedPrioridade === Number(element.prioridade);
-      const matchesText = this.filterText === '' || 
-        element.titulo.toLowerCase().includes(this.filterText.toLowerCase()) || 
-        element.nomeCliente.toLowerCase().includes(this.filterText.toLowerCase()) || 
+      const matchesText = this.filterText === '' ||
+        element.titulo.toLowerCase().includes(this.filterText.toLowerCase()) ||
+        element.nomeCliente.toLowerCase().includes(this.filterText.toLowerCase()) ||
         element.nomeTecnico.toLowerCase().includes(this.filterText.toLowerCase());
 
       return matchesStatus && matchesPrioridade && matchesText;
