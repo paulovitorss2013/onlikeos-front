@@ -5,10 +5,10 @@ export interface Chamado {
     prioridade: string;
     status: string;
     titulo: string;
-    descricao: string;
+    observacoes: string;
     tecnico: any;
     cliente: any;
     nomeTecnico: string;
     nomeCliente:string;
-    
+
 }

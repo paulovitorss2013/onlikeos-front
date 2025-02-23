@@ -10,9 +10,8 @@
       <input matInput formControlName="titulo" placeholder="Exemplo: Troca de ONU" maxlength="60">
     </mat-form-field>
 
-    <!-- STATUS E PRIORIDADE -->
     <div class="status-prioridade">
-      <!-- STATUS -->
+
       <mat-form-field>
         <mat-label>Selecione o Status</mat-label>
         <mat-select formControlName="status">
@@ -22,7 +21,6 @@
         </mat-select>
       </mat-form-field>
 
-      <!-- PRIORIDADE -->
       <mat-form-field>
         <mat-label>Selecione a Prioridade</mat-label>
         <mat-select formControlName="prioridade">
@@ -33,36 +31,34 @@
       </mat-form-field>
     </div>
 
-    <!-- SELECIONAR TÉCNICO -->
     <div class="tecnico">
       <mat-form-field class="full-width">
         <mat-label>Selecione o Técnico</mat-label>
         <mat-select formControlName="tecnico">
-          <mat-option value="0">Paulo Vitor</mat-option>
+          <mat-option *ngFor="let tec of tecnicos"
+          value="{{ tec.id }}">{{ tec.nome}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
 
-    <!-- SELECIONAR CLIENTE -->
     <div class="cliente">
       <mat-form-field class="full-width">
         <mat-label>Selecione o Cliente</mat-label>
         <mat-select formControlName="cliente">
-          <mat-option value="0">Rogério Caçador</mat-option>
+          <mat-option *ngFor="let cli of clientes"
+          value="{{ cli.id }}">{{ cli.nome}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
 
-    <!-- CAMPO DESCRIÇÃO -->
-    <mat-form-field class="full-width descricao" appearance="outline">
+    <mat-form-field class="full-width observacoes" appearance="outline">
       <mat-label>Relato sobre o chamado</mat-label>
-      <textarea class="descricao" matInput formControlName="descricao"
+      <textarea class="observacoes" matInput formControlName="observacoes"
         placeholder="Exemplo: Cliente entra em contato relatando ..."
         maxlength="500">
       </textarea>
     </mat-form-field>
 
-    <!-- BOTÕES -->
     <button (click)="create()" [disabled]="!validaCampos()" mat-button class="btn-criar">CRIAR</button>
     <button mat-button class="btn-cancelar" (click)="confirmarCancelamento()">CANCELAR</button>
 
