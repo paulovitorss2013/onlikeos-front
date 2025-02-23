@@ -71,8 +71,7 @@ h1 {
 mat-radio-button {
     display: flex;
     align-items: center; /* MANTÉM ALINHADO VERTICALMENTE */
-    gap: 0.1rem; /* APROXIMA O TEXTO DO BOTÃO */
+    gap: 2rem; /* APROXIMA O TEXTO DO BOTÃO */
     padding: 1px; /* ADICIONA UM PEQUENO ESPAÇO AO REDOR DO BOTÃO */
     border-radius: 5px; /* ARREDONDA LEVEMENTE OS CANTOS DO ESPAÇO AO REDOR DO BOTÃO */
-    background-color: rgba(39, 141, 45, 0.1); /* FUNDO VERDE CLARINHO PARA DESTACAR OS RADIO BUTTONS */
 }
