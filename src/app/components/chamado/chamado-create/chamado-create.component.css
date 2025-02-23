@@ -59,10 +59,6 @@ button.btn-cancelar {
 
 .status-prioridade {
   display: flex;
-}
-
-.status-prioridade {
-  display: flex;
   justify-content: space-between;
 }
 
@@ -70,7 +66,7 @@ button.btn-cancelar {
   width: 49%;
 }
 
-.descricao {
+.observacoes {
   min-height: 5rem;
-  max-height: 8rem;
+  max-height: 6rem;
 }
