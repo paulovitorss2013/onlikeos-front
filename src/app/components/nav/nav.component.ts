@@ -16,8 +16,8 @@ export class NavComponent implements OnInit {
     private toast:ToastrService) {}
 
   ngOnInit(): void {
-    //NAVEGANDO PARA A ROTA HOME (DEFINE A PÁGINA DE START)
-    this.router.navigate(['chamados']) 
+    // DEFINE A PÁGINA DE START)
+    this.router.navigate(['chamados/create'])
   }
 
   // MÉTODO PARA SAIR DO SISTEMA
