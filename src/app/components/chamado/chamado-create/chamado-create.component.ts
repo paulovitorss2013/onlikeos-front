@@ -78,14 +78,17 @@ export class ChamadoCreateComponent implements OnInit {
   }
 
   // MÉTODO PARA CRIAR UM CHAMADO
-  create(): void {
-    this.chamadoService.create(this.chamado).subscribe(resposta => {
+create(): void {
+  this.chamadoService.create(this.chamado).subscribe({
+    next: (resposta) => {
       this.toastService.success('Chamado criado com sucesso', 'Novo Chamado');
       this.router.navigate(['chamados']);
-    }, ex => {
-      this.toastService.error(ex.error.error);
-    });
-  }
+    },
+    error: (ex) => {
+      this.toastService.error(ex.error?.error || 'Erro ao criar chamado');
+    }
+  });
+}
 
   // MÉTODO PARA CONFIRMAR O CANCELAMENTO DAS AÇÕES
   confirmarCancelamento(): void {

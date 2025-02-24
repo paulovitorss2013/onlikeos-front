@@ -17,7 +17,7 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     // DEFINE A PÁGINA DE START)
-    this.router.navigate(['chamados/create'])
+    this.router.navigate(['chamados/update'])
   }
 
   // MÉTODO PARA SAIR DO SISTEMA
