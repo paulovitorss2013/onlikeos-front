@@ -90,7 +90,7 @@ export class ChamadoCreateComponent implements OnInit {
   // MÉTODO PARA CONFIRMAR O CANCELAMENTO DAS AÇÕES
   confirmarCancelamento(): void {
     if (window.confirm('Deseja mesmo cancelar?')) {
-      console.log('Ação cancelada!');
+      this.router.navigate(['chamados']);
     }
   }
 
