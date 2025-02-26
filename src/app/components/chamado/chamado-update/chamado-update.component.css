@@ -67,7 +67,7 @@ textarea {
 }
 
 /* ESTILIZAÇÃO DOS BOTÕES */
-button.btn-criar,
+button.btn-atualizar,
 button.btn-cancelar {
   width: 100%; /* Botões ocupam 100% da largura */
   padding: 0.75rem; /* Ajusta o espaçamento interno */
@@ -80,13 +80,13 @@ button.btn-cancelar {
 }
 
 /* ESTILO PARA O BOTÃO "CRIAR" */
-button.btn-criar {
+button.btn-atualizar {
   background-color: rgb(39, 141, 45);
   color: white;
 }
 
 /* ESTILO PARA O BOTÃO "CRIAR" QUANDO DESABILITADO */
-.btn-criar:disabled {
+.btn-atualizar:disabled {
   background-color: rgb(200, 200, 200);
   color: rgb(100, 100, 100);
   cursor: not-allowed;

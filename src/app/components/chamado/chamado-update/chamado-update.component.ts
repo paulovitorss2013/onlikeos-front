@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Cliente } from '../../../models/cliente';
@@ -5,7 +6,7 @@ import { Tecnico } from '../../../models/tecnico';
 import { Chamado } from '../../../models/chamado';
 import { ChamadoService } from '../../../services/chamado.service';
 import { ClienteService } from '../../../services/cliente.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TecnicoService } from '../../../services/tecnico.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -46,13 +47,20 @@ export class ChamadoUpdateComponent implements OnInit {
     private clienteService: ClienteService,
     private tecnicoService: TecnicoService,
     private toastService: ToastrService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.chamado.id = id;
+      this.findById();
+    }
+  
     this.findAllClientes();
     this.findAllTecnicos();
-    this.syncChamadoComFormulario(); // SINCRONIZA OS DADOS DIGITADOS COM O OBJETO CHAMADO
+    this.syncChamadoComFormulario();
   }
 
   // MÉTODO PARA LISTAR TODOS OS CLIENTES
@@ -76,18 +84,43 @@ export class ChamadoUpdateComponent implements OnInit {
     });
   }
 
+  /// MÉTODO BUSCAR AS INFORMAÇÕES PELO ID
+  findById(): void {
+    this.chamadoService.findById(this.chamado.id).subscribe({
+      next: (resposta) => {
+        this.chamado = resposta;
+        
+        // Atualiza os valores no formulário reativo
+        this.form.patchValue({
+          titulo: this.chamado.titulo,
+          prioridade: this.chamado.prioridade.toString(), // Converte para string
+          status: this.chamado.status.toString(), // Converte para string
+          observacoes: this.chamado.observacoes,
+          tecnico: this.chamado.tecnico,
+          cliente: this.chamado.cliente
+        });
+      },
+      error: (ex) => {
+        this.toastService.error(ex.error.error);
+      }
+    });
+  }
+
+
   // MÉTODO PARA CRIAR UM CHAMADO
-create(): void {
-  this.chamadoService.create(this.chamado).subscribe({
-    next: (resposta) => {
-      this.toastService.success('Chamado criado com sucesso', 'Novo Chamado');
-      this.router.navigate(['chamados']);
-    },
-    error: (ex) => {
-      this.toastService.error(ex.error?.error || 'Erro ao criar chamado');
-    }
-  });
-}
+  update(): void {
+    const chamadoAtualizado = { ...this.chamado, ...this.form.value }; // Atualiza com os valores do form
+  
+    this.chamadoService.update(chamadoAtualizado).subscribe({
+      next: () => {
+        this.toastService.success('Chamado atualizado com sucesso', 'Atualização');
+        this.router.navigate(['chamados']);
+      },
+      error: (ex) => {
+        this.toastService.error(ex.error?.error || 'Erro ao atualizar chamado');
+      }
+    });
+  }
 
   // MÉTODO PARA CONFIRMAR O CANCELAMENTO DAS AÇÕES
   confirmarCancelamento(): void {

@@ -70,7 +70,7 @@ export class ClienteUpdateComponent implements OnInit {
     });
   }
   
-  // MÉTÓDO PARA ATUALIZAR UM TÉCNICO
+  // MÉTÓDO PARA ATUALIZAR UM CLIENTE
   update(): void {
     if (!this.validaCampos()) return;  
     

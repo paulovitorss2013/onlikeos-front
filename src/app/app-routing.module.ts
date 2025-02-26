@@ -40,7 +40,7 @@ const routes: Routes = [
        // ROTAS PARA OS CHAMADOS
        { path: 'chamados', component: ChamadoListComponent },
        { path: 'chamados/create', component: ChamadoCreateComponent },
-       { path: 'chamados/update', component: ChamadoUpdateComponent },
+       { path: 'chamados/update/:id', component: ChamadoUpdateComponent },
 
       { path: '', redirectTo: 'home', pathMatch: 'full' }, // REDIRECIONA PARA HOME
     ],

@@ -16,8 +16,19 @@ export class ChamadoService {
     return this.http.get<Chamado[]>(`${API_CONFIG.baseUrl}/chamados`);
   }
 
-  // MÉTODO PARA CRIAR UM CHAMADO
-  create (Chamado: Chamado) {
-    return this.http.post<Chamado>(`${API_CONFIG.baseUrl}/chamados`, Chamado);
+  // MÉTODO PARA PEGAR AS INFORMAÇÕES PELO ID
+  findById(id: any): Observable<Chamado> {
+    return this.http.get<Chamado>(`${API_CONFIG.baseUrl}/chamados/${id}`);
   }
+
+  // MÉTODO PARA CRIAR UM CHAMADO
+  create (chamado: Chamado) {
+    return this.http.post<Chamado>(`${API_CONFIG.baseUrl}/chamados`, chamado);
+  }
+
+  // MÉTODO PARA ATUALIZAR UM CHAMADO
+  update (chamado: Chamado): Observable<Chamado> {
+    return this.http.put<Chamado>(`${API_CONFIG.baseUrl}/chamados/${chamado.id}`, chamado);
+  }
+
 }
