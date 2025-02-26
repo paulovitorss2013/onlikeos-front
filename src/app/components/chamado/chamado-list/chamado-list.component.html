@@ -75,8 +75,12 @@
       </ng-container>
 
       <ng-container matColumnDef="acoes">
-        <th mat-header-cell *matHeaderCellDef> Abrir </th>
+        <th mat-header-cell *matHeaderCellDef> Editar </th>
         <td mat-cell *matCellDef="let element">
+          <a [routerLink]="['/chamados', 'update', element.id]" matTooltip="Editar">
+            <i class="material-icons edit">edit</i>
+          </a>
+          
           <a [routerLink]="['/chamados', 'update', element.id]" matTooltip="Exibir">
             <i class="material-icons edit">remove_red_eye</i>
           </a>

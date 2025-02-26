@@ -75,3 +75,8 @@ mat-radio-button {
     padding: 1px; /* ADICIONA UM PEQUENO ESPAÇO AO REDOR DO BOTÃO */
     border-radius: 5px; /* ARREDONDA LEVEMENTE OS CANTOS DO ESPAÇO AO REDOR DO BOTÃO */
 }
+
+.edit {
+    color: rgb(39, 141, 45) !important; /* Força a cor verde no ícone */
+    margin-right: 1rem;
+}
