@@ -1,1 +1,76 @@
-<p>chamado-read works!</p>
+<div class="container mat-elevation-z8">
+
+  <h1>Visualizar Chamado</h1>
+
+  <form class="form" [formGroup]="form">
+
+    <!-- CAMPO TÍTULO -->
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Título do Chamado</mat-label>
+      <input matInput formControlName="titulo" [disabled]="true" 
+             title="Título do chamado">
+    </mat-form-field>
+
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Data Abertura</mat-label>
+      <input matInput formControlName="dataAbertura" [disabled]="true" 
+             title="Data Abertura">
+    </mat-form-field>
+
+    <div class="status-prioridade">
+
+      <mat-form-field>
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status" [disabled]="true" title="Status do chamado">
+          <mat-option value="0">Aberto</mat-option>
+          <mat-option value="1">Em Andamento</mat-option>
+          <mat-option value="2">Encerrado</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Prioridade</mat-label>
+        <mat-select formControlName="prioridade" [disabled]="true" title="Prioridade do chamado">
+          <mat-option value="0">Baixa</mat-option>
+          <mat-option value="1">Média</mat-option>
+          <mat-option value="2">Alta</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="tecnico">
+      <mat-form-field class="full-width">
+        <mat-label>Técnico Responsável</mat-label>
+        <input matInput formControlName="tecnico" [disabled]="true" 
+              title="Nome do técnico responsável">
+      </mat-form-field>
+    </div>
+
+    <div class="cliente">
+      <mat-form-field class="full-width">
+        <mat-label>Cliente</mat-label>
+        <input matInput formControlName="cliente" [disabled]="true" 
+              title="Nome do cliente">
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Data Fechamento</mat-label>
+      <input matInput formControlName="dataFechamento" [disabled]="true" 
+             title="Data Fechamento">
+    </mat-form-field>
+
+    <mat-form-field class="full-width observacoes" appearance="outline">
+      <mat-label>Relato sobre o chamado</mat-label>
+      <textarea class="observacoes" matInput formControlName="observacoes" [disabled]="true"
+                placeholder="Descreva o relato sobre o chamado" 
+                title="Relato sobre o chamado">
+      </textarea>
+    </mat-form-field>
+
+    <button mat-button class="btn-voltar" (click)="voltar()">VOLTAR</button>
+
+  </form>
+
+</div>
