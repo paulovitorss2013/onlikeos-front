@@ -35,6 +35,58 @@
         mask="(00) 00000-0000" />
     </mat-form-field>
 
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>CEP</mat-label>
+      <input matInput
+        placeholder="Ex: 36670-000 (digite apenas números)"
+        formControlName="cep"
+        mask="00000-000" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>logradouro</mat-label>
+      <input matInput
+        placeholder="Ex: Rua Nezinho Ferreira"
+        formControlName="logradouro"/>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Número</mat-label>
+      <input matInput
+        placeholder="761-A"
+        formControlName="numero"/>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Bairro</mat-label>
+      <input matInput
+        placeholder="Floresta"
+        formControlName="bairro"/>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Município</mat-label>
+      <input matInput
+        placeholder="Santo Antônio do Aventureiro"
+        formControlName="municipio"/>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>UF</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="0">MG</mat-option>
+          <mat-option value="1">RJ</mat-option>
+          <mat-option value="2">SP</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Coordenada</mat-label>
+      <input matInput
+        placeholder="MG"
+        formControlName="coordenada"/>
+    </mat-form-field>
+
     <button (click)="create()" [disabled]="!validaCampos()" mat-button class="btn-criar">CRIAR</button>
 
     <button mat-button class="btn-cancelar" (click)="confirmarCancelamento()">CANCELAR</button>

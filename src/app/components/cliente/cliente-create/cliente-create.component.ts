@@ -20,7 +20,14 @@ export class ClienteCreateComponent implements OnInit {
   email: '',
   senha: 'erNB1PZ@q*Wv76Fdr0TM',
   celular: '',
-  dataCriacao:''
+  dataCriacao:'',
+  cep: '',
+  logradouro: '',
+  numero: '',
+  bairro: '',
+  municipio: '',
+  uf:'',
+  coordenada: ''
  }
 
   // GRUPO DE FORMULÁRIOS REATIVOS
@@ -29,7 +36,14 @@ export class ClienteCreateComponent implements OnInit {
     cpf: new FormControl('', [Validators.required, Validators.minLength(11)]),
     celular: new FormControl('', [Validators.minLength(11)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    senha: new FormControl('', [Validators.minLength(8)])
+    senha: new FormControl('', [Validators.required, Validators.minLength(11)]),
+    cep: new FormControl('', [Validators.minLength(9)]),
+    logradouro: new FormControl,
+    numero: new FormControl,
+    bairro: new FormControl,
+    municipio: new FormControl,
+    uf: new FormControl,
+    coordenada: new FormControl
   });
 
   // CONSTRUTOR

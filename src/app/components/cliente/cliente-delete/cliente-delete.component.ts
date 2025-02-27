@@ -21,7 +21,14 @@ export class ClienteDeleteComponent implements OnInit {
     email: '',
     senha: '',
     celular: '',
-    dataCriacao: ''
+    dataCriacao: '',
+    cep: '',
+    logradouro: '',
+    numero: '',
+    bairro: '',
+    municipio: '',
+    uf:'',
+    coordenada: ''
   };
 
   // GRUPO DE FORMULÁRIOS REATIVOS COM CAMPOS DESABILITADOS
@@ -31,7 +38,13 @@ export class ClienteDeleteComponent implements OnInit {
     celular: new FormControl({ value: '', disabled: true }, [Validators.minLength(11)]),
     email: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.email]),
     senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    privilegios: new FormControl({ value: '', disabled: true })
+    cep: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    logradouro: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    numero: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    bairro: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    municipio: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    uf: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    coordenada: new FormControl('', [Validators.required, Validators.minLength(8)]),
   });
   
   // CONSTRUTOR
@@ -63,7 +76,14 @@ export class ClienteDeleteComponent implements OnInit {
           cpf: resposta.cpf,
           celular: resposta.celular,
           email: resposta.email,
-          senha: resposta.senha
+          senha: resposta.senha,
+          cep: resposta.cep,
+          logradouro: resposta.logradouro,
+          numero: resposta.numero,
+          bairro: resposta.bairro,
+          municipio: resposta.municipio,
+          uf: resposta.uf,
+          coordenada: resposta.coordenada,
         });
       },
       error: () => {

@@ -6,4 +6,11 @@ export interface Cliente {
   celular: string;
   senha: string;
   dataCriacao?: any;
+  cep: string;
+  logradouro: string;
+  numero: string;
+  bairro: string;
+  municipio: string;
+  uf: string;
+  coordenada: string;
 }

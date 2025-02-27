@@ -20,7 +20,14 @@ export class ClienteUpdateComponent implements OnInit {
     email: '',
     senha: '',
     celular: '',
-    dataCriacao: ''
+    dataCriacao: '',
+    cep: '',
+    logradouro: '',
+    numero: '',
+    bairro: '',
+    municipio: '',
+    uf:'',
+    coordenada: ''
   };
 
   // GRUPO DE FORMULÁRIOS REATIVOS
@@ -30,6 +37,13 @@ export class ClienteUpdateComponent implements OnInit {
     celular: new FormControl('', [Validators.minLength(11)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    cep: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    logradouro: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    numero: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    bairro: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    municipio: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    uf: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    coordenada: new FormControl('', [Validators.required, Validators.minLength(8)]),
   });
   
   // CONSTRUTOR
@@ -62,6 +76,13 @@ export class ClienteUpdateComponent implements OnInit {
           celular: resposta.celular,
           email: resposta.email,
           senha: resposta.senha,
+          cep: resposta.cep,
+          logradouro: resposta.logradouro,
+          numero: resposta.numero,
+          bairro: resposta.bairro,
+          municipio: resposta.municipio,
+          uf: resposta.uf,
+          coordenada: resposta.coordenada,
         });
       },
       error: (err) => {
@@ -81,7 +102,14 @@ export class ClienteUpdateComponent implements OnInit {
       email: this.form.value.email,
       celular: this.form.value.celular,
       senha: this.form.value.senha,
-      dataCriacao: this.cliente.dataCriacao 
+      dataCriacao: this.cliente.dataCriacao,
+      cep: this.form.value.cep,
+      logradouro: this.form.value.logradouro,
+      numero: this.form.value.numero,
+      bairro: this.form.value.bairro,
+      municipio: this.form.value.municipio,
+      uf: this.form.value.uf,
+      coordenada: this.form.value.coordenada,
     };
     this.service.update(cliente).subscribe({
       next: () => {
