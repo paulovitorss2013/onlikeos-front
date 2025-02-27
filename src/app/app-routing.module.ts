@@ -18,11 +18,14 @@ import { ChamadoUpdateComponent } from './components/chamado/chamado-update/cham
 import { ChamadoReadComponent } from './components/chamado/chamado-read/chamado-read.component';
 
 const routes: Routes = [
+  // ROTA PARA A PÁGINA DE LOGIN (SEM NECESSIDADE DE AUTENTICAÇÃO)
   { path: 'login', component: LoginComponent },
+
+  // ROTAS PROTEGIDAS PELO `AUTHGUARD`
   {
     path: '',
     component: NavComponent,
-    canActivate: [AuthGuard.canActivate],
+    canActivate: [AuthGuard], // <-- CORRIGIDO (ANTES ESTAVA ERRADO)
     children: [
       { path: 'home', component: HomeComponent },
 
@@ -38,16 +41,19 @@ const routes: Routes = [
       { path: 'clientes/update/:id', component: ClienteUpdateComponent },
       { path: 'clientes/delete/:id', component: ClienteDeleteComponent },
 
-       // ROTAS PARA OS CHAMADOS
-       { path: 'chamados', component: ChamadoListComponent },
-       { path: 'chamados/create', component: ChamadoCreateComponent },
-       { path: 'chamados/update/:id', component: ChamadoUpdateComponent },
-       { path: 'chamados/read/:id', component: ChamadoReadComponent },
+      // ROTAS PARA OS CHAMADOS
+      { path: 'chamados', component: ChamadoListComponent },
+      { path: 'chamados/create', component: ChamadoCreateComponent },
+      { path: 'chamados/update/:id', component: ChamadoUpdateComponent },
+      { path: 'chamados/read/:id', component: ChamadoReadComponent },
 
-      { path: '', redirectTo: 'home', pathMatch: 'full' }, // REDIRECIONA PARA HOME
+      // REDIRECIONAMENTO PADRÃO PARA A HOME
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
   },
-  { path: '**', redirectTo: 'login' }, // ROTA CORINGA PARA AS OUTRAS ROTAS
+
+  // ROTA CORINGA PARA PÁGINAS NÃO ENCONTRADAS
+  { path: '**', redirectTo: 'login' },
 ];
 
 @NgModule({

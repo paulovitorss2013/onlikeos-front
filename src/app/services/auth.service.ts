@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   // VERIFICA SE O USUÁRIO ESTÁ AUTENTICADO (VERIFICA SE ESTÁ NO NAVEGADOR)
-  isAuthenticate(): boolean {
+  isAuthenticated(): boolean {
     if (isPlatformBrowser(this.platformId)) {
       const token = localStorage.getItem('token');
       return token ? !this.jwtService.isTokenExpired(token) : false;
