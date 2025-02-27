@@ -24,7 +24,8 @@
       <mat-label>E-mail</mat-label>
       <input matInput
         placeholder="Digite o e-mail"
-        formControlName="email">
+        formControlName="email"
+        maxlength="60">
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
@@ -44,47 +45,43 @@
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
-      <mat-label>logradouro</mat-label>
+      <mat-label>Logradouro</mat-label>
       <input matInput
         placeholder="Ex: Rua Nezinho Ferreira"
-        formControlName="logradouro"/>
+        formControlName="logradouro"
+        maxlength="60"/>
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Número</mat-label>
       <input matInput
         placeholder="761-A"
-        formControlName="numero"/>
+        formControlName="numero"
+        maxlength="8"/>
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Bairro</mat-label>
       <input matInput
         placeholder="Floresta"
-        formControlName="bairro"/>
+        formControlName="bairro"
+        maxlength="40"/>
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Município</mat-label>
       <input matInput
         placeholder="Santo Antônio do Aventureiro"
-        formControlName="municipio"/>
+        formControlName="municipio"
+        maxlength="40"/>
     </mat-form-field>
-
-    <mat-form-field>
-        <mat-label>UF</mat-label>
-        <mat-select formControlName="status">
-          <mat-option value="0">MG</mat-option>
-          <mat-option value="1">RJ</mat-option>
-          <mat-option value="2">SP</mat-option>
-        </mat-select>
-      </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Coordenada</mat-label>
       <input matInput
-        placeholder="MG"
-        formControlName="coordenada"/>
+        placeholder="Link ou -21.757441, -42.811076"
+        formControlName="coordenada"
+        maxlength="100"/>
     </mat-form-field>
 
     <button (click)="create()" [disabled]="!validaCampos()" mat-button class="btn-criar">CRIAR</button>

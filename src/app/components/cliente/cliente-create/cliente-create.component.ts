@@ -36,14 +36,14 @@ export class ClienteCreateComponent implements OnInit {
     cpf: new FormControl('', [Validators.required, Validators.minLength(11)]),
     celular: new FormControl('', [Validators.minLength(11)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    senha: new FormControl('', [Validators.required, Validators.minLength(11)]),
-    cep: new FormControl('', [Validators.minLength(9)]),
-    logradouro: new FormControl,
-    numero: new FormControl,
-    bairro: new FormControl,
-    municipio: new FormControl,
-    uf: new FormControl,
-    coordenada: new FormControl
+    senha: new FormControl('', [Validators.minLength(8)]),
+    cep: new FormControl('', [Validators.minLength(8)]),
+    logradouro: new FormControl(''),
+    numero: new FormControl(''),
+    bairro: new FormControl(''),
+    municipio: new FormControl(''),
+    uf: new FormControl(''),
+    coordenada: new FormControl('')
   });
 
   // CONSTRUTOR
