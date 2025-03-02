@@ -10,6 +10,9 @@
 
   <div class="mat-elevation-z8">
     
+    <mat-paginator [pageSizeOptions]="[200, 20, 50, 100]" showFirstLastButtons>
+    </mat-paginator>
+
     <table mat-table [dataSource]="dataSource">
       
       <ng-container matColumnDef="nome">
@@ -46,9 +49,6 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-
-    <mat-paginator [pageSizeOptions]="[20, 50, 20, 200]" showFirstLastButtons>
-    </mat-paginator>
 
    </div>
 </div>

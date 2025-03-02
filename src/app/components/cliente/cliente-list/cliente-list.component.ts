@@ -24,14 +24,12 @@ export class ClienteListComponent implements OnInit {
   constructor(
     private service: ClienteService,
     private paginatorIntl: MatPaginatorIntl
-  )
-
-  // PAGINATOR
-  {
+  ) {
     this.paginatorIntl.itemsPerPageLabel = '';
-    this.paginatorIntl.getRangeLabel = () => '';
+    this.paginatorIntl.getRangeLabel = (page: number, pageSize: number, length: number) => {
+      return `${length} cliente(s) encontrado(s)`;
+    };
   }
-
   ngOnInit(): void {
     this.findAll();
   }
@@ -45,6 +43,7 @@ export class ClienteListComponent implements OnInit {
     });
   }
 
+
   // APLICA OS FILTROS PARA CONSULTA
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value
@@ -52,7 +51,14 @@ export class ClienteListComponent implements OnInit {
       .replace(/[\u0300-\u036f]/g, '')
       .trim()
       .toLowerCase();
-  
+
     this.dataSource.filter = filterValue;
+  }
+
+  // ATUALIZA OS DADOS DA TABELA E CONFIGURA O PAGINADOR
+  private updateDataSource(): void {
+    this.dataSource = new MatTableDataSource<Cliente>(this.ELEMENT_DATA);
+    this.dataSource.paginator = this.paginator;
+    this.paginatorIntl.changes.next();
   }
 }

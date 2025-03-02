@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { Tecnico } from '../../../models/tecnico';
 import { TecnicoService } from '../../../services/tecnico.service';
-import { MatPaginatorIntl } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-tecnico-list',
@@ -12,7 +11,10 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 })
 export class TecnicoListComponent implements OnInit {
 
-  ELEMENT_DATA: Tecnico[] = []
+  // DADOS ORIGINAIS E FILTRADOS
+  ELEMENT_DATA: Tecnico[] = [];
+
+  // COLUNAS DA TABELA
   displayedColumns: string[] = ['nome', 'cpf', 'acoes'];
   dataSource = new MatTableDataSource<Tecnico>(this.ELEMENT_DATA);
 
@@ -23,8 +25,11 @@ export class TecnicoListComponent implements OnInit {
     private service: TecnicoService,
     private paginatorIntl: MatPaginatorIntl
   ) {
+    // CONFIGURANDO O PAGINATOR PARA EXIBIR O TOTAL DE ITENS ENCONTRADOS
     this.paginatorIntl.itemsPerPageLabel = ''; 
-    this.paginatorIntl.getRangeLabel = () => '';
+    this.paginatorIntl.getRangeLabel = (page: number, pageSize: number, length: number) => {
+      return `Exibindo ${length} técnicos encontrados`;
+    };
   }
 
   ngOnInit(): void {
@@ -35,12 +40,11 @@ export class TecnicoListComponent implements OnInit {
   findAll() {
     this.service.findAll().subscribe(resposta => {
       this.ELEMENT_DATA = resposta;
-      this.dataSource = new MatTableDataSource<Tecnico>(this.ELEMENT_DATA);
-      this.dataSource.paginator = this.paginator;
+      this.updateDataSource();
     });
   }
 
- // APLICA OS FILTROS PARA CONSULTA
+  // APLICA OS FILTROS PARA CONSULTA
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value
       .normalize('NFD')
@@ -49,5 +53,17 @@ export class TecnicoListComponent implements OnInit {
       .toLowerCase();
   
     this.dataSource.filter = filterValue;
+
+    // ATUALIZA O PAGINATOR APÓS A FILTRAGEM
+    this.updateDataSource();
+  }
+
+  // ATUALIZA OS DADOS DA TABELA E CONFIGURA O PAGINADOR
+  private updateDataSource(): void {
+    this.dataSource = new MatTableDataSource<Tecnico>(this.ELEMENT_DATA);
+    this.dataSource.paginator = this.paginator;
+
+    // ATUALIZA A EXIBIÇÃO DO TOTAL NO PAGINATOR
+    this.paginatorIntl.changes.next();
   }
 }

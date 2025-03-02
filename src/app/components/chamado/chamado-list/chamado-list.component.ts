@@ -28,8 +28,11 @@ export class ChamadoListComponent implements OnInit {
 
   // CONSTRUTOR
   constructor(private service: ChamadoService, private paginatorIntl: MatPaginatorIntl) {
+    // Personaliza o paginator para exibir o total de itens
     this.paginatorIntl.itemsPerPageLabel = '';
-    this.paginatorIntl.getRangeLabel = () => '';
+    this.paginatorIntl.getRangeLabel = (page: number, pageSize: number, length: number) => {
+      return `${length} chamado(s) encontrado(s)`;
+    };
   }
 
   ngOnInit(): void {
@@ -44,6 +47,12 @@ export class ChamadoListComponent implements OnInit {
       this.updateDataSource();
     });
   }
+  
+  // ATUALIZA OS DADOS DA TABELA E CONFIGURA O PAGINADOR
+  private updateDataSource(): void {
+    this.dataSource = new MatTableDataSource<Chamado>(this.FILTERED_DATA);
+    this.dataSource.paginator = this.paginator;
+  }
 
   // APLICA OS FILTROS SELECIONADOS
   applyFilters(): void {
@@ -57,7 +66,6 @@ export class ChamadoListComponent implements OnInit {
 
       return matchesStatus && matchesPrioridade && matchesText;
     });
-
     this.updateDataSource();
   }
 
@@ -84,11 +92,7 @@ export class ChamadoListComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  // ATUALIZA OS DADOS DA TABELA E CONFIGURA O PAGINADOR
-  private updateDataSource(): void {
-    this.dataSource = new MatTableDataSource<Chamado>(this.FILTERED_DATA);
-    this.dataSource.paginator = this.paginator;
-  }
+  
 
   // RETORNA A DESCRIÇÃO DO STATUS
   retornaStatus(status: number | string): string {

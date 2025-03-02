@@ -8,12 +8,12 @@
     <mat-label>Pesquisar</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Nome do Técnico, nome do cliente ..." #input>
   </mat-form-field>
-
-  <!-- FILTROS -->
+  <button mat-button routerLink="mostrarFiltros">MOSTRAR FILTROS</button>
+  
   <table class="filtros-container">
     <tr>
       <td class="filter-row">
-        <!-- Filtro por Status -->
+  
         <div class="filtro-titulo centralizado">FILTRAR STATUS</div>
         <mat-radio-group class="radio-group" color="primary">
           <mat-radio-button (click)="orderByStatus(null)" value="all">Todos</mat-radio-button>
@@ -25,7 +25,6 @@
     </tr>
     <tr>
       <td class="filter-row">
-        <!-- Filtro por Prioridade -->
         <div class="filtro-titulo centralizado">FILTRAR PRIORIDADE</div>
         <mat-radio-group class="radio-group" color="primary">
           <mat-radio-button (click)="orderByPrioridade(null)" value="all">Todas</mat-radio-button>
@@ -36,6 +35,9 @@
       </td>
     </tr>
   </table>
+
+  <mat-paginator [pageSizeOptions]="[200, 20, 50, 100]" showFirstLastButtons>
+  </mat-paginator>
 
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
@@ -91,7 +93,6 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[20, 50, 100, 200]" showFirstLastButtons>
-    </mat-paginator>
+    
   </div>
 </div>
