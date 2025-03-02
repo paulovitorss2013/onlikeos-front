@@ -8,33 +8,32 @@
     <mat-label>Pesquisar</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Nome do Técnico, nome do cliente ..." #input>
   </mat-form-field>
-  <button mat-button routerLink="mostrarFiltros">MOSTRAR FILTROS</button>
+  <button mat-button (click)="toggleFiltros()">MOSTRAR/OCULTAR FILTROS</button>
   
-  <table class="filtros-container">
-    <tr>
-      <td class="filter-row">
-  
-        <div class="filtro-titulo centralizado">FILTRAR STATUS</div>
-        <mat-radio-group class="radio-group" color="primary">
-          <mat-radio-button (click)="orderByStatus(null)" value="all">Todos</mat-radio-button>
-          <mat-radio-button (click)="orderByStatus(0)" value="0">Aberto</mat-radio-button>
-          <mat-radio-button (click)="orderByStatus(1)" value="1">Em Andamento</mat-radio-button>
-          <mat-radio-button (click)="orderByStatus(2)" value="2">Encerrado</mat-radio-button>
-        </mat-radio-group>
-      </td>
-    </tr>
-    <tr>
-      <td class="filter-row">
-        <div class="filtro-titulo centralizado">FILTRAR PRIORIDADE</div>
-        <mat-radio-group class="radio-group" color="primary">
-          <mat-radio-button (click)="orderByPrioridade(null)" value="all">Todas</mat-radio-button>
-          <mat-radio-button (click)="orderByPrioridade(0)" value="0">Baixa</mat-radio-button>
-          <mat-radio-button (click)="orderByPrioridade(1)" value="1">Média</mat-radio-button>
-          <mat-radio-button (click)="orderByPrioridade(2)" value="2">Alta</mat-radio-button>
-        </mat-radio-group>
-      </td>
-    </tr>
-  </table>
+  <table class="filtros-container" *ngIf="mostrarFiltros">
+  <tr>
+    <td class="filter-row">
+      <div class="filtro-titulo centralizado">FILTRAR STATUS</div>
+      <mat-radio-group class="radio-group" color="primary">
+        <mat-radio-button (click)="orderByStatus(null)" value="all">Todos</mat-radio-button>
+        <mat-radio-button (click)="orderByStatus(0)" value="0">Aberto</mat-radio-button>
+        <mat-radio-button (click)="orderByStatus(1)" value="1">Em Andamento</mat-radio-button>
+        <mat-radio-button (click)="orderByStatus(2)" value="2">Encerrado</mat-radio-button>
+      </mat-radio-group>
+    </td>
+  </tr>
+  <tr>
+    <td class="filter-row">
+      <div class="filtro-titulo centralizado">FILTRAR PRIORIDADE</div>
+      <mat-radio-group class="radio-group" color="primary">
+        <mat-radio-button (click)="orderByPrioridade(null)" value="all">Todas</mat-radio-button>
+        <mat-radio-button (click)="orderByPrioridade(0)" value="0">Baixa</mat-radio-button>
+        <mat-radio-button (click)="orderByPrioridade(1)" value="1">Média</mat-radio-button>
+        <mat-radio-button (click)="orderByPrioridade(2)" value="2">Alta</mat-radio-button>
+      </mat-radio-group>
+    </td>
+  </tr>
+</table>
 
   <mat-paginator [pageSizeOptions]="[200, 20, 50, 100]" showFirstLastButtons>
   </mat-paginator>

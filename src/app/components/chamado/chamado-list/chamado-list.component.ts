@@ -26,9 +26,16 @@ export class ChamadoListComponent implements OnInit {
   selectedPrioridade: number | null = null;
   filterText: string = '';
 
+  mostrarFiltros: boolean = false;
+
+  toggleFiltros(): void {
+    this.mostrarFiltros = !this.mostrarFiltros;
+  }
+
   // CONSTRUTOR
   constructor(private service: ChamadoService, private paginatorIntl: MatPaginatorIntl) {
 
+     
     this.paginatorIntl.itemsPerPageLabel = 'Itens por página:';
     this.paginatorIntl.firstPageLabel = 'Primeira página';
     this.paginatorIntl.previousPageLabel = 'Página anterior';
@@ -55,6 +62,7 @@ export class ChamadoListComponent implements OnInit {
         data.nomeTecnico.toLowerCase().includes(filter) ||
         this.retornaStatus(data.status).toLowerCase().includes(filter) ||
         this.retornaPrioridade(data.prioridade).toLowerCase().includes(filter)
+        
       );
     };
   }
