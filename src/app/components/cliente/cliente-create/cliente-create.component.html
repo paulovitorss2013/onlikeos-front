@@ -75,11 +75,20 @@
         formControlName="municipio"
         maxlength="40"/>
     </mat-form-field>
+    
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Estado (UF)</mat-label>
+      <mat-select formControlName="uf">
+        <mat-option *ngFor="let estado of estadosBrasileiros" [value]="estado.sigla">
+          {{ estado.nome }} ({{ estado.sigla }})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Coordenada</mat-label>
       <input matInput
-        placeholder="Link ou -21.757441, -42.811076"
         formControlName="coordenada"
         maxlength="100"/>
     </mat-form-field>

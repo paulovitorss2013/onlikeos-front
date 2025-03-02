@@ -12,23 +12,36 @@ import { Router } from '@angular/router';
 })
 export class ClienteCreateComponent implements OnInit {
 
- // INSTÂNCIA DO CLIENTE
- cliente: Cliente = {
-  id: '',
-  nome: '',
-  cpf: '',
-  email: '',
-  senha: 'erNB1PZ@q*Wv76Fdr0TM',
-  celular: '',
-  dataCriacao:'',
-  cep: '',
-  logradouro: '',
-  numero: '',
-  bairro: '',
-  municipio: '',
-  uf:'',
-  coordenada: ''
- }
+  // INSTÂNCIA DO CLIENTE
+  cliente: Cliente = {
+    id: '',
+    nome: '',
+    cpf: '',
+    email: '',
+    senha: 'erNB1PZ@q*Wv76Fdr0TM',
+    celular: '',
+    dataCriacao: '',
+    cep: '',
+    logradouro: '',
+    numero: '',
+    bairro: '',
+    municipio: '',
+    uf: '',
+    coordenada: ''
+  };
+
+  // LISTA DE ESTADOS BRASILEIROS
+  estadosBrasileiros = [
+    { sigla: 'AC', nome: 'Acre' }, { sigla: 'AL', nome: 'Alagoas' }, { sigla: 'AP', nome: 'Amapá' },
+    { sigla: 'AM', nome: 'Amazonas' }, { sigla: 'BA', nome: 'Bahia' }, { sigla: 'CE', nome: 'Ceará' },
+    { sigla: 'DF', nome: 'Distrito Federal' }, { sigla: 'ES', nome: 'Espírito Santo' }, { sigla: 'GO', nome: 'Goiás' },
+    { sigla: 'MA', nome: 'Maranhão' }, { sigla: 'MT', nome: 'Mato Grosso' }, { sigla: 'MS', nome: 'Mato Grosso do Sul' },
+    { sigla: 'MG', nome: 'Minas Gerais' }, { sigla: 'PA', nome: 'Pará' }, { sigla: 'PB', nome: 'Paraíba' },
+    { sigla: 'PR', nome: 'Paraná' }, { sigla: 'PE', nome: 'Pernambuco' }, { sigla: 'PI', nome: 'Piauí' },
+    { sigla: 'RJ', nome: 'Rio de Janeiro' }, { sigla: 'RN', nome: 'Rio Grande do Norte' }, { sigla: 'RS', nome: 'Rio Grande do Sul' },
+    { sigla: 'RO', nome: 'Rondônia' }, { sigla: 'RR', nome: 'Roraima' }, { sigla: 'SC', nome: 'Santa Catarina' },
+    { sigla: 'SP', nome: 'São Paulo' }, { sigla: 'SE', nome: 'Sergipe' }, { sigla: 'TO', nome: 'Tocantins' }
+  ];
 
   // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
@@ -36,7 +49,7 @@ export class ClienteCreateComponent implements OnInit {
     cpf: new FormControl('', [Validators.required, Validators.minLength(11)]),
     celular: new FormControl('', [Validators.minLength(11)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    senha: new FormControl('', [Validators.minLength(8)]),
+    senha: new FormControl(''),
     cep: new FormControl('', [Validators.minLength(8)]),
     logradouro: new FormControl(''),
     numero: new FormControl(''),
@@ -55,24 +68,26 @@ export class ClienteCreateComponent implements OnInit {
 
   ngOnInit(): void {}
 
- // MÉTODO PARA CRIAR UM CLIENTE
-create(): void {
-  if (!this.validaCampos()) return
-  const cliente: Cliente = { ...this.form.value }
-  this.service.create(cliente).subscribe({
-    next: () => {
-      this.toast.success('Cliente cadastrado com sucesso!', 'Cadastro')
-      this.router.navigate(['clientes'])
-    },
-    error: (ex) => {
-      if (ex.error.errors)
-        ex.error.errors.forEach((element: { message: string }) =>
-          this.toast.error(element.message)
-        )
-      else this.toast.error(ex.error.message)
-    }
-  })
-}
+  // MÉTODO PARA CRIAR UM CLIENTE
+  create(): void {
+    if (!this.validaCampos()) return;
+    
+    const cliente: Cliente = { ...this.form.value };
+
+    this.service.create(cliente).subscribe({
+      next: () => {
+        this.toast.success('Cliente cadastrado com sucesso!', 'Cadastro');
+        this.router.navigate(['clientes']);
+      },
+      error: (ex) => {
+        if (ex.error.errors)
+          ex.error.errors.forEach((element: { message: string }) =>
+            this.toast.error(element.message)
+          );
+        else this.toast.error(ex.error.message);
+      }
+    });
+  }
 
   // MÉTODO PARA CONFIRMAR O CANCELAMENTO DAS AÇÕES
   confirmarCancelamento(): void {
