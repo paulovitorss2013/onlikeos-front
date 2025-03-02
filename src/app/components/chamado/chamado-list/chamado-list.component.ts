@@ -28,7 +28,6 @@ export class ChamadoListComponent implements OnInit {
 
   // CONSTRUTOR
   constructor(private service: ChamadoService, private paginatorIntl: MatPaginatorIntl) {
-    // CONFIGURANDO PAGINATOR PARA REMOVER TEXTOS PADRÃO
     this.paginatorIntl.itemsPerPageLabel = '';
     this.paginatorIntl.getRangeLabel = () => '';
   }
@@ -74,10 +73,15 @@ export class ChamadoListComponent implements OnInit {
     this.applyFilters();
   }
 
-  // APLICA FILTRO DE TEXTO
-  applyFilter(event: Event): void {
-    this.filterText = (event.target as HTMLInputElement).value.trim().toLowerCase();
-    this.applyFilters();
+ // APLICA OS FILTROS PARA CONSULTA
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .trim()
+      .toLowerCase();
+  
+    this.dataSource.filter = filterValue;
   }
 
   // ATUALIZA OS DADOS DA TABELA E CONFIGURA O PAGINADOR

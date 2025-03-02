@@ -40,9 +40,14 @@ export class TecnicoListComponent implements OnInit {
     });
   }
 
-  // APLICAÇÃO DO FILTRO PARA BUSCA
+ // APLICA OS FILTROS PARA CONSULTA
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    const filterValue = (event.target as HTMLInputElement).value
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .trim()
+      .toLowerCase();
+  
+    this.dataSource.filter = filterValue;
   }
 }
