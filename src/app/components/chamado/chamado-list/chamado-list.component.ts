@@ -43,6 +43,20 @@ export class ChamadoListComponent implements OnInit {
 
   ngOnInit(): void {
     this.findAll();
+    
+    // Define um filtro personalizado
+    this.dataSource.filterPredicate = (data: Chamado, filter: string) => {
+      filter = filter.trim().toLowerCase();
+  
+      return (
+        data.id.toString().includes(filter) ||
+        data.titulo.toLowerCase().includes(filter) ||
+        data.nomeCliente.toLowerCase().includes(filter) ||
+        data.nomeTecnico.toLowerCase().includes(filter) ||
+        this.retornaStatus(data.status).toLowerCase().includes(filter) ||
+        this.retornaPrioridade(data.prioridade).toLowerCase().includes(filter)
+      );
+    };
   }
 
   // BUSCA TODOS OS CHAMADOS
@@ -65,13 +79,20 @@ export class ChamadoListComponent implements OnInit {
     this.FILTERED_DATA = this.ELEMENT_DATA.filter(element => {
       const matchesStatus = this.selectedStatus === null || Number(element.status) === this.selectedStatus;
       const matchesPrioridade = this.selectedPrioridade === null || this.selectedPrioridade === Number(element.prioridade);
+  
+      // Função para remover acentos
+      const normalizeText = (text: string) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  
       const matchesText = this.filterText === '' ||
-        element.titulo.toLowerCase().includes(this.filterText.toLowerCase()) ||
-        element.nomeCliente.toLowerCase().includes(this.filterText.toLowerCase()) ||
-        element.nomeTecnico.toLowerCase().includes(this.filterText.toLowerCase());
-
+        normalizeText(element.titulo).includes(normalizeText(this.filterText)) ||
+        normalizeText(element.nomeCliente).includes(normalizeText(this.filterText)) ||
+        normalizeText(element.nomeTecnico).includes(normalizeText(this.filterText)) ||
+        normalizeText(this.retornaStatus(element.status)).includes(normalizeText(this.filterText)) ||
+        normalizeText(this.retornaPrioridade(element.prioridade)).includes(normalizeText(this.filterText));
+  
       return matchesStatus && matchesPrioridade && matchesText;
     });
+  
     this.updateDataSource();
   }
 
@@ -88,18 +109,12 @@ export class ChamadoListComponent implements OnInit {
   }
 
  // APLICA OS FILTROS PARA CONSULTA
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .trim()
-      .toLowerCase();
-  
-    this.dataSource.filter = filterValue;
-  }
+ applyFilter(event: Event) {
+  this.filterText = (event.target as HTMLInputElement).value.trim().toLowerCase();
+  this.applyFilters();
+}
 
   
-
   // RETORNA A DESCRIÇÃO DO STATUS
   retornaStatus(status: number | string): string {
     const statusMap: { [key: number]: string } = {
