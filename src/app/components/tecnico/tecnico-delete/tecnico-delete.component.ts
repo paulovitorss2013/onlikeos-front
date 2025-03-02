@@ -51,7 +51,7 @@ export class TecnicoDeleteComponent implements OnInit {
       this.tecnico.id = id;
       this.findById();
     } else {
-      this.toast.error('ID do técnico não encontrado');
+      this.toast.error('ID do técnico não encontrado.');
       this.router.navigate(['tecnicos']);
     }
   }

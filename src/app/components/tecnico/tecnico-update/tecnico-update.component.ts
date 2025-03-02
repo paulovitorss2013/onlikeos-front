@@ -101,7 +101,6 @@ export class TecnicoUpdateComponent implements OnInit {
     if (!this.validaCampos()) return;
   
     let perfis: string[] = this.form.value.perfis || [];
-
     let perfisConvertidos: number[] = perfis
       .map(perfil => Number(perfil))
       .filter(perfil => !isNaN(perfil));
@@ -122,11 +121,13 @@ export class TecnicoUpdateComponent implements OnInit {
       celular: this.form.value.celular,
       senha: this.form.value.senha,
       perfis: perfisConvertidos.map(p => p.toString()),
-      dataCriacao: this.tecnico.dataCriacao 
-    };  
+      dataCriacao: this.tecnico.dataCriacao
+    };
+  
     this.service.update(tecnico).subscribe({
       next: () => {
-        this.toast.success('Técnico atualizado com sucesso', 'Atualização');
+        this.toast.success('Técnico atualizado com sucesso!', 'Atualização');
+  
         this.router.navigate(['tecnicos']);
       },
       error: (ex) => {
@@ -142,6 +143,8 @@ export class TecnicoUpdateComponent implements OnInit {
       }
     });
   }
+  
+
   
   // MÉTÓDO CONFIRMAR O CANCELAMENTO DAS AÇÕES
   confirmarCancelamento(): void {

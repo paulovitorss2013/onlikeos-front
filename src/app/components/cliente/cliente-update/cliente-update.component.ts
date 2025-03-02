@@ -18,7 +18,7 @@ export class ClienteUpdateComponent implements OnInit {
     nome: '',
     cpf: '',
     email: '',
-    senha: '',
+    senha: 'erNB1PZ@q*Wv76Fdr0TM',
     celular: '',
     dataCriacao: '',
     cep: '',
@@ -26,9 +26,22 @@ export class ClienteUpdateComponent implements OnInit {
     numero: '',
     bairro: '',
     municipio: '',
-    uf:'',
+    uf: '',
     coordenada: ''
   };
+
+  // LISTA DE ESTADOS BRASILEIROS
+  estadosBrasileiros = [
+    { sigla: 'AC', nome: 'Acre' }, { sigla: 'AL', nome: 'Alagoas' }, { sigla: 'AP', nome: 'Amapá' },
+    { sigla: 'AM', nome: 'Amazonas' }, { sigla: 'BA', nome: 'Bahia' }, { sigla: 'CE', nome: 'Ceará' },
+    { sigla: 'DF', nome: 'Distrito Federal' }, { sigla: 'ES', nome: 'Espírito Santo' }, { sigla: 'GO', nome: 'Goiás' },
+    { sigla: 'MA', nome: 'Maranhão' }, { sigla: 'MT', nome: 'Mato Grosso' }, { sigla: 'MS', nome: 'Mato Grosso do Sul' },
+    { sigla: 'MG', nome: 'Minas Gerais' }, { sigla: 'PA', nome: 'Pará' }, { sigla: 'PB', nome: 'Paraíba' },
+    { sigla: 'PR', nome: 'Paraná' }, { sigla: 'PE', nome: 'Pernambuco' }, { sigla: 'PI', nome: 'Piauí' },
+    { sigla: 'RJ', nome: 'Rio de Janeiro' }, { sigla: 'RN', nome: 'Rio Grande do Norte' }, { sigla: 'RS', nome: 'Rio Grande do Sul' },
+    { sigla: 'RO', nome: 'Rondônia' }, { sigla: 'RR', nome: 'Roraima' }, { sigla: 'SC', nome: 'Santa Catarina' },
+    { sigla: 'SP', nome: 'São Paulo' }, { sigla: 'SE', nome: 'Sergipe' }, { sigla: 'TO', nome: 'Tocantins' }
+  ];
 
   // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
@@ -36,14 +49,14 @@ export class ClienteUpdateComponent implements OnInit {
     cpf: new FormControl('', [Validators.required, Validators.minLength(11)]),
     celular: new FormControl('', [Validators.minLength(11)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    cep: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    logradouro: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    numero: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    bairro: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    municipio: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    uf: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    coordenada: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    senha: new FormControl(''),
+    cep: new FormControl('', [Validators.minLength(8)]),
+    logradouro: new FormControl(''),
+    numero: new FormControl(''),
+    bairro: new FormControl(''),
+    municipio: new FormControl(''),
+    uf: new FormControl(''),
+    coordenada: new FormControl('')
   });
   
   // CONSTRUTOR
@@ -113,7 +126,7 @@ export class ClienteUpdateComponent implements OnInit {
     };
     this.service.update(cliente).subscribe({
       next: () => {
-        this.toast.success('Cliente atualizado com sucesso', 'Atualização');
+        this.toast.success('Cliente atualizado com sucesso!', 'Atualização');
         this.router.navigate(['clientes']);
       },
       error: (ex) => {

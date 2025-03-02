@@ -1,38 +1,37 @@
-import { HTTP_INTERCEPTORS, HttpInterceptorFn } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
+import { Observable, catchError, throwError } from 'rxjs';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   
-  // CONSTRUTOR DA CLASSE
-  constructor() {}
-
-  // MÉTODO PRINCIPAL QUE INTERCEPTA REQUISIÇÕES HTTP
+  constructor(private router: Router, private toastr: ToastrService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      // Pega o token do localStorage
       let token = localStorage.getItem('token');
 
       if (token) {
-        // Clona a requisição e adiciona o cabeçalho Authorization com o token
         const cloneReq = request.clone({
           headers: request.headers.set('Authorization', `Bearer ${token}`)
         });
-        return next.handle(cloneReq); // Passa a requisição clonada para o próximo handler
-      } else {
-        // Se não houver token, passa a requisição original sem alterações
-        return next.handle(request);
-      }
+        return next.handle(cloneReq).pipe(
+          catchError((error) => this.handleError(error))
+        );
+      } 
+
+      return next.handle(request).pipe(
+        catchError((error) => this.handleError(error))
+      );
+  }
+
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    if (error.status === 403) {
+      this.toastr.error('Ops! Você foi desconectado!');
+      localStorage.removeItem('token'); // Remove o token
+      this.router.navigate(['/login']); // Redireciona para a tela de login
+    }
+    return throwError(() => error);
   }
 }
-
-// PROVEDOR PARA REGISTRAR O INTERCEPTOR
-export const AuthInterceptorProvider = [
-  {
-    provide: HTTP_INTERCEPTORS, // Define o token HTTP_INTERCEPTORS como chave
-    useClass: AuthInterceptor, // Especifica a classe que será usada como interceptor
-    multi: true // Permite múltiplos interceptores serem registrados
-  }
-];
