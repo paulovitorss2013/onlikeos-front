@@ -25,7 +25,13 @@ export class TecnicoListComponent implements OnInit {
     private service: TecnicoService,
     private paginatorIntl: MatPaginatorIntl
   ) {
-    // CONFIGURANDO O PAGINATOR PARA EXIBIR O TOTAL DE ITENS ENCONTRADOS
+    
+    this.paginatorIntl.itemsPerPageLabel = 'Itens por página:';
+    this.paginatorIntl.firstPageLabel = 'Primeira página';
+    this.paginatorIntl.previousPageLabel = 'Página anterior';
+    this.paginatorIntl.nextPageLabel = 'Próxima página';
+    this.paginatorIntl.lastPageLabel = 'Última página';
+    
     this.paginatorIntl.itemsPerPageLabel = ''; 
     this.paginatorIntl.getRangeLabel = (page: number, pageSize: number, length: number) => {
       return `Exibindo ${length} técnicos encontrados`;

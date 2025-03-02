@@ -25,6 +25,13 @@ export class ClienteListComponent implements OnInit {
     private service: ClienteService,
     private paginatorIntl: MatPaginatorIntl
   ) {
+
+    this.paginatorIntl.itemsPerPageLabel = 'Itens por página:';
+    this.paginatorIntl.firstPageLabel = 'Primeira página';
+    this.paginatorIntl.previousPageLabel = 'Página anterior';
+    this.paginatorIntl.nextPageLabel = 'Próxima página';
+    this.paginatorIntl.lastPageLabel = 'Última página';
+
     this.paginatorIntl.itemsPerPageLabel = '';
     this.paginatorIntl.getRangeLabel = (page: number, pageSize: number, length: number) => {
       return `${length} cliente(s) encontrado(s)`;
