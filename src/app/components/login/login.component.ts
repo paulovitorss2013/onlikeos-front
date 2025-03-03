@@ -46,22 +46,21 @@ export class LoginComponent implements OnInit {
 
   // INÍCIO DO MÉTODO PARA LOGAR NO SISTEMA
   logar(): void {
-    // Atualiza as credenciais com os valores do formulário
     this.creds.email = this.loginForm.get('email')?.value ?? '';
     this.creds.senha = this.loginForm.get('senha')?.value ?? '';
-
+  
     if (!this.validaCampos()) {
       this.toast.warning('Por favor, preencha todos os campos corretamente.');
       return;
     }
-
-    this.loading = true; // Ativa o loading antes da requisição
-
+  
+    this.loading = true;
+  
     this.service.authenticate(this.creds)
       .pipe(
-        timeout(8000), // Define um tempo máximo de 10 segundos para a requisição
+        timeout(8000),
         catchError((erro) => {
-          this.loading = false; // Desativa o loading em caso de erro
+          this.loading = false;
           if (erro.name === 'TimeoutError') {
             this.toast.error('Tempo de resposta excedido!', 'Erro de conexão com o servidor');
           }
@@ -70,11 +69,11 @@ export class LoginComponent implements OnInit {
       )
       .subscribe({
         next: (resposta) => {
-          this.loading = false; // Desativa o loading quando receber resposta
-
+          this.loading = false;
+  
           const authorization = resposta.headers?.get('Authorization');
           if (authorization) {
-            this.service.successfulLogin(authorization.substring(7)); // Armazena o token
+            this.service.successfulLogin(authorization.substring(7));
             this.router.navigate(['home']).catch(() => {
               this.toast.error('Erro ao redirecionar para a home.', 'Login');
             });
@@ -83,8 +82,8 @@ export class LoginComponent implements OnInit {
           }
         },
         error: (erro) => {
-          this.loading = false; // Desativa o loading quando houver erro
-
+          this.loading = false;
+  
           if (erro.status === 0) {
             this.toast.error('Erro de conexão com o servidor.', 'Login');
           } else if (erro.status === 403) {
@@ -93,5 +92,4 @@ export class LoginComponent implements OnInit {
         }
       });
   }
-  // FIM DO MÉTODO PARA LOGAR NO SISTEMA
 }
