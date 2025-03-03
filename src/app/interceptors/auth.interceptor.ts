@@ -27,15 +27,14 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private handleError(error: HttpErrorResponse, requestUrl: string): Observable<never> {
-    const isLoginPage = this.router.url.includes('/login'); // Verifica se está na tela de login
+    const isLoginPage = this.router.url.includes('/login');
 
     if (error.status === 403) {
       if (isLoginPage) {
-        // Se estiver na tela de login, significa que as credenciais estão erradas
-        return throwError(() => error); // Deixa o `LoginComponent` lidar com a mensagem
+        return throwError(() => error); 
       } else {
-        localStorage.removeItem('token'); // Remove o token
-        this.router.navigate(['/login']); // Redireciona para login
+        localStorage.removeItem('token');
+        this.router.navigate(['/login']);
       }
     }
     return throwError(() => error);
