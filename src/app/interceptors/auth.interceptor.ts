@@ -30,6 +30,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const isLoginPage = this.router.url.includes('/login'); // Verifica se está na tela de login
 
     if (error.status === 403) {
+<<<<<<< HEAD
       if (isLoginPage) {
         // Se estiver na tela de login, significa que as credenciais estão erradas
         return throwError(() => error); // Deixa o `LoginComponent` lidar com a mensagem
@@ -39,6 +40,10 @@ export class AuthInterceptor implements HttpInterceptor {
         localStorage.removeItem('token'); // Remove o token
         this.router.navigate(['/login']); // Redireciona para login
       }
+=======
+      localStorage.removeItem('token'); // Remove o token
+      this.router.navigate(['/login']); // Redireciona para a tela de login
+>>>>>>> HEAD@{1}
     }
     return throwError(() => error);
   }

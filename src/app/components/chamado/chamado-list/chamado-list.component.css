@@ -80,3 +80,13 @@ mat-radio-button {
     color: rgb(39, 141, 45) !important; /* Força a cor verde no ícone */
     margin-right: 1rem;
 }
+
+/* CHAMADOS ABERTOS - VERMELHO */
+.status-aberto {
+    color: red !important;
+}
+
+/* CHAMADOS ENCERRADOS - VERDE */
+.status-encerrado {
+    color: green !important;
+}

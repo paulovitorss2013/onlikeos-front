@@ -1,82 +1,105 @@
 /* Define o layout principal */
 .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 16px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Estiliza o formulário */
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
-  }
-  
-  /* Centraliza o título */
-  h1 {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
-  
-  /* Define largura total para os campos */
-  .full-width {
-    width: 100%;
-  }
-  
-  /* Estiliza o container de status e prioridade */
-  .status-prioridade {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .status-prioridade mat-form-field {
-    width: 49%;
-  }
-  
-  /* CONTAINER PARA O CAMPO DE OBSERVAÇÕES */
-  .observacoes-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-  
-  /* Ajuste do tamanho do campo de observações */
-  .mat-form-field.observacoes {
-    width: 100%;
-  }
-  
-  textarea {
-    min-height: 120px; /* Altura mínima */
-    max-height: 200px; /* Altura máxima */
-    resize: vertical; /* Permite ajuste de tamanho vertical */
-    overflow-y: auto; /* Adiciona rolagem caso ultrapasse o máximo */
-    width: 100%;
-  }
-  
-  /* CONTAINER PARA O BOTÃO */
-  .button-container {
-    display: flex;
-    flex-direction: column; /* Botões um abaixo do outro */
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-  
-  /* ESTILIZAÇÃO BOTÃO DE VOLTAR */
-  button.btn-voltar {
-    width: 100%; /* Botões ocupam 100% da largura */
-    padding: 0.75rem; /* Ajusta o espaçamento interno */
-    font-size: 1rem;
-    text-align: center;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-    background-color: rgb(207, 80, 63);
-    color: white;
-  }
-  
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estiliza o formulário */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+/* Centraliza o título */
+h1 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Define largura total para os campos */
+.full-width {
+  width: 100%;
+}
+
+/* Estiliza o container de status e prioridade */
+.status-prioridade {
+  display: flex;
+  justify-content: space-between;
+}
+
+.status-prioridade mat-form-field {
+  width: 49%;
+}
+
+/* Ajuste do tamanho do campo de observações */
+textarea {
+  min-height: 120px;
+  max-height: 200px;
+  resize: vertical;
+  overflow-y: auto;
+  width: 100%;
+}
+
+/* CONTAINER PARA O BOTÃO */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* ESTILIZAÇÃO BOTÃO DE VOLTAR */
+button.btn-voltar {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  background-color: rgb(207, 80, 63);
+  color: white;
+}
+
+/* Garante que os campos readonly tenham aparência normal */
+mat-form-field input[readonly],
+mat-form-field textarea[readonly],
+mat-form-field input.mat-input-element[readonly] {
+  color: black;
+  background-color: white;
+  opacity: 1;
+  cursor: text;
+  border-color: rgba(0, 0, 0, 0.42);
+}
+
+/* Ajusta especificamente para inputs de datas */
+mat-form-field input[readonly][type="date"] {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: none;
+  background-color: white;
+  cursor: text;
+}
+
+/* Para garantir que os selects também fiquem normais */
+mat-form-field .readonly-select {
+  pointer-events: none;
+  color: black;
+  opacity: 1;
+  background-color: white;
+  cursor: default;
+}
+
+/* Remove o efeito apagado das opções dentro dos selects */
+mat-form-field .readonly-select .mat-option {
+  color: black;
+  opacity: 1;
+}
