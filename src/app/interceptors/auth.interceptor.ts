@@ -28,7 +28,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     if (error.status === 403) {
-      this.toastr.error('Ops! Você foi desconectado!');
       localStorage.removeItem('token'); // Remove o token
       this.router.navigate(['/login']); // Redireciona para a tela de login
     }
