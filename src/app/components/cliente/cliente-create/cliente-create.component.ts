@@ -62,7 +62,7 @@ export class ClienteCreateComponent implements OnInit {
   // CONSTRUTOR
   constructor(
     private service: ClienteService,
-    private toast: ToastrService,
+    private toastr: ToastrService,
     private router: Router
   ) {}
 
@@ -76,15 +76,15 @@ export class ClienteCreateComponent implements OnInit {
 
     this.service.create(cliente).subscribe({
       next: () => {
-        this.toast.success('Cliente cadastrado com sucesso!', 'Cadastro');
+        this.toastr.success('Cliente cadastrado com sucesso!', 'Cadastro');
         this.router.navigate(['clientes']);
       },
       error: (ex) => {
         if (ex.error.errors)
           ex.error.errors.forEach((element: { message: string }) =>
-            this.toast.error(element.message)
+            this.toastr.error(element.message)
           );
-        else this.toast.error(ex.error.message);
+        else this.toastr.error(ex.error.message);
       }
     });
   }

@@ -43,7 +43,7 @@ export class ChamadoReadComponent implements OnInit {
   // CONSTRUTOR
   constructor(
     private chamadoService: ChamadoService,
-    private toastService: ToastrService,
+    private toastrService: ToastrService,
     private router: Router,
     private route: ActivatedRoute,
   ) {}
@@ -62,8 +62,7 @@ export class ChamadoReadComponent implements OnInit {
     this.chamadoService.findById(this.chamado.id).subscribe({
       next: (resposta) => {
         this.chamado = resposta;
-        
-        // ATUALIZA OS VALORES NO FORMULÁRIO REATIVO
+  
         this.form.patchValue({
           titulo: this.chamado.titulo,
           dataAbertura: this.chamado.dataAbertura,
@@ -76,7 +75,7 @@ export class ChamadoReadComponent implements OnInit {
         });
       },
       error: (ex) => {
-        this.toastService.error(ex.error.error);
+        this.toastrService.error(ex.error.error);
       }
     });
   }

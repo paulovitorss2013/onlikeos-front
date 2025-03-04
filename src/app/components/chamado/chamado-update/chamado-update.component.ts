@@ -46,7 +46,7 @@ export class ChamadoUpdateComponent implements OnInit {
     private chamadoService: ChamadoService,
     private clienteService: ClienteService,
     private tecnicoService: TecnicoService,
-    private toastService: ToastrService,
+    private toastrService: ToastrService,
     private router: Router,
     private route: ActivatedRoute,
   ) {}
@@ -101,7 +101,7 @@ export class ChamadoUpdateComponent implements OnInit {
         });
       },
       error: (ex) => {
-        this.toastService.error(ex.error.error);
+        this.toastrService.error(ex.error.error);
       }
     });
   }
@@ -113,11 +113,11 @@ export class ChamadoUpdateComponent implements OnInit {
   
     this.chamadoService.update(chamadoAtualizado).subscribe({
       next: () => {
-        this.toastService.success('Chamado atualizado com sucesso!', 'Atualização');
+        this.toastrService.success('Chamado atualizado com sucesso!', 'Atualização');
         this.router.navigate(['chamados']);
       },
       error: (ex) => {
-        this.toastService.error(ex.error?.error || 'Erro ao atualizar chamado');
+        this.toastrService.error(ex.error?.error || 'Erro ao atualizar chamado');
       }
     });
   }

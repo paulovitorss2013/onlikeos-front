@@ -10,32 +10,23 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private router: Router, private toastr: ToastrService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      let token = localStorage.getItem('token');
+      const token = localStorage.getItem('token');
 
       if (token) {
-        const cloneReq = request.clone({
+        request = request.clone({
           headers: request.headers.set('Authorization', `Bearer ${token}`)
         });
-        return next.handle(cloneReq).pipe(
-          catchError((error) => this.handleError(error))
-        );
       } 
 
-      return next.handle(request).pipe(
-        catchError((error) => this.handleError(error))
-      );
+      return next.handle(request).pipe(catchError((error) => this.handleError(error))); // Aplicando o catchError uma única vez
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     if (error.status === 403) {
       const errorMessage = error.error?.message || 'Você não tem permissão para essa ação!';
-      const isLoginPage = this.router.url.includes('/login'); // Verifica se está na tela de login
-  
-      if (!isLoginPage) {
+      if (!this.router.url.includes('/login')) {
         this.toastr.warning(errorMessage, 'Acesso Negado');
       }
-  
-      return throwError(() => error);
     }
   
     if (error.status === 401) {

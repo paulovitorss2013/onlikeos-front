@@ -46,7 +46,7 @@ export class ChamadoCreateComponent implements OnInit {
     private chamadoService: ChamadoService,
     private clienteService: ClienteService,
     private tecnicoService: TecnicoService,
-    private toastService: ToastrService,
+    private toastrService: ToastrService,
     private router: Router
   ) {}
 
@@ -81,11 +81,11 @@ export class ChamadoCreateComponent implements OnInit {
 create(): void {
   this.chamadoService.create(this.chamado).subscribe({
     next: (resposta) => {
-      this.toastService.success('Chamado criado com sucesso!', 'Novo Chamado');
+      this.toastrService.success('Chamado criado com sucesso!', 'Novo Chamado');
       this.router.navigate(['chamados']);
     },
     error: (ex) => {
-      this.toastService.error(ex.error?.error || 'Erro ao criar chamado');
+      this.toastrService.error(ex.error?.error || 'Erro ao criar chamado');
     }
   });
 }

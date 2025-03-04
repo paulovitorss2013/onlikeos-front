@@ -62,7 +62,7 @@ export class ClienteUpdateComponent implements OnInit {
   // CONSTRUTOR
   constructor(
     private service: ClienteService,
-    private toast: ToastrService,
+    private toastr: ToastrService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -73,7 +73,7 @@ export class ClienteUpdateComponent implements OnInit {
       this.cliente.id = id;
       this.findById();
     } else {
-      this.toast.error('ID do cliente não encontrado');
+      this.toastr.error('ID do cliente não encontrado');
       this.router.navigate(['clientes']);
     }
   }
@@ -99,7 +99,7 @@ export class ClienteUpdateComponent implements OnInit {
         });
       },
       error: (err) => {
-        this.toast.error('Erro ao carregar os dados do cliente');
+        this.toastr.error('Erro ao carregar os dados do cliente');
       }
     });
   }
@@ -126,18 +126,18 @@ export class ClienteUpdateComponent implements OnInit {
     };
     this.service.update(cliente).subscribe({
       next: () => {
-        this.toast.success('Cliente atualizado com sucesso!', 'Atualização');
+        this.toastr.success('Cliente atualizado com sucesso!', 'Atualização');
         this.router.navigate(['clientes']);
       },
       error: (ex) => {
         if (ex.error?.errors) {
           ex.error.errors.forEach((element: { message: string }) =>
-            this.toast.error(element.message)
+            this.toastr.error(element.message)
           );
         } else if (ex.error?.message) {
-          this.toast.error(ex.error.message);
+          this.toastr.error(ex.error.message);
         } else {
-          this.toast.error('Erro desconhecido ao atualizar o cliente.');
+          this.toastr.error('Erro desconhecido ao atualizar o cliente.');
         }
       }
     });
