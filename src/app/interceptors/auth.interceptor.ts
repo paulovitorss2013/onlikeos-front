@@ -29,9 +29,9 @@ export class AuthInterceptor implements HttpInterceptor {
   private handleError(error: HttpErrorResponse): Observable<never> {
     if (error.status === 403) {
       const errorMessage = error.error?.message || 'Você não tem permissão para essa ação!';
+      const isLoginPage = this.router.url.includes('/login'); // Verifica se está na tela de login
   
-      // Verifica se a mensagem já foi exibida para evitar toast duplicado
-      if (!errorMessage.includes('Acesso Negado')) {
+      if (!isLoginPage) {
         this.toastr.warning(errorMessage, 'Acesso Negado');
       }
   
