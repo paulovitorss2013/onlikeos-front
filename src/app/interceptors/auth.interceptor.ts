@@ -17,26 +17,32 @@ export class AuthInterceptor implements HttpInterceptor {
           headers: request.headers.set('Authorization', `Bearer ${token}`)
         });
         return next.handle(cloneReq).pipe(
-          catchError((error) => this.handleError(error, request.url))
+          catchError((error) => this.handleError(error))
         );
       } 
 
       return next.handle(request).pipe(
-        catchError((error) => this.handleError(error, request.url))
+        catchError((error) => this.handleError(error))
       );
   }
 
-  private handleError(error: HttpErrorResponse, requestUrl: string): Observable<never> {
-    const isLoginPage = this.router.url.includes('/login');
-
+  private handleError(error: HttpErrorResponse): Observable<never> {
     if (error.status === 403) {
-      if (isLoginPage) {
-        return throwError(() => error); 
-      } else {
-        localStorage.removeItem('token');
-        this.router.navigate(['/login']);
+      const errorMessage = error.error?.message || 'Você não tem permissão para essa ação!';
+  
+      // Verifica se a mensagem já foi exibida para evitar toast duplicado
+      if (!errorMessage.includes('Acesso Negado')) {
+        this.toastr.warning(errorMessage, 'Acesso Negado');
       }
+  
+      return throwError(() => error);
     }
+  
+    if (error.status === 401) {
+      localStorage.removeItem('token');
+      this.router.navigate(['/login']);
+    }
+  
     return throwError(() => error);
-  } 
+  }
 }

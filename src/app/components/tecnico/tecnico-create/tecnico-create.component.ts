@@ -37,11 +37,13 @@ export class TecnicoCreateComponent implements OnInit {
   // CONSTRUTOR
   constructor(
     private service: TecnicoService,
-    private toast: ToastrService,
+    private toastr: ToastrService,
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.toastr.warning('Cadastrar um técnico requer privilégios de administrador.', 'Atenção!');
+  }
 
   // MÉTODO PARA ADICIONAR O PERFIL DO TÉCNICO
   addPerfil(perfil: number): void {
@@ -54,22 +56,29 @@ export class TecnicoCreateComponent implements OnInit {
   }
 
  // MÉTODO PARA CRIAR UM TÉCNICO
-create(): void {
-  if (!this.validaCampos()) return
-  const tecnico: Tecnico = { ...this.form.value }
+ create(): void {
+  if (!this.validaCampos()) return;
+
+  const tecnico: Tecnico = { ...this.form.value };
+
   this.service.create(tecnico).subscribe({
     next: () => {
-      this.toast.success('Técnico cadastrado com sucesso!', 'Cadastro')
-      this.router.navigate(['tecnicos'])
+      this.toastr.success('Técnico cadastrado com sucesso!', 'Cadastro');
+      this.router.navigate(['tecnicos']);
     },
     error: (ex) => {
-      if (ex.error.errors)
+      // Se for erro 403, não exibir outro toast
+      if (ex.status === 403) return;
+
+      if (ex.error.errors) {
         ex.error.errors.forEach((element: { message: string }) =>
-          this.toast.error(element.message)
-        )
-      else this.toast.error(ex.error.message)
+          this.toastr.error(element.message)
+        );
+      } else {
+        this.toastr.error(ex.error.message || 'Erro desconhecido ao criar técnico.');
+      }
     }
-  })
+  });
 }
 
   // MÉTODO PARA CONFIRMAR O CANCELAMENTO DAS AÇÕES

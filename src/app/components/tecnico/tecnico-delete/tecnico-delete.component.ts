@@ -40,18 +40,21 @@ export class TecnicoDeleteComponent implements OnInit {
   // CONSTRUTOR
   constructor(
     private service: TecnicoService,
-    private toast: ToastrService,
+    private toastr: ToastrService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+
+    this.toastr.warning('Deletar um técnico requer privilégios de administrador.', 'Atenção!');
+
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.tecnico.id = id;
       this.findById();
     } else {
-      this.toast.error('ID do técnico não encontrado.');
+      this.toastr.error('ID do técnico não encontrado.');
       this.router.navigate(['tecnicos']);
     }
   }
@@ -73,7 +76,7 @@ export class TecnicoDeleteComponent implements OnInit {
         });
       },
       error: (err) => {
-        this.toast.error('Erro ao carregar os dados do técnico.');
+        this.toastr.error('Erro ao carregar os dados do técnico.');
       }
     });
   }
@@ -82,23 +85,31 @@ export class TecnicoDeleteComponent implements OnInit {
   delete(): void {
     this.service.delete(this.tecnico.id).pipe(
       tap(() => {
-        this.toast.success('Técnico deletado com sucesso!', 'Delete');
+        this.toastr.success('Técnico deletado com sucesso!', 'Delete');
         this.router.navigate(['tecnicos']);
       }),
       catchError((error) => {
+        // Se for erro 403 (Acesso Negado), não exibir outro toast, pois o AuthInterceptor já tratou
+        if (error.status === 403) {
+          return of(null); // Apenas retorna sem exibir erro duplicado
+        }
+  
+        // Se houver uma lista de erros, exibe cada um
         if (error?.error?.errors) {
           error.error.errors.forEach((element: { message: string }) =>
-            this.toast.error(element.message)
+            this.toastr.error(element.message)
           );
         } else if (error?.error?.message) {
-          this.toast.error(error.error.message);
+          this.toastr.error(error.error.message);
         } else {
-          this.toast.error('Erro desconhecido ao deletar o técnico.');
+          this.toastr.error('Erro desconhecido ao deletar o técnico.');
         }
+  
         return of(null); 
       })
     ).subscribe();
   }
+  
 
   // MÉTÓDO CONFIRMAR O CANCELAMENTO DAS AÇÕES
   confirmarCancelamento(): void {

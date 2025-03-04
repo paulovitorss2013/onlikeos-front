@@ -39,18 +39,21 @@ export class TecnicoUpdateComponent implements OnInit {
   // CONSTRUTOR
   constructor(
     private service: TecnicoService,
-    private toast: ToastrService,
+    private toastr: ToastrService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    
+    this.toastr.warning('Atualizar um técnico requer privilégios de administrador.', 'Atenção!');
+
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.tecnico.id = id;
       this.findById();
     } else {
-      this.toast.error('ID do técnico não encontrado');
+      this.toastr.error('ID do técnico não encontrado');
       this.router.navigate(['tecnicos']);
     }
   }
@@ -72,7 +75,7 @@ export class TecnicoUpdateComponent implements OnInit {
         });
       },
       error: (err) => {
-        this.toast.error('Erro ao carregar os dados do técnico');
+        this.toastr.error('Erro ao carregar os dados do técnico');
       }
     });
   }
@@ -126,19 +129,19 @@ export class TecnicoUpdateComponent implements OnInit {
   
     this.service.update(tecnico).subscribe({
       next: () => {
-        this.toast.success('Técnico atualizado com sucesso!', 'Atualização');
-  
+        this.toastr.success('Técnico atualizado com sucesso!', 'Atualização');
         this.router.navigate(['tecnicos']);
       },
       error: (ex) => {
+        // Se for erro 403, não exibir outro toast
+        if (ex.status === 403) return;
+  
         if (ex.error?.errors) {
           ex.error.errors.forEach((element: { message: string }) =>
-            this.toast.error(element.message)
+            this.toastr.error(element.message)
           );
-        } else if (ex.error?.message) {
-          this.toast.error(ex.error.message);
         } else {
-          this.toast.error('Erro desconhecido ao atualizar o técnico.');
+          this.toastr.error(ex.error.message || 'Erro desconhecido ao atualizar o técnico.');
         }
       }
     });
