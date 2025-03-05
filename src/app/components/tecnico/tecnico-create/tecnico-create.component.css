@@ -23,7 +23,6 @@ h1 {
     width: 100%; /* Os campos ocupam a largura total do contêiner */
 }
 
-
 /* ESTILO PARA O BOTÃO "CRIAR" */
 button.btn-criar {
     background-color: rgb(39, 141, 45); /* Tom verde escuro */
@@ -58,9 +57,7 @@ button.btn-cancelar {
     transition: background-color 0.3s ease; /* Transição suave */
 }
 
-
 /* --------- AJUSTES PARA TELAS PEQUENAS E MÉDIAS (RESPONSIVIDADE) --------- */
-
 @media (max-width: 768px) {
     .container {
         max-width: 100%; /* Aumenta a largura para telas menores */
@@ -89,5 +86,32 @@ button.btn-cancelar {
 
     button.btn-criar, button.btn-cancelar {
         font-size: 1.1rem; /* Ajusta o tamanho da fonte nos botões */
+    }
+}
+
+/* --------- AJUSTES PARA MODO DE ALTO CONTRASTE (FORCED COLORS) --------- */
+@media (forced-colors: active) {
+    body {
+        background-color: Canvas; /* Define a cor de fundo para o modo de cores forçadas */
+        color: CanvasText; /* Define a cor do texto para o modo de cores forçadas */
+    }
+
+    button.btn-criar {
+        background-color: ButtonFace; /* Cor do botão no modo de alto contraste */
+        color: ButtonText; /* Cor do texto do botão */
+    }
+
+    button.btn-cancelar {
+        background-color: ButtonFace; /* Cor do botão no modo de alto contraste */
+        color: ButtonText; /* Cor do texto do botão */
+    }
+
+    h1 {
+        color: CanvasText; /* Cor do título no modo de alto contraste */
+    }
+
+    .mat-form-field {
+        background-color: Canvas; /* Cor de fundo dos campos de input */
+        color: CanvasText; /* Cor do texto nos campos de input */
     }
 }
