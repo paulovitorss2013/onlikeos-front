@@ -11,8 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./cliente-create.component.css']
 })
 export class ClienteCreateComponent implements OnInit {
-
-  // INSTÂNCIA DO CLIENTE
+  // Instância do cliente
   cliente: Cliente = {
     id: '',
     nome: '',
@@ -30,20 +29,38 @@ export class ClienteCreateComponent implements OnInit {
     coordenada: ''
   };
 
-  // LISTA DE ESTADOS BRASILEIROS
+  // Lista de estados brasileiros
   estadosBrasileiros = [
-    { sigla: 'AC', nome: 'Acre' }, { sigla: 'AL', nome: 'Alagoas' }, { sigla: 'AP', nome: 'Amapá' },
-    { sigla: 'AM', nome: 'Amazonas' }, { sigla: 'BA', nome: 'Bahia' }, { sigla: 'CE', nome: 'Ceará' },
-    { sigla: 'DF', nome: 'Distrito Federal' }, { sigla: 'ES', nome: 'Espírito Santo' }, { sigla: 'GO', nome: 'Goiás' },
-    { sigla: 'MA', nome: 'Maranhão' }, { sigla: 'MT', nome: 'Mato Grosso' }, { sigla: 'MS', nome: 'Mato Grosso do Sul' },
-    { sigla: 'MG', nome: 'Minas Gerais' }, { sigla: 'PA', nome: 'Pará' }, { sigla: 'PB', nome: 'Paraíba' },
-    { sigla: 'PR', nome: 'Paraná' }, { sigla: 'PE', nome: 'Pernambuco' }, { sigla: 'PI', nome: 'Piauí' },
-    { sigla: 'RJ', nome: 'Rio de Janeiro' }, { sigla: 'RN', nome: 'Rio Grande do Norte' }, { sigla: 'RS', nome: 'Rio Grande do Sul' },
-    { sigla: 'RO', nome: 'Rondônia' }, { sigla: 'RR', nome: 'Roraima' }, { sigla: 'SC', nome: 'Santa Catarina' },
-    { sigla: 'SP', nome: 'São Paulo' }, { sigla: 'SE', nome: 'Sergipe' }, { sigla: 'TO', nome: 'Tocantins' }
+    { sigla: 'AC', nome: 'Acre' },
+    { sigla: 'AL', nome: 'Alagoas' },
+    { sigla: 'AP', nome: 'Amapá' },
+    { sigla: 'AM', nome: 'Amazonas' },
+    { sigla: 'BA', nome: 'Bahia' },
+    { sigla: 'CE', nome: 'Ceará' },
+    { sigla: 'DF', nome: 'Distrito Federal' },
+    { sigla: 'ES', nome: 'Espírito Santo' },
+    { sigla: 'GO', nome: 'Goiás' },
+    { sigla: 'MA', nome: 'Maranhão' },
+    { sigla: 'MT', nome: 'Mato Grosso' },
+    { sigla: 'MS', nome: 'Mato Grosso do Sul' },
+    { sigla: 'MG', nome: 'Minas Gerais' },
+    { sigla: 'PA', nome: 'Pará' },
+    { sigla: 'PB', nome: 'Paraíba' },
+    { sigla: 'PR', nome: 'Paraná' },
+    { sigla: 'PE', nome: 'Pernambuco' },
+    { sigla: 'PI', nome: 'Piauí' },
+    { sigla: 'RJ', nome: 'Rio de Janeiro' },
+    { sigla: 'RN', nome: 'Rio Grande do Norte' },
+    { sigla: 'RS', nome: 'Rio Grande do Sul' },
+    { sigla: 'RO', nome: 'Rondônia' },
+    { sigla: 'RR', nome: 'Roraima' },
+    { sigla: 'SC', nome: 'Santa Catarina' },
+    { sigla: 'SP', nome: 'São Paulo' },
+    { sigla: 'SE', nome: 'Sergipe' },
+    { sigla: 'TO', nome: 'Tocantins' }
   ];
 
-  // GRUPO DE FORMULÁRIOS REATIVOS
+  // Grupo de formulários reativos
   form: FormGroup = new FormGroup({
     nome: new FormControl('', [Validators.required, Validators.minLength(10)]),
     cpfCnpj: new FormControl('', [Validators.required, Validators.minLength(11)]),
@@ -56,10 +73,15 @@ export class ClienteCreateComponent implements OnInit {
     bairro: new FormControl(''),
     municipio: new FormControl(''),
     uf: new FormControl(''),
-    coordenada: new FormControl('')
+    coordenada: new FormControl(''),
+    tipoCliente: new FormControl('', [Validators.required]) // Campo para armazenar o tipo de cliente
   });
 
-  // CONSTRUTOR
+  // Mascara do CPF/CNPJ
+  cpfCnpjMask: string = '000.000.000-00'; // Inicialmente, CPF
+  // Tipo de cliente
+  tipoCliente: string = ''; // Pessoa Física ou Pessoa Jurídica
+
   constructor(
     private service: ClienteService,
     private toastr: ToastrService,
@@ -68,12 +90,28 @@ export class ClienteCreateComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  // MÉTODO PARA ALTERAR A MÁSCARA DE CPF/CNPJ COM BASE NA SELEÇÃO DO TIPO DE CLIENTE
+  onTipoClienteChange(): void {
+    const tipo = this.form.get('tipoCliente')?.value;
+
+    // Verifica o tipo de cliente e ajusta a máscara e limpa o campo CPF/CNPJ se necessário
+    if (tipo === 'Pessoa Física') {
+      this.cpfCnpjMask = '000.000.000-00'; // Máscara para CPF
+      // Não precisa limpar o CPF/CNPJ, pois ele deve ser mantido
+    } else if (tipo === 'Pessoa Jurídica') {
+      this.cpfCnpjMask = '00.000.000/0000-00'; // Máscara para CNPJ
+      // Limpa o campo de CPF/CNPJ quando for selecionado "Pessoa Jurídica"
+      this.form.get('cpfCnpj')?.setValue('');
+    }
+
+    // Atualiza o valor do campo tipoCliente automaticamente
+    this.form.get('tipoCliente')?.setValue(tipo);
+  }
+
   // MÉTODO PARA CRIAR UM CLIENTE
   create(): void {
     if (!this.validaCampos()) return;
-    
     const cliente: Cliente = { ...this.form.value };
-
     this.service.create(cliente).subscribe({
       next: () => {
         this.toastr.success('Cliente cadastrado com sucesso!', 'Cadastro');
