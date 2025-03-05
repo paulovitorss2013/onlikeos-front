@@ -17,7 +17,7 @@ export class ClienteDeleteComponent implements OnInit {
   cliente: Cliente = {
     id: '',
     nome: '',
-    cpf: '',
+    cpfCnpj: '',
     email: '',
     senha: '',
     celular: '',
@@ -34,7 +34,7 @@ export class ClienteDeleteComponent implements OnInit {
   // GRUPO DE FORMULÁRIOS REATIVOS COM CAMPOS DESABILITADOS
   form: FormGroup = new FormGroup({
     nome: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.minLength(10)]),
-    cpf: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.minLength(11)]),
+    cpfCnpj: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.minLength(11)]),
     celular: new FormControl({ value: '', disabled: true }, [Validators.minLength(11)]),
     email: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.email]),
     senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
@@ -73,7 +73,7 @@ export class ClienteDeleteComponent implements OnInit {
         this.cliente = resposta;
         this.form.patchValue({
           nome: resposta.nome,
-          cpf: resposta.cpf,
+          cpfCnpj: resposta.cpfCnpj,
           celular: resposta.celular,
           email: resposta.email,
           senha: resposta.senha,

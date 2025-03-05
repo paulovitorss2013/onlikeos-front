@@ -16,7 +16,7 @@ export class ClienteCreateComponent implements OnInit {
   cliente: Cliente = {
     id: '',
     nome: '',
-    cpf: '',
+    cpfCnpj: '',
     email: '',
     senha: 'erNB1PZ@q*Wv76Fdr0TM',
     celular: '',
@@ -46,7 +46,7 @@ export class ClienteCreateComponent implements OnInit {
   // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
     nome: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    cpf: new FormControl('', [Validators.required, Validators.minLength(11)]),
+    cpfCnpj: new FormControl('', [Validators.required, Validators.minLength(11)]),
     celular: new FormControl('', [Validators.minLength(11)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     senha: new FormControl(''),

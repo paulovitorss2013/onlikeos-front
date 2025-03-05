@@ -15,7 +15,7 @@ export class TecnicoListComponent implements OnInit {
   ELEMENT_DATA: Tecnico[] = [];
 
   // COLUNAS DA TABELA
-  displayedColumns: string[] = ['nome', 'cpf', 'acoes'];
+  displayedColumns: string[] = ['nome', 'cpfCnpj', 'acoes'];
   dataSource = new MatTableDataSource<Tecnico>(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

@@ -16,7 +16,7 @@ export class TecnicoCreateComponent implements OnInit {
  tecnico: Tecnico = {
   id: '',
   nome: '',
-  cpf: '',
+  cpfCnpj: '',
   email: '',
   senha: '',
   celular: '',
@@ -27,7 +27,7 @@ export class TecnicoCreateComponent implements OnInit {
   // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
     nome: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    cpf: new FormControl('', [Validators.required, Validators.minLength(11)]),
+    cpfCnpj: new FormControl('', [Validators.required, Validators.minLength(11)]),
     celular: new FormControl('', [Validators.minLength(11)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     senha: new FormControl('', [Validators.required, Validators.minLength(8)]),

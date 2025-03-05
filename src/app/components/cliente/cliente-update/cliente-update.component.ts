@@ -16,7 +16,7 @@ export class ClienteUpdateComponent implements OnInit {
   cliente: Cliente = {
     id: '',
     nome: '',
-    cpf: '',
+    cpfCnpj: '',
     email: '',
     senha: 'erNB1PZ@q*Wv76Fdr0TM',
     celular: '',
@@ -46,7 +46,7 @@ export class ClienteUpdateComponent implements OnInit {
   // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
     nome: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    cpf: new FormControl('', [Validators.required, Validators.minLength(11)]),
+    cpfCnpj: new FormControl('', [Validators.required, Validators.minLength(11)]),
     celular: new FormControl('', [Validators.minLength(11)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     senha: new FormControl(''),
@@ -85,7 +85,7 @@ export class ClienteUpdateComponent implements OnInit {
         this.cliente = resposta;
         this.form.patchValue({
           nome: resposta.nome,
-          cpf: resposta.cpf,
+          cpfCnpj: resposta.cpfCnpj,
           celular: resposta.celular,
           email: resposta.email,
           senha: resposta.senha,
@@ -111,7 +111,7 @@ export class ClienteUpdateComponent implements OnInit {
     const cliente: Cliente = {
       id: this.cliente.id,
       nome: this.form.value.nome,
-      cpf: this.form.value.cpf,
+      cpfCnpj: this.form.value.cpfCnpj,
       email: this.form.value.email,
       celular: this.form.value.celular,
       senha: this.form.value.senha,

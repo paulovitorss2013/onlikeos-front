@@ -17,7 +17,7 @@ export class TecnicoDeleteComponent implements OnInit {
   tecnico: Tecnico = {
     id: '',
     nome: '',
-    cpf: '',
+    cpfCnpj: '',
     email: '',
     senha: '',
     celular: '',
@@ -28,7 +28,7 @@ export class TecnicoDeleteComponent implements OnInit {
   // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
     nome: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.minLength(10)]),
-    cpf: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.minLength(11)]),
+    cpfCnpj: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.minLength(11)]),
     celular: new FormControl({ value: '', disabled: true }, [Validators.minLength(11)]),
     email: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.email]),
     senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
@@ -67,7 +67,7 @@ export class TecnicoDeleteComponent implements OnInit {
         const isAdmin = resposta.perfis.includes('ADMIN');
         this.form.patchValue({
           nome: resposta.nome,
-          cpf: resposta.cpf,
+          cpfCnpj: resposta.cpfCnpj,
           celular: resposta.celular,
           email: resposta.email,
           senha: resposta.senha,

@@ -15,7 +15,7 @@ export class ClienteListComponent implements OnInit {
   ELEMENT_DATA: Cliente[] = []
 
   // COLUNAS DA TABELA
-  displayedColumns: string[] = ['nome', 'cpf', 'acoes'];
+  displayedColumns: string[] = ['nome', 'cpfCnpj', 'acoes'];
   dataSource = new MatTableDataSource<Cliente>(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
