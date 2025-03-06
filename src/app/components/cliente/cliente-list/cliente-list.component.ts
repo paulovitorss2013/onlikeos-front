@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Cliente } from '../../../models/cliente';
@@ -10,9 +10,10 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
   templateUrl: './cliente-list.component.html',
   styleUrls: ['./cliente-list.component.css']
 })
+
+// DADOS ORIGINAIS E FILTRADOS
 export class ClienteListComponent implements OnInit {
-  // DADOS ORIGINAIS E FILTRADOS
-  ELEMENT_DATA: Cliente[] = []
+  ELEMENT_DATA: Cliente[] = [];
 
   // COLUNAS DA TABELA
   displayedColumns: string[] = ['nome', 'cpfCnpj', 'acoes'];
@@ -20,12 +21,11 @@ export class ClienteListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  // CONSTRUTOR
+   // CONSTRUTOR
   constructor(
     private service: ClienteService,
     private paginatorIntl: MatPaginatorIntl
   ) {
-
     this.paginatorIntl.itemsPerPageLabel = 'Itens por página:';
     this.paginatorIntl.firstPageLabel = 'Primeira página';
     this.paginatorIntl.previousPageLabel = 'Página anterior';
@@ -37,11 +37,12 @@ export class ClienteListComponent implements OnInit {
       return `${length} cliente(s) encontrado(s)`;
     };
   }
+
   ngOnInit(): void {
     this.findAll();
   }
 
-  // MÉTODO PARA LISTAR TODOS OS CHAMADOS
+  // MÉTODO PARA LISTAR TODOS OS CLIENTES
   findAll() {
     this.service.findAll().subscribe(resposta => {
       this.ELEMENT_DATA = resposta;
@@ -49,7 +50,6 @@ export class ClienteListComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     });
   }
-
 
   // APLICA OS FILTROS PARA CONSULTA
   applyFilter(event: Event) {
@@ -67,5 +67,18 @@ export class ClienteListComponent implements OnInit {
     this.dataSource = new MatTableDataSource<Cliente>(this.ELEMENT_DATA);
     this.dataSource.paginator = this.paginator;
     this.paginatorIntl.changes.next();
+  }
+
+  // MÉTODO PARA APLICAR A MÁSCARA PARA O CPF OU CNPJ
+  applyMask(cpfCnpj: string): string {
+    cpfCnpj = cpfCnpj.replace(/\D/g, '');
+    if (cpfCnpj.length === 11) {
+      // CPF
+      return cpfCnpj.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    } else if (cpfCnpj.length === 14) {
+      // CNPJ
+      return cpfCnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+    }
+    return cpfCnpj; 
   }
 }
