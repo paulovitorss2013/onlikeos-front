@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./cliente-create.component.css']
 })
 export class ClienteCreateComponent implements OnInit {
-  // Instância do cliente
+  // INSTÂNCIA DO CLIENTE
   cliente: Cliente = {
     id: '',
     nome: '',
@@ -29,7 +29,7 @@ export class ClienteCreateComponent implements OnInit {
     coordenada: ''
   };
 
-  // Lista de estados brasileiros
+  // LISTA DE ESTADOS BRASILEIROS
   estadosBrasileiros = [
     { sigla: 'AC', nome: 'Acre' },
     { sigla: 'AL', nome: 'Alagoas' },
@@ -60,7 +60,7 @@ export class ClienteCreateComponent implements OnInit {
     { sigla: 'TO', nome: 'Tocantins' }
   ];
 
-  // Grupo de formulários reativos
+  // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
     nome: new FormControl('', [Validators.required, Validators.minLength(10)]),
     cpfCnpj: new FormControl('', [Validators.required, Validators.minLength(11)]),
@@ -74,13 +74,13 @@ export class ClienteCreateComponent implements OnInit {
     municipio: new FormControl(''),
     uf: new FormControl(''),
     coordenada: new FormControl(''),
-    tipoCliente: new FormControl('', [Validators.required]) // Campo para armazenar o tipo de cliente
+    tipoCliente: new FormControl('Pessoa Física', [Validators.required]) // DEFINIDO COMO PADRÃO
   });
 
-  // Mascara do CPF/CNPJ
-  cpfCnpjMask: string = '000.000.000-00'; // Inicialmente, CPF
-  // Tipo de cliente
-  tipoCliente: string = ''; // Pessoa Física ou Pessoa Jurídica
+  // MÁSCARA DO CPF/CNPJ
+  cpfCnpjMask: string = '000.000.000-00'; // INICIALMENTE, CPF
+  // TIPO DE CLIENTE
+  tipoCliente: string = 'Pessoa Física'; // INICIA COMO PESSOA FÍSICA
 
   constructor(
     private service: ClienteService,
@@ -88,24 +88,21 @@ export class ClienteCreateComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.onTipoClienteChange(); // APLICA A MÁSCARA CORRETA NO INÍCIO
+  }
 
   // MÉTODO PARA ALTERAR A MÁSCARA DE CPF/CNPJ COM BASE NA SELEÇÃO DO TIPO DE CLIENTE
   onTipoClienteChange(): void {
     const tipo = this.form.get('tipoCliente')?.value;
 
-    // Verifica o tipo de cliente e ajusta a máscara e limpa o campo CPF/CNPJ se necessário
+    // VERIFICA O TIPO DE CLIENTE E AJUSTA A MÁSCARA E LIMPA O CAMPO CPF/CNPJ SE NECESSÁRIO
     if (tipo === 'Pessoa Física') {
-      this.cpfCnpjMask = '000.000.000-00'; // Máscara para CPF
-      // Não precisa limpar o CPF/CNPJ, pois ele deve ser mantido
+      this.cpfCnpjMask = '000.000.000-00'; // MÁSCARA PARA CPF
     } else if (tipo === 'Pessoa Jurídica') {
-      this.cpfCnpjMask = '00.000.000/0000-00'; // Máscara para CNPJ
-      // Limpa o campo de CPF/CNPJ quando for selecionado "Pessoa Jurídica"
-      this.form.get('cpfCnpj')?.setValue('');
+      this.cpfCnpjMask = '00.000.000/0000-00'; // MÁSCARA PARA CNPJ
+      this.form.get('cpfCnpj')?.setValue(''); // LIMPA O CAMPO DE CPF/CNPJ
     }
-
-    // Atualiza o valor do campo tipoCliente automaticamente
-    this.form.get('tipoCliente')?.setValue(tipo);
   }
 
   // MÉTODO PARA CRIAR UM CLIENTE

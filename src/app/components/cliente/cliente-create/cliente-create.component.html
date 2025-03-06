@@ -70,12 +70,6 @@
       <input matInput formControlName="coordenada" placeholder="Link ou coordenada em texto" maxlength="100"/>
     </mat-form-field>
 
-    <!-- CAMPO NÃO MODIFICÁVEL PARA TIPO DE CLIENTE -->
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Tipo de Cliente</mat-label>
-      <input matInput [value]="tipoCliente" readonly />
-    </mat-form-field>
-
     <button (click)="create()" [disabled]="!validaCampos()" mat-button class="btn-criar">CRIAR</button>
     <button mat-button class="btn-cancelar" (click)="confirmarCancelamento()">CANCELAR</button>
   </form>
