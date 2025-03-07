@@ -30,6 +30,10 @@ export class ClienteUpdateComponent implements OnInit {
     coordenada: ''
   };
 
+  // INICIALIZAÇÃO MÁSCARAS PARA CPF E CNPJ
+  cpfCnpjMask: string = '000.000.000-00'; // INICIALMENTE, CPF
+  tipoCliente: string = 'Pessoa Física'; // INICIA COMO PESSOA FÍSICA
+
   // LISTA DE ESTADOS BRASILEIROS
   estadosBrasileiros = [
     { sigla: 'AC', nome: 'Acre' }, { sigla: 'AL', nome: 'Alagoas' }, { sigla: 'AP', nome: 'Amapá' },
@@ -56,7 +60,8 @@ export class ClienteUpdateComponent implements OnInit {
     bairro: new FormControl(''),
     municipio: new FormControl(''),
     uf: new FormControl(''),
-    coordenada: new FormControl('')
+    coordenada: new FormControl(''),
+    tipoCliente: new FormControl('', Validators.required)
   });
   
   // CONSTRUTOR
@@ -83,6 +88,15 @@ export class ClienteUpdateComponent implements OnInit {
     this.service.findById(this.cliente.id).subscribe({
       next: (resposta) => {
         this.cliente = resposta;
+        // Atualizar a máscara de CPF/CNPJ baseado na resposta
+        if (resposta.cpfCnpj?.length === 11) {
+          this.cpfCnpjMask = '000.000.000-00'; // MÁSCARA PARA CPF
+          this.tipoCliente = 'Pessoa Física';  // Define como Pessoa Física
+        } else if (resposta.cpfCnpj?.length === 14) {
+          this.cpfCnpjMask = '00.000.000/0000-00'; // MÁSCARA PARA CNPJ
+          this.tipoCliente = 'Pessoa Jurídica';  // Define como Pessoa Jurídica
+        }
+        // Preencher o formulário com os dados da resposta da API
         this.form.patchValue({
           nome: resposta.nome,
           cpfCnpj: resposta.cpfCnpj,
@@ -96,6 +110,7 @@ export class ClienteUpdateComponent implements OnInit {
           municipio: resposta.municipio,
           uf: resposta.uf,
           coordenada: resposta.coordenada,
+          tipoCliente: this.tipoCliente
         });
       },
       error: (err) => {
@@ -104,6 +119,19 @@ export class ClienteUpdateComponent implements OnInit {
     });
   }
   
+  // MÉTODO PARA ALTERAR A MÁSCARA DE CPF/CNPJ COM BASE NA SELEÇÃO DO TIPO DE CLIENTE
+  onTipoClienteChange(): void {
+    const tipo = this.form.get('tipoCliente')?.value;
+  
+    if (tipo === 'Pessoa Física') {
+      this.cpfCnpjMask = '000.000.000-00'; // MÁSCARA PARA CPF
+      this.form.get('cpfCnpj')?.setValue(''); // LIMPA O CAMPO DE CPF/CNPJ
+    } else if (tipo === 'Pessoa Jurídica') {
+      this.cpfCnpjMask = '00.000.000/0000-00'; // MÁSCARA PARA CNPJ
+      this.form.get('cpfCnpj')?.setValue(''); // LIMPA O CAMPO DE CPF/CNPJ
+    }
+  }
+
   // MÉTÓDO PARA ATUALIZAR UM TÉCNICO
   update(): void {
     if (!this.validaCampos()) return;  

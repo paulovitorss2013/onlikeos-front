@@ -22,7 +22,7 @@
       <mat-label>CPF</mat-label>
       <input matInput
         placeholder="Ex: 000.000.000-00 (digite apenas números)"
-        formControlName="cpf"
+        formControlName="cpfCnpj"
         mask="000.000.000-00" />
     </mat-form-field>
 
@@ -48,7 +48,7 @@
         formControlName="senha" maxlength="64">
     </mat-form-field>
 
-    <button (click)="create()" [disabled]="!validaCampos()" mat-button class="btn-criar">CRIAR</button>
+    <button (click)="create()" [disabled]="form.invalid" mat-button class="btn-criar">CRIAR</button>
 
     <button mat-button class="btn-cancelar" (click)="confirmarCancelamento()">CANCELAR</button>
 

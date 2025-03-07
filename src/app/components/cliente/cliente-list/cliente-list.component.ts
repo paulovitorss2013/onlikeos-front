@@ -62,13 +62,6 @@ export class ClienteListComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  // ATUALIZA OS DADOS DA TABELA E CONFIGURA O PAGINADOR
-  private updateDataSource(): void {
-    this.dataSource = new MatTableDataSource<Cliente>(this.ELEMENT_DATA);
-    this.dataSource.paginator = this.paginator;
-    this.paginatorIntl.changes.next();
-  }
-
   // MÉTODO PARA APLICAR A MÁSCARA PARA O CPF OU CNPJ
   applyMask(cpfCnpj: string): string {
     cpfCnpj = cpfCnpj.replace(/\D/g, '');

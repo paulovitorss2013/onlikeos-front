@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./cliente-create.component.css']
 })
 export class ClienteCreateComponent implements OnInit {
+  
   // INSTÂNCIA DO CLIENTE
   cliente: Cliente = {
     id: '',
@@ -28,6 +29,10 @@ export class ClienteCreateComponent implements OnInit {
     uf: '',
     coordenada: ''
   };
+  
+  // INICIALIZAÇÃO MÁSCARAS PARA CPF E CNPJ
+  cpfCnpjMask: string = '000.000.000-00'; // INICIALMENTE, CPF
+  tipoCliente: string = 'Pessoa Física'; // INICIA COMO PESSOA FÍSICA
 
   // LISTA DE ESTADOS BRASILEIROS
   estadosBrasileiros = [
@@ -74,13 +79,8 @@ export class ClienteCreateComponent implements OnInit {
     municipio: new FormControl(''),
     uf: new FormControl(''),
     coordenada: new FormControl(''),
-    tipoCliente: new FormControl('Pessoa Física', [Validators.required]) // DEFINIDO COMO PADRÃO
+    tipoCliente: new FormControl('Pessoa Física', [Validators.required])
   });
-
-  // MÁSCARA DO CPF/CNPJ
-  cpfCnpjMask: string = '000.000.000-00'; // INICIALMENTE, CPF
-  // TIPO DE CLIENTE
-  tipoCliente: string = 'Pessoa Física'; // INICIA COMO PESSOA FÍSICA
 
   constructor(
     private service: ClienteService,
@@ -95,8 +95,6 @@ export class ClienteCreateComponent implements OnInit {
   // MÉTODO PARA ALTERAR A MÁSCARA DE CPF/CNPJ COM BASE NA SELEÇÃO DO TIPO DE CLIENTE
   onTipoClienteChange(): void {
     const tipo = this.form.get('tipoCliente')?.value;
-
-    // VERIFICA O TIPO DE CLIENTE E AJUSTA A MÁSCARA E LIMPA O CAMPO CPF/CNPJ SE NECESSÁRIO
     if (tipo === 'Pessoa Física') {
       this.cpfCnpjMask = '000.000.000-00'; // MÁSCARA PARA CPF
     } else if (tipo === 'Pessoa Jurídica') {

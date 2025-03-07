@@ -12,11 +12,17 @@
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Tipo de Cliente</mat-label>
+      <mat-select formControlName="tipoCliente" (selectionChange)="onTipoClienteChange()">
+        <mat-option value="Pessoa Física">Pessoa Física</mat-option>
+        <mat-option value="Pessoa Jurídica">Pessoa Jurídica</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
       <mat-label>CPF/CNPJ</mat-label>
-      <input matInput
-        placeholder="Ex: 000.000.000-00 (digite apenas números)"
-        formControlName="cpfCnpj"
-        mask="000.000.000-00" />
+      <input matInput placeholder="Ex: (apenas números)" formControlName="cpfCnpj" 
+        [mask]="cpfCnpjMask" />
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">

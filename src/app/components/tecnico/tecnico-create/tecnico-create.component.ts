@@ -26,11 +26,11 @@ export class TecnicoCreateComponent implements OnInit {
 
   // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
-    nome: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    cpfCnpj: new FormControl('', [Validators.required, Validators.minLength(11)]),
-    celular: new FormControl('', [Validators.minLength(11)]),
+    nome: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(60)]),
+    cpfCnpj: new FormControl('', [Validators.required, Validators.minLength(11), Validators.maxLength(18)]),
+    celular: new FormControl('', [Validators.minLength(11), Validators.maxLength(15)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    senha: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]),
     perfis: new FormControl([])
   });
 
