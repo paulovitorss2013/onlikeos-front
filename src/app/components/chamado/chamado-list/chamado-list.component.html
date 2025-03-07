@@ -1,17 +1,17 @@
 <div class="container">
   <div class="header-container">
-    <h1 class="centralizado">Listando os Chamados</h1>
+    <h1>Listando os Chamados</h1>
     <button mat-button routerLink="create">CRIAR NOVO</button>
+    <button mat-button routerLink="">MEUS CHAMADOS</button>
+    <button mat-button (click)="toggleFiltros()">FILTROS</button>
   </div>
 
-  <!-- CAMPO DE PESQUISA -->
   <mat-form-field>
     <mat-label>Pesquisar</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Nome do Técnico, nome do cliente ..." #input>
   </mat-form-field>
-  <button mat-button (click)="toggleFiltros()">MOSTRAR/OCULTAR FILTROS</button>
+  
 
-  <!-- FILTROS -->
   <table class="filtros-container" *ngIf="mostrarFiltros">
     <tr>
       <td class="filter-row">

@@ -90,3 +90,7 @@ mat-radio-button {
 .status-encerrado {
     color: green !important;
 }
+
+header.container{
+    margin: auto;
+}
