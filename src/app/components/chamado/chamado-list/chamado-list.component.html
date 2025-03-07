@@ -1,11 +1,11 @@
 <div class="container">
   <div class="header-container">
     <h1>Listando os Chamados</h1>
-    <button mat-button routerLink="create">CRIAR NOVO</button>
     <button mat-button routerLink="">MEUS CHAMADOS</button>
     <button mat-button (click)="toggleFiltros()">FILTROS</button>
   </div>
-
+ 
+  
   <mat-form-field>
     <mat-label>Pesquisar</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Nome do Técnico, nome do cliente ..." #input>
@@ -37,11 +37,12 @@
     </tr>
   </table>
 
-  <!-- PAGINAÇÃO -->
   <mat-paginator [pageSizeOptions]="[20, 50, 100]" showFirstLastButtons></mat-paginator>
 
-  <!-- TABELA DE CHAMADOS -->
   <div class="mat-elevation-z8">
+    
+    <button mat-button routerLink="create">ABRIR NOVO</button>
+
     <table mat-table [dataSource]="dataSource">
 
       <ng-container matColumnDef="id">
