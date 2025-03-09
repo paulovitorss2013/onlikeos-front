@@ -11,11 +11,17 @@
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Tipo de Cliente</mat-label>
+      <mat-select formControlName="tipoCliente" (selectionChange)="onTipoClienteChange()">
+        <mat-option value="Pessoa Física">Pessoa Física</mat-option>
+        <mat-option value="Pessoa Jurídica">Pessoa Jurídica</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
       <mat-label>CPF/CNPJ</mat-label>
-      <input matInput
-        placeholder="(apenas números)"
-        formControlName="cpfCnpj"
-        mask="000.000.000-00" />
+      <input matInput placeholder="Ex: (apenas números)" formControlName="cpfCnpj" 
+        [mask]="cpfCnpjMask" />
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
@@ -32,6 +38,65 @@
         formControlName="celular"
         mask="(00) 00000-0000">
     </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>CEP</mat-label>
+      <input matInput
+        placeholder="Ex: 36670-000 (digite apenas números)"
+        formControlName="cep"
+        mask="00000-000" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Logradouro</mat-label>
+      <input matInput
+        placeholder="Ex: Rua Nezinho Ferreira"
+        formControlName="logradouro"
+        maxlength="60"/>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Número</mat-label>
+      <input matInput
+        placeholder="761-A"
+        formControlName="numero"
+        maxlength="15"/>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Bairro</mat-label>
+      <input matInput
+        placeholder="Floresta"
+        formControlName="bairro"
+        maxlength="40"/>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Município</mat-label>
+      <input matInput
+        placeholder="Santo Antônio do Aventureiro"
+        formControlName="municipio"
+        maxlength="50"/>
+    </mat-form-field>
+    
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Estado (UF)</mat-label>
+      <mat-select formControlName="uf">
+        <mat-option *ngFor="let estado of estadosBrasileiros" [value]="estado.sigla">
+          {{ estado.nome }} ({{ estado.sigla }})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Coordenada</mat-label>
+      <input matInput
+        formControlName="coordenada"
+        placeholder="Link ou coordenada em texto"
+        maxlength="100"/>
+    </mat-form-field>
+    
 
     <button (click)="delete()" mat-button class="btn-deletar">DELETAR</button>
 

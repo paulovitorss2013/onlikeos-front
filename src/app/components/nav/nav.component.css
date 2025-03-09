@@ -1,79 +1,96 @@
 /* --------- AJUSTES PARA TELAS GRANDES --------- */
 
-/* DEFINE A ALTURA TOTAL DO CONTAINER PARA OCUPAR TODO O ESPAÇO VERTICAL */
 .container {
-    height: 100%;    
+    height: 100%;
 }
 
-/* ESTILIZAÇÃO DA BARRA LATERAL */
 .sidenav {
-    width: 13rem; /* Define a largura fixa da barra lateral */
-    background: rgb(39, 141, 45); /* Tom verde escuro para o fundo */
+    width: 13rem;
+    background: rgb(39, 141, 45);
 }
 
-/* ESTILIZAÇÃO PARA IMAGENS */
-img{
-    width: 100%; /* Imagem ocupa toda a largura do container */
-    height: 12rem; /* Altura fixa da imagem */ 
+img {
+    width: 100%;
+    height: 12rem;
 }
 
- /* AJUSTES ESPECÍFICOS PARA ÍCONES */
- .sidenav i {
-    margin: 1rem 0.5rem 1.5rem 0.2rem; /* Margens dos ícones */
-    font-size: 1.254rem; /* Ajuste do tamanho do ícone */   
-    color: rgb(255, 255, 255); /* Cor do ícone do sidenav branco */  
- }
- 
- /* ESTILO PARA O TEXTO DO ÍCONE */
+.sidenav i {
+    margin: 1rem 0.5rem 1.5rem 0.2rem;
+    font-size: 1.254rem;
+    color: rgb(255, 255, 255);
+}
+
 .link-text {
-    font-size: 22.5px; /* Ajuste do tamanho da fonte */
-    font-weight: 50; /* Define espessura do texto */
-    color: rgb(255, 255, 255); /* Define cor do texto */
+    font-size: 22.5px;
+    font-weight: 50;
+    color: rgb(255, 255, 255);
 }
 
 .menu {
-    margin: 0.5rem 1rem 1rem 1rem; /* Define margens do botão */
-    color: white; /* Define cor do texto do botão */
-    background-color: rgb(39, 141, 45); /* Define cor de fundo verde escuro */
+    margin: 0.5rem 1rem 1rem 1rem;
+    color: white;
+    background-color: rgb(39, 141, 45);
 }
 
 /* --------- AJUSTE RESPONSIVO PARA TELAS MENORES --------- */
 @media (max-width: 768px) {
 
     .container {
-        flex-direction: column; /* Alinha os itens em coluna para melhor aproveitamento de espaço */
+        flex-direction: column;
     }
 
     .sidenav {
-        width: 2.6rem; /* Reduz a largura da barra lateral para mostrar apenas ícones */
+        width: 2.6rem;
     }
 
     .sidenav-content {
-        flex: 1; /* Permite que o conteúdo principal ocupe o restante do espaço disponível */
-        padding: 1rem; /* Adiciona espaçamento interno */
+        flex: 1;
+        padding: 1rem;
     }
 
     .sidenav img {
-        display: none; /* Oculta imagem dentro da barra lateral */
+        display: none;
     }
 
     .sidenav .link-text {
-        display: none; /* Oculta o texto dos links na barra lateral */
+        display: none;
     }
 
     .sidenav a {
-        padding: 1rem 0; /* Ajusta o espaçamento ao redor do ícone */
-        margin-top: 0.7rem; /* Define espaçamento superior entre os links */
+        padding: 1rem 0;
+        margin-top: 0.7rem;
     }
 
     .sidenav i {
-        font-size: 1.9rem; /* Ajusta o tamanho do ícone para telas menores */
-        margin-right: 0; /* Remove o espaçamento extra ao lado do ícone */
-        margin-top: rem; /* Esta linha parece estar incompleta, deveria ter um valor */
+        font-size: 1.9rem;
+        margin-right: 0;
+        margin-top: 1rem; /* Corrigido o valor 'rem' */
     }
 
     .menu {
-        display: none; /* Oculta o botão de menu em telas menores */
+        display: none;
     }
 }
 
+/* --------- AJUSTE RESPONSIVO PARA TELAS MENORES (MAX-WIDTH: 480PX) --------- */
+@media (max-width: 480px) {
+
+    .sidenav {
+        width: 2.2rem;
+    }
+
+    .sidenav i {
+        font-size: 1.6rem;
+        margin: 0.8rem auto;
+        display: block;
+        text-align: center;
+    }
+
+    .sidenav a {
+        padding: 0.6rem 0;
+    }
+
+    .sidenav-content {
+        padding: 0.5rem;
+    }
+}

@@ -2,75 +2,116 @@
 
 /* ESTILOS PARA O CARD */
 .card {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave para destacar o card */
-    width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 75%;
+    height: 75%;
     margin: auto;
 }
 
 /* ESTILO PARA A IMAGEM DO CARD */
 .card img {
-    width: 30%; /* Ocupa toda a largura disponível do contêiner */
-    margin: 1rem auto; /* Ajusta o espaçamento ao redor */
-    display: flex; /* Garante que a imagem seja tratada como um bloco */
+    width: 30%;
+    margin: 1rem auto;
+    display: flex;
+}
+
+/* ESTILO PARA O TÍTULO DO CARD */
+mat-card-title {
+    font-size: 1.6rem;
 }
 
 /* ESTILO PARA AÇÕES DO CARD */
 mat-card-actions {
     display: flex;
-    justify-content: center; /* Centraliza os botões horizontalmente */
-    flex-wrap: wrap; /* Permite que os botões se ajustem em múltiplas linhas se necessário */
-    gap: 1rem; /* Espaço entre os botões */
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
     margin-top: 1rem;
     width: 100%;
 }
 
 /* ESTILO PARA OS BOTÕES */
 mat-card-actions button {
-    background-color: rgb(39, 141, 45); /* Tom verde escuro */
+    background-color: rgb(39, 141, 45);
     color: rgb(255, 255, 255);
-    border: none; /* Remove bordas padrão */
-    border-radius: 5px; /* Bordas arredondadas */
-    padding: 0.5rem 1.5rem; /* Ajusta o espaçamento interno */
-    font-size: 0.8rem; /* Tamanho de fonte adequado */
-    cursor: pointer; /* Altera o cursor para indicar que é clicável */
-    
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1.5rem;
+    font-size: 0.8rem;
+    cursor: pointer;
 }
 
 /* EFEITO DE HOVER PARA OS BOTÕES */
 mat-card-actions button:hover {
-    background-color: #6ac26a; /* Tom mais claro ao passar o mouse */
+    background-color: #6ac26a;
 }
-
-mat-card-title {
-    font-size: 1.6rem;
-}
-
 
 /* --------- AJUSTE RESPONSIVO PARA TELAS MENORES --------- */
 
 @media (max-width: 768px) {
+
+    /* ESTILOS PARA O CARD */
     .card {
-        flex: 1; /* Permite que o conteúdo expanda */
-        margin-top: 1rem; /* Ajusta a distância entre o card e o cabeçalho */
+        margin-top: 1rem;
     }
 
+    /* ESTILO PARA A IMAGEM DO CARD */
     .card img {
-        display: none; /* Oculta imagem em telas menores */
+        display: none; /* Oculta a imagem nas telas menores */
     }
 
+    /* ESTILO PARA AÇÕES DO CARD */
+    mat-card-actions {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    /* ESTILO PARA OS BOTÕES */
+    mat-card-actions button {
+        width: 100%; /* Os botões ocupam toda a largura disponível */
+        text-align: center;
+    }
+
+    /* ESTILO PARA O TÍTULO DO CARD */
     mat-card-title {   
-        text-align: left; /* Alinha o texto à esquerda em telas menores também */
+        text-align: left;
         font-size: 1.5rem;
         margin: auto;
     }
+}
 
-    mat-card-actions {
-        flex-direction: column; /* Alinha os botões verticalmente em telas menores */
-        gap: 0.8rem; /* Aumenta o espaço entre os botões em telas menores*/
+/* --------- AJUSTE RESPONSIVO PARA TELAS MENORES (MAX-WIDTH: 480PX) --------- */
+
+@media (max-width: 480px) {
+
+    /* ESTILOS PARA O CARD */
+    .card {
+        margin-top: 1rem;
+        width: 100%; /* O cartão ocupa toda a largura disponível */
     }
 
+    /* ESTILO PARA A IMAGEM DO CARD */
+    .card img {
+        display: none; /* Esconde a imagem em telas pequenas */
+    }
+
+    /* ESTILO PARA AÇÕES DO CARD */
+    mat-card-actions {
+        flex-direction: column;
+        gap: 0.6rem;
+        margin-top: 1rem; /* Ajusta o espaçamento superior */
+    }
+
+    /* ESTILO PARA OS BOTÕES */
     mat-card-actions button {
-        width: 100%; /* Botões ocupam toda a largura em telas*/
-        text-align: center; /* Texto centralizado */
+        width: 100%; /* Os botões ocupam toda a largura disponível */
+        text-align: center;
+        font-size: 1rem; /* Aumenta o tamanho da fonte para facilitar a leitura */
+        padding: 0.6rem 1.2rem; /* Ajusta o padding para os botões */
+    }
+
+    /* ESTILO PARA O TÍTULO DO CARD */
+    mat-card-title {   
+        display: none; /* Esconde o título nas telas menores */
     }
 }

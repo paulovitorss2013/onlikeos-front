@@ -31,21 +31,40 @@ export class ClienteDeleteComponent implements OnInit {
     coordenada: ''
   };
 
+  // INICIALIZAÇÃO MÁSCARAS PARA CPF E CNPJ
+  cpfCnpjMask: string = '000.000.000-00'; // INICIALMENTE, CPF
+  tipoCliente: string = 'Pessoa Física'; // INICIA COMO PESSOA FÍSICA
+
+  // LISTA DE ESTADOS BRASILEIROS
+  estadosBrasileiros = [
+    { sigla: 'AC', nome: 'Acre' }, { sigla: 'AL', nome: 'Alagoas' }, { sigla: 'AP', nome: 'Amapá' },
+    { sigla: 'AM', nome: 'Amazonas' }, { sigla: 'BA', nome: 'Bahia' }, { sigla: 'CE', nome: 'Ceará' },
+    { sigla: 'DF', nome: 'Distrito Federal' }, { sigla: 'ES', nome: 'Espírito Santo' }, { sigla: 'GO', nome: 'Goiás' },
+    { sigla: 'MA', nome: 'Maranhão' }, { sigla: 'MT', nome: 'Mato Grosso' }, { sigla: 'MS', nome: 'Mato Grosso do Sul' },
+    { sigla: 'MG', nome: 'Minas Gerais' }, { sigla: 'PA', nome: 'Pará' }, { sigla: 'PB', nome: 'Paraíba' },
+    { sigla: 'PR', nome: 'Paraná' }, { sigla: 'PE', nome: 'Pernambuco' }, { sigla: 'PI', nome: 'Piauí' },
+    { sigla: 'RJ', nome: 'Rio de Janeiro' }, { sigla: 'RN', nome: 'Rio Grande do Norte' }, { sigla: 'RS', nome: 'Rio Grande do Sul' },
+    { sigla: 'RO', nome: 'Rondônia' }, { sigla: 'RR', nome: 'Roraima' }, { sigla: 'SC', nome: 'Santa Catarina' },
+    { sigla: 'SP', nome: 'São Paulo' }, { sigla: 'SE', nome: 'Sergipe' }, { sigla: 'TO', nome: 'Tocantins' }
+  ];
+  
+
   // GRUPO DE FORMULÁRIOS REATIVOS COM CAMPOS DESABILITADOS
   form: FormGroup = new FormGroup({
-    nome: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.minLength(10)]),
-    cpfCnpj: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.minLength(11)]),
-    celular: new FormControl({ value: '', disabled: true }, [Validators.minLength(11)]),
-    email: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.email]),
-    senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    cep: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    logradouro: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    numero: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    bairro: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    municipio: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    uf: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    coordenada: new FormControl('', [Validators.required, Validators.minLength(8)]),
-  });
+    nome: new FormControl({ value: '', disabled: true }),
+    cpfCnpj: new FormControl({ value: '', disabled: true }),
+    celular: new FormControl({ value: '', disabled: true }),
+    email: new FormControl({ value: '', disabled: true }),
+    senha: new FormControl({ value: '', disabled: true }),
+    cep: new FormControl({ value: '', disabled: true }),
+    logradouro: new FormControl({ value: '', disabled: true }),
+    numero: new FormControl({ value: '', disabled: true }),
+    bairro: new FormControl({ value: '', disabled: true }),
+    municipio: new FormControl({ value: '', disabled: true }),
+    uf: new FormControl({ value: '', disabled: true }),
+    coordenada: new FormControl({ value: '', disabled: true }),
+    tipoCliente: new FormControl({ value: '', disabled: true })
+});
   
   // CONSTRUTOR
   constructor(
@@ -66,11 +85,20 @@ export class ClienteDeleteComponent implements OnInit {
     }
   }
 
-  // MÉTODO PARA BUSCAR O CLIENTE E SEUS ATRIBUTOS POR ID
+  // MÉTODO PARA BUSCAR O TÉCNICO E SEUS ATRIBUTOS POR ID
   findById(): void {
     this.service.findById(this.cliente.id).subscribe({
       next: (resposta) => {
         this.cliente = resposta;
+        
+        if (resposta.cpfCnpj?.length === 11) {
+          this.cpfCnpjMask = '000.000.000-00';
+          this.tipoCliente = 'Pessoa Física';
+        } else if (resposta.cpfCnpj?.length === 14) {
+          this.cpfCnpjMask = '00.000.000/0000-00';
+          this.tipoCliente = 'Pessoa Jurídica'; 
+        }
+   
         this.form.patchValue({
           nome: resposta.nome,
           cpfCnpj: resposta.cpfCnpj,
@@ -84,12 +112,26 @@ export class ClienteDeleteComponent implements OnInit {
           municipio: resposta.municipio,
           uf: resposta.uf,
           coordenada: resposta.coordenada,
+          tipoCliente: this.tipoCliente
         });
       },
-      error: () => {
-        this.toastr.error('Erro ao carregar os dados do cliente.');
+      error: (err) => {
+        this.toastr.error('Erro ao carregar os dados do cliente');
       }
     });
+  }
+
+  // MÉTODO PARA ALTERAR A MÁSCARA DE CPF/CNPJ COM BASE NA SELEÇÃO DO TIPO DE CLIENTE
+  onTipoClienteChange(): void {
+    const tipo = this.form.get('tipoCliente')?.value;
+  
+    if (tipo === 'Pessoa Física') {
+      this.cpfCnpjMask = '000.000.000-00';
+      this.form.get('cpfCnpj')?.setValue('');
+    } else if (tipo === 'Pessoa Jurídica') {
+      this.cpfCnpjMask = '00.000.000/0000-00';
+      this.form.get('cpfCnpj')?.setValue('');
+    }
   }
 
   // MÉTODO PARA DELETAR O CLIENTE

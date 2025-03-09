@@ -1,8 +1,14 @@
+<!-- CONTAINER PRINCIPAL DO LAYOUT -->
 <mat-drawer-container class="container" autosize>
 
+    <!-- MENU LATERAL (SIDENAV) -->
     <mat-drawer #drawer class="sidenav" mode="side" opened>
+        <!-- IMAGEM DO MENU LATERAL -->
         <img src="assets/img/sidenav-image.svg" alt="Onlike OS">
+        
+        <!-- LISTA DE NAVEGAÇÃO -->
         <mat-nav-list class="nav-list">
+
             <a mat-list-item routerLink="home">
                 <i class="material-icons">home</i>
                 <span class="link-text">Início</span>
@@ -30,15 +36,19 @@
         </mat-nav-list>
     </mat-drawer>
 
+    <!-- CONTEÚDO PRINCIPAL AO LADO DO MENU -->
     <div class="sidenav-content">
 
+        <!-- COMPONENTE DO CABEÇALHO -->
         <app-header></app-header>
 
-    <button Class="menu" (click)="drawer.toggle()" mat-icon-button>
+        <!-- BOTÃO PARA ABRIR/FECHAR O MENU LATERAL -->
+        <button class="menu" (click)="drawer.toggle()" mat-icon-button>
             <mat-icon>menu</mat-icon>
-    </button>
+        </button>
 
-    <router-outlet></router-outlet>
+        <!-- ÁREA ONDE O CONTEÚDO DAS PÁGINAS SERÁ CARREGADO -->
+        <router-outlet></router-outlet>
 
     </div>
 

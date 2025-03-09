@@ -10,14 +10,14 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class NavComponent implements OnInit {
 
+  // CONSTRUTOR
   constructor (
     private router:Router,
     private authService: AuthService,
     private toast:ToastrService) {}
-
+  
   ngOnInit(): void {
-    // DEFINE A PÁGINA DE START)
-    this.router.navigate([''])
+    this.router.navigate(['']) // DEFINE A PÁGINA INICIAL DO SISTEMA)
   }
 
   // MÉTODO PARA SAIR DO SISTEMA

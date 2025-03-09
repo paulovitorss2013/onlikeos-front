@@ -13,17 +13,17 @@ export class HomeComponent {
     private router: Router,
   ) {}
 
-// MÉTODO LISTAR TODOS OS TÉCNICOS
+// DIRECIONA PARA LISTAR TODOS OS TÉCNICOS
 listarTecnicos(): void {
   this.router.navigate(['tecnicos']);
  } 
 
-// MÉTODO NAVEGAR PARA LISTAR TODOS OS CHAMADOS
+// DIRECIONA PARA LISTAR TODOS OS CHAMADOS
 listarClientes(): void {
   this.router.navigate(['clientes']);
  }
 
-// MÉTODO NAVEGAR PARA LISTAR TODOS OS CHAMADOS
+// DIRECIONA PARA LISTAR TODOS OS CHAMADOS
 listarChamados(): void {
   this.router.navigate(['chamados']);
  }
