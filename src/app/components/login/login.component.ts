@@ -1,5 +1,4 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Credenciais } from '../../models/credenciais';
 import { ToastrService } from 'ngx-toastr';
@@ -12,14 +11,19 @@ import { catchError, throwError, timeout } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
+
 export class LoginComponent implements OnInit {
+  
+  // DECLARAÇÃO DAS CREDENCIAIS
   creds: Credenciais = {
     email: '',
     senha: ''
   };
 
+  // VARIÁVEL DE CONTROLE DE CARREGAMENTO
   loading: boolean = false;
 
+  // FORMULÁRIO DE LOGIN
   loginForm = new FormGroup({
     email: new FormControl(this.creds.email, [
       Validators.required,
@@ -30,7 +34,8 @@ export class LoginComponent implements OnInit {
       Validators.minLength(8),
     ]),
   });
-
+  
+  // CONSTRUTOR DO COMPONENTE
   constructor(
     private toast: ToastrService,
     private service: AuthService,
@@ -38,13 +43,15 @@ export class LoginComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
+  // MÉTODO DE INICIALIZAÇÃO DO COMPONENTE
   ngOnInit(): void {}
 
+  // MÉTODO PARA VALIDAR O FORMULÁRIO
   validaCampos(): boolean {
     return this.loginForm.valid;
   }
 
-  // INÍCIO DO MÉTODO PARA LOGAR NO SISTEMA
+  // MÉTODO PARA LOGAR NO SISTEMA
   logar(): void {
     this.creds.email = this.loginForm.get('email')?.value ?? '';
     this.creds.senha = this.loginForm.get('senha')?.value ?? '';

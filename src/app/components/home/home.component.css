@@ -2,48 +2,48 @@
 
 /* ESTILOS PARA O CARD */
 .card {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 75%;
-    height: 75%;
-    margin: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona sombra suave ao redor do card */
+    width: 75%; /* Define a largura do card para 75% da largura disponível */
+    height: 75%; /* Define a altura do card para 75% da altura disponível */
+    margin: auto; /* Centraliza o card horizontalmente */
 }
 
 /* ESTILO PARA A IMAGEM DO CARD */
 .card img {
-    width: 30%;
-    margin: 1rem auto;
-    display: flex;
+    width: 30%; /* Define a largura da imagem dentro do card como 30% */
+    margin: 1rem auto; /* Adiciona margem ao redor da imagem e centraliza */
+    display: flex; /* Alinha a imagem como um item flexível */
 }
 
 /* ESTILO PARA O TÍTULO DO CARD */
 mat-card-title {
-    font-size: 1.6rem;
+    font-size: 1.6rem; /* Define o tamanho da fonte do título do card */
 }
 
 /* ESTILO PARA AÇÕES DO CARD */
 mat-card-actions {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 1rem;
-    width: 100%;
+    display: flex; /* Define o layout das ações como flexível */
+    justify-content: center; /* Centraliza as ações horizontalmente */
+    flex-wrap: wrap; /* Permite que as ações se quebrem em múltiplas linhas, se necessário */
+    gap: 1rem; /* Define o espaço entre os itens */
+    margin-top: 1rem; /* Adiciona margem no topo das ações */
+    width: 100%; /* Garante que as ações ocupem 100% da largura disponível */
 }
 
 /* ESTILO PARA OS BOTÕES */
 mat-card-actions button {
-    background-color: rgb(39, 141, 45);
-    color: rgb(255, 255, 255);
-    border: none;
-    border-radius: 5px;
-    padding: 0.5rem 1.5rem;
-    font-size: 0.8rem;
-    cursor: pointer;
+    background-color: rgb(39, 141, 45); /* Define o fundo dos botões como verde */
+    color: rgb(255, 255, 255); /* Define a cor do texto dos botões como branco */
+    border: none; /* Remove a borda padrão do botão */
+    border-radius: 5px; /* Adiciona bordas arredondadas aos botões */
+    padding: 0.5rem 1.5rem; /* Adiciona espaçamento interno aos botões */
+    font-size: 0.8rem; /* Define o tamanho da fonte dos botões */
+    cursor: pointer; /* Muda o cursor para indicar que o botão é clicável */
 }
 
 /* EFEITO DE HOVER PARA OS BOTÕES */
 mat-card-actions button:hover {
-    background-color: #6ac26a;
+    background-color: #6ac26a; /* Altera a cor do fundo para um tom mais claro de verde ao passar o mouse */
 }
 
 /* --------- AJUSTE RESPONSIVO PARA TELAS MENORES --------- */
@@ -52,31 +52,31 @@ mat-card-actions button:hover {
 
     /* ESTILOS PARA O CARD */
     .card {
-        margin-top: 1rem;
+        margin-top: 1rem; /* Adiciona margem superior ao card em telas menores */
     }
 
     /* ESTILO PARA A IMAGEM DO CARD */
     .card img {
-        display: none; /* Oculta a imagem nas telas menores */
+        display: none; /* Oculta a imagem do card em telas menores */
     }
 
     /* ESTILO PARA AÇÕES DO CARD */
     mat-card-actions {
-        flex-direction: column;
-        gap: 0.8rem;
+        flex-direction: column; /* Alinha as ações em uma coluna em telas menores */
+        gap: 0.8rem; /* Reduz o espaçamento entre os botões */
     }
 
     /* ESTILO PARA OS BOTÕES */
     mat-card-actions button {
-        width: 100%; /* Os botões ocupam toda a largura disponível */
-        text-align: center;
+        width: 100%; /* Faz os botões ocuparem 100% da largura disponível */
+        text-align: center; /* Centraliza o texto dentro dos botões */
     }
 
     /* ESTILO PARA O TÍTULO DO CARD */
     mat-card-title {   
-        text-align: left;
-        font-size: 1.5rem;
-        margin: auto;
+        text-align: left; /* Alinha o título à esquerda */
+        font-size: 1.5rem; /* Reduz o tamanho da fonte do título */
+        margin: auto; /* Centraliza o título */
     }
 }
 
@@ -86,32 +86,32 @@ mat-card-actions button:hover {
 
     /* ESTILOS PARA O CARD */
     .card {
-        margin-top: 1rem;
-        width: 100%; /* O cartão ocupa toda a largura disponível */
+        margin-top: 1rem; /* Adiciona margem superior ao card em telas muito pequenas */
+        width: 100%; /* O card ocupa toda a largura disponível */
     }
 
     /* ESTILO PARA A IMAGEM DO CARD */
     .card img {
-        display: none; /* Esconde a imagem em telas pequenas */
+        display: none; /* Esconde a imagem nas telas muito pequenas */
     }
 
     /* ESTILO PARA AÇÕES DO CARD */
     mat-card-actions {
-        flex-direction: column;
-        gap: 0.6rem;
-        margin-top: 1rem; /* Ajusta o espaçamento superior */
+        flex-direction: column; /* Alinha as ações em uma coluna em telas pequenas */
+        gap: 0.6rem; /* Reduz o espaçamento entre os botões */
+        margin-top: 1rem; /* Adiciona margem superior ao bloco de ações */
     }
 
     /* ESTILO PARA OS BOTÕES */
     mat-card-actions button {
-        width: 100%; /* Os botões ocupam toda a largura disponível */
-        text-align: center;
+        width: 100%; /* Faz os botões ocuparem 100% da largura disponível */
+        text-align: center; /* Centraliza o texto dentro dos botões */
         font-size: 1rem; /* Aumenta o tamanho da fonte para facilitar a leitura */
         padding: 0.6rem 1.2rem; /* Ajusta o padding para os botões */
     }
 
     /* ESTILO PARA O TÍTULO DO CARD */
     mat-card-title {   
-        display: none; /* Esconde o título nas telas menores */
+        display: none; /* Esconde o título do card nas telas menores */
     }
 }

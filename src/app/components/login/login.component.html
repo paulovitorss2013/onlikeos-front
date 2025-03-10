@@ -1,8 +1,12 @@
 <div class="container">
-    <form [formGroup]="loginForm" class="form mat-elevation-z8">
 
+   <!-- BLOCO PRINCIPAL DO FORMULÁRIO DE LOGIN -->
+    <form [formGroup]="loginForm" class="form mat-elevation-z8">
+        
+        <!-- TÍTULO PRINCIPAL DO FORMULÁRIO -->
         <h1>Onlike OS</h1>
 
+        <!-- IMAGEM DO FORMULÁRIO DE LOGIN -->
         <img src="assets/img/login-image.svg" alt="Seja Bem-vindo">
 
         <mat-form-field class="full-width" appearance="fill" name="email">
@@ -22,6 +26,7 @@
                 placeholder="Digite sua senha">
         </mat-form-field>
 
+        <!-- BLOCO DO BOTÃO DE SUBMISSÃO -->
         <button
         (click)="logar()"
         [disabled]="!loginForm.valid || loading"

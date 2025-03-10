@@ -16,6 +16,7 @@ export class NavComponent implements OnInit {
     private authService: AuthService,
     private toast:ToastrService) {}
   
+  // MÉTODO DE INICIALIZAÇÃO DO COMPONENTE
   ngOnInit(): void {
     this.router.navigate(['']) // DEFINE A PÁGINA INICIAL DO SISTEMA)
   }

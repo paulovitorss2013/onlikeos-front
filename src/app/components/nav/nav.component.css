@@ -1,74 +1,74 @@
 /* --------- AJUSTES PARA TELAS GRANDES --------- */
 
 .container {
-    height: 100%;
+    height: 100%; /* Garante que o container ocupe 100% da altura da tela */
 }
 
 .sidenav {
-    width: 13rem;
-    background: rgb(39, 141, 45);
+    width: 13rem; /* Define a largura da barra lateral (menu) */
+    background: rgb(39, 141, 45); /* Define a cor de fundo da barra lateral */
 }
 
 img {
-    width: 100%;
-    height: 12rem;
+    width: 100%; /* A imagem ocupa toda a largura disponível */
+    height: 12rem; /* A altura da imagem é fixada em 12rem */
 }
 
 .sidenav i {
-    margin: 1rem 0.5rem 1.5rem 0.2rem;
-    font-size: 1.254rem;
-    color: rgb(255, 255, 255);
+    margin: 1rem 0.5rem 1.5rem 0.2rem; /* Define o espaçamento das fontes na barra lateral */
+    font-size: 1.254rem; /* Define o tamanho da fonte dos ícones na barra lateral */
+    color: rgb(255, 255, 255); /* Define a cor dos ícones como branco */
 }
 
 .link-text {
-    font-size: 22.5px;
-    font-weight: 50;
-    color: rgb(255, 255, 255);
+    font-size: 22.5px; /* Define o tamanho da fonte do texto do link */
+    font-weight: 50; /* Define o peso da fonte do texto do link */
+    color: rgb(255, 255, 255); /* Define a cor do texto do link como branco */
 }
 
 .menu {
-    margin: 0.5rem 1rem 1rem 1rem;
-    color: white;
-    background-color: rgb(39, 141, 45);
+    margin: 0.5rem 1rem 1rem 1rem; /* Define o espaçamento ao redor do menu */
+    color: white; /* Define a cor do texto no menu como branco */
+    background-color: rgb(39, 141, 45); /* Define a cor de fundo do menu */
 }
 
-/* --------- AJUSTE RESPONSIVO PARA TELAS MENORES --------- */
+/* --------- AJUSTE RESPONSIVO PARA TELAS MENORES (MAX-WIDTH: 768PX)--------- */
 @media (max-width: 768px) {
 
     .container {
-        flex-direction: column;
+        flex-direction: column; /* Altera a direção do layout para coluna em telas menores */
     }
 
     .sidenav {
-        width: 2.6rem;
+        width: 2.6rem; /* Reduz a largura da barra lateral para 2.6rem em telas pequenas */
     }
 
     .sidenav-content {
-        flex: 1;
-        padding: 1rem;
+        flex: 1; /* Garante que o conteúdo da barra lateral ocupe todo o espaço disponível */
+        padding: 1rem; /* Adiciona padding ao conteúdo da barra lateral */
     }
 
     .sidenav img {
-        display: none;
+        display: none; /* Esconde a imagem da barra lateral em telas pequenas */
     }
 
     .sidenav .link-text {
-        display: none;
+        display: none; /* Esconde o texto dos links da barra lateral em telas pequenas */
     }
 
     .sidenav a {
-        padding: 1rem 0;
-        margin-top: 0.7rem;
+        padding: 1rem 0; /* Adiciona padding nos links da barra lateral */
+        margin-top: 0.7rem; /* Adiciona margem no topo dos links da barra lateral */
     }
 
     .sidenav i {
-        font-size: 1.9rem;
-        margin-right: 0;
-        margin-top: 1rem; /* Corrigido o valor 'rem' */
+        font-size: 1.9rem; /* Aumenta o tamanho dos ícones na barra lateral */
+        margin-right: 0; /* Remove a margem direita dos ícones */
+        margin-top: 1rem; /* Define uma margem no topo dos ícones */
     }
 
     .menu {
-        display: none;
+        display: none; /* Esconde o menu em telas pequenas */
     }
 }
 
@@ -76,21 +76,21 @@ img {
 @media (max-width: 480px) {
 
     .sidenav {
-        width: 2.2rem;
+        width: 2.2rem; /* Reduz a largura da barra lateral ainda mais em telas muito pequenas */
     }
 
     .sidenav i {
-        font-size: 1.6rem;
-        margin: 0.8rem auto;
-        display: block;
-        text-align: center;
+        font-size: 1.6rem; /* Diminui o tamanho dos ícones na barra lateral */
+        margin: 0.8rem auto; /* Adiciona margem ao redor dos ícones */
+        display: block; /* Exibe os ícones como blocos */
+        text-align: center; /* Centraliza os ícones */
     }
 
     .sidenav a {
-        padding: 0.6rem 0;
+        padding: 0.6rem 0; /* Ajusta o padding dos links da barra lateral */
     }
 
     .sidenav-content {
-        padding: 0.5rem;
+        padding: 0.5rem; /* Reduz o padding do conteúdo da barra lateral */
     }
 }
