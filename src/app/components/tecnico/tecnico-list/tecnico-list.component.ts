@@ -25,7 +25,6 @@ export class TecnicoListComponent implements OnInit {
     private service: TecnicoService,
     private paginatorIntl: MatPaginatorIntl
   ) {
-    
     this.paginatorIntl.itemsPerPageLabel = 'Itens por página:';
     this.paginatorIntl.firstPageLabel = 'Primeira página';
     this.paginatorIntl.previousPageLabel = 'Página anterior';
@@ -34,10 +33,11 @@ export class TecnicoListComponent implements OnInit {
     
     this.paginatorIntl.itemsPerPageLabel = ''; 
     this.paginatorIntl.getRangeLabel = (page: number, pageSize: number, length: number) => {
-      return `Exibindo ${length} técnicos encontrados`;
+      return `Total: ${length}`;
     };
   }
 
+  // INICIALIZAÇÃO DO COMPONENTE
   ngOnInit(): void {
     this.findAll();
   }
@@ -57,7 +57,6 @@ export class TecnicoListComponent implements OnInit {
       .replace(/[\u0300-\u036f]/g, '')
       .trim()
       .toLowerCase();
-  
     this.dataSource.filter = filterValue;
 
     // ATUALIZA O PAGINATOR APÓS A FILTRAGEM

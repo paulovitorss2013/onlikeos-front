@@ -34,7 +34,7 @@ export class ClienteListComponent implements OnInit {
 
     this.paginatorIntl.itemsPerPageLabel = '';
     this.paginatorIntl.getRangeLabel = (page: number, pageSize: number, length: number) => {
-      return `${length} cliente(s) encontrado(s)`;
+      return `Total: ${length}`;
     };
   }
 

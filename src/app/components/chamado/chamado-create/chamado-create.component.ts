@@ -28,6 +28,7 @@ export class ChamadoCreateComponent implements OnInit {
     nomeTecnico: '',
   }
 
+  // DECLARAÇÃO DOS ARRAYS DE CLIENTE E
   clientes: Cliente[] = [];
   tecnicos: Tecnico[] = [];
 
@@ -50,6 +51,7 @@ export class ChamadoCreateComponent implements OnInit {
     private router: Router
   ) {}
 
+  // INICIALIZAÇÃO DO COMPONENTE
   ngOnInit(): void {
     this.findAllClientes();
     this.findAllTecnicos();
@@ -90,11 +92,9 @@ create(): void {
   });
 }
 
-  // MÉTODO PARA CONFIRMAR O CANCELAMENTO DAS AÇÕES
-  confirmarCancelamento(): void {
-    if (window.confirm('Deseja mesmo cancelar?')) {
+  // MÉTODO CANCELAR AS AÇÕES
+  cancelar(): void {
       this.router.navigate(['chamados']);
-    }
   }
 
   // MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO

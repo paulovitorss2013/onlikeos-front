@@ -41,6 +41,7 @@ export class TecnicoCreateComponent implements OnInit {
     private router: Router
   ) {}
 
+  // INICIALIZAÇÃO DO COMPONENTE
   ngOnInit(): void {
     this.toastr.warning('Cadastrar um técnico requer privilégios de administrador.', 'Atenção!');
   }
@@ -58,18 +59,14 @@ export class TecnicoCreateComponent implements OnInit {
  // MÉTODO PARA CRIAR UM TÉCNICO
  create(): void {
   if (!this.validaCampos()) return;
-
   const tecnico: Tecnico = { ...this.form.value };
-
   this.service.create(tecnico).subscribe({
     next: () => {
       this.toastr.success('Técnico cadastrado com sucesso!', 'Cadastro');
       this.router.navigate(['tecnicos']);
     },
     error: (ex) => {
-      // Se for erro 403, não exibir outro toast
       if (ex.status === 403) return;
-
       if (ex.error.errors) {
         ex.error.errors.forEach((element: { message: string }) =>
           this.toastr.error(element.message)
@@ -81,11 +78,9 @@ export class TecnicoCreateComponent implements OnInit {
   });
 }
 
-  // MÉTODO PARA CONFIRMAR O CANCELAMENTO DAS AÇÕES
-  confirmarCancelamento(): void {
-    if (window.confirm('Deseja mesmo cancelar?')) {
+  // MÉTODO CANCELAR AS AÇÕES
+  cancelar(): void {
       this.router.navigate(['tecnicos']);
-    }
   }
 
   // MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO

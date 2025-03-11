@@ -16,7 +16,7 @@ export class NavComponent implements OnInit {
     private authService: AuthService,
     private toast:ToastrService) {}
   
-  // MÉTODO DE INICIALIZAÇÃO DO COMPONENTE
+  // INICIALIZAÇÃO DO COMPONENTE
   ngOnInit(): void {
     this.router.navigate(['']) // DEFINE A PÁGINA INICIAL DO SISTEMA)
   }
@@ -30,5 +30,5 @@ export class NavComponent implements OnInit {
       this.toast.info('Você saiu do sistema, até mais!', 'Logout', { timeOut: 4500 });
     }
   }
-
+  
 }

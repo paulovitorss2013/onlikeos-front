@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Cliente } from '../../../models/cliente';
@@ -16,7 +15,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './chamado-update.component.css'
 })
 export class ChamadoUpdateComponent implements OnInit {
-// INSTÂNCIA DO CHAMADO
+
+  // INSTÂNCIA DO CHAMADO
   chamado: Chamado = {
     prioridade: '',
     status: '',
@@ -28,6 +28,7 @@ export class ChamadoUpdateComponent implements OnInit {
     nomeTecnico: '',
   }
 
+  // DECLARAÇÃO DOS ARRAYS DE CLIENTE E TÉCNICOS
   clientes: Cliente[] = [];
   tecnicos: Tecnico[] = [];
 
@@ -51,13 +52,13 @@ export class ChamadoUpdateComponent implements OnInit {
     private route: ActivatedRoute,
   ) {}
 
+  // INICIALIZAÇÃO DO COMPONENTE
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.chamado.id = id;
       this.findById();
     }
-  
     this.findAllClientes();
     this.findAllTecnicos();
     this.syncChamadoComFormulario();
@@ -89,12 +90,10 @@ export class ChamadoUpdateComponent implements OnInit {
     this.chamadoService.findById(this.chamado.id).subscribe({
       next: (resposta) => {
         this.chamado = resposta;
-        
-        // Atualiza os valores no formulário reativo
         this.form.patchValue({
           titulo: this.chamado.titulo,
-          prioridade: this.chamado.prioridade.toString(), // Converte para string
-          status: this.chamado.status.toString(), // Converte para string
+          prioridade: this.chamado.prioridade.toString(), 
+          status: this.chamado.status.toString(),
           observacoes: this.chamado.observacoes,
           tecnico: this.chamado.tecnico,
           cliente: this.chamado.cliente
@@ -106,10 +105,9 @@ export class ChamadoUpdateComponent implements OnInit {
     });
   }
 
-
   // MÉTODO PARA CRIAR UM CHAMADO
   update(): void {
-    const chamadoAtualizado = { ...this.chamado, ...this.form.value }; // Atualiza com os valores do form
+    const chamadoAtualizado = { ...this.chamado, ...this.form.value };
   
     this.chamadoService.update(chamadoAtualizado).subscribe({
       next: () => {
@@ -122,12 +120,10 @@ export class ChamadoUpdateComponent implements OnInit {
     });
   }
 
-  // MÉTODO PARA CONFIRMAR O CANCELAMENTO DAS AÇÕES
-  confirmarCancelamento(): void {
-    if (window.confirm('Deseja mesmo cancelar?')) {
-      this.router.navigate(['chamados']);
-    }
-  }
+  // MÉTODO CANCELAR AS AÇÕES
+  cancelar(): void {
+    this.router.navigate(['chamados']);
+}
 
   // MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO
   validaCampos(): boolean {

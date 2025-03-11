@@ -1,8 +1,13 @@
+<!-- CONTAINER PRINCIPAL -->
 <div class="container">
+
+  <!-- TÍTULO DA PÁGINA -->
   <h1>Listando os Técnicos</h1>
 
+  <!-- BOTÃO PARA CRIAR UM TÉCNICO -->
   <button mat-button routerLink="create">CRIAR NOVO</button>
 
+  <!-- CAMPO DE PESQUISA -->
   <mat-form-field>
     <mat-label>Pesquisar</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Nome, CPF, e-mail e etc ..." #input>
@@ -11,6 +16,7 @@
   <mat-paginator [pageSizeOptions]="[200, 20, 50, 100]" showFirstLastButtons>
   </mat-paginator>
 
+  <!-- TABELA -->
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="nome">

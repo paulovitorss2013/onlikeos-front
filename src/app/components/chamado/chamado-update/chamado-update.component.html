@@ -1,7 +1,10 @@
+<!-- CONTAINER PRINCIPAL -->
 <div class="container mat-elevation-z8">
 
+  <!-- TÍTULO DA PÁGINA -->
     <h1>Alterar Chamado</h1>
-  
+
+    <!-- FORMULÁRIO -->
     <form class="form" [formGroup]="form">
   
       <mat-form-field class="full-width" appearance="outline">
@@ -59,9 +62,10 @@
           maxlength="1000">
         </textarea>
       </mat-form-field>
-  
+      
+      <!-- BOTÕES DE AÇÃO -->
       <button (click)="update()" [disabled]="!validaCampos()" mat-button class="btn-atualizar">ATUALIZAR</button>
-      <button mat-button class="btn-cancelar" (click)="confirmarCancelamento()">CANCELAR</button>
+      <button mat-button class="btn-cancelar" (click)="cancelar()">CANCELAR</button>
   
     </form>
   

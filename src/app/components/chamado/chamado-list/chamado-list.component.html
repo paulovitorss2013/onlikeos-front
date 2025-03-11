@@ -1,17 +1,20 @@
+<!-- CONTAINER PRINCIPAL -->
 <div class="container">
+
+  <!-- CONTAINER DO TÍTULO DA PÁGINA -->
   <div class="header-container">
     <h1>Listando os Chamados</h1>
     <button mat-button routerLink="">MEUS CHAMADOS</button>
     <button mat-button (click)="toggleFiltros()">FILTROS</button>
   </div>
  
-  
+  <!-- CAMPO DE PESQUISA -->
   <mat-form-field>
     <mat-label>Pesquisar</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Nome do Técnico, nome do cliente ..." #input>
   </mat-form-field>
   
-
+  <!-- FILTROS PERSONALIZADOS -->
   <table class="filtros-container" *ngIf="mostrarFiltros">
     <tr>
       <td class="filter-row">
@@ -39,8 +42,10 @@
 
   <mat-paginator [pageSizeOptions]="[200, 50, 100]" showFirstLastButtons></mat-paginator>
 
+  <!-- TABELA -->
   <div class="mat-elevation-z8">
     
+    <!-- BOTÃO PARA CRIAR NOVO CHAMADO -->
     <button mat-button routerLink="create">ABRIR NOVO</button>
 
     <table mat-table [dataSource]="dataSource">

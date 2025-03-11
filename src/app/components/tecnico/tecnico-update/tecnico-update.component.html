@@ -1,6 +1,10 @@
+<!-- CONTAINER PRINCIPAL -->
 <div class="container mat-elevation-z8">
+  
+    <!-- TÍTULO DA PÁGINA -->
   <h1>Exibir ou Alterar Técnico</h1>
 
+  <!-- FORMULÁRIO -->
   <form class="form" [formGroup]="form">
 
     <section>
@@ -50,9 +54,9 @@
         type="password">
     </mat-form-field>
 
+    <!-- BOTÕES DE AÇÃO -->
     <button (click)="update()" [disabled]="!validaCampos()" mat-button class="btn-atualizar">ATUALIZAR</button>
-
-    <button mat-button class="btn-cancelar" (click)="confirmarCancelamento()">CANCELAR</button>
+    <button mat-button class="btn-cancelar" (click)="cancelar()">CANCELAR</button>
 
    </form>
 

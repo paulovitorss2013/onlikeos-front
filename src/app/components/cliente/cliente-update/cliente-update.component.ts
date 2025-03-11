@@ -124,11 +124,11 @@ export class ClienteUpdateComponent implements OnInit {
     const tipo = this.form.get('tipoCliente')?.value;
   
     if (tipo === 'Pessoa Física') {
-      this.cpfCnpjMask = '000.000.000-00'; // MÁSCARA PARA CPF
-      this.form.get('cpfCnpj')?.setValue(''); // LIMPA O CAMPO DE CPF/CNPJ
+      this.cpfCnpjMask = '000.000.000-00';
+      this.form.get('cpfCnpj')?.setValue('');
     } else if (tipo === 'Pessoa Jurídica') {
-      this.cpfCnpjMask = '00.000.000/0000-00'; // MÁSCARA PARA CNPJ
-      this.form.get('cpfCnpj')?.setValue(''); // LIMPA O CAMPO DE CPF/CNPJ
+      this.cpfCnpjMask = '00.000.000/0000-00';
+      this.form.get('cpfCnpj')?.setValue('');
     }
   }
 
@@ -171,12 +171,10 @@ export class ClienteUpdateComponent implements OnInit {
     });
   }
   
-  // MÉTÓDO CONFIRMAR O CANCELAMENTO DAS AÇÕES
-  confirmarCancelamento(): void {
-    if (window.confirm('Sair sem salvar as alterações?')) {
-      this.router.navigate(['clientes']);
-    }
-  }
+  // MÉTODO PARA CANCELAR AS AÇÕES
+  cancelar(): void {
+    this.router.navigate(['clientes']);
+}
 
   // MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO
   validaCampos(): boolean {

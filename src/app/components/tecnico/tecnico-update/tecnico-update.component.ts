@@ -44,10 +44,9 @@ export class TecnicoUpdateComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
+  // INICIALIZAÇÃO DO COMPONENTE
   ngOnInit(): void {
-    
     this.toastr.warning('Atualizar um técnico requer privilégios de administrador.', 'Atenção!');
-
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.tecnico.id = id;
@@ -147,14 +146,10 @@ export class TecnicoUpdateComponent implements OnInit {
     });
   }
   
-
-  
-  // MÉTÓDO CONFIRMAR O CANCELAMENTO DAS AÇÕES
-  confirmarCancelamento(): void {
-    if (window.confirm('Sair sem salvar as alterações?')) {
-      this.router.navigate(['tecnicos']);
-    }
-  }
+// MÉTODO CANCELAR AS AÇÕES
+cancelar(): void {
+  this.router.navigate(['tecnicos']);
+}
 
   // MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO
   validaCampos(): boolean {

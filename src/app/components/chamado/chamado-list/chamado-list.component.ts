@@ -19,6 +19,7 @@ export class ChamadoListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'cliente', 'tecnico', 'prioridade', 'status', 'acoes'];
   dataSource = new MatTableDataSource<Chamado>(this.ELEMENT_DATA);
 
+  // REFERÊNCIA DO PAGINATOR
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   // FILTROS SELECIONADOS
@@ -26,16 +27,16 @@ export class ChamadoListComponent implements OnInit {
   selectedPrioridade: number | null = null;
   filterText: string = '';
 
+  // INICIALIZAÇÃO DO FILTRO OCULTO
   mostrarFiltros: boolean = false;
 
+  // VISIBILIDADE DO FILTRO
   toggleFiltros(): void {
     this.mostrarFiltros = !this.mostrarFiltros;
   }
 
   // CONSTRUTOR
   constructor(private service: ChamadoService, private paginatorIntl: MatPaginatorIntl) {
-
-     
     this.paginatorIntl.itemsPerPageLabel = 'Itens por página:';
     this.paginatorIntl.firstPageLabel = 'Primeira página';
     this.paginatorIntl.previousPageLabel = 'Página anterior';
@@ -44,17 +45,15 @@ export class ChamadoListComponent implements OnInit {
     
     this.paginatorIntl.itemsPerPageLabel = '';
     this.paginatorIntl.getRangeLabel = (page: number, pageSize: number, length: number) => {
-      return `${length} chamado(s) encontrado(s)`;
+      return `Total: ${length}  `;
     };
   }
 
+  // INICIALIZAÇÃO DO COMPONENTE
   ngOnInit(): void {
     this.findAll();
-    
-    // Define um filtro personalizado
     this.dataSource.filterPredicate = (data: Chamado, filter: string) => {
       filter = filter.trim().toLowerCase();
-  
       return (
         data.id.toString().includes(filter) ||
         data.titulo.toLowerCase().includes(filter) ||
@@ -67,7 +66,7 @@ export class ChamadoListComponent implements OnInit {
     };
   }
 
-  // BUSCA TODOS OS CHAMADOS
+  // MÉTODO PARA BUSCAR TODOS OS CHAMADOS
   findAll(): void {
     this.service.findAll().subscribe(resposta => {
       this.ELEMENT_DATA = resposta;
@@ -82,25 +81,23 @@ export class ChamadoListComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  // APLICA OS FILTROS SELECIONADOS
+  // MÉTODO PARA APLICAR OS FILTROS SELECIONADOS
   applyFilters(): void {
     this.FILTERED_DATA = this.ELEMENT_DATA.filter(element => {
       const matchesStatus = this.selectedStatus === null || Number(element.status) === this.selectedStatus;
       const matchesPrioridade = this.selectedPrioridade === null || this.selectedPrioridade === Number(element.prioridade);
   
-      // Função para remover acentos
+      // TRATA OS ACENTOS
       const normalizeText = (text: string) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-  
+      
       const matchesText = this.filterText === '' ||
         normalizeText(element.titulo).includes(normalizeText(this.filterText)) ||
         normalizeText(element.nomeCliente).includes(normalizeText(this.filterText)) ||
         normalizeText(element.nomeTecnico).includes(normalizeText(this.filterText)) ||
         normalizeText(this.retornaStatus(element.status)).includes(normalizeText(this.filterText)) ||
         normalizeText(this.retornaPrioridade(element.prioridade)).includes(normalizeText(this.filterText));
-  
       return matchesStatus && matchesPrioridade && matchesText;
     });
-  
     this.updateDataSource();
   }
 

@@ -46,9 +46,7 @@ export class TecnicoDeleteComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
     this.toastr.warning('Deletar um técnico requer privilégios de administrador.', 'Atenção!');
-
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.tecnico.id = id;
@@ -111,10 +109,10 @@ export class TecnicoDeleteComponent implements OnInit {
   }
   
 
-  // MÉTÓDO CONFIRMAR O CANCELAMENTO DAS AÇÕES
-  confirmarCancelamento(): void {
-    if (window.confirm('Sair sem deletar o técnico?')) {
-      this.router.navigate(['tecnicos']);
-    }
+  /// MÉTODO CANCELAR AS AÇÕES
+  cancelar(): void {
+    this.router.navigate(['tecnicos']);
   }
+  
 }
+

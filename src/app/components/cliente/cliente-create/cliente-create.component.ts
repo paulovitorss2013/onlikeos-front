@@ -82,12 +82,14 @@ export class ClienteCreateComponent implements OnInit {
     tipoCliente: new FormControl('Pessoa Física', [Validators.required])
   });
 
+  // CONSTRUTOR
   constructor(
     private service: ClienteService,
     private toastr: ToastrService,
     private router: Router
   ) {}
 
+  // INICIALIZAÇÃO DO COMPONENTE
   ngOnInit(): void {
     this.onTipoClienteChange(); // APLICA A MÁSCARA CORRETA NO INÍCIO
   }
@@ -122,11 +124,9 @@ export class ClienteCreateComponent implements OnInit {
     });
   }
 
-  // MÉTODO PARA CONFIRMAR O CANCELAMENTO DAS AÇÕES
-  confirmarCancelamento(): void {
-    if (window.confirm('Deseja mesmo cancelar?')) {
+  // MÉTODO PARA CANCELAR AS AÇÕES
+  cancelar(): void {
       this.router.navigate(['clientes']);
-    }
   }
 
   // MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO

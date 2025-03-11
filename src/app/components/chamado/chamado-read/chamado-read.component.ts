@@ -48,7 +48,7 @@ export class ChamadoReadComponent implements OnInit {
     private route: ActivatedRoute,
   ) {}
 
-  // MÉTODO DE INICIALIZAÇÃO
+  // INICIALIZAÇÃO DO COMPONENTE
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
@@ -62,7 +62,6 @@ export class ChamadoReadComponent implements OnInit {
     this.chamadoService.findById(this.chamado.id).subscribe({
       next: (resposta) => {
         this.chamado = resposta;
-  
         this.form.patchValue({
           titulo: this.chamado.titulo,
           dataAbertura: this.chamado.dataAbertura,

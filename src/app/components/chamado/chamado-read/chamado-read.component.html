@@ -1,6 +1,10 @@
+<!-- CONTAINER PRINCIPAL -->
 <div class="container mat-elevation-z8">
+  
+  <!-- TÍTULO DA PÁGINA -->
   <h1>Visualizar Chamado</h1>
 
+  <!-- FORMULÁRIO -->
   <form class="form" [formGroup]="form">
 
     <mat-form-field class="full-width" appearance="outline">
@@ -13,9 +17,7 @@
       <input matInput formControlName="dataAbertura" readonly title="Data Abertura">
     </mat-form-field>
 
-  
     <div class="status-prioridade">
-      <!-- Status -->
       <mat-form-field>
         <mat-label>Status</mat-label>
         <mat-select formControlName="status" class="readonly-select" title="Status do chamado">
@@ -25,7 +27,6 @@
         </mat-select>
       </mat-form-field>
 
-      <!-- Prioridade -->
       <mat-form-field>
         <mat-label>Prioridade</mat-label>
         <mat-select formControlName="prioridade" class="readonly-select" title="Prioridade do chamado">
@@ -36,25 +37,21 @@
       </mat-form-field>
     </div>
 
-    <!-- Técnico Responsável -->
     <mat-form-field class="full-width">
       <mat-label>Técnico Responsável</mat-label>
       <input matInput formControlName="tecnico" readonly title="Nome do técnico responsável">
     </mat-form-field>
 
-    <!-- Cliente -->
     <mat-form-field class="full-width">
       <mat-label>Cliente</mat-label>
       <input matInput formControlName="cliente" readonly title="Nome do cliente">
     </mat-form-field>
 
-    <!-- Data de Fechamento -->
     <mat-form-field class="full-width" appearance="outline">
       <mat-label>Data Fechamento</mat-label>
       <input matInput formControlName="dataFechamento" readonly title="Data Fechamento">
     </mat-form-field>
 
-    <!-- Relato sobre o chamado -->
     <mat-form-field class="full-width observacoes" appearance="outline">
       <mat-label>Relato sobre o chamado</mat-label>
       <textarea matInput formControlName="observacoes" readonly
@@ -63,7 +60,7 @@
       </textarea>
     </mat-form-field>
 
-    <!-- Botão Voltar -->
+    <!-- BOTÃO VOLTAR -->
     <div class="button-container">
       <button mat-button class="btn-voltar" (click)="voltar()">VOLTAR</button>
     </div>

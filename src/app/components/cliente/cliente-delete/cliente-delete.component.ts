@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ClienteService } from '../../../services/cliente.service';
 import { Cliente } from '../../../models/cliente';
 import { ToastrService } from 'ngx-toastr';
@@ -74,6 +74,7 @@ export class ClienteDeleteComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
+  // INICIALIZAÇÃO DO COMPONENTE
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
@@ -98,7 +99,6 @@ export class ClienteDeleteComponent implements OnInit {
           this.cpfCnpjMask = '00.000.000/0000-00';
           this.tipoCliente = 'Pessoa Jurídica'; 
         }
-   
         this.form.patchValue({
           nome: resposta.nome,
           cpfCnpj: resposta.cpfCnpj,
@@ -124,7 +124,6 @@ export class ClienteDeleteComponent implements OnInit {
   // MÉTODO PARA ALTERAR A MÁSCARA DE CPF/CNPJ COM BASE NA SELEÇÃO DO TIPO DE CLIENTE
   onTipoClienteChange(): void {
     const tipo = this.form.get('tipoCliente')?.value;
-  
     if (tipo === 'Pessoa Física') {
       this.cpfCnpjMask = '000.000.000-00';
       this.form.get('cpfCnpj')?.setValue('');
@@ -136,30 +135,32 @@ export class ClienteDeleteComponent implements OnInit {
 
   // MÉTODO PARA DELETAR O CLIENTE
   delete(): void {
-    this.service.delete(this.cliente.id).pipe(
-      tap(() => {
-        this.toastr.success('Cliente deletado com sucesso!', 'Delete');
-        this.router.navigate(['clientes']);
-      }),
-      catchError((error) => {
-        if (error?.error?.errors) {
-          error.error.errors.forEach((element: { message: string }) =>
-            this.toastr.error(element.message)
-          );
-        } else if (error?.error?.message) {
-          this.toastr.error(error.error.message);
-        } else {
-          this.toastr.error('Erro desconhecido ao deletar o cliente.');
-        }
-        return of(null);
-      })
-    ).subscribe();
-  }
-  
-  // MÉTODO PARA CONFIRMAR O CANCELAMENTO DAS AÇÕES
-  confirmarCancelamento(): void {
-    if (window.confirm('Sair sem deletar o cliente?')) {
-      this.router.navigate(['clientes']);
+    const confirmar = window.confirm('Deseja mesmo deletar o cliente?');
+    if (confirmar) {
+      this.service.delete(this.cliente.id).pipe(
+        tap(() => {
+          this.toastr.success('Cliente deletado com sucesso!', 'Delete');
+          this.router.navigate(['clientes']);
+        }),
+        catchError((error) => {
+          if (error?.error?.errors) {
+            error.error.errors.forEach((element: { message: string }) =>
+              this.toastr.error(element.message)
+            );
+          } else if (error?.error?.message) {
+            this.toastr.error(error.error.message);
+          } else {
+            this.toastr.error('Erro desconhecido ao deletar o cliente.');
+          }
+          return of(null);
+        })
+      ).subscribe();
     }
   }
+  
+  // MÉTODO PARA CANCELAR AS AÇÕES
+  cancelar(): void {
+    this.router.navigate(['clientes']);
+  }
+
 }
