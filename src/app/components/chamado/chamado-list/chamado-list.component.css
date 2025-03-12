@@ -1,96 +1,154 @@
-/* --------- AJUSTES PARA TELAS GRANDES --------- */
+/* --------- ESTILOS GERAIS --------- */
 
-/* ESTILIZA A CLASSE .CONTAINER */
 .container {
-    width: 90%; /* DEFINE A LARGURA DO CONTAINER PARA OCUPAR 90% DA TELA */
-    margin: auto; /* CENTRALIZA O CONTAINER HORIZONTALMENTE */
-}
-
-/* ESTILIZA A TABELA */
-table {
-    width: 100%; /* FAZ A TABELA OCUPAR TODA A LARGURA DISPONÍVEL DO CONTAINER */
-}
-
-/* DEFINE O CAMPO DE FORMULÁRIO DO ANGULAR MATERIAL */
-mat-form-field {
-    width: 100%; /* FAZ O CAMPO DE FORMULÁRIO OCUPAR TODA A LARGURA DISPONÍVEL */
-}
-
-/* ESTILO PARA OS BOTÕES */
-button {
-    background-color: rgb(39, 141, 45); /* DEFINE UM TOM VERDE ESCURO PARA O FUNDO DO BOTÃO */
-    color: white; /* DEFINE A COR DO TEXTO COMO BRANCO */
-    border-radius: 5px; /* ARREDONDA AS BORDAS DO BOTÃO */
-    padding: 0.5rem 1.5rem; /* DEFINE O ESPAÇAMENTO INTERNO DO BOTÃO (VERTICAL E HORIZONTAL) */
-    font-size: 0.8rem; /* AJUSTA O TAMANHO DA FONTE */
-    cursor: pointer; /* ALTERA O CURSOR PARA INDICAR QUE O BOTÃO É CLICÁVEL */
-    margin: 0 1.5rem 1.5rem 0; /* ADICIONA ESPAÇAMENTO EXTERNO À DIREITA E ABAIXO DO BOTÃO */
-}
-
-/* ESTILIZA O TÍTULO PRINCIPAL (H1) */
-h1 {
-    width: 100%; /* FAZ O TÍTULO OCUPAR TODA A LARGURA DISPONÍVEL */
-    text-align: center; /* CENTRALIZA O TEXTO */
-    margin-bottom: 1.5rem; /* ESPAÇAMENTO INFERIOR PARA SEPARAR O TÍTULO DOS OUTROS ELEMENTOS */
-}
-
-/* ESTILIZA O ÍCONE VISUALIZAR */
-.edit {
-    color: rgb(39, 141, 45);
-    margin-right: 1rem; /* ADICIONA ESPAÇO À DIREITA */
-}
-
-/* ESTILIZA O CONTAINER DOS FILTROS */
-.filtros-container {
-    width: 100%;
-    text-align: left; /* ALINHA OS FILTROS À ESQUERDA */
-    margin-bottom: 1rem; /* ADICIONA UM ESPAÇAMENTO EXTRA ABAIXO DOS FILTROS */
-}
-
-/* FORMATAÇÃO DO BLOCO DE FILTROS */
-.filter-row {
-    display: flex;
-    flex-direction: column; /* MANTÉM O TÍTULO EM CIMA E OS BOTÕES ABAIXO */
-    align-items: flex-start; /* ALINHA TUDO À ESQUERDA */
-    margin-bottom: 1rem; /* ESPAÇO ENTRE OS FILTROS */
-}
-
-/* ESTILIZA O TÍTULO DOS FILTROS */
-.filtro-titulo {
-    font-weight: bold; /* TEXTO EM NEGRITO */
-    margin-bottom: 0.3rem; /* REDUZ O ESPAÇAMENTO ABAIXO DO TÍTULO */
-}
-
-/* ESTILIZA O GRUPO DE RADIO BUTTONS */
-.radio-group {
-    display: flex;
-    gap: 1rem; /* ADICIONA ESPAÇO ENTRE OS RADIO BUTTONS */
-}
-
-/* ESTILIZAÇÃO DOS RADIO BUTTONS */
-mat-radio-button {
-    display: flex;
-    align-items: center; /* MANTÉM ALINHADO VERTICALMENTE */
-    gap: 2rem; /* APROXIMA O TEXTO DO BOTÃO */
-    padding: 1px; /* ADICIONA UM PEQUENO ESPAÇO AO REDOR DO BOTÃO */
-    border-radius: 5px; /* ARREDONDA LEVEMENTE OS CANTOS DO ESPAÇO AO REDOR DO BOTÃO */
-}
-
-.edit {
-    color: rgb(39, 141, 45) !important; /* Força a cor verde no ícone */
-    margin-right: 1rem;
-}
-
-/* CHAMADOS ABERTOS - VERMELHO */
-.status-aberto {
-    color: red !important;
-}
-
-/* CHAMADOS ENCERRADOS - VERDE */
-.status-encerrado {
-    color: green !important;
-}
-
-header.container{
+    width: 90%;
+    max-width: 1200px;
     margin: auto;
+    overflow-x: auto;
+}
+
+mat-form-field {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 1rem;
+}
+
+/* ESTILIZAÇÃO DA TABELA */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+    white-space: nowrap;
+}
+
+/* CABEÇALHOS DA TABELA */
+th {
+    background-color: #f4f4f4;
+    text-align: left;
+    padding: 10px;
+}
+
+/* CÉLULAS DA TABELA */
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* BOTÕES */
+button {
+    background-color: rgb(39, 141, 45);
+    color: white !important;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    margin: 0 0.5rem;
+}
+
+/* BOTÕES DENTRO DA TABELA */
+td button {
+    width: auto;
+    min-width: 80px;
+}
+
+/* ÍCONE EDITAR E EXIBIR */
+.edit, .view {
+    color: rgb(39, 141, 45) !important;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    text-decoration: none;
+}
+
+/* --------- AJUSTES PARA TELAS PEQUENAS --------- */
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    th:not(:first-child):not(:nth-child(2)):not(:last-child),
+    td:not(:first-child):not(:nth-child(2)):not(:last-child) {
+        display: none;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    button {
+        width: 100%;
+        margin: 5px 0;
+        padding: 0.6rem;
+    }
+
+    mat-form-field {
+        width: 100% !important;
+        max-width: 100%;
+    }
+
+    .filtros-container {
+        width: 100%;
+    }
+
+    /* Ajustes para o grupo de rádio */
+    .radio-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.2rem; /* Diminui o espaço entre os radio buttons */
+        margin: 0; /* Remove a margem extra */
+    }
+
+    mat-radio-button {
+        padding: 4px 8px; /* Ajusta o padding para um tamanho menor */
+        font-size: 0.7rem; /* Reduz o tamanho da fonte */
+        margin-right: 0.3rem; /* Reduz o espaçamento horizontal */
+        height: 24px; /* Define uma altura fixa para os radio buttons */
+        min-height: 24px; /* Garante que o tamanho mínimo do radio button seja 24px */
+    }
+
+    mat-radio-button .mat-radio-label {
+        margin-left: 0.2rem; /* Menor margem entre o ícone e o texto */
+    }
+}
+
+@media (max-width: 480px) {
+    table {
+        font-size: 0.8rem;
+    }
+
+    button {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+    }
+
+    .mat-elevation-z8 button {
+        font-size: 0.7rem;
+        padding: 0.5rem 1rem;
+    }
+
+    mat-form-field {
+        width: 100% !important;
+    }
+
+    /* Ajustes para os radio buttons em telas ainda menores */
+    .radio-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.2rem; /* Diminui o espaço ainda mais */
+        margin: 0; /* Remove a margem extra */
+    }
+
+    mat-radio-button {
+        padding: 3px 6px; /* Reduz ainda mais o padding */
+        font-size: 0.7rem; /* Reduz ainda mais o tamanho da fonte */
+        margin-right: 0.3rem; /* Menos margem */
+        height: 20px; /* Menor altura para os radio buttons */
+        min-height: 20px; /* Garante altura mínima de 20px */
+    }
+
+    mat-radio-button .mat-radio-label {
+        margin-left: 0.1rem; /* Minimiza o espaço entre o ícone e o texto */
+    }
 }

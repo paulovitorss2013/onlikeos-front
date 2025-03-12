@@ -1,100 +1,127 @@
-/* Define o layout principal */
+/* --------- AJUSTES PARA TELAS GRANDES --------- */
+
+/* ESTILIZA O CONTAINER PRINCIPAL */
 .container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 16px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
+  max-width: 600px; /* Define a largura máxima do container */
+  margin: 0 auto; /* Centraliza o container na tela */
+  padding: 16px; /* Adiciona espaçamento interno */
+  box-sizing: border-box; /* Mantém o tamanho total incluindo padding e border */
+  display: flex; /* Usa flexbox para organização */
+  flex-direction: column; /* Alinha os itens em coluna */
 }
 
-/* Estiliza o formulário */
+/* ESTILIZA O FORMULÁRIO */
 .form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 100%;
+  display: flex; /* Usa flexbox para organização */
+  flex-direction: column; /* Alinha os itens em coluna */
+  gap: 16px; /* Adiciona espaçamento entre os campos */
+  width: 100%; /* Faz o formulário ocupar toda a largura disponível */
 }
 
-/* Centraliza o título */
+/* CENTRALIZA O TÍTULO */
 h1 {
-  width: 100%;
-  text-align: center;
-  margin-bottom: 1.5rem;
+  width: 100%; /* Faz o título ocupar toda a largura */
+  text-align: center; /* Centraliza o texto */
+  margin-bottom: 1.5rem; /* Adiciona espaçamento inferior */
 }
 
-/* Define largura total para os campos */
+/* DEFINE LARGURA TOTAL PARA OS CAMPOS */
 .full-width {
-  width: 100%;
+  width: 100%; /* Faz os elementos ocuparem toda a largura disponível */
 }
 
-/* Estiliza o container de status e prioridade */
+/* CONTAINER DE STATUS E PRIORIDADE */
 .status-prioridade {
-  display: flex;
-  justify-content: space-between;
-}
-
-.status-prioridade mat-form-field {
-  width: 49%;
+  display: flex; /* Usa flexbox para organização */
+  flex-direction: column; /* Alinha os itens em coluna */
+  gap: 16px; /* Adiciona espaçamento entre os elementos */
 }
 
 /* CONTAINER PARA O CAMPO DE OBSERVAÇÕES */
 .observacoes-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  display: flex; /* Usa flexbox para organização */
+  flex-direction: column; /* Alinha os itens em coluna */
+  width: 100%; /* Faz o container ocupar toda a largura */
 }
 
-/* Ajuste do tamanho do campo de observações */
+/* AJUSTE DO TAMANHO DO CAMPO DE OBSERVAÇÕES */
 .mat-form-field.observacoes {
-  width: 100%;
+  width: 100%; /* Faz o campo ocupar toda a largura */
 }
 
 textarea {
-  min-height: 120px; /* Altura mínima */
-  max-height: 200px; /* Altura máxima */
+  min-height: 120px; /* Define a altura mínima do campo */
+  max-height: 200px; /* Define a altura máxima do campo */
   resize: vertical; /* Permite ajuste de tamanho vertical */
-  overflow-y: auto; /* Adiciona rolagem caso ultrapasse o máximo */
-  width: 100%;
+  overflow-y: auto; /* Adiciona rolagem vertical se necessário */
+  width: 100%; /* Faz o campo ocupar toda a largura */
 }
 
 /* CONTAINER PARA OS BOTÕES */
 .button-container {
-  display: flex;
-  flex-direction: column; /* Botões um abaixo do outro */
-  gap: 1rem;
-  margin-top: 1rem;
+  display: flex; /* Usa flexbox para organização */
+  flex-direction: column; /* Alinha os botões um abaixo do outro */
+  gap: 1rem; /* Adiciona espaçamento entre os botões */
+  margin-top: 1rem; /* Adiciona espaçamento superior */
 }
 
 /* ESTILIZAÇÃO DOS BOTÕES */
 button.btn-criar,
 button.btn-cancelar {
-  width: 100%; /* Botões ocupam 100% da largura */
-  padding: 0.75rem; /* Ajusta o espaçamento interno */
-  font-size: 1rem;
-  text-align: center;
-  border: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  cursor: pointer;
+  width: 100%; /* Faz os botões ocuparem toda a largura disponível */
+  padding: 0.75rem; /* Adiciona espaçamento interno */
+  font-size: 1rem; /* Define o tamanho da fonte */
+  text-align: center; /* Centraliza o texto */
+  border: none; /* Remove a borda */
+  border-radius: 5px; /* Arredonda as bordas */
+  transition: background-color 0.3s ease; /* Adiciona transição suave */
+  cursor: pointer; /* Altera o cursor para indicar clique */
 }
 
 /* ESTILO PARA O BOTÃO "CRIAR" */
 button.btn-criar {
-  background-color: rgb(39, 141, 45);
-  color: white;
+  background-color: rgb(39, 141, 45); /* Define a cor de fundo */
+  color: white; /* Define a cor do texto */
 }
 
 /* ESTILO PARA O BOTÃO "CRIAR" QUANDO DESABILITADO */
 .btn-criar:disabled {
-  background-color: rgb(200, 200, 200);
-  color: rgb(100, 100, 100);
-  cursor: not-allowed;
-  opacity: 0.7;
+  background-color: rgb(200, 200, 200); /* Altera a cor de fundo */
+  color: rgb(100, 100, 100); /* Altera a cor do texto */
+  cursor: not-allowed; /* Altera o cursor para indicar que não pode ser clicado */
+  opacity: 0.7; /* Reduz a opacidade */
 }
 
 /* ESTILO PARA O BOTÃO "CANCELAR" */
 button.btn-cancelar {
-  background-color: rgb(207, 80, 63);
-  color: white;
+  background-color: rgb(207, 80, 63); /* Define a cor de fundo */
+  color: white; /* Define a cor do texto */
+}
+
+/* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
+@media (min-width: 768px) {
+  .status-prioridade {
+    flex-direction: row; /* Em telas maiores, os campos ficam lado a lado */
+  }
+
+  .status-prioridade mat-form-field {
+    width: 49%; /* Define largura para os campos quando lado a lado */
+  }
+}
+
+/* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 480px --------- */
+@media (max-width: 480px) {
+  .container {
+    width: 100%; /* Faz o container ocupar toda a largura da tela */
+    padding: 8px; /* Reduz o espaçamento interno */
+  }
+
+  .button-container {
+    flex-direction: column; /* Mantém os botões um abaixo do outro */
+    gap: 0.5rem; /* Reduz o espaçamento entre os botões */
+  }
+
+  .status-prioridade mat-form-field {
+    width: 100%; /* Faz os campos ocuparem toda a largura */
+  }
 }

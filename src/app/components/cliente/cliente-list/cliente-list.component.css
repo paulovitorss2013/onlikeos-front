@@ -19,7 +19,7 @@ mat-form-field {
 /* ESTILO PARA OS BOTÕES */
 button {
     background-color: rgb(39, 141, 45); /* Define um tom verde escuro para o fundo do botão */
-    color: rgb(255, 255, 255); /* Define a cor do texto como branco e usa !important para garantir que não seja sobrescrito */
+    color: rgb(255, 255, 255)!important; /* Define a cor do texto como branco e usa !important para garantir que não seja sobrescrito */
     border-radius: 5px; /* Arredonda as bordas do botão */
     padding: 0.5rem 1.5rem; /* Define o espaçamento interno do botão (vertical e horizontal) */
     font-size: 0.8rem; /* Ajusta o tamanho da fonte */

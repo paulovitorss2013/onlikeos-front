@@ -1,69 +1,72 @@
-/* Define o layout principal */
+/* --------- AJUSTES PARA TELAS GRANDES --------- */
+
+/* ESTILIZA O CONTAINER PRINCIPAL */
 .container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 16px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
+  max-width: 600px; /* Largura máxima para telas grandes */
+  margin: 0 auto; /* Centraliza o container */
+  padding: 16px; /* Espaçamento interno */
+  box-sizing: border-box; /* Inclui padding no cálculo da largura */
+  display: flex; /* Usado para layout flexível */
+  flex-direction: column; /* Coloca os itens em coluna */
 }
 
-/* Estiliza o formulário */
+/* ESTILIZA O FORMULÁRIO */
 .form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 100%;
+  display: flex; /* Layout flexível */
+  flex-direction: column; /* Coloca os itens do formulário em coluna */
+  gap: 16px; /* Espaçamento entre os elementos */
+  width: 100%; /* Largura total disponível */
 }
 
-/* Centraliza o título */
+/* ESTILIZA O TÍTULO H1 */
 h1 {
-  width: 100%;
-  text-align: center;
-  margin-bottom: 1.5rem;
+  width: 100%; /* Largura total */
+  text-align: center; /* Centraliza o texto */
+  margin-bottom: 1.5rem; /* Espaçamento abaixo do título */
 }
 
-/* Define largura total para os campos */
+/* LARGURA TOTAL PARA OS CAMPOS */
 .full-width {
-  width: 100%;
+  width: 100%; /* Largura total para campos */
 }
 
-/* Estiliza o container de status e prioridade */
+/* ESTILIZA O CONTAINER DE STATUS E PRIORIDADE */
 .status-prioridade {
-  display: flex;
-  justify-content: space-between;
+  display: flex; /* Usado para layout flexível */
+  justify-content: space-between; /* Espaça os itens igualmente */
+  flex-direction: column; /* Coloca os itens em coluna */
 }
-
 .status-prioridade mat-form-field {
-  width: 49%;
+  width: 100%; /* Faz os campos ocuparem toda a largura disponível */
 }
 
 /* CONTAINER PARA O CAMPO DE OBSERVAÇÕES */
 .observacoes-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  display: flex; /* Layout flexível */
+  flex-direction: column; /* Coloca os itens em coluna */
+  width: 100%; /* Largura total */
 }
 
-/* Ajuste do tamanho do campo de observações */
+/* AJUSTA O TAMANHO DO CAMPO OBSERVAÇÕES */
 .mat-form-field.observacoes {
-  width: 100%;
+  width: 100%; /* Largura total para o campo de observações */
 }
 
+/* AJUSTE DA ÁREA DE TEXTO */
 textarea {
   min-height: 120px; /* Altura mínima */
   max-height: 200px; /* Altura máxima */
   resize: vertical; /* Permite ajuste de tamanho vertical */
-  overflow-y: auto; /* Adiciona rolagem caso ultrapasse o máximo */
-  width: 100%;
+  overflow-y: auto; /* Adiciona rolagem se necessário */
+  width: 100%; /* Largura total */
 }
 
 /* CONTAINER PARA OS BOTÕES */
 .button-container {
-  display: flex;
-  flex-direction: column; /* Botões um abaixo do outro */
-  gap: 1rem;
-  margin-top: 1rem;
+  display: flex; /* Layout flexível */
+  flex-direction: column; /* Coloca os botões um abaixo do outro */
+  gap: 1rem; /* Espaçamento entre os botões */
+  margin-top: 1rem; /* Espaçamento acima dos botões */
 }
 
 /* ESTILIZAÇÃO DOS BOTÕES */
@@ -71,30 +74,66 @@ button.btn-atualizar,
 button.btn-cancelar {
   width: 100%; /* Botões ocupam 100% da largura */
   padding: 0.75rem; /* Ajusta o espaçamento interno */
-  font-size: 1rem;
-  text-align: center;
-  border: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  cursor: pointer;
+  font-size: 1rem; /* Tamanho da fonte */
+  text-align: center; /* Centraliza o texto */
+  border: none; /* Sem borda */
+  border-radius: 5px; /* Bordas arredondadas */
+  transition: background-color 0.3s ease; /* Transição suave para mudança de cor */
+  cursor: pointer; /* Muda o cursor para mãozinha */
 }
 
-/* ESTILO PARA O BOTÃO "CRIAR" */
+/* ESTILO PARA O BOTÃO "ATUALIZAR" */
 button.btn-atualizar {
-  background-color: rgb(39, 141, 45);
-  color: white;
+  background-color: rgb(39, 141, 45); /* Cor de fundo para o botão */
+  color: white; /* Cor do texto */
 }
 
-/* ESTILO PARA O BOTÃO "CRIAR" QUANDO DESABILITADO */
+/* ESTILO PARA O BOTÃO "ATUALIZAR" QUANDO DESABILITADO */
 .btn-atualizar:disabled {
-  background-color: rgb(200, 200, 200);
-  color: rgb(100, 100, 100);
-  cursor: not-allowed;
-  opacity: 0.7;
+  background-color: rgb(200, 200, 200); /* Cor de fundo desabilitado */
+  color: rgb(100, 100, 100); /* Cor do texto desabilitado */
+  cursor: not-allowed; /* Cursor de desabilitado */
+  opacity: 0.7; /* Opacidade reduzida para indicar desabilitado */
 }
 
 /* ESTILO PARA O BOTÃO "CANCELAR" */
 button.btn-cancelar {
-  background-color: rgb(207, 80, 63);
-  color: white;
+  background-color: rgb(207, 80, 63); /* Cor de fundo para o botão cancelar */
+  color: white; /* Cor do texto */
+}
+
+/* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
+@media (max-width: 768px) {
+  .container {
+    padding: 12px; /* Reduz o padding para telas menores */
+  }
+  .form {
+    gap: 12px; /* Reduz o gap entre os campos */
+  }
+  button.btn-atualizar,
+  button.btn-cancelar {
+    font-size: 0.9rem; /* Reduz o tamanho da fonte dos botões */
+  }
+  textarea {
+    min-height: 100px; /* Reduz a altura mínima do textarea */
+  }
+}
+
+/* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
+@media (max-width: 480px) {
+
+  /* ESTILIZA O CONTAINER PRINCIPAL */
+  .container {
+    padding: 8px; /* Reduz ainda mais o padding */
+  }
+  .form {
+    gap: 8px; /* Reduz o gap entre os campos */
+  }
+  button.btn-atualizar,
+  button.btn-cancelar {
+    font-size: 0.875rem; /* Reduz o tamanho da fonte dos botões ainda mais */
+  }
+  textarea {
+    min-height: 80px; /* Reduz a altura mínima do textarea */
+  }
 }

@@ -23,8 +23,7 @@ export class NavComponent implements OnInit {
 
   // MÉTODO PARA SAIR DO SISTEMA
   logout() {
-    const confirmacao = window.confirm("Tem certeza que deseja sair?");
-    if (confirmacao) {
+    {
       this.router.navigate(['login']);
       this.authService.logout();
       this.toast.info('Você saiu do sistema, até mais!', 'Logout', { timeOut: 4500 });

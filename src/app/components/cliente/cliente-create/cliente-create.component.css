@@ -1,4 +1,6 @@
 /* --------- AJUSTES PARA TELAS GRANDES --------- */
+
+/* ESTILIZA O CONTAINER PRINCIPAL */
 .container {
     max-width: 600px; /* define uma largura máxima para o formulário */
     margin: 0 auto; /* centraliza o formulário horizontalmente */
@@ -6,22 +8,25 @@
     box-sizing: border-box; /* inclui padding e borda no tamanho total */
 }
 
+/* ESTILIZA O FORMULÁRIO */
 .form {
     display: flex; /* usa flexbox para layout */
     flex-direction: column; /* empilha os itens verticalmente */
     gap: 16px; /* espaçamento entre os campos */
 }
 
+/* ESTILIZA O H1 */
 h1 {
     text-align: center; /* centraliza o texto */
     margin-bottom: 1.5rem; /* espaçamento inferior para separar o título dos outros elementos */
 }
 
+/* ESTILIZA A LARGURA DOS ITENS */
 .full-width {
     width: 100%; /* os campos ocupam a largura total do contêiner */
 }
 
-/* botões compartilhando estilos */
+/* BOTÕES COMPARTILHANDO ESTILOS */
 button.btn-criar, button.btn-cancelar {
     border-radius: 5px; /* bordas arredondadas */
     padding: 0.5rem 1.5rem; /* ajusta o espaçamento interno */

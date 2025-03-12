@@ -1,4 +1,6 @@
 /* --------- AJUSTES PARA TELAS GRANDES --------- */
+
+/* ESTILIZA O CONTAINER PRINCIPAL */
 .container {
     max-width: 600px; /* Define uma largura máxima para o formulário */
     margin: 0 auto; /* Centraliza o formulário horizontalmente */
@@ -59,7 +61,7 @@ button.btn-cancelar {
 }
 
 
-/* --------- AJUSTES PARA TELAS PEQUENAS E MÉDIAS (RESPONSIVIDADE) --------- */
+/* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
 
 @media (max-width: 768px) {
     .container {
@@ -78,6 +80,7 @@ button.btn-cancelar {
     }
 }
 
+/* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
 @media (max-width: 480px) {
     h1 {
         font-size: 1.5rem; /* Ajusta o tamanho do título */

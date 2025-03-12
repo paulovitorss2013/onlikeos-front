@@ -9,8 +9,11 @@ import { isPlatformBrowser } from '@angular/common';
   providedIn: 'root',
 })
 export class AuthService {
+  
+  // DECLARAÇÃO DA VARIÁVEL DO JWT
   jwtService: JwtHelperService = new JwtHelperService();
 
+  // CONSTRUTOR
   constructor(
     private http: HttpClient,
     @Inject(PLATFORM_ID) private platformId: Object // INJETA O IDENTIFICADOR DA PLATAFORMA
@@ -37,7 +40,7 @@ export class AuthService {
       const token = localStorage.getItem('token');
       return token ? !this.jwtService.isTokenExpired(token) : false;
     }
-    return false; // RETORNA FALSO SE NÃO ESTIVER NO NAVEGADOR
+    return false;
   }
 
   // MÉTODO PARA LIMPAR O TOKEN AO SAIR DO SISTEMA (VERIFICA SE ESTÁ NO NAVEGADOR)
@@ -46,4 +49,5 @@ export class AuthService {
       localStorage.clear();
     }
   }
+  
 }

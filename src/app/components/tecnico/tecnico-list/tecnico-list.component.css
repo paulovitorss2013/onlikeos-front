@@ -1,6 +1,6 @@
 /* --------- AJUSTES PARA TELAS GRANDES --------- */
 
-/* ESTILIZA A CLASSE .CONTAINER */
+/* ESTILIZA O CONTAINER PRINCIPAL */
 .container {
     width: 90%; /* Define a largura do container para ocupar 90% da largura da tela */
     margin: auto; /* Centraliza o container horizontalmente */

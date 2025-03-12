@@ -9,23 +9,24 @@ import { Tecnico } from '../models/tecnico';
 })
 export class TecnicoService {
 
+  // CONSTRUTOR
   constructor(private http: HttpClient) { }
-  
-  // MÉTODO PARA BUSCAR O TÉCNICO PELO ID
-  findById(id: any): Observable<Tecnico> {
-    return this.http.get<Tecnico>(`${API_CONFIG.baseUrl}/tecnicos/${id}`);
-  }
 
-  // MÉTODO PARA LISTAR TODOS OS TÉCNICOS
+    // MÉTODO PARA CRIAR UM TÉCNICO
+  create(tecnico: Tecnico): Observable<Tecnico> {
+    return this.http.post<Tecnico>(`${API_CONFIG.baseUrl}/tecnicos`, tecnico, {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      });
+    }
+
+    // MÉTODO PARA LISTAR TODOS OS TÉCNICOS
   findAll(): Observable<Tecnico[]> {
     return this.http.get<Tecnico[]>(`${API_CONFIG.baseUrl}/tecnicos`);
   }
 
-  // MÉTODO PARA CRIAR UM TÉCNICO
-  create(tecnico: Tecnico): Observable<Tecnico> {
-    return this.http.post<Tecnico>(`${API_CONFIG.baseUrl}/tecnicos`, tecnico, {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    });
+  // MÉTODO PARA BUSCAR AS INFORMAÇÕES DO TÉCNICO PELO ID
+  findById(id: any): Observable<Tecnico> {
+    return this.http.get<Tecnico>(`${API_CONFIG.baseUrl}/tecnicos/${id}`);
   }
 
   // MÉTODO PARA ATUALIZAR UM TÉCNICO
