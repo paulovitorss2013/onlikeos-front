@@ -9,17 +9,16 @@ html, body {
 
 /* Personalizando a cor dos rótulos (mat-label) */
 .mat-mdc-form-field .mdc-floating-label {
-  color: #181818 !important;
+  color: #000 !important;
 }
 
-/* Personalizando a borda dos inputs */
+/* Personalizando a borda dos inputs e a cor do texto */
 .mat-mdc-form-field {
   --mdc-filled-text-field-caret-color: rgb(39, 141, 45);
   --mdc-filled-text-field-focus-label-text-color: rgb(39, 141, 45);
   --mdc-filled-text-field-focus-active-indicator-color: rgb(39, 141, 45);
 }
 
-/* Personalizando a aparência dos inputs */
 .mat-mdc-form-field input,
 .mat-mdc-form-field textarea,
 .mat-mdc-select-value {
@@ -31,32 +30,22 @@ html, body {
   color: #000 !important; /* Cor do texto das opções */
 }
 
-/* Quando uma opção está selecionada, mantém a cor preta */
 .mat-mdc-option.mat-mdc-option-selected {
   color: #000 !important; /* Texto preto */
   background-color: transparent !important; /* Fundo transparente */
 }
 
-/* Evita que a opção selecionada fique azul e altera o fundo quando o campo está selecionado */
 .mat-mdc-option.mat-mdc-option-selected:hover {
   color: #000 !important; /* Texto preto na opção selecionada em hover */
 }
 
 /* Quando o campo está em foco */
-.mat-mdc-form-field.mat-mdc-form-field--focused .mdc-floating-label {
-  color: rgb(39, 141, 45) !important; /* Cor verde para o label no foco */
-}
-
+.mat-mdc-form-field.mat-mdc-form-field--focused .mdc-floating-label,
 .mat-mdc-form-field.mat-mdc-form-field--focused .mat-mdc-select-value {
-  color: #000 !important; /* Cor preta do texto quando em foco */
+  color: rgb(39, 141, 45) !important; /* Cor verde para o label no foco e texto selecionado */
 }
 
 /* Remover o fundo azul do item selecionado */
-.mat-mdc-select.mat-mdc-select:focus .mat-mdc-select-value {
-  color: #000 !important;
-}
-
-/* Evitar o comportamento de cor azul padrão do Angular Material */
 .mat-mdc-select:focus .mat-mdc-select-value,
 .mat-mdc-option.mat-mdc-option-selected {
   background-color: transparent !important; /* Remover o fundo azul padrão */
@@ -66,6 +55,7 @@ html, body {
 /* Personalizando o Checkbox */
 .mat-checkbox.mat-checkbox-checked .mat-checkbox-background {
   background-color: rgb(39, 141, 45) !important; /* Cor verde escuro para o fundo do checkbox selecionado */
+  border-color: rgb(39, 141, 45) !important; /* Fronteira do checkbox para verde escuro */
 }
 
 .mat-checkbox.mat-checkbox-checked .mat-checkbox-checkmark {
@@ -75,11 +65,6 @@ html, body {
 /* Estilo para o estado do checkbox quando é selecionado */
 .mat-checkbox.mat-checkbox-checked {
   color: rgb(39, 141, 45) !important; /* Cor do texto quando o checkbox está marcado */
-}
-
-/* Evitar a cor azul padrão no checkbox */
-.mat-checkbox .mat-checkbox-background {
-  border-color: rgb(39, 141, 45) !important; /* Fronteira do checkbox para verde escuro */
 }
 
 /* Adicionando margens para o checkbox */
