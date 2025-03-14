@@ -5,19 +5,25 @@
     overflow-x: auto; /* Permite rolagem horizontal se o conteúdo ultrapassar a largura */
 }
 
+h1 {
+    text-align: center;
+}
 mat-form-field {
     width: 100% !important; /* Garante que o campo ocupe 100% da largura */
     max-width: 100% !important; /* Garante que o campo não ultrapasse 100% da largura */
     margin-bottom: 1rem; /* Adiciona espaçamento abaixo do campo */
 }
 
-/* ESTILIZAÇÃO DA TABELA */
+/* Adicionando margem ao campo de pesquisa */
+.search-field {
+    margin-top: 20px; /* Ajuste o valor conforme necessário */
+  }
+
+/* ESTILIZA A TABELA */
 table {
-    width: 100%; /* Define que a tabela ocupa 100% da largura disponível */
-    border-collapse: collapse; /* Remove o espaçamento entre as células da tabela */
-    table-layout: auto; /* Ajusta o layout das colunas automaticamente */
-    white-space: nowrap; /* Evita quebra de texto dentro das células */
+    width: 100%; /* Faz a tabela ocupar toda a largura disponível do container */
 }
+
 
 /* CABEÇALHOS DA TABELA */
 th {
@@ -77,11 +83,7 @@ td button {
         display: none; /* Esconde as colunas intermediárias da tabela */
     }
 
-    table {
-        display: block; /* Faz a tabela se tornar um bloco, permitindo rolagem horizontal */
-        overflow-x: auto; /* Adiciona rolagem horizontal na tabela */
-        white-space: nowrap; /* Impede que o texto dentro da tabela quebre */
-    }
+    /* ESTILIZA A TABELA */
 
     button {
         width: 100%; /* Faz o botão ocupar toda a largura disponível */
@@ -121,10 +123,6 @@ td button {
 
 /* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 480px --------- */
 @media (max-width: 480px) {
-    table {
-        font-size: 0.8rem; /* Ajusta o tamanho da fonte da tabela */
-    }
-
     button {
         padding: 0.7rem; /* Ajusta o padding do botão */
         font-size: 0.9rem; /* Ajusta o tamanho da fonte do botão */
