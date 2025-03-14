@@ -1,0 +1,159 @@
+/* --------- AJUSTES PARA TELAS GRANDES --------- */
+.container {
+    width: 90%; /* Define a largura da container */
+    margin: auto; /* Centraliza a container horizontalmente */
+    overflow-x: auto; /* Permite rolagem horizontal se o conteúdo ultrapassar a largura */
+}
+
+h1 {
+    text-align: center;
+}
+mat-form-field {
+    width: 100% !important; /* Garante que o campo ocupe 100% da largura */
+    max-width: 100% !important; /* Garante que o campo não ultrapasse 100% da largura */
+    margin-bottom: 1rem; /* Adiciona espaçamento abaixo do campo */
+}
+
+/* Adicionando margem ao campo de pesquisa */
+.search-field {
+    margin-top: 20px; /* Ajuste o valor conforme necessário */
+  }
+
+/* ESTILIZA A TABELA */
+table {
+    width: 100%; /* Faz a tabela ocupar toda a largura disponível do container */
+}
+
+
+/* CABEÇALHOS DA TABELA */
+th {
+    background-color: #f4f4f4; /* Define a cor de fundo do cabeçalho */
+    text-align: left; /* Alinha o texto à esquerda */
+    padding: 10px; /* Adiciona espaçamento interno */
+}
+
+/* CÉLULAS DA TABELA */
+td {
+    padding: 10px; /* Adiciona espaçamento interno nas células */
+    border-bottom: 1px solid #ddd; /* Adiciona uma borda fina abaixo das células */
+}
+
+/* BOTÕES */
+button {
+    background-color: rgb(39, 141, 45); /* Define a cor de fundo do botão */
+    color: white !important; /* Define a cor do texto do botão */
+    border-radius: 5px; /* Adiciona borda arredondada ao botão */
+    padding: 0.5rem 1rem; /* Define o espaçamento interno do botão */
+    font-size: 0.8rem; /* Define o tamanho da fonte do botão */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    margin: 0 0.5rem; /* Adiciona margem à esquerda e à direita */
+}
+
+/* BOTÕES DENTRO DA TABELA */
+td button {
+    width: auto; /* Define que o botão terá largura automática */
+    min-width: 80px; /* Define a largura mínima do botão */
+}
+
+/* ÍCONE EDITAR E EXIBIR */
+.edit, .view {
+    color: rgb(39, 141, 45) !important; /* Define a cor do ícone de editar e visualizar */
+    font-size: 1.2rem; /* Define o tamanho da fonte dos ícones */
+    margin-right: 1rem; /* Adiciona espaçamento à direita */
+    text-decoration: none; /* Remove qualquer sublinhado dos ícones */
+}
+
+/* CORES PARA STATUS DOS CHAMADOS */
+.status-encerrado {
+    color: green; /* Define a cor verde para status de encerrado */
+}
+
+.status-aberto {
+    color: red; /* Define a cor vermelha para status de aberto */
+}
+
+/* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
+@media (max-width: 768px) {
+    .container {
+        width: 95%; /* Ajusta a largura da container para 95% em telas pequenas */
+    }
+
+    th:not(:first-child):not(:nth-child(2)):not(:last-child),
+    td:not(:first-child):not(:nth-child(2)):not(:last-child) {
+        display: none; /* Esconde as colunas intermediárias da tabela */
+    }
+
+    /* ESTILIZA A TABELA */
+
+    button {
+        width: 100%; /* Faz o botão ocupar toda a largura disponível */
+        margin: 5px 0; /* Adiciona margem no topo e na base do botão */
+        padding: 0.6rem; /* Ajusta o espaçamento interno do botão */
+    }
+
+    mat-form-field {
+        width: 100% !important; /* Garante que o campo ocupe 100% da largura disponível */
+        max-width: 100%; /* Limita a largura máxima a 100% */
+    }
+
+    .filtros-container {
+        width: 100%; /* Faz o container dos filtros ocupar 100% da largura */
+    }
+
+    /* Ajustes para o grupo de rádio */
+    .radio-group {
+        display: flex; /* Define o grupo de rádio como um container flexível */
+        flex-wrap: wrap; /* Permite que os itens se quebrem para a linha seguinte */
+        gap: 0.2rem; /* Diminui o espaço entre os radio buttons */
+        margin: 0; /* Remove a margem extra */
+    }
+
+    mat-radio-button {
+        padding: 4px 8px; /* Ajusta o padding para um tamanho menor */
+        font-size: 0.7rem; /* Reduz o tamanho da fonte */
+        margin-right: 0.3rem; /* Reduz o espaçamento horizontal */
+        height: 24px; /* Define uma altura fixa para os radio buttons */
+        min-height: 24px; /* Garante que o tamanho mínimo do radio button seja 24px */
+    }
+
+    mat-radio-button .mat-radio-label {
+        margin-left: 0.2rem; /* Menor margem entre o ícone e o texto */
+    }
+}
+
+/* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 480px --------- */
+@media (max-width: 480px) {
+    button {
+        padding: 0.7rem; /* Ajusta o padding do botão */
+        font-size: 0.9rem; /* Ajusta o tamanho da fonte do botão */
+    }
+
+    .mat-elevation-z8 button {
+        font-size: 0.7rem; /* Ajusta o tamanho da fonte para o botão dentro de mat-elevation-z8 */
+        padding: 0.5rem 1rem; /* Ajusta o padding do botão dentro de mat-elevation-z8 */
+    }
+
+    mat-form-field {
+        width: 100% !important; /* Garante que o campo ocupe 100% da largura disponível */
+    }
+
+    /* Ajustes para os radio buttons em telas ainda menores */
+    .radio-group {
+        display: flex; /* Define o grupo de rádio como um container flexível */
+        flex-wrap: wrap; /* Permite que os itens se quebrem para a linha seguinte */
+        gap: 0.2rem; /* Diminui o espaço entre os radio buttons ainda mais */
+        margin: 0; /* Remove a margem extra */
+    }
+
+    mat-radio-button {
+        padding: 3px 6px; /* Reduz ainda mais o padding */
+        font-size: 0.7rem; /* Reduz ainda mais o tamanho da fonte */
+        margin-right: 0.3rem; /* Reduz ainda mais o espaço horizontal */
+        height: 20px; /* Define uma altura menor para os radio buttons */
+        min-height: 20px; /* Garante que o tamanho mínimo do radio button seja 20px */
+    }
+
+    mat-radio-button .mat-radio-label {
+        margin-left: 0.1rem; /* Minimiza o espaço entre o ícone e o texto */
+    }
+}

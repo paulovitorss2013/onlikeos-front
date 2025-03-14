@@ -13,7 +13,12 @@ export class HomeComponent {
     private router: Router,
   ) {}
 
-// DIRECIONA PARA LISTAR TODOS OS TÉCNICOS
+// DIRECIONA PARA MEUS CHAMADOS
+listarMeusChamados(): void {
+  this.router.navigate(['chamados-my-list']);
+ }
+
+  // DIRECIONA PARA LISTAR TODOS OS TÉCNICOS
 listarTecnicos(): void {
   this.router.navigate(['tecnicos']);
  } 
