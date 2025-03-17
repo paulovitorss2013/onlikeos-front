@@ -4,6 +4,7 @@
     <!-- CONTAINER DO TÍTULO DA PÁGINA -->
     <div class="header-container">
       <h1>Meus Chamados</h1>
+      <button mat-button routerLink="/chamados">LISTAR TODOS</button>
       <button mat-button (click)="toggleFiltros()">FILTROS</button>
     </div>
    
@@ -45,7 +46,7 @@
     <div class="mat-elevation-z8">
       
       <!-- BOTÃO PARA CRIAR NOVO CHAMADO -->
-      <button mat-button routerLink="create">ABRIR NOVO</button>
+      <button mat-button routerLink="/chamados/create">ABRIR NOVO</button>
   
       <table mat-table [dataSource]="dataSource">
   
