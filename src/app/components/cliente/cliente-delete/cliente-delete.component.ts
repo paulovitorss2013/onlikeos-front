@@ -135,8 +135,6 @@ export class ClienteDeleteComponent implements OnInit {
 
   // MÉTODO PARA DELETAR O CLIENTE
   delete(): void {
-    const confirmar = window.confirm('Deseja mesmo deletar o cliente?');
-    if (confirmar) {
       this.service.delete(this.cliente.id).pipe(
         tap(() => {
           this.toastr.success('Cliente deletado com sucesso!', 'Delete');
@@ -156,7 +154,7 @@ export class ClienteDeleteComponent implements OnInit {
         })
       ).subscribe();
     }
-  }
+ 
   
   // MÉTODO PARA CANCELAR AS AÇÕES
   cancelar(): void {
