@@ -22,6 +22,7 @@ export class ChamadoUpdateComponent implements OnInit {
     status: '',
     titulo: '',
     observacoes: '',
+    procedimentos: '',
     tecnico: '',
     cliente: '',
     nomeCliente: '',
@@ -38,6 +39,7 @@ export class ChamadoUpdateComponent implements OnInit {
     prioridade: new FormControl('', [Validators.required]),
     status: new FormControl('', [Validators.required]),
     observacoes: new FormControl('', [Validators.required, Validators.minLength(15)]),
+    procedimentos: new FormControl(''),
     tecnico: new FormControl('', [Validators.required]),
     cliente: new FormControl('', [Validators.required])
   });
@@ -95,6 +97,7 @@ export class ChamadoUpdateComponent implements OnInit {
           prioridade: this.chamado.prioridade.toString(), 
           status: this.chamado.status.toString(),
           observacoes: this.chamado.observacoes,
+          procedimentos: this.chamado.procedimentos,
           tecnico: this.chamado.tecnico,
           cliente: this.chamado.cliente
         });

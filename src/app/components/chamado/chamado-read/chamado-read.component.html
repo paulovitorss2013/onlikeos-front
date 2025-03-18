@@ -60,6 +60,14 @@
       </textarea>
     </mat-form-field>
 
+    <mat-form-field *ngIf="form.get('procedimentos')?.value" class="full-width procedimentos" appearance="outline">
+      <mat-label>Procedimentos Registrados</mat-label>
+      <textarea matInput formControlName="procedimentos" readonly
+                placeholder="Exemplo: Trocado o roteador..."
+                title="Procedimentos">
+      </textarea>
+    </mat-form-field>
+
     <!-- BOTÃO VOLTAR -->
     <div class="button-container">
       <button mat-button class="btn-voltar" (click)="voltar()">VOLTAR</button>

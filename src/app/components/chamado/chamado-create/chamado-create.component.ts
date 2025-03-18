@@ -22,6 +22,7 @@ export class ChamadoCreateComponent implements OnInit {
     status: '',
     titulo: '',
     observacoes: '',
+    procedimentos: '',
     tecnico: '',
     cliente: '',
     nomeCliente: '',

@@ -24,6 +24,7 @@ export class ChamadoReadComponent implements OnInit {
     nomeTecnico: '',
     dataFechamento: '',
     observacoes: '',
+    procedimentos: ''
     
   };
 
@@ -37,7 +38,7 @@ export class ChamadoReadComponent implements OnInit {
     cliente: new FormControl({ value: '', disabled: true }),
     dataFechamento: new FormControl({ value: '', disabled: true }),
     observacoes: new FormControl({ value: '', disabled: true }),
-    
+    procedimentos: new FormControl({ value: '', disabled: true }),
   });
 
   // CONSTRUTOR
@@ -70,7 +71,8 @@ export class ChamadoReadComponent implements OnInit {
           tecnico: this.chamado.nomeTecnico,
           cliente: this.chamado.nomeCliente,
           dataFechamento: this.chamado.dataFechamento,
-          observacoes: this.chamado.observacoes
+          observacoes: this.chamado.observacoes,
+          procedimentos: this.chamado.procedimentos
         });
       },
       error: (ex) => {
