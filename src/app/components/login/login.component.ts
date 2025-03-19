@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
   logar(): void {
     this.creds.email = this.loginForm.get('email')?.value ?? '';
     this.creds.senha = this.loginForm.get('senha')?.value ?? '';
-  
+    
     if (!this.validaCampos()) {
       this.toast.warning('Por favor, preencha todos os campos corretamente.');
       return;
@@ -80,7 +80,8 @@ export class LoginComponent implements OnInit {
   
           const authorization = resposta.headers?.get('Authorization');
           if (authorization) {
-            this.service.successfulLogin(authorization.substring(7));
+            const userEmail = this.creds.email;  // Recupera o email diretamente de `creds`
+            this.service.successfulLogin(authorization.substring(7), userEmail);  // Passa o email junto com o token
             this.router.navigate(['home']).catch(() => {
               this.toast.error('Erro ao redirecionar para a home.', 'Login');
             });

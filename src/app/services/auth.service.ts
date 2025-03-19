@@ -9,17 +9,14 @@ import { isPlatformBrowser } from '@angular/common';
   providedIn: 'root',
 })
 export class AuthService {
-  
-  // DECLARAÇÃO DA VARIÁVEL DO JWT
   jwtService: JwtHelperService = new JwtHelperService();
 
-  // CONSTRUTOR
   constructor(
     private http: HttpClient,
-    @Inject(PLATFORM_ID) private platformId: Object // INJETA O IDENTIFICADOR DA PLATAFORMA
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
-  // REALIZA A AUTENTICAÇÃO DO USUÁRIO
+  // Realiza a autenticação do usuário
   authenticate(creds: Credenciais) {
     return this.http.post(`${API_CONFIG.baseUrl}/login`, creds, {
       observe: 'response',
@@ -27,14 +24,15 @@ export class AuthService {
     });
   }
 
-  // SALVA O TOKEN NO LOCAL STORAGE (VERIFICA SE ESTÁ NO NAVEGADOR)
-  successfulLogin(authToken: string): void {
+  // Salva o token e o email no localStorage
+  successfulLogin(authToken: string, email: string): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('token', authToken);
+      localStorage.setItem('userEmail', email);  // Salva o email no localStorage
     }
   }
 
-  // VERIFICA SE O USUÁRIO ESTÁ AUTENTICADO (VERIFICA SE ESTÁ NO NAVEGADOR)
+  // Verifica se o usuário está autenticado
   isAuthenticated(): boolean {
     if (isPlatformBrowser(this.platformId)) {
       const token = localStorage.getItem('token');
@@ -43,11 +41,26 @@ export class AuthService {
     return false;
   }
 
-  // MÉTODO PARA LIMPAR O TOKEN AO SAIR DO SISTEMA (VERIFICA SE ESTÁ NO NAVEGADOR)
+  // Limpa o token e o email ao sair
   logout(): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.clear();
     }
   }
-  
+
+  // Recupera o email do usuário armazenado
+  getUserEmail(): string | null {
+    if (isPlatformBrowser(this.platformId)) {
+      return localStorage.getItem('userEmail');
+    }
+    return null;
+  }
+
+  // Recupera o token armazenado
+  getToken(): string | null {
+    if (isPlatformBrowser(this.platformId)) {
+      return localStorage.getItem('token');
+    }
+    return null;
+  }
 }

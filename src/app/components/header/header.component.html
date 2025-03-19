@@ -1,3 +1,6 @@
 <div class="container">
-    <h1 class="mat-elevation-z4">ONLIKE OS</h1>
+    <h1 class="mat-elevation-z4">ONLIKE OS
+        <!-- Exibe o email do usuário com estilo de texto verde -->
+        <p *ngIf="userEmail" class="email-user">Conectado como: {{ userEmail }}</p>
+    </h1>
 </div>

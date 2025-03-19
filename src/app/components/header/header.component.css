@@ -1,19 +1,29 @@
 /* --------- AJUSTES RESPONSIVOS --------- */
-
 .container {
     width: 100%; /* Define que o contêiner ocupará 100% da largura disponível */
+}
+
+.email-user {
+    color: white; /* Cor do texto branco */
+    font-size: 18px;  /* Ajuste do tamanho da fonte */
+    text-align: center;  /* Alinha o texto ao centro */
+    margin: 0;  /* Remove qualquer margem padrão */
+    padding: 0;  /* Remove qualquer preenchimento */
+    line-height: 1.2;  /* Reduz o espaçamento entre as linhas do texto */
 }
 
 h1 {
     color: white; /* Define a cor do texto como branco */
     padding: 0.75rem 2rem; /* Adiciona espaçamento interno (0.75rem no topo e na base, 2rem nas laterais) */
-    font-size: clamp(1.5rem, 3vw, 2rem); /* Define um tamanho de fonte responsivo*/
+    font-size: clamp(1.5rem, 3vw, 2rem); /* Define um tamanho de fonte responsivo */
     text-align: center; /* Centraliza o texto */
     font-style: italic; /* Define o texto como itálico */
     font-weight: bold; /* Define o peso da fonte como negrito */
     font-family: 'Oswald', sans-serif; /* Define a fonte como 'Oswald' e usa sans-serif como alternativa */
     letter-spacing: -0.5px; /* Reduz ligeiramente o espaçamento entre as letras */
-    background: linear-gradient(90deg, rgb(39, 141, 45) 0%, #000 100%);/* Aplica um gradiente linear de 90 graus*/
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);/* Adiciona uma sombra */
+    background: linear-gradient(90deg, rgb(39, 141, 45) 0%, #000 100%); /* Aplica um gradiente linear de 90 graus */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3); /* Adiciona uma sombra */
+    margin: 0;  /* Remove qualquer margem */
+    padding-bottom: 0;  /* Remove o espaçamento inferior */
+    line-height: 1.2;  /* Ajusta o espaçamento entre o título e o texto "Conectado como" */
 }
-    
