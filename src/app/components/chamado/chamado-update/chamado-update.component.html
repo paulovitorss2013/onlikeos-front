@@ -66,22 +66,23 @@
     <!-- ÁREA DOS PROCEDIMENTOS -->
     <h2>Histórico dos Procedimentos</h2>
     <mat-form-field class="full-width text" appearance="outline">
-      <mat-label>Registros</mat-label>
       <textarea class="procedimentos" matInput formControlName="procedimentos"
         maxlength="1000">
       </textarea>
     </mat-form-field>
 
+     <!-- BOTÃO PARA NOVO PROCEDIMENTO -->
+     <button mat-button class="btn-novoProcedimento">INCLUIR PROCEDIMENTO</button> 
+
     <!-- ÁREA PARA NOVOS PROCEDIMENTOS -->
        <mat-form-field class="full-width text" appearance="outline">
          <mat-label>Novo Procedimento</mat-label>
          <textarea class="novoProcedimento" matInput formControlName="novoProcedimento"
-         placeholder="Relate aqui um novo procedimento e selecione INCLUIR PROCEDIMENTO."
+         placeholder="Relate aqui um novo procedimento e selecione o botão acima INCLUIR PROCEDIMENTO."
          maxlength="1000">
          </textarea>
        </mat-form-field>
-    <!-- BOTÃO PARA PROCEDIMENTOS -->
-    <button mat-button class="btn-novoProcedimento">INCLUIR PROCEDIMENTO</button>    
+       
   
     <!-- BOTÕES PARA CHAMADO -->
     <button (click)="update()" [disabled]="!validaCampos()" mat-button class="btn-atualizar">ATUALIZAR CHAMADO</button>

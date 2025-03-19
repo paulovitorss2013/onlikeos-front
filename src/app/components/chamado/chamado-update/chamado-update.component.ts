@@ -93,12 +93,13 @@ export class ChamadoUpdateComponent implements OnInit {
     this.chamadoService.findById(this.chamado.id).subscribe({
       next: (resposta) => {
         this.chamado = resposta;
+        const procedimentos = this.chamado.procedimentos?.trim() || 'Nenhum procedimento registrado para esse chamado.';
         this.form.patchValue({
           titulo: this.chamado.titulo,
-          prioridade: this.chamado.prioridade.toString(), 
+          prioridade: this.chamado.prioridade.toString(),
           status: this.chamado.status.toString(),
           observacoes: this.chamado.observacoes,
-          procedimentos: this.chamado.procedimentos,
+          procedimentos: procedimentos,
           tecnico: this.chamado.tecnico,
           cliente: this.chamado.cliente
         });

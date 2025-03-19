@@ -112,7 +112,7 @@ button.btn-cancelar {
 }
 
 /* ESTILO PARA O BOTÃO "PROCEDIMENTOS" */
-button.btn-procedimentos {
+button.btn-novoProcedimento {
   background-color: rgb(252, 154, 8); /* Cor de fundo para o botão cancelar */
   color: white; /* Cor do texto */
 }
