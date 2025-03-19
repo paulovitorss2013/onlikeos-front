@@ -112,33 +112,37 @@ export class ChamadoUpdateComponent implements OnInit {
     });
   }
 
-// MÉTODO PARA INCLUIR PROCEDIMENTOS NO CAMPO
-incluirProcedimento(): void {
-  const novoProcedimento = this.form.get('novoProcedimento')?.value?.trim();
-  let procedimentosAtuais = this.getProcedimentosAtuais();
-
-  if (novoProcedimento && novoProcedimento.length >= 10) {
-    const emailTecnico = this.authService.getUserEmail() || 'Técnico desconhecido';
-    const dataHoraAtual = this.getDataHoraAtual();
-    const registro = `${emailTecnico} - ${dataHoraAtual} - ${novoProcedimento}`;
-
-    if (procedimentosAtuais === 'Nenhum procedimento registrado para esse chamado.' || !procedimentosAtuais) {
-      procedimentosAtuais = '';
+  incluirProcedimento(): void {
+    const novoProcedimento = this.form.get('novoProcedimento')?.value?.trim();
+    let procedimentosAtuais = this.getProcedimentosAtuais();
+  
+    if (novoProcedimento && novoProcedimento.length >= 10) {
+      const emailTecnico = this.authService.getUserEmail() || 'Técnico desconhecido';
+      const dataHoraAtual = this.getDataHoraAtual();
+      const registro = `${emailTecnico} - ${dataHoraAtual} - ${novoProcedimento}`;
+  
+      if (procedimentosAtuais === 'Nenhum procedimento registrado para esse chamado.' || !procedimentosAtuais) {
+        procedimentosAtuais = '';
+      }
+  
+      // Adiciona uma linha em branco entre os procedimentos
+      const novoHistorico = procedimentosAtuais ? `${procedimentosAtuais}\n\n${registro}` : registro;
+  
+      this.form.patchValue({
+        procedimentos: novoHistorico,
+        novoProcedimento: ''
+      });
+  
+      this.toastrService.info('Agora você precisa salvar as atualizações do chamado.', 'Procedimento incluído', {
+        timeOut: 5000,
+        progressBar: true, 
+        closeButton: true,
+      });
+    } else {
+      this.toastrService.warning('O procedimento deve conter pelo menos 10 caracteres.');
     }
-    const novoHistorico = procedimentosAtuais ? `${procedimentosAtuais}\n${registro}` : registro;
-    this.form.patchValue({
-      procedimentos: novoHistorico,
-      novoProcedimento: ''
-    });
-    this.toastrService.info('Agora você precisa salvar as atualizações do chamado.', 'Procedimento incluído', {
-      timeOut: 5000,
-      progressBar: true, 
-      closeButton: true,
-    });
-  } else {
-    this.toastrService.warning('O procedimento deve conter pelo menos 10 caracteres.');
   }
-}
+  
   
   // MÉTO PARA RECUPERAR OS PROCEDIMENTOS ATUAIS
   private getProcedimentosAtuais(): string {
