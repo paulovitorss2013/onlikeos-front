@@ -16,7 +16,7 @@ export class AuthService {
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
-  // Realiza a autenticação do usuário
+  // REALIZA A AUTENTICAÇÃO DO USUÁRIO
   authenticate(creds: Credenciais) {
     return this.http.post(`${API_CONFIG.baseUrl}/login`, creds, {
       observe: 'response',
@@ -24,7 +24,7 @@ export class AuthService {
     });
   }
 
-  // Salva o token e o email no localStorage
+  // SALVA O TOKEN E O E-MAIL NO LOCAL STORAGE
   successfulLogin(authToken: string, email: string): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('token', authToken);
@@ -32,7 +32,7 @@ export class AuthService {
     }
   }
 
-  // Verifica se o usuário está autenticado
+  // VERIFICA SE O USUÁRIO ESTÁ AUTENTICADO
   isAuthenticated(): boolean {
     if (isPlatformBrowser(this.platformId)) {
       const token = localStorage.getItem('token');
@@ -41,14 +41,14 @@ export class AuthService {
     return false;
   }
 
-  // Limpa o token e o email ao sair
+  // LIMPA O TOKEN E O E-MAIL AO SAIR
   logout(): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.clear();
     }
   }
 
-  // Recupera o email do usuário armazenado
+  // RECUPERA O E-MAIL DO USUÁRIO ARMAZENADO
   getUserEmail(): string | null {
     if (isPlatformBrowser(this.platformId)) {
       return localStorage.getItem('userEmail');
@@ -56,7 +56,7 @@ export class AuthService {
     return null;
   }
 
-  // Recupera o token armazenado
+  // RECUPERA O TOKEN ARMAZENADO
   getToken(): string | null {
     if (isPlatformBrowser(this.platformId)) {
       return localStorage.getItem('token');
