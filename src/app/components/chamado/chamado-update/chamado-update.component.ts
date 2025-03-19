@@ -8,6 +8,7 @@ import { ClienteService } from '../../../services/cliente.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TecnicoService } from '../../../services/tecnico.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-chamado-update',
@@ -53,6 +54,7 @@ export class ChamadoUpdateComponent implements OnInit {
     private toastrService: ToastrService,
     private router: Router,
     private route: ActivatedRoute,
+    private authService: AuthService
   ) {}
 
   // INICIALIZAÇÃO DO COMPONENTE
@@ -110,7 +112,51 @@ export class ChamadoUpdateComponent implements OnInit {
     });
   }
 
-  // MÉTODO PARA CRIAR UM CHAMADO
+// MÉTODO PARA INCLUIR PROCEDIMENTOS NO CAMPO
+incluirProcedimento(): void {
+  const novoProcedimento = this.form.get('novoProcedimento')?.value?.trim();
+  let procedimentosAtuais = this.getProcedimentosAtuais();
+
+  if (novoProcedimento && novoProcedimento.length >= 10) {
+    const emailTecnico = this.authService.getUserEmail() || 'Técnico desconhecido';
+    const dataHoraAtual = this.getDataHoraAtual();
+    const registro = `${emailTecnico} - ${dataHoraAtual} - ${novoProcedimento}`;
+
+    if (procedimentosAtuais === 'Nenhum procedimento registrado para esse chamado.' || !procedimentosAtuais) {
+      procedimentosAtuais = '';
+    }
+    const novoHistorico = procedimentosAtuais ? `${procedimentosAtuais}\n${registro}` : registro;
+    this.form.patchValue({
+      procedimentos: novoHistorico,
+      novoProcedimento: ''
+    });
+    this.toastrService.info('Agora você precisa salvar as atualizações do chamado.', 'Procedimento incluído', {
+      timeOut: 5000,
+      progressBar: true, 
+      closeButton: true,
+    });
+  } else {
+    this.toastrService.warning('O procedimento deve conter pelo menos 10 caracteres.');
+  }
+}
+  
+  // MÉTO PARA RECUPERAR OS PROCEDIMENTOS ATUAIS
+  private getProcedimentosAtuais(): string {
+    const procedimentos = this.form.get('procedimentos')?.value?.trim();
+    return procedimentos && procedimentos !== 'Nenhum procedimento registrado para esse chamado.' 
+      ? procedimentos 
+      : ''; // Retorna vazio se não houver nenhum procedimento ou se for o texto padrão
+  }
+  
+  // MÉTODO PARA OBTER A DATA E HORA ATUAL FORMATADAS
+  private getDataHoraAtual(): string {
+    return new Date().toLocaleString('pt-BR', {
+      day: '2-digit', month: '2-digit', year: 'numeric',
+      hour: '2-digit', minute: '2-digit'
+    });
+  }
+
+  // MÉTODO PARA ATUALIZAR UM CHAMADO
   update(): void {
     const chamadoAtualizado = { ...this.chamado, ...this.form.value };
   

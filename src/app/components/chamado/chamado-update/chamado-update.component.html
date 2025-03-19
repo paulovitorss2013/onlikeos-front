@@ -67,12 +67,14 @@
     <h2>Histórico dos Procedimentos</h2>
     <mat-form-field class="full-width text" appearance="outline">
       <textarea class="procedimentos" matInput formControlName="procedimentos"
-        maxlength="1000">
+        maxlength="1000" readonly>
       </textarea>
     </mat-form-field>
 
      <!-- BOTÃO PARA NOVO PROCEDIMENTO -->
-     <button mat-button class="btn-novoProcedimento">INCLUIR PROCEDIMENTO</button> 
+     <button mat-button class="btn-novoProcedimento" (click)="incluirProcedimento()">
+      INCLUIR PROCEDIMENTO
+    </button>
 
     <!-- ÁREA PARA NOVOS PROCEDIMENTOS -->
        <mat-form-field class="full-width text" appearance="outline">
