@@ -1,6 +1,7 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, CanLoadFn, Router } from '@angular/router';
+import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { CanMatchFn } from '@angular/router';
 
 /**
  * VERIFICA SE O USUÁRIO ESTÁ AUTENTICADO E PODE ACESSAR A ROTA.
@@ -13,7 +14,7 @@ export const AuthGuard: CanActivateFn = (route, state) => {
 /**
  * VERIFICA SE O USUÁRIO PODE CARREGAR MÓDULOS DE FORMA ASSÍNCRONA.
  */
-export const authLoadGuard: CanLoadFn = (route, segments) => {
+export const authLoadGuard: CanMatchFn = (route, segments) => {
   return verificarAcesso();
 };
 

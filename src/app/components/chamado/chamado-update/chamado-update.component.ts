@@ -40,6 +40,7 @@ export class ChamadoUpdateComponent implements OnInit {
     status: new FormControl('', [Validators.required]),
     observacoes: new FormControl('', [Validators.required, Validators.minLength(15)]),
     procedimentos: new FormControl(''),
+    novoProcedimento: new FormControl(''),
     tecnico: new FormControl('', [Validators.required]),
     cliente: new FormControl('', [Validators.required])
   });
