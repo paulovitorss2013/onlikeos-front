@@ -9,6 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TecnicoService } from '../../../services/tecnico.service';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../services/auth.service';
+import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-chamado-update',
@@ -54,7 +56,8 @@ export class ChamadoUpdateComponent implements OnInit {
     private toastrService: ToastrService,
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialog: MatDialog
   ) {}
 
   // INICIALIZAÇÃO DO COMPONENTE
@@ -90,7 +93,7 @@ export class ChamadoUpdateComponent implements OnInit {
     });
   }
 
-  /// MÉTODO BUSCAR AS INFORMAÇÕES PELO ID
+  // MÉTODO BUSCAR AS INFORMAÇÕES PELO ID
   findById(): void {
     this.chamadoService.findById(this.chamado.id).subscribe({
       next: (resposta) => {
@@ -112,6 +115,7 @@ export class ChamadoUpdateComponent implements OnInit {
     });
   }
 
+  // MÉTODO PARA INCLUIR UM PROCEDIMENTO
   incluirProcedimento(): void {
     const novoProcedimento = this.form.get('novoProcedimento')?.value?.trim();
     let procedimentosAtuais = this.getProcedimentosAtuais();
@@ -124,15 +128,11 @@ export class ChamadoUpdateComponent implements OnInit {
       if (procedimentosAtuais === 'Nenhum procedimento registrado para esse chamado.' || !procedimentosAtuais) {
         procedimentosAtuais = '';
       }
-  
-      // Adiciona uma linha em branco entre os procedimentos
       const novoHistorico = procedimentosAtuais ? `${procedimentosAtuais}\n\n${registro}` : registro;
-  
       this.form.patchValue({
         procedimentos: novoHistorico,
         novoProcedimento: ''
       });
-  
       this.toastrService.info('Agora você precisa salvar as atualizações do chamado.', 'Procedimento incluído', {
         timeOut: 5000,
         progressBar: true, 
@@ -149,7 +149,7 @@ export class ChamadoUpdateComponent implements OnInit {
     const procedimentos = this.form.get('procedimentos')?.value?.trim();
     return procedimentos && procedimentos !== 'Nenhum procedimento registrado para esse chamado.' 
       ? procedimentos 
-      : ''; // Retorna vazio se não houver nenhum procedimento ou se for o texto padrão
+      : '';
   }
   
   // MÉTODO PARA OBTER A DATA E HORA ATUAL FORMATADAS
@@ -161,24 +161,42 @@ export class ChamadoUpdateComponent implements OnInit {
   }
 
   // MÉTODO PARA ATUALIZAR UM CHAMADO
-  update(): void {
-    const chamadoAtualizado = { ...this.chamado, ...this.form.value };
-  
-    this.chamadoService.update(chamadoAtualizado).subscribe({
-      next: () => {
-        this.toastrService.success('Chamado atualizado com sucesso!', 'Atualização');
-        this.router.navigate(['chamados']);
-      },
-      error: (ex) => {
-        this.toastrService.error(ex.error?.error || 'Erro ao atualizar chamado');
-      }
-    });
-  }
+// MÉTODO PARA ATUALIZAR UM CHAMADO COM CONFIRMAÇÃO
+update(): void {
+  const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    width: '300px',
+    data: { message: 'Deseja mesmo atualizar este chamado?' }
+  });
 
-  // MÉTODO CANCELAR AS AÇÕES
-  cancelar(): void {
-    this.router.navigate(['chamados']);
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      const chamadoAtualizado = { ...this.chamado, ...this.form.value };
+
+      this.chamadoService.update(chamadoAtualizado).subscribe({
+        next: () => {
+          this.toastrService.success('Chamado atualizado com sucesso!', 'Atualização');
+          this.router.navigate(['chamados']);
+        },
+        error: (ex) => {
+          this.toastrService.error(ex.error?.error || 'Erro ao atualizar chamado');
+        }
+      });
+    }
+  });
 }
+
+  // MÉTODO PARA CANCELAR AS AÇÕES
+    cancelar(): void {
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        width: '300px',
+        data: { message: 'Tem certeza de que deseja cancelar a edição?' }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.router.navigate(['chamados']);
+        }
+      });
+    }
 
   // MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO
   validaCampos(): boolean {

@@ -5,6 +5,8 @@ import { Tecnico } from '../../../models/tecnico';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, of, tap } from 'rxjs';
+import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-tecnico-delete',
@@ -42,7 +44,8 @@ export class TecnicoDeleteComponent implements OnInit {
     private service: TecnicoService,
     private toastr: ToastrService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -81,31 +84,33 @@ export class TecnicoDeleteComponent implements OnInit {
 
   // MÉTÓDO PARA DELETAR UM TÉCNICO
   delete(): void {
-    this.service.delete(this.tecnico.id).pipe(
-      tap(() => {
-        this.toastr.success('Técnico deletado com sucesso!', 'Delete');
-        this.router.navigate(['tecnicos']);
-      }),
-      catchError((error) => {
-        // Se for erro 403 (Acesso Negado), não exibir outro toast, pois o AuthInterceptor já tratou
-        if (error.status === 403) {
-          return of(null); // Apenas retorna sem exibir erro duplicado
-        }
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: { message: 'Tem certeza que deseja deletar este técnico?' }
+    });
   
-        // Se houver uma lista de erros, exibe cada um
-        if (error?.error?.errors) {
-          error.error.errors.forEach((element: { message: string }) =>
-            this.toastr.error(element.message)
-          );
-        } else if (error?.error?.message) {
-          this.toastr.error(error.error.message);
-        } else {
-          this.toastr.error('Erro desconhecido ao deletar o técnico.');
-        }
-  
-        return of(null); 
-      })
-    ).subscribe();
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.service.delete(this.tecnico.id).pipe(
+          tap(() => {
+            this.toastr.success('Técnico deletado com sucesso!', 'Delete');
+            this.router.navigate(['tecnicos']);
+          }),
+          catchError((error) => {
+            if (error?.error?.errors) {
+              error.error.errors.forEach((element: { message: string }) =>
+                this.toastr.error(element.message)
+              );
+            } else if (error?.error?.message) {
+              this.toastr.error(error.error.message);
+            } else {
+              this.toastr.error('Erro desconhecido ao deletar o técnico.');
+            }
+            return of(null);
+          })
+        ).subscribe();
+      }
+    });
   }
   
 

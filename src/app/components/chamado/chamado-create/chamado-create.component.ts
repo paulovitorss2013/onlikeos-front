@@ -8,6 +8,8 @@ import { TecnicoService } from '../../../services/tecnico.service';
 import { ChamadoService } from '../../../services/chamado.service';
 import { Chamado } from '../../../models/chamado';
 import { ToastrService } from 'ngx-toastr';
+import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-chamado-create',
@@ -49,7 +51,8 @@ export class ChamadoCreateComponent implements OnInit {
     private clienteService: ClienteService,
     private tecnicoService: TecnicoService,
     private toastrService: ToastrService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   // INICIALIZAÇÃO DO COMPONENTE
@@ -93,10 +96,18 @@ create(): void {
   });
 }
 
-  // MÉTODO CANCELAR AS AÇÕES
-  cancelar(): void {
-      this.router.navigate(['chamados']);
-  }
+  // MÉTODO PARA CANCELAR AS AÇÕES
+    cancelar(): void {
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        width: '300px',
+        data: { message: 'Tem certeza que deseja cancelar a criação?' }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.router.navigate(['chamados']);
+        }
+      });
+    }
 
   // MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO
   validaCampos(): boolean {

@@ -43,63 +43,6 @@
         mask="(00) 00000-0000">
     </mat-form-field>
 
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>CEP</mat-label>
-      <input matInput
-        placeholder="Ex: 36670-000 (digite apenas números)"
-        formControlName="cep"
-        mask="00000-000" />
-    </mat-form-field>
-
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Logradouro</mat-label>
-      <input matInput
-        placeholder="Ex: Rua Nezinho Ferreira"
-        formControlName="logradouro"
-        maxlength="60"/>
-    </mat-form-field>
-
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Número</mat-label>
-      <input matInput
-        placeholder="761-A"
-        formControlName="numero"
-        maxlength="15"/>
-    </mat-form-field>
-
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Bairro</mat-label>
-      <input matInput
-        placeholder="Floresta"
-        formControlName="bairro"
-        maxlength="40"/>
-    </mat-form-field>
-
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Município</mat-label>
-      <input matInput
-        placeholder="Santo Antônio do Aventureiro"
-        formControlName="municipio"
-        maxlength="50"/>
-    </mat-form-field>
-    
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Estado (UF)</mat-label>
-      <mat-select formControlName="uf">
-        <mat-option *ngFor="let estado of estadosBrasileiros" [value]="estado.sigla">
-          {{ estado.nome }} ({{ estado.sigla }})
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Coordenada</mat-label>
-      <input matInput
-        formControlName="coordenada"
-        placeholder="Link ou coordenada em texto"
-        maxlength="100"/>
-    </mat-form-field>
-    
     <!-- BOTÕES DE AÇÃO -->
     <button (click)="delete()" mat-button class="btn-deletar">DELETAR</button>
     <button mat-button class="btn-cancelar" (click)="cancelar()">CANCELAR</button>

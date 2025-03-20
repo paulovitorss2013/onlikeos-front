@@ -25,6 +25,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 // NGX-MASK PARA MASCARAMENTO DE CPF, TELEFONE E ETC...
@@ -58,6 +59,7 @@ import { ChamadoCreateComponent } from './components/chamado/chamado-create/cham
 import { ChamadoUpdateComponent } from './components/chamado/chamado-update/chamado-update.component';
 import { ChamadoReadComponent } from './components/chamado/chamado-read/chamado-read.component';
 import { ChamadoMyListComponent } from './components/chamado/chamado-my-list/chamado-my-list.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +80,8 @@ import { ChamadoMyListComponent } from './components/chamado/chamado-my-list/cha
     ChamadoCreateComponent,
     ChamadoUpdateComponent,
     ChamadoReadComponent,
-    ChamadoMyListComponent
+    ChamadoMyListComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -88,6 +91,7 @@ import { ChamadoMyListComponent } from './components/chamado/chamado-my-list/cha
     HttpClientModule,
     BrowserAnimationsModule,
     MatRadioModule,
+    [MatDialogModule],
 
     // ANGULAR MATERIAL
     MatToolbarModule,

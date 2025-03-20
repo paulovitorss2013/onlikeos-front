@@ -4,6 +4,8 @@ import { TecnicoService } from '../../../services/tecnico.service';
 import { Tecnico } from '../../../models/tecnico';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-tecnico-update',
@@ -41,7 +43,8 @@ export class TecnicoUpdateComponent implements OnInit {
     private service: TecnicoService,
     private toastr: ToastrService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog: MatDialog
   ) {}
 
   // INICIALIZAÇÃO DO COMPONENTE
@@ -146,10 +149,18 @@ export class TecnicoUpdateComponent implements OnInit {
     });
   }
   
-// MÉTODO CANCELAR AS AÇÕES
-cancelar(): void {
-  this.router.navigate(['tecnicos']);
-}
+// MÉTODO PARA CANCELAR AS AÇÕES
+  cancelar(): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: { message: 'Tem certeza que deseja cancelar a edição?' }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.router.navigate(['tecnicos']);
+      }
+    });
+  }
 
   // MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO
   validaCampos(): boolean {

@@ -5,6 +5,9 @@ import { Cliente } from '../../../models/cliente';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, of, tap } from 'rxjs';
+import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-cliente-delete',
@@ -71,7 +74,8 @@ export class ClienteDeleteComponent implements OnInit {
     private service: ClienteService,
     private toastr: ToastrService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog: MatDialog
   ) {}
 
   // INICIALIZAÇÃO DO COMPONENTE
@@ -135,25 +139,34 @@ export class ClienteDeleteComponent implements OnInit {
 
   // MÉTODO PARA DELETAR O CLIENTE
   delete(): void {
-      this.service.delete(this.cliente.id).pipe(
-        tap(() => {
-          this.toastr.success('Cliente deletado com sucesso!', 'Delete');
-          this.router.navigate(['clientes']);
-        }),
-        catchError((error) => {
-          if (error?.error?.errors) {
-            error.error.errors.forEach((element: { message: string }) =>
-              this.toastr.error(element.message)
-            );
-          } else if (error?.error?.message) {
-            this.toastr.error(error.error.message);
-          } else {
-            this.toastr.error('Erro desconhecido ao deletar o cliente.');
-          }
-          return of(null);
-        })
-      ).subscribe();
-    }
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: { message: 'Tem certeza que deseja deletar este cliente?' }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.service.delete(this.cliente.id).pipe(
+          tap(() => {
+            this.toastr.success('Cliente deletado com sucesso!', 'Delete');
+            this.router.navigate(['clientes']);
+          }),
+          catchError((error) => {
+            if (error?.error?.errors) {
+              error.error.errors.forEach((element: { message: string }) =>
+                this.toastr.error(element.message)
+              );
+            } else if (error?.error?.message) {
+              this.toastr.error(error.error.message);
+            } else {
+              this.toastr.error('Erro desconhecido ao deletar o cliente.');
+            }
+            return of(null);
+          })
+        ).subscribe();
+      }
+    });
+  }
  
   
   // MÉTODO PARA CANCELAR AS AÇÕES

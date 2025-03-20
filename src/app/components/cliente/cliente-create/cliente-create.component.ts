@@ -4,6 +4,8 @@ import { ClienteService } from '../../../services/cliente.service';
 import { Cliente } from '../../../models/cliente';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-cliente-create',
@@ -86,7 +88,8 @@ export class ClienteCreateComponent implements OnInit {
   constructor(
     private service: ClienteService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   // INICIALIZAÇÃO DO COMPONENTE
@@ -126,7 +129,15 @@ export class ClienteCreateComponent implements OnInit {
 
   // MÉTODO PARA CANCELAR AS AÇÕES
   cancelar(): void {
-      this.router.navigate(['clientes']);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: { message: 'Tem certeza que deseja cancelar a criação?' }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.router.navigate(['clientes']);
+      }
+    });
   }
 
   // MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO
