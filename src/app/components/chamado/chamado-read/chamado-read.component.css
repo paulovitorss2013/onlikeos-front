@@ -56,6 +56,7 @@ textarea {
   overflow-y: auto; /* Adiciona rolagem se necessário */
   width: 100%; /* Largura total */
   background-color: rgb(233, 233, 233)!important; /* Cor do fundo */
+  margin-bottom: 0.5rem;
 }
 
 /* CONTAINER PARA O BOTÃO */
@@ -78,6 +79,19 @@ button.btn-voltar {
   cursor: pointer; /* Altera o cursor para indicar interatividade */
   background-color: rgb(207, 80, 63); /* Define cor de fundo */
   color: white; /* Define cor do texto */
+}
+
+/* AJUSTE BOTÃO DAS COORDENADAS */
+.botao-coordenadas-container {
+  display: flex; /* Usa flexbox */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  margin-top: 0rem !important; /* Ajuste a margem conforme necessário */
+  margin-bottom: 1rem; /* Ajuste a margem inferior conforme necessário */
+  padding: 0 !important; /* Remove qualquer padding extra */
+  width: 100%; /* Certifique-se de que a largura é 100% */
+  height: 100%; /* Garantir que a altura do container ocupe o necessário */
+  box-sizing: border-box; /* Inclui padding na largura e altura */
 }
 
 /* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */

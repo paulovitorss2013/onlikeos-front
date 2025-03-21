@@ -57,7 +57,14 @@
       <textarea class="dadosCliente" matInput formControlName="dadosCliente" readonly
         placeholder="O cliente não possui informações de endereço e contato.">
       </textarea>
-    </mat-form-field>
+    </mat-form-field> 
+    
+    <!-- BOTÃO DE ABRIR COORDENADAS NO GOOGLE MAPS (Agora dentro do formulário) -->
+    <div *ngIf="chamado.cliente?.coordenada" class="botao-coordenadas-container">
+      <button mat-raised-button color="primary" (click)="abrirNoGoogleMaps(chamado.cliente.coordenada)">
+        ABRIR NO MAPA
+      </button>
+    </div>
 
     <mat-form-field class="full-width text" appearance="outline">
       <mat-label>Relato sobre o chamado</mat-label>

@@ -177,6 +177,18 @@ export class ClienteUpdateComponent implements OnInit {
       }
     });
   }
+
+  // MÉTODO PARA ABRIR COORDENADAS NO GOOGLE MAPS
+abrirNoGoogleMaps(coordenada: string): void {
+  const isGoogleMapsLink = coordenada.startsWith('https://maps.app.goo.gl/');
+  if (isGoogleMapsLink) {
+    window.open(coordenada, '_blank');
+  } else {
+    // Se for uma coordenada simples, abre no Google Maps
+    const url = `https://www.google.com/maps?q=${coordenada}`;
+    window.open(url, '_blank');
+  }
+}
   
 // MÉTODO PARA CANCELAR AS AÇÕES
   cancelar(): void {

@@ -111,6 +111,13 @@
         maxlength="100"/>
     </mat-form-field>
 
+    <!-- BOTÃO PARA ABRIR NO GOOGLE MAPS -->
+    <div *ngIf="cliente.coordenada" class="botao-coordenadas-container">
+      <button mat-raised-button color="primary" (click)="abrirNoGoogleMaps(cliente.coordenada)">
+        ABRIR NO MAPA
+      </button>
+    </div>
+
     <!-- BOTÕES DE AÇÃO -->
     <button (click)="update()" [disabled]="!validaCampos()" mat-button class="btn-atualizar">ATUALIZAR</button>
     <button mat-button class="btn-cancelar" (click)="cancelar()">CANCELAR</button>
