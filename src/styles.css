@@ -52,22 +52,3 @@ html, body {
   color: #000 !important; /* Definir a cor preta */
 }
 
-/* Personalizando o Checkbox */
-.mat-checkbox.mat-checkbox-checked .mat-checkbox-background {
-  background-color: rgb(39, 141, 45) !important; /* Cor verde escuro para o fundo do checkbox selecionado */
-  border-color: rgb(39, 141, 45) !important; /* Fronteira do checkbox para verde escuro */
-}
-
-.mat-checkbox.mat-checkbox-checked .mat-checkbox-checkmark {
-  color: white !important; /* Cor do "check" em branco */
-}
-
-/* Estilo para o estado do checkbox quando é selecionado */
-.mat-checkbox.mat-checkbox-checked {
-  color: rgb(39, 141, 45) !important; /* Cor do texto quando o checkbox está marcado */
-}
-
-/* Adicionando margens para o checkbox */
-.mat-checkbox {
-  margin: 10px 0 !important; /* Ajuste de margem */
-}
