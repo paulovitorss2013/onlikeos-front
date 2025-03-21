@@ -160,8 +160,7 @@ export class ChamadoUpdateComponent implements OnInit {
     });
   }
 
-  // MÉTODO PARA ATUALIZAR UM CHAMADO
-// MÉTODO PARA ATUALIZAR UM CHAMADO COM CONFIRMAÇÃO
+// MÉTODO PARA ATUALIZAR UM CHAMADO
 update(): void {
   const dialogRef = this.dialog.open(ConfirmDialogComponent, {
     width: '300px',

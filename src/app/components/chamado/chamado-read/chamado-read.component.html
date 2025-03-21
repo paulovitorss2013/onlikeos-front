@@ -17,6 +17,11 @@
       <input matInput formControlName="dataAbertura" readonly title="Data Abertura">
     </mat-form-field>
 
+    <mat-form-field class="full-width" appearance="outline" *ngIf="form.get('dataFechamento')?.value">
+      <mat-label>Data Fechamento</mat-label>
+      <input matInput formControlName="dataFechamento" readonly title="Data Fechamento">
+    </mat-form-field>
+
     <div class="status-prioridade">
       <mat-form-field>
         <mat-label>Status</mat-label>
@@ -46,13 +51,15 @@
       <mat-label>Cliente</mat-label>
       <input matInput formControlName="cliente" readonly title="Nome do cliente">
     </mat-form-field>
-
-    <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Data Fechamento</mat-label>
-      <input matInput formControlName="dataFechamento" readonly title="Data Fechamento">
+    
+    <mat-form-field class="full-width text" appearance="outline">
+      <mat-label>Dados do Cliente</mat-label>
+      <textarea class="dadosCliente" matInput formControlName="dadosCliente" readonly
+        placeholder="O cliente não possui informações de endereço e contato.">
+      </textarea>
     </mat-form-field>
 
-    <mat-form-field class="full-width observacoes" appearance="outline">
+    <mat-form-field class="full-width text" appearance="outline">
       <mat-label>Relato sobre o chamado</mat-label>
       <textarea matInput formControlName="observacoes" readonly
                 placeholder="Descreva o relato sobre o chamado"
@@ -60,13 +67,12 @@
       </textarea>
     </mat-form-field>
 
-    <mat-form-field *ngIf="form.get('procedimentos')?.value" class="full-width procedimentos" appearance="outline">
-      <mat-label>Procedimentos Registrados</mat-label>
-      <textarea matInput formControlName="procedimentos" readonly
-                placeholder="Exemplo: Trocado o roteador..."
-                title="Procedimentos">
-      </textarea>
-    </mat-form-field>
+     <!-- ÁREA DOS PROCEDIMENTOS -->
+     <h2>Histórico dos Procedimentos</h2>
+     <mat-form-field class="full-width text" appearance="outline">
+       <textarea class="procedimentos" matInput formControlName="procedimentos" 
+       placeholder="Histórico dos Procedimentos" readonly></textarea>
+     </mat-form-field>
 
     <!-- BOTÃO VOLTAR -->
     <div class="button-container">

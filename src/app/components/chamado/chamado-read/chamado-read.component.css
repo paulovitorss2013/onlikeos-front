@@ -25,6 +25,15 @@ h1 {
   margin-bottom: 1.5rem; /* Adiciona espaçamento abaixo do título */
 }
 
+/* ESTILIZA O TÍTULO H2 */
+h2 {
+  width: 100%; /* Largura total */
+  text-align: center; /* Centraliza o texto */
+  border: 0; /* Remove todas as bordas */
+  margin: 0; /* Remove todas as margens */
+  color: rgb(39, 141, 45); /* Cor do texto do h2 */
+}
+
 /* DEFINE LARGURA TOTAL PARA OS CAMPOS */
 .full-width {
   width: 100%; /* Faz com que os campos ocupem toda a largura disponível */
@@ -36,18 +45,17 @@ h1 {
   justify-content: space-between; /* Distribui os elementos */
   flex-direction: column; /* Organiza os itens um abaixo do outro */
   gap: 16px; /* Adiciona espaçamento entre os elementos */
-}
-.status-prioridade mat-form-field {
   width: 100%; /* Faz os campos ocuparem toda a largura disponível */
 }
 
-/* AJUSTE DO TAMANHO DO CAMPO DE OBSERVAÇÕES */
+/* AJUSTE DA ÁREA DE TEXTO */
 textarea {
-  min-height: 120px; /* Define altura mínima */
-  max-height: 200px; /* Define altura máxima */
-  resize: vertical; /* Permite redimensionamento vertical */
-  overflow-y: auto; /* Adiciona rolagem caso necessário */
-  width: 100%; /* Faz o textarea ocupar toda a largura disponível */
+  min-height: 120px; /* Altura mínima */
+  max-height: 200px; /* Altura máxima */
+  resize: vertical; /* Permite ajuste de tamanho vertical */
+  overflow-y: auto; /* Adiciona rolagem se necessário */
+  width: 100%; /* Largura total */
+  background-color: rgb(233, 233, 233)!important; /* Cor do fundo */
 }
 
 /* CONTAINER PARA O BOTÃO */
@@ -70,41 +78,6 @@ button.btn-voltar {
   cursor: pointer; /* Altera o cursor para indicar interatividade */
   background-color: rgb(207, 80, 63); /* Define cor de fundo */
   color: white; /* Define cor do texto */
-}
-
-/* Garante que os campos readonly tenham aparência normal */
-mat-form-field input[readonly],
-mat-form-field textarea[readonly],
-mat-form-field input.mat-input-element[readonly] {
-  color: black; /* Define a cor do texto */
-  background-color: white; /* Define cor de fundo */
-  opacity: 1; /* Mantém a opacidade normal */
-  cursor: text; /* Altera o cursor para indicar que é texto */
-  border-color: rgba(0, 0, 0, 0.42); /* Define a cor da borda */
-}
-
-/* Ajusta especificamente para inputs de datas */
-mat-form-field input[readonly][type="date"] {
-  -webkit-appearance: none; /* Remove estilos padrões do navegador */
-  -moz-appearance: textfield; /* Remove estilos padrões do Firefox */
-  appearance: none; /* Remove estilos padrões */
-  background-color: white; /* Define cor de fundo */
-  cursor: text; /* Altera o cursor para indicar que é texto */
-}
-
-/* Para garantir que os selects também fiquem normais */
-mat-form-field .readonly-select {
-  pointer-events: none; /* Impede interação */
-  color: black; /* Define cor do texto */
-  opacity: 1; /* Mantém a opacidade normal */
-  background-color: white; /* Define cor de fundo */
-  cursor: default; /* Define cursor padrão */
-}
-
-/* Remove o efeito apagado das opções dentro dos selects */
-mat-form-field .readonly-select .mat-option {
-  color: black; /* Define cor do texto */
-  opacity: 1; /* Mantém a opacidade normal */
 }
 
 /* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */

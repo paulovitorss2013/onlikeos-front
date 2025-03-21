@@ -38,7 +38,7 @@ $custom-green: (
 // CRIANDO A PALETA PERSONALIZADA
 $custom-primary: mat.define-palette($custom-green, 500);
 
-// CRIANDO A 
+// CRIANDO O TEMA
 $custom-theme: mat.define-light-theme((
   color: (
     primary: $custom-primary,
@@ -46,5 +46,5 @@ $custom-theme: mat.define-light-theme((
   )
 ));
 
-// Aplicar o tema ao Angular Material
+// APLICANDO O TEMA AO ANGULA MATERIAL
 @include mat.all-component-themes($custom-theme);

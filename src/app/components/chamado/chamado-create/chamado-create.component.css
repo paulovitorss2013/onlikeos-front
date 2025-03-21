@@ -55,6 +55,7 @@ textarea {
   resize: vertical; /* Permite ajuste de tamanho vertical */
   overflow-y: auto; /* Adiciona rolagem vertical se necessário */
   width: 100%; /* Faz o campo ocupar toda a largura */
+  background-color: rgb(233, 233, 233)!important; /* Cor do fundo */
 }
 
 /* CONTAINER PARA OS BOTÕES */

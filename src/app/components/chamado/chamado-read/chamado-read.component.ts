@@ -58,28 +58,30 @@ export class ChamadoReadComponent implements OnInit {
     }
   }
 
-  /// MÉTODO BUSCAR AS INFORMAÇÕES PELO ID
-  findById(): void {
-    this.chamadoService.findById(this.chamado.id).subscribe({
-      next: (resposta) => {
-        this.chamado = resposta;
-        this.form.patchValue({
-          titulo: this.chamado.titulo,
-          dataAbertura: this.chamado.dataAbertura,
-          prioridade: this.chamado.prioridade.toString(),
-          status: this.chamado.status.toString(),
-          tecnico: this.chamado.nomeTecnico,
-          cliente: this.chamado.nomeCliente,
-          dataFechamento: this.chamado.dataFechamento,
-          observacoes: this.chamado.observacoes,
-          procedimentos: this.chamado.procedimentos
-        });
-      },
-      error: (ex) => {
-        this.toastrService.error(ex.error.error);
-      }
-    });
-  }
+// MÉTODO BUSCAR AS INFORMAÇÕES PELO ID
+findById(): void {
+  this.chamadoService.findById(this.chamado.id).subscribe({
+    next: (resposta) => {
+      this.chamado = resposta;
+      const procedimentos = this.chamado.procedimentos?.trim() || 'Nenhum procedimento registrado para esse chamado.';
+      
+      this.form.patchValue({
+        titulo: this.chamado.titulo,
+        dataAbertura: this.chamado.dataAbertura,
+        prioridade: this.chamado.prioridade.toString(),
+        status: this.chamado.status.toString(),
+        tecnico: this.chamado.nomeTecnico,
+        cliente: this.chamado.nomeCliente,
+        dataFechamento: this.chamado.dataFechamento,
+        observacoes: this.chamado.observacoes,
+        procedimentos: procedimentos
+      });
+    },
+    error: (ex) => {
+      this.toastrService.error(ex.error.error);
+    }
+  });
+}
 
   // VOLTA PARA A TELA DOS CHAMADOS
   voltar(): void {
