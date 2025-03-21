@@ -44,6 +44,14 @@
         mask="(00) 00000-0000" >
     </mat-form-field>
 
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Telefone</mat-label>
+      <input matInput
+        placeholder="Ex: (00) 0000-0000 (digite apenas números)"
+        formControlName="telefone"
+        mask="(00) 0000-0000" >
+    </mat-form-field>
+
     <!-- BOTÕES DE AÇÃO -->
     <button (click)="delete()" mat-button class="btn-deletar">DELETAR</button>
     <button mat-button class="btn-cancelar" (click)="cancelar()">CANCELAR</button>

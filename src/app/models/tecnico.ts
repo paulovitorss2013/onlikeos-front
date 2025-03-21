@@ -4,6 +4,7 @@ export interface Tecnico {
   cpfCnpj: string;
   email: string;
   celular: string;
+  telefone: string;
   senha: string;
   perfis: string[];
   dataCriacao?: any;

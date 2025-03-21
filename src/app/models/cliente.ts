@@ -4,6 +4,7 @@ export interface Cliente {
   cpfCnpj: string;
   email: string;
   celular: string;
+  telefone: string;
   senha: string;
   dataCriacao?: any;
   cep: string;

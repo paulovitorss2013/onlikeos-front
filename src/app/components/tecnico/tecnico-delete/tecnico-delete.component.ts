@@ -23,6 +23,7 @@ export class TecnicoDeleteComponent implements OnInit {
     email: '',
     senha: '',
     celular: '',
+    telefone: '',
     perfis: [],
     dataCriacao: ''
   };
@@ -32,6 +33,7 @@ export class TecnicoDeleteComponent implements OnInit {
     nome: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.minLength(10)]),
     cpfCnpj: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.minLength(11)]),
     celular: new FormControl({ value: '', disabled: true }, [Validators.minLength(11)]),
+    telefone: new FormControl({ value: '', disabled: true }, [Validators.minLength(11)]),
     email: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.email]),
     senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
     perfis: new FormControl([]),
@@ -70,6 +72,7 @@ export class TecnicoDeleteComponent implements OnInit {
           nome: resposta.nome,
           cpfCnpj: resposta.cpfCnpj,
           celular: resposta.celular,
+          telefone: resposta.telefone,
           email: resposta.email,
           senha: resposta.senha,
           perfis: resposta.perfis || [],

@@ -22,6 +22,7 @@ export class TecnicoCreateComponent implements OnInit {
   email: '',
   senha: '',
   celular: '',
+  telefone: '',
   perfis: [],
   dataCriacao:''
  }
@@ -30,7 +31,8 @@ export class TecnicoCreateComponent implements OnInit {
   form: FormGroup = new FormGroup({
     nome: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(60)]),
     cpfCnpj: new FormControl('', [Validators.required, Validators.minLength(11), Validators.maxLength(18)]),
-    celular: new FormControl('', [Validators.minLength(11), Validators.maxLength(15)]),
+    celular: new FormControl('', [Validators.minLength(11)]),
+    telefone: new FormControl('', [Validators.minLength(10)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     senha: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]),
     perfis: new FormControl([])

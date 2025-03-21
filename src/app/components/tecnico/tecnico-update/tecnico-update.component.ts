@@ -22,6 +22,7 @@ export class TecnicoUpdateComponent implements OnInit {
     email: '',
     senha: '',
     celular: '',
+    telefone: '',
     perfis: [],
     dataCriacao: ''
   };
@@ -31,6 +32,7 @@ export class TecnicoUpdateComponent implements OnInit {
     nome: new FormControl('', [Validators.required, Validators.minLength(10)]),
     cpfCnpj: new FormControl('', [Validators.required, Validators.minLength(11)]),
     celular: new FormControl('', [Validators.minLength(11)]),
+    telefone: new FormControl('', [Validators.minLength(10)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
     perfis: new FormControl([]),
@@ -70,6 +72,7 @@ export class TecnicoUpdateComponent implements OnInit {
           nome: resposta.nome,
           cpfCnpj: resposta.cpfCnpj,
           celular: resposta.celular,
+          telefone: resposta.telefone,
           email: resposta.email,
           senha: resposta.senha,
           perfis: resposta.perfis || [],
@@ -124,6 +127,7 @@ export class TecnicoUpdateComponent implements OnInit {
       cpfCnpj: this.form.value.cpfCnpj,
       email: this.form.value.email,
       celular: this.form.value.celular,
+      telefone: this.form.value.telefone,
       senha: this.form.value.senha,
       perfis: perfisConvertidos.map(p => p.toString()),
       dataCriacao: this.tecnico.dataCriacao
