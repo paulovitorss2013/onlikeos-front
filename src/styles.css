@@ -1,5 +1,6 @@
 /* ESTILOS GLOBAIS */
 @import '../node_modules/ngx-toastr/toastr.css';
+@import 'theme.scss';
 
 html, body {
   height: 100%;
@@ -7,48 +8,39 @@ html, body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-/* Personalizando a cor dos rótulos (mat-label) */
+/* PERSONALIZANDO A COR DOS RÓTULOS (MAT-LABEL) */
 .mat-mdc-form-field .mdc-floating-label {
   color: #000 !important;
 }
 
-/* Personalizando a borda dos inputs e a cor do texto */
+/* PERSONALIZANDO A BORDA DOS INPUTS E A COR DO TEXTO */
 .mat-mdc-form-field {
   --mdc-filled-text-field-caret-color: rgb(39, 141, 45);
   --mdc-filled-text-field-focus-label-text-color: rgb(39, 141, 45);
   --mdc-filled-text-field-focus-active-indicator-color: rgb(39, 141, 45);
 }
 
+/* PERSONALIZANDO A COR DO TEXTO EM INPUTS, TEXTAREA E MAT-SELECT */
 .mat-mdc-form-field input,
 .mat-mdc-form-field textarea,
-.mat-mdc-select-value {
-  color: #000 !important; /* Cor preta do texto */
-}
-
-/* Personalizando as opções dentro do mat-select */
+.mat-mdc-select-value,
 .mat-mdc-option {
-  color: #000 !important; /* Cor do texto das opções */
+  color: #000 !important;
 }
 
+/* PERSONALIZANDO A OPÇÃO SELECIONADA NO MAT-SELECT */
 .mat-mdc-option.mat-mdc-option-selected {
-  color: #000 !important; /* Texto preto */
-  background-color: transparent !important; /* Fundo transparente */
+  background-color: transparent !important;
 }
 
-.mat-mdc-option.mat-mdc-option-selected:hover {
-  color: #000 !important; /* Texto preto na opção selecionada em hover */
-}
-
-/* Quando o campo está em foco */
+/* QUANDO O CAMPO ESTÁ EM FOCO */
 .mat-mdc-form-field.mat-mdc-form-field--focused .mdc-floating-label,
 .mat-mdc-form-field.mat-mdc-form-field--focused .mat-mdc-select-value {
-  color: rgb(39, 141, 45) !important; /* Cor verde para o label no foco e texto selecionado */
+  color: rgb(39, 141, 45) !important;
 }
 
-/* Remover o fundo azul do item selecionado */
+/* REMOVER O FUNDO PADRÃO DO ITEM SELECIONADO */
 .mat-mdc-select:focus .mat-mdc-select-value,
 .mat-mdc-option.mat-mdc-option-selected {
-  background-color: transparent !important; /* Remover o fundo azul padrão */
-  color: #000 !important; /* Definir a cor preta */
+  background-color: transparent !important;
 }
-

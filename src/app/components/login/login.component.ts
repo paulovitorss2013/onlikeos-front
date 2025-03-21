@@ -80,8 +80,9 @@ export class LoginComponent implements OnInit {
   
           const authorization = resposta.headers?.get('Authorization');
           if (authorization) {
-            const userEmail = this.creds.email;  // Recupera o email diretamente de `creds`
-            this.service.successfulLogin(authorization.substring(7), userEmail);  // Passa o email junto com o token
+            const userEmail = this.creds.email;
+            this.service.successfulLogin(authorization.substring(7), userEmail);
+            this.toast.success('Seja bem-vindo!', 'Logado com sucesso!')
             this.router.navigate(['home']).catch(() => {
               this.toast.error('Erro ao redirecionar para a home.', 'Login');
             });

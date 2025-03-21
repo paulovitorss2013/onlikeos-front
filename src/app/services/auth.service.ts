@@ -28,7 +28,7 @@ export class AuthService {
   successfulLogin(authToken: string, email: string): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('token', authToken);
-      localStorage.setItem('userEmail', email);  // Salva o email no localStorage
+      localStorage.setItem('userEmail', email);
     }
   }
 

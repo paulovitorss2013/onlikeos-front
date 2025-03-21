@@ -1,0 +1,50 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+// Criar uma paleta personalizada com todos os tons necessários
+$custom-green: (
+  50: #e3f3e5,
+  100: #b9e0be,
+  200: #8ccf94,
+  300: #5fbd6a,
+  400: #3ea951,
+  500: #278d2d,
+  600: #23812a,
+  700: #1d7223,
+  800: #17551b,
+  900: #113e14,
+  A100: #a6ffaf,
+  A200: #6fff7c,
+  A400: #3aff4d,
+  A700: #20ff38,
+  contrast: (
+    50: black,
+    100: black,
+    200: black,
+    300: black,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: black,
+    A200: black,
+    A400: black,
+    A700: black,
+  ),
+);
+
+// CRIANDO A PALETA PERSONALIZADA
+$custom-primary: mat.define-palette($custom-green, 500);
+
+// CRIANDO A 
+$custom-theme: mat.define-light-theme((
+  color: (
+    primary: $custom-primary,
+    accent: mat.define-palette(mat.$amber-palette, 500),
+  )
+));
+
+// Aplicar o tema ao Angular Material
+@include mat.all-component-themes($custom-theme);
