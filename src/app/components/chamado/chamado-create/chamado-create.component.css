@@ -99,6 +99,22 @@ button.btn-cancelar {
   color: white; /* Define a cor do texto */
 }
 
+.mat-mdc-select-panel {
+  white-space: normal !important; /* Permite que o conteúdo dentro do painel quebre a linha */
+  word-wrap: break-word !important; /* Quebra as palavras longas */
+  max-width: 100% !important; /* Garante que o painel use toda a largura disponível */
+  display: block !important; /* Assegura que o painel seja renderizado corretamente */
+}
+
+.mat-mdc-option {
+  white-space: normal !important; /* Permite quebra de linha dentro das opções */
+  word-wrap: break-word !important; /* Quebra palavras longas */
+  overflow-wrap: break-word !important;
+  display: flex !important;
+  align-items: center !important;
+  max-width: 100% !important;
+}
+
 /* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
 @media (min-width: 768px) {
   .status-prioridade {
@@ -133,4 +149,5 @@ button.btn-cancelar {
   .tipo mat-form-field {
     width: 100%; /* Faz os campos ocuparem toda a largura */
   }
+
 }

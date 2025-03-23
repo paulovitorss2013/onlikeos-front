@@ -139,9 +139,7 @@ export class TecnicoUpdateComponent implements OnInit {
         this.router.navigate(['tecnicos']);
       },
       error: (ex) => {
-        // Se for erro 403, não exibir outro toast
         if (ex.status === 403) return;
-  
         if (ex.error?.errors) {
           ex.error.errors.forEach((element: { message: string }) =>
             this.toastr.error(element.message)
