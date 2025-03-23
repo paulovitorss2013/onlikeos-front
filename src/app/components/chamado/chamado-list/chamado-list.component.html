@@ -51,18 +51,10 @@
     <table mat-table [dataSource]="dataSource">
 
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> Número </th>
+        <th mat-header-cell *matHeaderCellDef>Protocolo</th>
         <td mat-cell *matCellDef="let element"
             [ngClass]="{'status-aberto': element.status === 0, 'status-encerrado': element.status === 2}">
-          {{element.id}}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="titulo">
-        <th mat-header-cell *matHeaderCellDef> Título </th>
-        <td mat-cell *matCellDef="let element"
-            [ngClass]="{'status-aberto': element.status === 0, 'status-encerrado': element.status === 2}">
-          {{element.titulo}}
+          {{ formatarId(element.id) }}
         </td>
       </ng-container>
 

@@ -21,9 +21,9 @@ export class ChamadoUpdateComponent implements OnInit {
 
   // INSTÂNCIA DO CHAMADO
   chamado: Chamado = {
+    id: '',
     prioridade: '',
     status: '',
-    titulo: '',
     observacoes: '',
     procedimentos: '',
     tecnico: '',
@@ -38,7 +38,7 @@ export class ChamadoUpdateComponent implements OnInit {
 
   // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
-    titulo: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    id: new FormControl(''),
     prioridade: new FormControl('', [Validators.required]),
     status: new FormControl('', [Validators.required]),
     observacoes: new FormControl('', [Validators.required, Validators.minLength(15)]),
@@ -93,20 +93,31 @@ export class ChamadoUpdateComponent implements OnInit {
     });
   }
 
+  // MÉTODO PARA FORMATAR O ID
+  private formatarId(id: string | number): string {
+    const anoCorrente = new Date().getFullYear(); // Obtém o ano atual
+    return `${String(id).padStart(4, '0')}/${anoCorrente}`;
+  }
+
   // MÉTODO BUSCAR AS INFORMAÇÕES PELO ID
   findById(): void {
     this.chamadoService.findById(this.chamado.id).subscribe({
       next: (resposta) => {
         this.chamado = resposta;
+  
         const procedimentos = this.chamado.procedimentos?.trim() || 'Nenhum procedimento registrado para esse chamado.';
+        const idFormatado = this.formatarId(this.chamado.id);
+  
         this.form.patchValue({
-          titulo: this.chamado.titulo,
+          id: idFormatado,
+          dataAbertura: this.chamado.dataAbertura,
           prioridade: this.chamado.prioridade.toString(),
           status: this.chamado.status.toString(),
+          tecnico: this.chamado.nomeTecnico,
+          cliente: this.chamado.nomeCliente,
+          dataFechamento: this.chamado.dataFechamento,
           observacoes: this.chamado.observacoes,
-          procedimentos: procedimentos,
-          tecnico: this.chamado.tecnico,
-          cliente: this.chamado.cliente
+          procedimentos: procedimentos
         });
       },
       error: (ex) => {

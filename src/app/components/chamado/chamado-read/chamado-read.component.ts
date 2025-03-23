@@ -15,7 +15,7 @@ export class ChamadoReadComponent implements OnInit {
 
   // INSTÂNCIA DO CHAMADO
   chamado: Chamado = {
-    titulo: '',
+    id: '',
     dataAbertura: '',
     prioridade: '',
     status: '',
@@ -30,7 +30,7 @@ export class ChamadoReadComponent implements OnInit {
 
   // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
-    titulo: new FormControl({ value: '', disabled: true }),
+    id: new FormControl({ value: '', disabled: true }),
     dataAbertura: new FormControl({ value: '', disabled: true }),
     prioridade: new FormControl({ value: '', disabled: true }),
     status: new FormControl({ value: '', disabled: true }),
@@ -105,9 +105,11 @@ export class ChamadoReadComponent implements OnInit {
  `${this.chamado.cliente.coordenada ? `Coordenadas: ${this.chamado.cliente.coordenada}` : ''}`
  : 'Dados do cliente não encontrados.';
 
+const anoCorrente = new Date().getFullYear();
+const idFormatado = `${String(this.chamado.id).padStart(4, '0')}/${anoCorrente}`;
 
     this.form.patchValue({
-      titulo: this.chamado.titulo,
+      id: idFormatado,
       dataAbertura: this.chamado.dataAbertura,
       prioridade: this.chamado.prioridade.toString(),
       status: this.chamado.status.toString(),

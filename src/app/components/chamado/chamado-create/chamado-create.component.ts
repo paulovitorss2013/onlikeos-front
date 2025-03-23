@@ -22,7 +22,6 @@ export class ChamadoCreateComponent implements OnInit {
   chamado: Chamado = {
     prioridade: '',
     status: '',
-    titulo: '',
     observacoes: '',
     procedimentos: '',
     tecnico: '',
@@ -37,7 +36,6 @@ export class ChamadoCreateComponent implements OnInit {
 
   // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
-    titulo: new FormControl('', [Validators.required, Validators.minLength(10)]),
     prioridade: new FormControl('', [Validators.required]),
     status: new FormControl('', [Validators.required]),
     observacoes: new FormControl('', [Validators.required, Validators.minLength(15)]),

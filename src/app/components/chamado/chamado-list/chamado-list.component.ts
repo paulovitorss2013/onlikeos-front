@@ -19,6 +19,14 @@ export class ChamadoListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'cliente', 'tecnico', 'prioridade', 'status', 'acoes'];
   dataSource = new MatTableDataSource<Chamado>(this.ELEMENT_DATA);
 
+
+  // FORMATAÇÃO DO NÚMERO DO CHAMADO
+  formatarId(id: number): string {
+    const anoAtual = new Date().getFullYear(); 
+    const idFormatado = id.toString().padStart(4, '0');
+    return `${idFormatado}/${anoAtual}`;
+  }
+
   // REFERÊNCIA DO PAGINATOR
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -56,7 +64,6 @@ export class ChamadoListComponent implements OnInit {
       filter = filter.trim().toLowerCase();
       return (
         data.id.toString().includes(filter) ||
-        data.titulo.toLowerCase().includes(filter) ||
         data.nomeCliente.toLowerCase().includes(filter) ||
         data.nomeTecnico.toLowerCase().includes(filter) ||
         this.retornaStatus(data.status).toLowerCase().includes(filter) ||
@@ -91,7 +98,6 @@ export class ChamadoListComponent implements OnInit {
       const normalizeText = (text: string) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
       
       const matchesText = this.filterText === '' ||
-        normalizeText(element.titulo).includes(normalizeText(this.filterText)) ||
         normalizeText(element.nomeCliente).includes(normalizeText(this.filterText)) ||
         normalizeText(element.nomeTecnico).includes(normalizeText(this.filterText)) ||
         normalizeText(this.retornaStatus(element.status)).includes(normalizeText(this.filterText)) ||
