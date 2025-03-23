@@ -1,6 +1,7 @@
 export interface Cliente {
   id?: any;
   nome: string;
+  login: string;
   cpfCnpj: string;
   email: string;
   celular: string;

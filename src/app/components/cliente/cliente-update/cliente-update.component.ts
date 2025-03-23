@@ -18,6 +18,7 @@ export class ClienteUpdateComponent implements OnInit {
   cliente: Cliente = {
     id: '',
     nome: '',
+    login: '',
     cpfCnpj: '',
     email: '',
     senha: 'erNB1PZ@q*Wv76Fdr0TM',
@@ -53,6 +54,7 @@ export class ClienteUpdateComponent implements OnInit {
   // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
     nome: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    login: new FormControl('', [Validators.required, Validators.minLength(6)]),
     cpfCnpj: new FormControl('', [Validators.required, Validators.minLength(11)]),
     celular: new FormControl('', [Validators.minLength(11)]),
     telefone: new FormControl('', [Validators.minLength(10)]),
@@ -93,17 +95,16 @@ export class ClienteUpdateComponent implements OnInit {
     this.service.findById(this.cliente.id).subscribe({
       next: (resposta) => {
         this.cliente = resposta;
-        // Atualizar a máscara de CPF/CNPJ baseado na resposta
         if (resposta.cpfCnpj?.length === 11) {
-          this.cpfCnpjMask = '000.000.000-00'; // MÁSCARA PARA CPF
-          this.tipoCliente = 'Pessoa Física';  // Define como Pessoa Física
+          this.cpfCnpjMask = '000.000.000-00'; 
+          this.tipoCliente = 'Pessoa Física';  
         } else if (resposta.cpfCnpj?.length === 14) {
-          this.cpfCnpjMask = '00.000.000/0000-00'; // MÁSCARA PARA CNPJ
-          this.tipoCliente = 'Pessoa Jurídica';  // Define como Pessoa Jurídica
+          this.cpfCnpjMask = '00.000.000/0000-00'; 
+          this.tipoCliente = 'Pessoa Jurídica';  
         }
-        // Preencher o formulário com os dados da resposta da API
         this.form.patchValue({
           nome: resposta.nome,
+          login: resposta.login,
           cpfCnpj: resposta.cpfCnpj,
           celular: resposta.celular,
           telefone: resposta.telefone,
@@ -145,6 +146,7 @@ export class ClienteUpdateComponent implements OnInit {
     const cliente: Cliente = {
       id: this.cliente.id,
       nome: this.form.value.nome,
+      login: this.form.value.login,
       cpfCnpj: this.form.value.cpfCnpj,
       email: this.form.value.email,
       celular: this.form.value.celular,
