@@ -37,17 +37,6 @@ h1 {
   gap: 16px; /* Adiciona espaçamento entre os elementos */
 }
 
-.tipo {
-  display: flex; /* Flexbox, mas sem necessidade de coluna */
-  flex-direction: column; /* Mantém alinhamento vertical */
-  gap: 16px;
-  width: 100%; /* Certifica-se de que ocupa toda a largura */
-}
-
-.tipo mat-form-field {
-  width: 100%; /* Garantir que os mat-form-field ocupem toda a largura */
-}
-
 /* CONTAINER PARA O CAMPO DE OBSERVAÇÕES */
 .observacoes-container {
   display: flex; /* Usa flexbox para organização */

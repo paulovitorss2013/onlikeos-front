@@ -6,13 +6,23 @@
 
     <!-- FORMULÁRIO -->
     <form class="form" [formGroup]="form">
-  
+      
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Número do Protocolo</mat-label>
+        <input matInput formControlName="id" readonly title="id">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Selecione o Tipo</mat-label>
+        <mat-select formControlName="tipo">
+          <mat-option value="0">Instalação</mat-option>
+          <mat-option value="1">Reparo</mat-option>
+          <mat-option value="2">Financeiro</mat-option>
+          <mat-option value="3">Cancelamento</mat-option>
+        </mat-select>
+      </mat-form-field>
+
       <div class="status-prioridade">
-        
-        <mat-form-field class="full-width" appearance="outline">
-          <mat-label>Número do Protocolo</mat-label>
-          <input matInput formControlName="id" readonly title="id">
-        </mat-form-field>
 
         <mat-form-field>
           <mat-label>Status</mat-label>
