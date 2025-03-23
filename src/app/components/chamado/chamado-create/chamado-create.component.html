@@ -42,8 +42,9 @@
       <mat-form-field class="full-width">
         <mat-label>Selecione o Técnico</mat-label>
         <mat-select formControlName="tecnico">
-          <mat-option *ngFor="let tec of tecnicos"
-          value="{{ tec.id }}">{{ tec.nome}}</mat-option>
+          <mat-option *ngFor="let tec of tecnicos" [value]="tec.id">
+            {{ tec.nome }}, CPF: {{ tec.cpfCnpj | mask: '000.000.000-00' }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -52,8 +53,9 @@
       <mat-form-field class="full-width">
         <mat-label>Selecione o Cliente</mat-label>
         <mat-select formControlName="cliente">
-          <mat-option *ngFor="let cli of clientes"
-          value="{{ cli.id }}">{{ cli.nome}}</mat-option>
+          <mat-option *ngFor="let cli of clientes" [value]="cli.id">
+            {{ cli.nome }}, CPF/CNPJ: {{ formatarCpfCnpj(cli.cpfCnpj) }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
     </div>

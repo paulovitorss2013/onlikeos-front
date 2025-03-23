@@ -6,23 +6,13 @@
 
     <!-- FORMULÁRIO -->
     <form class="form" [formGroup]="form">
-      
-      <mat-form-field class="full-width" appearance="outline">
-        <mat-label>Número do Protocolo</mat-label>
-        <input matInput formControlName="id" readonly title="id">
-      </mat-form-field>
-
-      <mat-form-field class="full-width">
-        <mat-label>Selecione o Tipo</mat-label>
-        <mat-select formControlName="tipo">
-          <mat-option value="0">Instalação</mat-option>
-          <mat-option value="1">Reparo</mat-option>
-          <mat-option value="2">Financeiro</mat-option>
-          <mat-option value="3">Cancelamento</mat-option>
-        </mat-select>
-      </mat-form-field>
-
+  
       <div class="status-prioridade">
+        
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Número do Protocolo</mat-label>
+          <input matInput formControlName="id" readonly title="id">
+        </mat-form-field>
 
         <mat-form-field>
           <mat-label>Status</mat-label>
@@ -43,27 +33,23 @@
         </mat-form-field>
       </div>
   
-      <div class="tecnico">
-        <mat-form-field class="full-width">
-          <mat-label>Técnico Responsável</mat-label>
-          <mat-select formControlName="tecnico">
-            <mat-option *ngFor="let tec of tecnicos" [value]="tec.id">
-              {{ tec.nome }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-  
-      <div class="cliente">
-        <mat-form-field class="full-width">
-          <mat-label>Cliente</mat-label>
-          <mat-select formControlName="cliente">
-            <mat-option *ngFor="let cli of clientes" [value]="cli.id">
-              {{ cli.nome }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+      <mat-form-field class="full-width">
+        <mat-label>Técnico Responsável</mat-label>
+        <mat-select formControlName="tecnico">
+          <mat-option *ngFor="let tec of tecnicos" [value]="tec.id">
+            {{ tec.nome }} - CPF: {{ formatarCpfCnpj(tec.cpfCnpj) }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      <mat-form-field class="full-width">
+        <mat-label>Cliente</mat-label>
+        <mat-select formControlName="cliente">
+          <mat-option *ngFor="let cli of clientes" [value]="cli.id">
+            {{ cli.nome }}, CPF/CNPJ: {{ formatarCpfCnpj(cli.cpfCnpj) }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
   
       <mat-form-field class="full-width text" appearance="outline">
         <mat-label>Relato sobre o chamado</mat-label>

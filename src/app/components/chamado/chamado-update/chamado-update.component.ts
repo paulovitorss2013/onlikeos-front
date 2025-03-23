@@ -74,16 +74,32 @@ export class ChamadoUpdateComponent implements OnInit {
     this.syncChamadoComFormulario();
   }
 
-  // MÉTODO PARA LISTAR TODOS OS CLIENTES
+  // MÉTODO PARA FORMATAR O CPF OU CNPJ
+  formatarCpfCnpj(valor: string): string {
+  if (!valor) return '';
+  const cleaned = valor.replace(/\D/g, '');  // Remove tudo que não é número
+  if (cleaned.length === 11) {
+    // Formatar como CPF: 000.000.000-00
+    return cleaned.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+  } else if (cleaned.length === 14) {
+    // Formatar como CNPJ: 00.000.000/0000-00
+    return cleaned.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+   }
+   return valor;
+ }
+
+  // MÉTODO PARA BUSCAR TODOS OS CLIENTES
   findAllClientes(): void {
     this.clienteService.findAll().subscribe(resposta => {
+      console.log('Clientes carregados:', resposta);  // Verifique aqui
       this.clientes = resposta;
     });
   }
-
-  // MÉTODO PARA LISTAR TODOS OS TÉCNICOS
+  
+  // MÉTODO PARA BUSCAR TODOS OS TÉCNICOS
   findAllTecnicos(): void {
     this.tecnicoService.findAll().subscribe(resposta => {
+      console.log('Técnicos carregados:', resposta);  // Verifique aqui
       this.tecnicos = resposta;
     });
   }
@@ -107,17 +123,26 @@ export class ChamadoUpdateComponent implements OnInit {
       next: (resposta) => {
         this.chamado = resposta;
   
+        // Buscar cliente e técnico pelos IDs e formatar os nomes com CPF/CNPJ
+        const tecnico = this.tecnicos.find(tecnico => tecnico.id === this.chamado.tecnico);
+        const cliente = this.clientes.find(cliente => cliente.id === this.chamado.cliente);
+  
+        // Atualizar nome com CPF/CNPJ
+        this.chamado.nomeTecnico = tecnico ? `${tecnico.nome} - CPF/CNPJ: ${this.formatarCpfCnpj(tecnico.cpfCnpj)}` : '';
+        this.chamado.nomeCliente = cliente ? `${cliente.nome} - CPF/CNPJ: ${this.formatarCpfCnpj(cliente.cpfCnpj)}` : '';
+  
         const procedimentos = this.chamado.procedimentos?.trim() || 'Nenhum procedimento registrado para esse chamado.';
         const idFormatado = this.formatarId(this.chamado.id);
   
+        // Preencher o formulário com os dados formatados
         this.form.patchValue({
           id: idFormatado,
           tipo: this.chamado.tipo.toString(),
           dataAbertura: this.chamado.dataAbertura,
           prioridade: this.chamado.prioridade.toString(),
           status: this.chamado.status.toString(),
-          tecnico: this.chamado.nomeTecnico,
-          cliente: this.chamado.nomeCliente,
+          tecnico: this.chamado.tecnico,  // Passar o ID do técnico
+          cliente: this.chamado.cliente,  // Passar o ID do cliente
           dataFechamento: this.chamado.dataFechamento,
           observacoes: this.chamado.observacoes,
           procedimentos: procedimentos
@@ -128,6 +153,7 @@ export class ChamadoUpdateComponent implements OnInit {
       }
     });
   }
+  
 
   // MÉTODO PARA INCLUIR UM PROCEDIMENTO
   incluirProcedimento(): void {

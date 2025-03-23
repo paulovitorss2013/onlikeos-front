@@ -62,19 +62,39 @@ export class ChamadoCreateComponent implements OnInit {
     this.syncChamadoComFormulario(); // SINCRONIZA OS DADOS DIGITADOS COM O OBJETO CHAMADO
   }
 
-  // MÉTODO PARA LISTAR TODOS OS CLIENTES
-  findAllClientes(): void {
-    this.clienteService.findAll().subscribe(resposta => {
-      this.clientes = resposta;
-    });
+  // FORMANDO O CPF OU CNPJ PARA CLIENTE
+  formatarCpfCnpj(valor: string): string {
+    if (!valor) return '';
+    const cleaned = valor.replace(/\D/g, '');
+    if (cleaned.length === 11) {
+      // Formatar como CPF: 000.000.000-00
+      return cleaned.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    } else if (cleaned.length === 14) {
+      // Formatar como CNPJ: 00.000.000/0000-00
+      return cleaned.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+    }
+    return valor;
   }
 
-  // MÉTODO PARA LISTAR TODOS OS TÉCNICOS
-  findAllTecnicos(): void {
-    this.tecnicoService.findAll().subscribe(resposta => {
-      this.tecnicos = resposta;
-    });
-  }
+// MÉTODO PARA LISTAR TODOS OS CLIENTES + CPF/CNPJ
+findAllClientes(): void {
+  this.clienteService.findAll().subscribe(resposta => {
+    this.clientes = resposta.map(cli => ({
+      ...cli,
+      displayName: `${cli.nome} - ${cli.cpfCnpj}`
+    }));
+   });
+ }
+  
+ // MÉTODO PARA LISTAR TODOS OS TÉCNICOS + CPF/CNPJ
+ findAllTecnicos(): void {
+  this.tecnicoService.findAll().subscribe(resposta => {
+    this.tecnicos = resposta.map(tec => ({
+      ...tec,
+      displayName: `${tec.nome} - ${tec.cpfCnpj}`
+    }));
+   });
+ }
 
   // MÉTODO PARA SINCRONIZAR O FORMULÁRIO COM O OBJETO CHAMADO
   syncChamadoComFormulario(): void {
