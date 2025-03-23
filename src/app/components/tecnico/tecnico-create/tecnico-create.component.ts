@@ -65,7 +65,7 @@ export class TecnicoCreateComponent implements OnInit {
  create(): void {
   if (!this.validaCampos()) return;
   const tecnico: Tecnico = { ...this.form.value };
-  this.service.create(tecnico).subscribe({ 
+  this.service.create(tecnico).subscribe({
     next: () => {
       this.toastr.success('Técnico cadastrado com sucesso!', 'Cadastro');
       this.router.navigate(['tecnicos']);

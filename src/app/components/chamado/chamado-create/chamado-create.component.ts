@@ -62,7 +62,7 @@ export class ChamadoCreateComponent implements OnInit {
     this.syncChamadoComFormulario(); // SINCRONIZA OS DADOS DIGITADOS COM O OBJETO CHAMADO
   }
 
-  // FORMANDO O CPF OU CNPJ PARA CLIENTE
+  // FORMATANDO CPF E CNPJ
   formatarCpfCnpj(valor: string): string {
     if (!valor) return '';
     const cleaned = valor.replace(/\D/g, '');
@@ -81,7 +81,7 @@ findAllClientes(): void {
   this.clienteService.findAll().subscribe(resposta => {
     this.clientes = resposta.map(cli => ({
       ...cli,
-      displayName: `${cli.nome} - ${cli.cpfCnpj}`
+      displayName: `${cli.nome} - ${cli.login}`
     }));
    });
  }
