@@ -12,6 +12,20 @@
       <input matInput formControlName="id" readonly title="id">
     </mat-form-field>
 
+    <div class="tipo">
+
+      <mat-form-field>
+        <mat-label>Tipo</mat-label>
+        <mat-select formControlName="tipo">
+          <mat-option value="0">Instalação</mat-option>
+          <mat-option value="1">Reparo</mat-option>
+          <mat-option value="2">Financeiro</mat-option>
+          <mat-option value="3">Cancelamento</mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      </div>
+
     <mat-form-field class="full-width" appearance="outline">
       <mat-label>Data Abertura</mat-label>
       <input matInput formControlName="dataAbertura" readonly title="Data Abertura">

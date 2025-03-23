@@ -7,6 +7,20 @@
   <!-- FORMULÁRIO DE CADASTRO -->
   <form class="form" [formGroup]="form">
 
+    <div class="tipo">
+      
+      <mat-form-field class="full-width">
+        <mat-label>Selecione o Tipo</mat-label>
+        <mat-select formControlName="tipo">
+          <mat-option value="0">Instalação</mat-option>
+          <mat-option value="1">Reparo</mat-option>
+          <mat-option value="2">Financeiro</mat-option>
+          <mat-option value="3">Cancelamento</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
     <div class="status-prioridade">
 
       <mat-form-field>

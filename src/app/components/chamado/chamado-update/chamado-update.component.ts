@@ -22,6 +22,7 @@ export class ChamadoUpdateComponent implements OnInit {
   // INSTÂNCIA DO CHAMADO
   chamado: Chamado = {
     id: '',
+    tipo: '',
     prioridade: '',
     status: '',
     observacoes: '',
@@ -39,6 +40,7 @@ export class ChamadoUpdateComponent implements OnInit {
   // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
     id: new FormControl(''),
+    tipo: new FormControl('', [Validators.required]),
     prioridade: new FormControl('', [Validators.required]),
     status: new FormControl('', [Validators.required]),
     observacoes: new FormControl('', [Validators.required, Validators.minLength(15)]),
@@ -110,6 +112,7 @@ export class ChamadoUpdateComponent implements OnInit {
   
         this.form.patchValue({
           id: idFormatado,
+          tipo: this.chamado.tipo.toString(),
           dataAbertura: this.chamado.dataAbertura,
           prioridade: this.chamado.prioridade.toString(),
           status: this.chamado.status.toString(),

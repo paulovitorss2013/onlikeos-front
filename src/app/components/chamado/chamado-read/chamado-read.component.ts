@@ -16,6 +16,7 @@ export class ChamadoReadComponent implements OnInit {
   // INSTÂNCIA DO CHAMADO
   chamado: Chamado = {
     id: '',
+    tipo: '',
     dataAbertura: '',
     prioridade: '',
     status: '',
@@ -31,6 +32,7 @@ export class ChamadoReadComponent implements OnInit {
   // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
     id: new FormControl({ value: '', disabled: true }),
+    tipo: new FormControl({ value: '', disabled: true }),
     dataAbertura: new FormControl({ value: '', disabled: true }),
     prioridade: new FormControl({ value: '', disabled: true }),
     status: new FormControl({ value: '', disabled: true }),
@@ -110,6 +112,7 @@ const idFormatado = `${String(this.chamado.id).padStart(4, '0')}/${anoCorrente}`
 
     this.form.patchValue({
       id: idFormatado,
+      tipo: this.chamado.tipo.toString(),
       dataAbertura: this.chamado.dataAbertura,
       prioridade: this.chamado.prioridade.toString(),
       status: this.chamado.status.toString(),
