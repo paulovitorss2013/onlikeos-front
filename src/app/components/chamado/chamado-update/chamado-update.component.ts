@@ -73,15 +73,13 @@ export class ChamadoUpdateComponent implements OnInit {
     this.syncChamadoComFormulario();
   }
 
-  // MÉTODO PARA FORMATAR O CPF OU CNPJ
+  // MÉTODO PARA FORMATAR E CNPJ
   formatarCpfCnpj(valor: string): string {
   if (!valor) return '';
-  const cleaned = valor.replace(/\D/g, '');  // Remove tudo que não é número
+  const cleaned = valor.replace(/\D/g, '');
   if (cleaned.length === 11) {
-    // Formatar como CPF: 000.000.000-00
     return cleaned.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
   } else if (cleaned.length === 14) {
-    // Formatar como CNPJ: 00.000.000/0000-00
     return cleaned.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
    }
    return valor;
@@ -125,7 +123,7 @@ export class ChamadoUpdateComponent implements OnInit {
         const cliente = this.clientes.find(cliente => cliente.id === this.chamado.cliente);
   
         this.chamado.nomeTecnico = tecnico ? `${tecnico.nome} - CPF/CNPJ: ${this.formatarCpfCnpj(tecnico.cpfCnpj)}` : '';
-        this.chamado.nomeCliente = cliente ? `${cliente.nome} - CPF/CNPJ: ${this.formatarCpfCnpj(cliente.cpfCnpj)}` : '';
+        this.chamado.nomeCliente = cliente ? `${cliente.login} - PPPoE: ${cliente.login}` : '';
   
         const procedimentos = this.chamado.procedimentos?.trim() || 'Nenhum procedimento registrado para esse chamado.';
         const idFormatado = this.formatarId(this.chamado.id);

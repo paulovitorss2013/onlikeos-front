@@ -54,7 +54,7 @@
         <mat-label>Selecione o Cliente</mat-label>
         <mat-select formControlName="cliente">
           <mat-option *ngFor="let cli of clientes" [value]="cli.id">
-            {{ cli.nome }}, login/contrato: {{ cli.login }}
+            {{ cli.nome }}, PPPoE: {{ cli.login }}
           </mat-option>
         </mat-select>
       </mat-form-field>
