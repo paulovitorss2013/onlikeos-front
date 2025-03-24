@@ -145,7 +145,6 @@ export class ChamadoUpdateComponent implements OnInit {
       }
     });
   }
-  
 
   // MÉTODO PARA INCLUIR UM PROCEDIMENTO
   incluirProcedimento(): void {

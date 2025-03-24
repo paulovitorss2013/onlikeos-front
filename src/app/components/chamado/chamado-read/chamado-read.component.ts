@@ -5,6 +5,8 @@ import { ChamadoService } from '../../../services/chamado.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClienteService } from '../../../services/cliente.service';
+import { TecnicoService } from '../../../services/tecnico.service';
+
 
 @Component({
   selector: 'app-chamado-read',
@@ -48,6 +50,7 @@ export class ChamadoReadComponent implements OnInit {
   constructor(
     private chamadoService: ChamadoService,
     private clienteService: ClienteService,
+    private tecnicoService: TecnicoService,
     private toastrService: ToastrService,
     private router: Router,
     private route: ActivatedRoute,
@@ -62,22 +65,38 @@ export class ChamadoReadComponent implements OnInit {
     }
   }
 
-  // MÉTODO BUSCAR AS INFORMAÇÕES PELO ID
-  findById(): void {
-    this.chamadoService.findById(this.chamado.id).subscribe({
-      next: (resposta) => {
-        this.chamado = resposta;
-        if (this.chamado.cliente) {
-          this.buscarDadosDoCliente(this.chamado.cliente);
-        } else {
-          this.atualizarFormulario();
-        }
-      },
-      error: (ex) => {
-        this.toastrService.error(ex.error.error);
+ // MÉTODO ALTERADO PARA BUSCAR O TÉCNICO E O CLIENTE
+findById(): void {
+  this.chamadoService.findById(this.chamado.id).subscribe({
+    next: (resposta) => {
+      this.chamado = resposta;
+      if (this.chamado.cliente) {
+        this.buscarDadosDoCliente(this.chamado.cliente);
       }
-    });
-  }
+      if (this.chamado.tecnico) {
+        this.buscarDadosDoTecnico(this.chamado.tecnico);
+      }
+      this.atualizarFormulario();
+    },
+    error: (ex) => {
+      this.toastrService.error(ex.error.error);
+    }
+  });
+}
+
+// MÉTODO PARA BUSCAR OS DADOS DO CLIENTE
+buscarDadosDoTecnico(tecnicoId: string): void {
+  this.tecnicoService.findById(tecnicoId).subscribe({
+    next: (tecnico) => {
+      this.chamado.tecnico = tecnico;
+      this.atualizarFormulario();
+    },
+    error: (ex) => {
+      console.error('Erro ao buscar cliente:', ex);
+      this.toastrService.error('Erro ao carregar os dados do cliente.');
+    }
+  });
+}
 
   // MÉTODO PARA BUSCAR OS DADOS DO CLIENTE
   buscarDadosDoCliente(clienteId: string): void {
@@ -110,21 +129,18 @@ export class ChamadoReadComponent implements OnInit {
   
  // INFORMAÇÕES PARA DADOS DO CLIENTE
  const dadosCliente = this.chamado.cliente ? 
-    `${this.chamado.cliente.celular ? `Celular: ${this.aplicarMascaraDadosCliente(this.chamado.cliente.celular, 'celular')}` : 'Celular: Não informado'}\n` +
-    `${this.chamado.cliente.telefone ? `Telefone: ${this.aplicarMascaraDadosCliente(this.chamado.cliente.telefone, 'telefone')}` : 'Telefone: Não informado'}\n` +
-    `${this.chamado.cliente.logradouro ? `Logradouro: ${this.chamado.cliente.logradouro}` : 'Logradouro: Não informado'}\n` +
-    `${this.chamado.cliente.numero ? `Número: ${this.chamado.cliente.numero}` : 'Número: Não informado'}\n` +
-    `${this.chamado.cliente.bairro ? `Bairro: ${this.chamado.cliente.bairro}` : 'Bairro: Não informado'}\n` +
-    `${this.chamado.cliente.municipio ? `Município: ${this.chamado.cliente.municipio}` : 'Município: Não informado'}\n` +
-    `${this.chamado.cliente.uf ? `Estado: ${this.chamado.cliente.uf}` : 'Estado: Não informado'}\n` +
-    `${this.chamado.cliente.coordenada ? `Coordenadas: ${this.chamado.cliente.coordenada}` : 'Coordenadas: Não informadas'}` 
+    `${this.chamado.cliente.celular ? `Celular: ${this.aplicarMascaraDadosCliente(this.chamado.cliente.celular, 'celular')}` : 'Celular: Não informado.'}\n` +
+    `${this.chamado.cliente.telefone ? `Telefone: ${this.aplicarMascaraDadosCliente(this.chamado.cliente.telefone, 'telefone')}` : 'Telefone: Não informado.'}\n` +
+    `${this.chamado.cliente.logradouro ? `Logradouro: ${this.chamado.cliente.logradouro}` : 'Logradouro: Não informado.'}\n` +
+    `${this.chamado.cliente.numero ? `Número: ${this.chamado.cliente.numero}` : 'Número: Não informado.'}\n` +
+    `${this.chamado.cliente.bairro ? `Bairro: ${this.chamado.cliente.bairro}` : 'Bairro: Não informado.'}\n` +
+    `${this.chamado.cliente.municipio ? `Município: ${this.chamado.cliente.municipio}` : 'Município: Não informado.'}\n` +
+    `${this.chamado.cliente.uf ? `Estado: ${this.chamado.cliente.uf}` : 'Estado: Não informado.'}\n` +
+    `${this.chamado.cliente.coordenada ? `Localização: ${this.chamado.cliente.coordenada}` : 'Localização: Não informada.'}` 
   : 'Dados do cliente não encontrados.';
 
-const anoCorrente = new Date().getFullYear();
-const idFormatado = `${String(this.chamado.id).padStart(4, '0')}/${anoCorrente}`;
-
     this.form.patchValue({
-      id: idFormatado,
+      id: this.chamado.id,
       tipo: this.chamado.tipo.toString(),
       dataAbertura: this.chamado.dataAbertura,
       prioridade: this.chamado.prioridade.toString(),
@@ -138,9 +154,16 @@ const idFormatado = `${String(this.chamado.id).padStart(4, '0')}/${anoCorrente}`
     });
   }
 
- // FORMATAR DADOS DO TÉCNICO
+// FORMATAR CPF DO TÉCNICO
+private formatarCPF(cpf: string): string {
+  return cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4');
+}
+
+// FORMATAR DADOS DO TÉCNICO
 private formatarTecnico(): string {
-  const cpfCnpj = this.chamado.tecnico?.cpfCnpj ? ` - CPF: ${this.chamado.tecnico.cpfCnpj}` : '';
+  const cpfCnpj = this.chamado.tecnico?.cpfCnpj
+    ? ` - CPF: ${this.formatarCPF(this.chamado.tecnico.cpfCnpj)}`
+    : '';
   return `${this.chamado.nomeTecnico}${cpfCnpj}`;
 }
 
@@ -148,6 +171,13 @@ private formatarTecnico(): string {
 private formatarCliente(): string {
   const login = this.chamado.cliente?.login ? ` - PPPoE: ${this.chamado.cliente.login}` : '';
   return `${this.chamado.nomeCliente}${login}`;
+}
+
+// MÉTODO PARA FORMATAR O ID
+formatarId(id: string | number): string {
+  if (!id) return ''; // Evita erro caso o ID seja indefinido ou nulo
+  const anoCorrente = new Date().getFullYear(); // Obtém o ano atual
+  return `${String(id).padStart(4, '0')}/${anoCorrente}`;
 }
 
  // MÉTODO PARA ABRIR GOOGLE MAPS
