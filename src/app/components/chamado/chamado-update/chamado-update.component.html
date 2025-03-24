@@ -47,7 +47,7 @@
         <mat-label>Técnico Responsável</mat-label>
         <mat-select formControlName="tecnico">
           <mat-option *ngFor="let tec of tecnicos" [value]="tec.id">
-            {{ tec.nome }} - CPF: {{ formatarCpfCnpj(tec.cpfCnpj) }}
+            {{ tec.nome }} - CPF: {{ formatarCpf(tec.cpfCnpj) }}
           </mat-option>
         </mat-select>
       </mat-form-field>

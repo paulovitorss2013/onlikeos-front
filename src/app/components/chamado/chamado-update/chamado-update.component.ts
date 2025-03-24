@@ -74,16 +74,11 @@ export class ChamadoUpdateComponent implements OnInit {
   }
 
   // MÉTODO PARA FORMATAR E CNPJ
-  formatarCpfCnpj(valor: string): string {
-  if (!valor) return '';
-  const cleaned = valor.replace(/\D/g, '');
-  if (cleaned.length === 11) {
-    return cleaned.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-  } else if (cleaned.length === 14) {
-    return cleaned.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
-   }
-   return valor;
- }
+  formatarCpf(cpf: string): string {
+    if (!cpf) return '';
+    const cleaned = cpf.replace(/\D/g, ''); // Remove tudo que não for número
+    return cleaned.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4'); // Sempre formata como CPF
+  }
 
   // MÉTODO PARA BUSCAR TODOS OS CLIENTES
   findAllClientes(): void {
@@ -122,7 +117,7 @@ export class ChamadoUpdateComponent implements OnInit {
         const tecnico = this.tecnicos.find(tecnico => tecnico.id === this.chamado.tecnico);
         const cliente = this.clientes.find(cliente => cliente.id === this.chamado.cliente);
   
-        this.chamado.nomeTecnico = tecnico ? `${tecnico.nome} - CPF/CNPJ: ${this.formatarCpfCnpj(tecnico.cpfCnpj)}` : '';
+        this.chamado.nomeTecnico = tecnico ? `${tecnico.nome} - CPF/CNPJ: ${this.formatarCpf(tecnico.cpfCnpj)}` : '';
         this.chamado.nomeCliente = cliente ? `${cliente.login} - PPPoE: ${cliente.login}` : '';
   
         const procedimentos = this.chamado.procedimentos?.trim() || 'Nenhum procedimento registrado para esse chamado.';
