@@ -11,9 +11,9 @@
         
         <mat-form-field class="full-width" appearance="outline">
           <mat-label>Número do Protocolo</mat-label>
-          <input matInput [value]="formatarId(chamado.id)" readonly>
+          <input matInput [value]="formatarId(chamado.id)" readonly placeholder="Número do Protocolo">
         </mat-form-field>
-
+        
         <mat-form-field class="full-width">
           <mat-label>Selecione o Tipo</mat-label>
           <mat-select formControlName="tipo">

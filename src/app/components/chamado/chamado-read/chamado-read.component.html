@@ -13,7 +13,7 @@
     </mat-form-field>
 
     <mat-form-field class="full-width">
-      <mat-label>Selecione o Tipo</mat-label>
+      <mat-label>Tipo de Chamado</mat-label>
       <mat-select formControlName="tipo">
         <mat-option value="0">Instalação</mat-option>
         <mat-option value="1">Reparo</mat-option>
@@ -23,12 +23,12 @@
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Data Abertura</mat-label>
+      <mat-label>Data de Abertura</mat-label>
       <input matInput formControlName="dataAbertura" readonly title="Data Abertura">
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="outline" *ngIf="form.get('dataFechamento')?.value">
-      <mat-label>Data Fechamento</mat-label>
+      <mat-label>Data de Fechamento</mat-label>
       <input matInput formControlName="dataFechamento" readonly title="Data Fechamento">
     </mat-form-field>
 

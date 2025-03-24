@@ -79,6 +79,7 @@ export class ChamadoReadComponent implements OnInit {
     });
   }
 
+  // MÉTODO PARA BUSCAR OS DADOS DO CLIENTE
   buscarDadosDoCliente(clienteId: string): void {
     this.clienteService.findById(clienteId).subscribe({
       next: (cliente) => {
@@ -92,6 +93,7 @@ export class ChamadoReadComponent implements OnInit {
     });
   }
 
+  // ATUALIZAÇÃO DO FORMULÁRIO
   atualizarFormulario(): void {
     const procedimentos = this.chamado.procedimentos?.trim() || 'Nenhum procedimento registrado para esse chamado.';
   
@@ -125,12 +127,13 @@ const idFormatado = `${String(this.chamado.id).padStart(4, '0')}/${anoCorrente}`
     });
   }
 
+  // APLICANDO A MÁSCARA PARA CELULAR E TELEFONE
   aplicarMascara(valor: string, tipo: 'celular' | 'telefone'): string {
     if (tipo === 'celular') {
-      return valor.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1)$2-$3'); // Mascara de celular
+      return valor.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1)$2-$3');
     }
     if (tipo === 'telefone') {
-      return valor.replace(/^(\d{2})(\d{4})(\d{4})$/, '($1)$2-$3'); // Mascara de telefone fixo
+      return valor.replace(/^(\d{2})(\d{4})(\d{4})$/, '($1)$2-$3');
     }
     return valor;
   }
@@ -141,7 +144,6 @@ const idFormatado = `${String(this.chamado.id).padStart(4, '0')}/${anoCorrente}`
   if (isGoogleMapsLink) {
     window.open(coordenada, '_blank');
   } else {
-    // Se for uma coordenada simples, abre no Google Maps
     const url = `https://www.google.com/maps?q=${coordenada}`;
     window.open(url, '_blank');
   }
