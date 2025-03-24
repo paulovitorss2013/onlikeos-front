@@ -93,21 +93,32 @@ export class ChamadoReadComponent implements OnInit {
     });
   }
 
+  // APLICANDO A MÁSCARA PARA CELULAR E TELEFONE
+  aplicarMascaraDadosCliente(valor: string, tipo: 'celular' | 'telefone'): string {
+    if (tipo === 'celular') {
+      return valor.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1)$2-$3');
+    }
+    if (tipo === 'telefone') {
+      return valor.replace(/^(\d{2})(\d{4})(\d{4})$/, '($1)$2-$3');
+    }
+    return valor;
+  } 
+
   // ATUALIZAÇÃO DO FORMULÁRIO
   atualizarFormulario(): void {
     const procedimentos = this.chamado.procedimentos?.trim() || 'Nenhum procedimento registrado para esse chamado.';
   
  // INFORMAÇÕES PARA DADOS DO CLIENTE
  const dadosCliente = this.chamado.cliente ? 
- `${this.chamado.cliente.celular ? `Celular: ${this.aplicarMascara(this.chamado.cliente.celular, 'celular')}` : ''}\n` +
- `${this.chamado.cliente.telefone ? `Telefone: ${this.aplicarMascara(this.chamado.cliente.telefone, 'telefone')}` : ''}\n` +
- `${this.chamado.cliente.logradouro ? `Logradouro: ${this.chamado.cliente.logradouro}` : ''}\n` +
- `${this.chamado.cliente.numero ? `Número: ${this.chamado.cliente.numero}` : ''}\n` +
- `${this.chamado.cliente.bairro ? `Bairro: ${this.chamado.cliente.bairro}` : ''}\n` +
- `${this.chamado.cliente.municipio ? `Município: ${this.chamado.cliente.municipio}` : ''}\n` +
- `${this.chamado.cliente.uf ? `Estado: ${this.chamado.cliente.uf}` : ''}\n` +
- `${this.chamado.cliente.coordenada ? `Coordenadas: ${this.chamado.cliente.coordenada}` : ''}`
- : 'Dados do cliente não encontrados.';
+    `${this.chamado.cliente.celular ? `Celular: ${this.aplicarMascaraDadosCliente(this.chamado.cliente.celular, 'celular')}` : 'Celular: Não informado'}\n` +
+    `${this.chamado.cliente.telefone ? `Telefone: ${this.aplicarMascaraDadosCliente(this.chamado.cliente.telefone, 'telefone')}` : 'Telefone: Não informado'}\n` +
+    `${this.chamado.cliente.logradouro ? `Logradouro: ${this.chamado.cliente.logradouro}` : 'Logradouro: Não informado'}\n` +
+    `${this.chamado.cliente.numero ? `Número: ${this.chamado.cliente.numero}` : 'Número: Não informado'}\n` +
+    `${this.chamado.cliente.bairro ? `Bairro: ${this.chamado.cliente.bairro}` : 'Bairro: Não informado'}\n` +
+    `${this.chamado.cliente.municipio ? `Município: ${this.chamado.cliente.municipio}` : 'Município: Não informado'}\n` +
+    `${this.chamado.cliente.uf ? `Estado: ${this.chamado.cliente.uf}` : 'Estado: Não informado'}\n` +
+    `${this.chamado.cliente.coordenada ? `Coordenadas: ${this.chamado.cliente.coordenada}` : 'Coordenadas: Não informadas'}` 
+  : 'Dados do cliente não encontrados.';
 
 const anoCorrente = new Date().getFullYear();
 const idFormatado = `${String(this.chamado.id).padStart(4, '0')}/${anoCorrente}`;
@@ -118,8 +129,8 @@ const idFormatado = `${String(this.chamado.id).padStart(4, '0')}/${anoCorrente}`
       dataAbertura: this.chamado.dataAbertura,
       prioridade: this.chamado.prioridade.toString(),
       status: this.chamado.status.toString(),
-      tecnico: this.chamado.nomeTecnico,
-      cliente: this.chamado.nomeCliente,
+      tecnico: this.formatarTecnico(),
+      cliente: this.formatarCliente(),
       dataFechamento: this.chamado.dataFechamento,
       observacoes: this.chamado.observacoes,
       procedimentos: procedimentos,
@@ -127,16 +138,17 @@ const idFormatado = `${String(this.chamado.id).padStart(4, '0')}/${anoCorrente}`
     });
   }
 
-  // APLICANDO A MÁSCARA PARA CELULAR E TELEFONE
-  aplicarMascara(valor: string, tipo: 'celular' | 'telefone'): string {
-    if (tipo === 'celular') {
-      return valor.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1)$2-$3');
-    }
-    if (tipo === 'telefone') {
-      return valor.replace(/^(\d{2})(\d{4})(\d{4})$/, '($1)$2-$3');
-    }
-    return valor;
-  }
+ // FORMATAR DADOS DO TÉCNICO
+private formatarTecnico(): string {
+  const cpfCnpj = this.chamado.tecnico?.cpfCnpj ? ` - CPF: ${this.chamado.tecnico.cpfCnpj}` : '';
+  return `${this.chamado.nomeTecnico}${cpfCnpj}`;
+}
+
+// FORMATAR DADOS DO CLIENTE
+private formatarCliente(): string {
+  const login = this.chamado.cliente?.login ? ` - PPPoE: ${this.chamado.cliente.login}` : '';
+  return `${this.chamado.nomeCliente}${login}`;
+}
 
  // MÉTODO PARA ABRIR GOOGLE MAPS
   abrirNoGoogleMaps(coordenada: string): void {
