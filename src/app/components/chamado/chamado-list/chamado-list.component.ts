@@ -16,7 +16,7 @@ export class ChamadoListComponent implements OnInit {
   FILTERED_DATA: Chamado[] = [];
 
   // COLUNAS DA TABELA
-  displayedColumns: string[] = ['id', 'cliente', 'tecnico', 'prioridade', 'status', 'acoes'];
+  displayedColumns: string[] = ['id', 'cliente', 'tecnico', 'prioridade', 'status', 'acoes',];
   dataSource = new MatTableDataSource<Chamado>(this.ELEMENT_DATA);
 
 
@@ -124,7 +124,6 @@ export class ChamadoListComponent implements OnInit {
   this.filterText = (event.target as HTMLInputElement).value.trim().toLowerCase();
   this.applyFilters();
 }
-
   
   // RETORNA A DESCRIÇÃO DO STATUS
   retornaStatus(status: number | string): string {

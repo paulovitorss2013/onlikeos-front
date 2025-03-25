@@ -131,11 +131,11 @@ buscarDadosDoTecnico(tecnicoId: string): void {
  const dadosCliente = this.chamado.cliente ? 
     `${this.chamado.cliente.celular ? `Celular: ${this.aplicarMascaraDadosCliente(this.chamado.cliente.celular, 'celular')}` : 'Celular: Não informado.'}\n` +
     `${this.chamado.cliente.telefone ? `Telefone: ${this.aplicarMascaraDadosCliente(this.chamado.cliente.telefone, 'telefone')}` : 'Telefone: Não informado.'}\n` +
-    `${this.chamado.cliente.logradouro ? `Logradouro: ${this.chamado.cliente.logradouro}` : 'Logradouro: Não informado.'}\n` +
-    `${this.chamado.cliente.numero ? `Número: ${this.chamado.cliente.numero}` : 'Número: Não informado.'}\n` +
-    `${this.chamado.cliente.bairro ? `Bairro: ${this.chamado.cliente.bairro}` : 'Bairro: Não informado.'}\n` +
-    `${this.chamado.cliente.municipio ? `Município: ${this.chamado.cliente.municipio}` : 'Município: Não informado.'}\n` +
-    `${this.chamado.cliente.uf ? `Estado: ${this.chamado.cliente.uf}` : 'Estado: Não informado.'}\n` +
+    `${this.chamado.cliente.logradouro ? `Logradouro: ${this.chamado.cliente.logradouro}.` : 'Logradouro: Não informado.'}\n` +
+    `${this.chamado.cliente.numero ? `Número: ${this.chamado.cliente.numero}.` : 'Número: Não informado.'}\n` +
+    `${this.chamado.cliente.bairro ? `Bairro: ${this.chamado.cliente.bairro}.` : 'Bairro: Não informado.'}\n` +
+    `${this.chamado.cliente.municipio ? `Município: ${this.chamado.cliente.municipio}.` : 'Município: Não informado.'}\n` +
+    `${this.chamado.cliente.uf ? `Estado: ${this.chamado.cliente.uf}.` : 'Estado: Não informado.'}\n` +
     `${this.chamado.cliente.coordenada ? `Localização: ${this.chamado.cliente.coordenada}` : 'Localização: Não informada.'}` 
   : 'Dados do cliente não encontrados.';
 
