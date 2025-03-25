@@ -68,7 +68,11 @@ textarea {
   resize: vertical; /* Permite ajuste de tamanho vertical */
   overflow-y: auto; /* Adiciona rolagem se necessário */
   width: 100%; /* Largura total */
-  background-color: rgb(233, 233, 233)!important; /* Cor do fundo */
+  background-color: rgb(233, 233, 233) !important; /* Cor do fundo */
+  text-align: justify; /* Justifica o texto */
+  word-spacing: normal; /* Mantém o espaçamento padrão entre palavras */
+  white-space: pre-wrap; /* Mantém quebras de linha e espaços extras */
+  word-break: break-word; /* Quebra palavras longas corretamente */
 }
 
 /* CONTAINER PARA OS BOTÕES */

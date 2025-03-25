@@ -27,7 +27,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 
-
 // NGX-MASK PARA MASCARAMENTO DE CPF, TELEFONE E ETC...
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
@@ -81,7 +80,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     ChamadoUpdateComponent,
     ChamadoReadComponent,
     ChamadoMyListComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    
   ],
   imports: [
     BrowserModule,
