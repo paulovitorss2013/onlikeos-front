@@ -38,6 +38,19 @@
         </mat-radio-group>
       </td>
     </tr>
+
+    <tr>
+      <td class="filter-row">
+        <div class="filtro-titulo centralizado">Filtrar Tipo</div>
+        <mat-radio-group class="radio-group" color="primary">
+          <mat-radio-button (click)="orderByTipo(null)" value="all">Todos</mat-radio-button>
+          <mat-radio-button (click)="orderByTipo(0)" value="0">Instalação</mat-radio-button>
+          <mat-radio-button (click)="orderByTipo(1)" value="1">Reparo</mat-radio-button>
+          <mat-radio-button (click)="orderByTipo(2)" value="2">Financeiro</mat-radio-button>
+          <mat-radio-button (click)="orderByTipo(3)" value="3">Cancelamento</mat-radio-button>
+        </mat-radio-group>
+      </td>
+    </tr>
   </table>
 
   <mat-paginator [pageSizeOptions]="[200, 50, 100]" showFirstLastButtons></mat-paginator>
@@ -82,11 +95,11 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="prioridade">
-        <th mat-header-cell *matHeaderCellDef> Prioridade </th>
+      <ng-container matColumnDef="tipo">
+        <th mat-header-cell *matHeaderCellDef> Tipo </th>
         <td mat-cell *matCellDef="let element"
             [ngClass]="{'status-aberto': element.status === 0, 'status-encerrado': element.status === 2}">
-          {{retornaPrioridade(element.prioridade)}}
+          {{retornaTipo(element.tipo)}}
         </td>
       </ng-container>
 

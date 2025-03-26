@@ -16,7 +16,7 @@ export class ChamadoListComponent implements OnInit {
   FILTERED_DATA: Chamado[] = [];
 
   // COLUNAS DA TABELA
-  displayedColumns: string[] = ['id', 'cliente', 'tecnico', 'prioridade', 'status', 'acoes'];
+  displayedColumns: string[] = ['id', 'cliente', 'tecnico', 'tipo', 'status', 'acoes'];
   dataSource = new MatTableDataSource<Chamado>(this.ELEMENT_DATA);
 
 
@@ -33,6 +33,8 @@ export class ChamadoListComponent implements OnInit {
   // FILTROS SELECIONADOS
   selectedStatus: number | null = null;
   selectedPrioridade: number | null = null;
+  selectedTipo: number | null = null;
+
   filterText: string = '';
 
   // INICIALIZAÇÃO DO FILTRO OCULTO
@@ -67,7 +69,8 @@ export class ChamadoListComponent implements OnInit {
         data.nomeCliente.toLowerCase().includes(filter) ||
         data.nomeTecnico.toLowerCase().includes(filter) ||
         this.retornaStatus(data.status).toLowerCase().includes(filter) ||
-        this.retornaPrioridade(data.prioridade).toLowerCase().includes(filter)
+        this.retornaPrioridade(data.prioridade).toLowerCase().includes(filter) ||
+        this.retornaTipo(data.tipo).toLowerCase().includes(filter)
         
       );
     };
@@ -90,22 +93,27 @@ export class ChamadoListComponent implements OnInit {
 
   // MÉTODO PARA APLICAR OS FILTROS SELECIONADOS
   applyFilters(): void {
-    this.FILTERED_DATA = this.ELEMENT_DATA.filter(element => {
-      const matchesStatus = this.selectedStatus === null || Number(element.status) === this.selectedStatus;
-      const matchesPrioridade = this.selectedPrioridade === null || this.selectedPrioridade === Number(element.prioridade);
-  
-      // TRATA OS ACENTOS
-      const normalizeText = (text: string) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-      
-      const matchesText = this.filterText === '' ||
-        normalizeText(element.nomeCliente).includes(normalizeText(this.filterText)) ||
-        normalizeText(element.nomeTecnico).includes(normalizeText(this.filterText)) ||
-        normalizeText(this.retornaStatus(element.status)).includes(normalizeText(this.filterText)) ||
-        normalizeText(this.retornaPrioridade(element.prioridade)).includes(normalizeText(this.filterText));
-      return matchesStatus && matchesPrioridade && matchesText;
-    });
-    this.updateDataSource();
-  }
+  this.FILTERED_DATA = this.ELEMENT_DATA.filter(element => {
+    const matchesStatus = this.selectedStatus === null || Number(element.status) === this.selectedStatus;
+    const matchesPrioridade = this.selectedPrioridade === null || this.selectedPrioridade === Number(element.prioridade);
+
+    // TRATA OS ACENTOS
+    const normalizeText = (text: string) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+    // Adicionando a comparação de tipo diretamente
+    const matchesTipo = this.selectedTipo === null || Number(element.tipo) === this.selectedTipo;
+
+    const matchesText = this.filterText === '' ||
+      normalizeText(element.nomeCliente).includes(normalizeText(this.filterText)) ||
+      normalizeText(element.nomeTecnico).includes(normalizeText(this.filterText)) ||
+      normalizeText(this.retornaStatus(element.status)).includes(normalizeText(this.filterText)) ||
+      normalizeText(this.retornaPrioridade(element.prioridade)).includes(normalizeText(this.filterText)) ||
+      normalizeText(this.retornaTipo(element.tipo)).includes(normalizeText(this.filterText));
+
+    return matchesStatus && matchesPrioridade && matchesTipo && matchesText;
+  });
+  this.updateDataSource();
+}
 
   // ORDENA PELO STATUS SELECIONADO
   orderByStatus(status: number | null): void {
@@ -116,6 +124,12 @@ export class ChamadoListComponent implements OnInit {
   // ORDENA PELA PRIORIDADE SELECIONADA
   orderByPrioridade(prioridade: number | null): void {
     this.selectedPrioridade = prioridade;
+    this.applyFilters();
+  }
+
+  // ORDENA PELO TIPO SELECIONADO
+  orderByTipo(tipo: number | null): void {
+    this.selectedTipo = tipo;
     this.applyFilters();
   }
 
@@ -144,5 +158,16 @@ export class ChamadoListComponent implements OnInit {
       2: 'Alta'
     };
     return prioridadeMap[Number(prioridade)] || 'Desconhecida';
+  }
+
+  // RETORNA A DESCRIÇÃO DA PRIORIDADE
+  retornaTipo(tipo: number | string): string {
+    const tipoMap: { [key: number]: string } = {
+      0: 'Instalação',
+      1: 'Reparo',
+      2: 'Financeiro',
+      3: 'Cancelamento'
+    };
+    return tipoMap[Number(tipo)] || 'Desconhecido';
   }
 }
