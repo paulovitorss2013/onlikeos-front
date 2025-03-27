@@ -14,5 +14,5 @@ export interface Cliente {
   bairro: string;
   municipio: string;
   uf: string;
-  coordenada: string;
+  coordenada: string; 
 }

@@ -57,7 +57,6 @@ import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-
 import { ChamadoCreateComponent } from './components/chamado/chamado-create/chamado-create.component';
 import { ChamadoUpdateComponent } from './components/chamado/chamado-update/chamado-update.component';
 import { ChamadoReadComponent } from './components/chamado/chamado-read/chamado-read.component';
-import { ChamadoMyListComponent } from './components/chamado/chamado-my-list/chamado-my-list.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
@@ -79,7 +78,6 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     ChamadoCreateComponent,
     ChamadoUpdateComponent,
     ChamadoReadComponent,
-    ChamadoMyListComponent,
     ConfirmDialogComponent,
     
   ],
