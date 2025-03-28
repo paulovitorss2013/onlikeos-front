@@ -127,6 +127,7 @@ findAllClosedProgress(): void {
   
   // ATUALIZA OS DADOS DA TABELA E CONFIGURA O PAGINADOR
   private updateDataSource(): void {
+    this.FILTERED_DATA.sort((a, b) => b.id - a.id);
     this.dataSource = new MatTableDataSource<Chamado>(this.FILTERED_DATA);
     this.dataSource.paginator = this.paginator;
   }
