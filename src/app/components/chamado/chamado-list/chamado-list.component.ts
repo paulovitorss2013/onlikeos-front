@@ -98,20 +98,6 @@ findAll(): void {
   });
 }
 
-// MÉTODO PARA LISTAR MEUS CHAMADOS (PENDENTE DE IMPLEMENTAÇÃO)
-findMyList(): void {
-  this.service.findAll().subscribe({
-    next: (chamados) => {
-      this.ELEMENT_DATA = chamados;
-      this.FILTERED_DATA = chamados;
-      this.updateDataSource();
-    },
-    error: (err) => {
-      console.error('Erro ao buscar meus chamados:', err);
-    }
-  });
-}
-
   findOpenAndInProgress(): void {
     this.service.findOpenAndInProgress().subscribe({
       next: (chamados) => {
@@ -150,19 +136,14 @@ findAllClosedProgress(): void {
   this.FILTERED_DATA = this.ELEMENT_DATA.filter(element => {
     const matchesStatus = this.selectedStatus === null || Number(element.status) === this.selectedStatus;
     const matchesPrioridade = this.selectedPrioridade === null || this.selectedPrioridade === Number(element.prioridade);
-
-    // TRATA OS ACENTOS
     const normalizeText = (text: string) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-
-    // Adicionando a comparação de tipo diretamente
     const matchesTipo = this.selectedTipo === null || Number(element.tipo) === this.selectedTipo;
-
     const matchesText = this.filterText === '' ||
-      normalizeText(element.nomeCliente).includes(normalizeText(this.filterText)) ||
-      normalizeText(element.nomeTecnico).includes(normalizeText(this.filterText)) ||
-      normalizeText(this.retornaStatus(element.status)).includes(normalizeText(this.filterText)) ||
-      normalizeText(this.retornaPrioridade(element.prioridade)).includes(normalizeText(this.filterText)) ||
-      normalizeText(this.retornaTipo(element.tipo)).includes(normalizeText(this.filterText));
+  normalizeText(element.nomeCliente).includes(normalizeText(this.filterText)) ||
+  normalizeText(element.nomeTecnico).includes(normalizeText(this.filterText)) ||
+  normalizeText(this.retornaStatus(element.status)).includes(normalizeText(this.filterText)) ||
+  normalizeText(this.retornaPrioridade(element.prioridade)).includes(normalizeText(this.filterText)) ||
+  normalizeText(this.retornaTipo(element.tipo)).includes(normalizeText(this.filterText));
 
     return matchesStatus && matchesPrioridade && matchesTipo && matchesText;
   });
@@ -189,7 +170,9 @@ findAllClosedProgress(): void {
 
  // APLICA OS FILTROS PARA CONSULTA
  applyFilter(event: Event) {
-  this.filterText = (event.target as HTMLInputElement).value.trim().toLowerCase();
+  const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+  this.filterText = filterValue;
+  this.dataSource.filter = filterValue; // Adiciona o filtro diretamente à dataSource
   this.applyFilters();
 }
 
