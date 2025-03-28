@@ -65,12 +65,28 @@ td button {
 
 /* CORES PARA STATUS DOS CHAMADOS */
 .status-encerrado {
-    color: green; /* Define a cor verde para status de encerrado */
+    color:rgb(39, 141, 45) /* Define a cor verde para status de encerrado */
 }
 
 .status-aberto {
     color: red; /* Define a cor vermelha para status de aberto */
 }
+
+.no-data-message {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(39, 141, 45);
+    margin-top: 20px;
+  }
+
+  button.active {
+    background-color: rgb(39, 141, 45); /* Cor de fundo para o botão ativo */
+    color: rgb(70, 66, 66) !important; /* Garantir que o texto continue visível */
+    font-weight: bold; /* Deixa o texto em negrito */
+    border-radius: 5px; /* Borda arredondada */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adiciona sombra para destacar */
+  }
 
 /* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
 @media (max-width: 768px) {

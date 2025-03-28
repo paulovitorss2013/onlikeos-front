@@ -16,7 +16,6 @@ import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-
 import { ChamadoCreateComponent } from './components/chamado/chamado-create/chamado-create.component';
 import { ChamadoUpdateComponent } from './components/chamado/chamado-update/chamado-update.component';
 import { ChamadoReadComponent } from './components/chamado/chamado-read/chamado-read.component';
-import { ChamadoMyListComponent } from './components/chamado/chamado-my-list/chamado-my-list.component';
 
 const routes: Routes = [
   // ROTA PARA A PÁGINA DE LOGIN (SEM NECESSIDADE DE AUTENTICAÇÃO)
@@ -44,7 +43,6 @@ const routes: Routes = [
 
       // ROTAS PARA OS CHAMADOS
       { path: 'chamados', component: ChamadoListComponent },
-      { path: 'chamados-my-list', component: ChamadoMyListComponent },
       { path: 'chamados/create', component: ChamadoCreateComponent },
       { path: 'chamados/update/:id', component: ChamadoUpdateComponent },
       { path: 'chamados/read/:id', component: ChamadoReadComponent },

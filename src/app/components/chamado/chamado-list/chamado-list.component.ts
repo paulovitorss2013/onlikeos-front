@@ -11,6 +11,14 @@ import { ChamadoService } from '../../../services/chamado.service';
 })
 export class ChamadoListComponent implements OnInit {
 
+  // DEFINE O DESTAQUE PADRÃO PARA O BOTÃO
+  activeButton: string = 'pendentes';
+
+  // ATUALIZA O BOTÃO ATIVO
+  setActiveButton(button: string): void {
+  this.activeButton = button;
+  }
+
   // DADOS ORIGINAIS E FILTRADOS
   ELEMENT_DATA: Chamado[] = [];
   FILTERED_DATA: Chamado[] = [];
@@ -61,7 +69,7 @@ export class ChamadoListComponent implements OnInit {
 
   // INICIALIZAÇÃO DO COMPONENTE
   ngOnInit(): void {
-    this.findAll();
+    this.findOpenAndInProgress();
     this.dataSource.filterPredicate = (data: Chamado, filter: string) => {
       filter = filter.trim().toLowerCase();
       return (
@@ -76,14 +84,60 @@ export class ChamadoListComponent implements OnInit {
     };
   }
 
-  // MÉTODO PARA BUSCAR TODOS OS CHAMADOS
-  findAll(): void {
-    this.service.findAll().subscribe(resposta => {
-      this.ELEMENT_DATA = resposta;
-      this.FILTERED_DATA = resposta;
+  // LISTA TODOS OS CHAMADOS
+findAll(): void {
+  this.service.findAll().subscribe({
+    next: (chamados) => {
+      this.ELEMENT_DATA = chamados;
+      this.FILTERED_DATA = chamados;
       this.updateDataSource();
+    },
+    error: (err) => {
+      console.error('Erro ao buscar todos os chamados:', err);
+    }
+  });
+}
+
+// MÉTODO PARA LISTAR MEUS CHAMADOS (PENDENTE DE IMPLEMENTAÇÃO)
+findMyList(): void {
+  this.service.findAll().subscribe({
+    next: (chamados) => {
+      this.ELEMENT_DATA = chamados;
+      this.FILTERED_DATA = chamados;
+      this.updateDataSource();
+    },
+    error: (err) => {
+      console.error('Erro ao buscar meus chamados:', err);
+    }
+  });
+}
+
+  findOpenAndInProgress(): void {
+    this.service.findOpenAndInProgress().subscribe({
+      next: (chamados) => {
+        this.ELEMENT_DATA = chamados;
+        this.FILTERED_DATA = chamados;
+        this.updateDataSource();
+      },
+      error: (err) => {
+        console.error('Erro ao buscar chamados abertos e em andamento:', err);
+      }
     });
   }
+
+  // LISTA APENAS OS CHAMADOS ENCERRADOS
+findAllClosedProgress(): void {
+  this.service.findAllClosedProgress().subscribe({
+    next: (chamados) => {
+      this.ELEMENT_DATA = chamados;
+      this.FILTERED_DATA = chamados;
+      this.updateDataSource();
+    },
+    error: (err) => {
+      console.error('Erro ao buscar chamados encerrados:', err);
+    }
+  });
+}
   
   // ATUALIZA OS DADOS DA TABELA E CONFIGURA O PAGINADOR
   private updateDataSource(): void {

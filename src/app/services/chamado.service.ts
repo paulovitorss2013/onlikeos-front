@@ -21,6 +21,16 @@ export class ChamadoService {
     return this.http.get<Chamado[]>(`${API_CONFIG.baseUrl}/chamados`);
   }
 
+  // MÉTODO PARA LISTAR OS CHAMADOS EM ANDAMENTO
+   findOpenAndInProgress(): Observable<Chamado[]> {
+    return this.http.get<Chamado[]>(`${API_CONFIG.baseUrl}/chamados/pendentes`);
+  }
+
+  // MÉTODO PARA LISTAR OS CHAMADOS EM ANDAMENTO
+  findAllClosedProgress(): Observable<Chamado[]> {
+    return this.http.get<Chamado[]>(`${API_CONFIG.baseUrl}/chamados/encerrados`);
+  }
+
   // MÉTODO PARA CAPTURAR AS INFORMAÇÕES DO CHAMADO PELO ID
   findById(id: any): Observable<Chamado> {
     return this.http.get<Chamado>(`${API_CONFIG.baseUrl}/chamados/${id}`);
