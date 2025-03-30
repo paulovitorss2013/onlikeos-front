@@ -19,9 +19,9 @@
 
   <!-- TABELA -->
   <div class="mat-elevation-z8">
-      
+
     <table mat-table [dataSource]="dataSource">
-      
+
       <ng-container matColumnDef="nome">
         <th mat-header-cell *matHeaderCellDef> Nome </th>
         <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
@@ -29,7 +29,7 @@
 
       <ng-container matColumnDef="cpfCnpj">
         <th mat-header-cell *matHeaderCellDef> CPF/CNPJ </th>
-        <td mat-cell *matCellDef="let element"> 
+        <td mat-cell *matCellDef="let element">
           <span>{{ applyMask(element.cpfCnpj) }}</span>
         </td>
       </ng-container>
@@ -42,15 +42,15 @@
       <ng-container matColumnDef="acoes">
         <th mat-header-cell *matHeaderCellDef> Ações </th>
         <td mat-cell *matCellDef="let element">
-          
+
           <a routerLink="update/{{ element.id }}" matTooltip="Exibir">
             <i class="material-icons edit">remove_red_eye</i>
           </a>
-      
+
           <a routerLink="delete/{{ element.id }}" matTooltip="Excluir">
             <i class="material-icons delete">delete</i>
           </a>
-      
+
         </td>
       </ng-container>
 
@@ -58,5 +58,14 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-   </div>
+    <!-- BARRA DE CARREGAMENTO -->
+    <div *ngIf="isLoading" class="loading-container">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+
+    <!-- MENSAGEM APÓS O CARREGAMENTO -->
+    <div *ngIf="!isLoading && dataSource.data.length === 0" class="no-data-message">
+    Nenhum cliente a exibir.
+    </div>
+  </div>
 </div>

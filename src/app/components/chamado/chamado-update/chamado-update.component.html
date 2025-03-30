@@ -6,14 +6,14 @@
 
     <!-- FORMULÁRIO -->
     <form class="form" [formGroup]="form">
-  
+
       <div class="status-prioridade">
-        
+
         <mat-form-field class="full-width" appearance="outline">
           <mat-label>Número do Protocolo</mat-label>
           <input matInput [value]="formatarId(chamado.id)" readonly placeholder="Número do Protocolo">
         </mat-form-field>
-        
+
         <mat-form-field class="full-width">
           <mat-label>Selecione o Tipo</mat-label>
           <mat-select formControlName="tipo">
@@ -32,7 +32,7 @@
             <mat-option value="2">Encerrado</mat-option>
           </mat-select>
         </mat-form-field>
-  
+
         <mat-form-field>
           <mat-label>Prioridade</mat-label>
           <mat-select formControlName="prioridade">
@@ -42,7 +42,7 @@
           </mat-select>
         </mat-form-field>
       </div>
-  
+
       <mat-form-field class="full-width">
         <mat-label>Técnico Responsável</mat-label>
         <mat-select formControlName="tecnico">
@@ -51,7 +51,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      
+
       <mat-form-field class="full-width">
         <mat-label>Cliente</mat-label>
         <mat-select formControlName="cliente">
@@ -60,7 +60,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-  
+
       <mat-form-field class="full-width text" appearance="outline">
         <mat-label>Relato sobre o chamado</mat-label>
         <textarea class="observacoes" matInput formControlName="observacoes"
@@ -68,11 +68,11 @@
           maxlength="1000">
         </textarea>
       </mat-form-field>
-    
+
     <!-- ÁREA DOS PROCEDIMENTOS -->
     <h2>Histórico dos Procedimentos</h2>
     <mat-form-field class="full-width text" appearance="outline">
-      <textarea class="procedimentos" matInput formControlName="procedimentos" 
+      <textarea class="procedimentos" matInput formControlName="procedimentos"
       placeholder="Histórico dos Procedimentos" readonly></textarea>
     </mat-form-field>
 
@@ -85,17 +85,16 @@
        <mat-form-field class="full-width text" appearance="outline">
          <mat-label>Novo Procedimento</mat-label>
          <textarea class="novoProcedimento" matInput formControlName="novoProcedimento"
-         placeholder="Relate o procedimento e selecione incluir procedimento. Após finalizar as alterações, clique em atualizar chamado"
+         placeholder="Relate o procedimento e selecione incluir procedimento. Após finalizar as alterações, clique em atualizar chamado."
          maxlength="1000">
          </textarea>
        </mat-form-field>
-       
-  
+
+
     <!-- BOTÕES PARA CHAMADO -->
     <button (click)="update()" [disabled]="!validaCampos()" mat-button class="btn-atualizar">ATUALIZAR CHAMADO</button>
     <button mat-button class="btn-cancelar" (click)="cancelar()">CANCELAR ATUALIZAÇÃO</button>
-  
+
     </form>
-  
+
   </div>
-  

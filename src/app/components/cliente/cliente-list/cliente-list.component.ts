@@ -11,8 +11,13 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
   styleUrls: ['./cliente-list.component.css']
 })
 
-// DADOS ORIGINAIS E FILTRADOS
 export class ClienteListComponent implements OnInit {
+
+  // VARIÁVEL DE CONTROLE DO CARREGAMENTO
+  isLoading: boolean = true;
+
+
+// DADOS ORIGINAIS E FILTRADOS
   ELEMENT_DATA: Cliente[] = [];
 
   // COLUNAS DA TABELA
@@ -38,16 +43,27 @@ export class ClienteListComponent implements OnInit {
     };
   }
 
+  // INICIALIZAÇÃO DO COMPONENTE
   ngOnInit(): void {
     this.findAll();
   }
 
   // MÉTODO PARA LISTAR TODOS OS CLIENTES
   findAll() {
-    this.service.findAll().subscribe(resposta => {
-      this.ELEMENT_DATA = resposta;
-      this.dataSource = new MatTableDataSource<Cliente>(this.ELEMENT_DATA);
-      this.dataSource.paginator = this.paginator;
+    this.isLoading = true; // Ativa a barra de carregamento
+
+    this.service.findAll().subscribe({
+      next: (resposta) => {
+        this.ELEMENT_DATA = resposta;
+        this.dataSource = new MatTableDataSource<Cliente>(this.ELEMENT_DATA);
+        this.dataSource.paginator = this.paginator;
+      },
+      error: (err) => {
+        console.error('Erro ao buscar os clientes:', err);
+      },
+      complete: () => {
+        this.isLoading = false;
+      }
     });
   }
 
@@ -72,6 +88,6 @@ export class ClienteListComponent implements OnInit {
       // CNPJ
       return cpfCnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
     }
-    return cpfCnpj; 
+    return cpfCnpj;
   }
 }

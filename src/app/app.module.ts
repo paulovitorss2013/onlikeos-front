@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 // ANGULAR MATERIAL
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -67,7 +68,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     HeaderComponent,
     LoginComponent,
     TecnicoCreateComponent,
-    TecnicoListComponent, 
+    TecnicoListComponent,
     TecnicoUpdateComponent,
     TecnicoDeleteComponent,
     ClienteCreateComponent,
@@ -79,7 +80,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     ChamadoUpdateComponent,
     ChamadoReadComponent,
     ConfirmDialogComponent,
-    
+
   ],
   imports: [
     BrowserModule,
@@ -90,6 +91,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     BrowserAnimationsModule,
     MatRadioModule,
     [MatDialogModule],
+    MatProgressBarModule,
 
     // ANGULAR MATERIAL
     MatToolbarModule,

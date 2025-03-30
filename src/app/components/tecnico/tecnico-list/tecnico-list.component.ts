@@ -11,6 +11,9 @@ import { TecnicoService } from '../../../services/tecnico.service';
 })
 export class TecnicoListComponent implements OnInit {
 
+   // VARIÁVEL DE CONTROLE DO CARREGAMENTO
+   isLoading: boolean = true;
+
   // DADOS ORIGINAIS E FILTRADOS
   ELEMENT_DATA: Tecnico[] = [];
 
@@ -30,8 +33,8 @@ export class TecnicoListComponent implements OnInit {
     this.paginatorIntl.previousPageLabel = 'Página anterior';
     this.paginatorIntl.nextPageLabel = 'Próxima página';
     this.paginatorIntl.lastPageLabel = 'Última página';
-    
-    this.paginatorIntl.itemsPerPageLabel = ''; 
+
+    this.paginatorIntl.itemsPerPageLabel = '';
     this.paginatorIntl.getRangeLabel = (page: number, pageSize: number, length: number) => {
       return `Total: ${length}`;
     };
@@ -44,9 +47,18 @@ export class TecnicoListComponent implements OnInit {
 
   // MÉTODO PARA LISTAR TODOS OS TÉCNICOS
   findAll() {
-    this.service.findAll().subscribe(resposta => {
-      this.ELEMENT_DATA = resposta;
-      this.updateDataSource();
+    this.isLoading = true;
+    this.service.findAll().subscribe({
+      next: (resposta) => {
+        this.ELEMENT_DATA = resposta;
+        this.updateDataSource();
+      },
+      error: (err) => {
+        console.error('Erro ao buscar técnicos:', err);
+      },
+      complete: () => {
+        this.isLoading = false;
+      }
     });
   }
 

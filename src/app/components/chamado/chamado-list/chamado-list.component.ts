@@ -11,6 +11,9 @@ import { ChamadoService } from '../../../services/chamado.service';
 })
 export class ChamadoListComponent implements OnInit {
 
+  // VARIÁVEL DE CONTROLE DO CARREGAMENTO
+  isLoading: boolean = true;
+
   // DEFINE O DESTAQUE PADRÃO PARA O BOTÃO
   activeButton: string = 'pendentes';
 
@@ -30,7 +33,7 @@ export class ChamadoListComponent implements OnInit {
 
   // FORMATAÇÃO DO NÚMERO DO CHAMADO
   formatarId(id: number): string {
-    const anoAtual = new Date().getFullYear(); 
+    const anoAtual = new Date().getFullYear();
     const idFormatado = id.toString().padStart(4, '0');
     return `${idFormatado}/${anoAtual}`;
   }
@@ -60,7 +63,7 @@ export class ChamadoListComponent implements OnInit {
     this.paginatorIntl.previousPageLabel = 'Página anterior';
     this.paginatorIntl.nextPageLabel = 'Próxima página';
     this.paginatorIntl.lastPageLabel = 'Última página';
-    
+
     this.paginatorIntl.itemsPerPageLabel = '';
     this.paginatorIntl.getRangeLabel = (page: number, pageSize: number, length: number) => {
       return `Total: ${length}  `;
@@ -79,52 +82,61 @@ export class ChamadoListComponent implements OnInit {
         this.retornaStatus(data.status).toLowerCase().includes(filter) ||
         this.retornaPrioridade(data.prioridade).toLowerCase().includes(filter) ||
         this.retornaTipo(data.tipo).toLowerCase().includes(filter)
-        
+
       );
     };
   }
 
   // LISTA TODOS OS CHAMADOS
-findAll(): void {
-  this.service.findAll().subscribe({
-    next: (chamados) => {
-      this.ELEMENT_DATA = chamados;
-      this.FILTERED_DATA = chamados;
-      this.updateDataSource();
-    },
-    error: (err) => {
-      console.error('Erro ao buscar todos os chamados:', err);
-    }
-  });
-}
+  findAll(): void {
+    this.isLoading = true;
+    this.service.findAll().subscribe({
+      next: (chamados) => {
+        this.ELEMENT_DATA = chamados;
+        this.FILTERED_DATA = chamados;
+        this.updateDataSource();
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Erro ao buscar todos os chamados:', err);
+        this.isLoading = false;
+      }
+    });
+  }
 
   findOpenAndInProgress(): void {
+    this.isLoading = true;
     this.service.findOpenAndInProgress().subscribe({
       next: (chamados) => {
         this.ELEMENT_DATA = chamados;
         this.FILTERED_DATA = chamados;
         this.updateDataSource();
+        this.isLoading = false;
       },
       error: (err) => {
         console.error('Erro ao buscar chamados abertos e em andamento:', err);
+        this.isLoading = false;
       }
     });
   }
 
   // LISTA APENAS OS CHAMADOS ENCERRADOS
-findAllClosedProgress(): void {
-  this.service.findAllClosedProgress().subscribe({
-    next: (chamados) => {
-      this.ELEMENT_DATA = chamados;
-      this.FILTERED_DATA = chamados;
-      this.updateDataSource();
-    },
-    error: (err) => {
-      console.error('Erro ao buscar chamados encerrados:', err);
-    }
-  });
-}
-  
+  findAllClosedProgress(): void {
+    this.isLoading = true;
+    this.service.findAllClosedProgress().subscribe({
+      next: (chamados) => {
+        this.ELEMENT_DATA = chamados;
+        this.FILTERED_DATA = chamados;
+        this.updateDataSource();
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Erro ao buscar chamados encerrados:', err);
+        this.isLoading = false;
+      }
+    });
+  }
+
   // ATUALIZA OS DADOS DA TABELA E CONFIGURA O PAGINADOR
   private updateDataSource(): void {
     this.FILTERED_DATA.sort((a, b) => b.id - a.id);
@@ -177,7 +189,7 @@ findAllClosedProgress(): void {
   this.applyFilters();
 }
 
-  
+
   // RETORNA A DESCRIÇÃO DO STATUS
   retornaStatus(status: number | string): string {
     const statusMap: { [key: number]: string } = {

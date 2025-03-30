@@ -69,12 +69,12 @@ mat-card-actions button:hover {
     /* ESTILO PARA OS BOTÕES */
     mat-card-actions button {
         width: 100%; /* Faz os botões ocuparem 100% da largura disponível */
-        text-align: center; /* Centraliza o texto dentro dos botões */
+        text-align: center; /* Alinha o texto no centro */
     }
 
     /* ESTILO PARA O TÍTULO DO CARD */
-    mat-card-title {   
-        text-align: left; /* Alinha o título à esquerda */
+    mat-card-title {
+        text-align: center; /* Alinha o título à esquerda */
         font-size: 1.5rem; /* Reduz o tamanho da fonte do título */
         margin: auto; /* Centraliza o título */
     }
@@ -111,7 +111,9 @@ mat-card-actions button:hover {
     }
 
     /* ESTILO PARA O TÍTULO DO CARD */
-    mat-card-title {   
-        display: none; /* Esconde o título do card nas telas menores */
+    mat-card-title {
+        text-align: center; /* Alinha o título à esquerda */
+        font-size: 1.5rem; /* Reduz o tamanho da fonte do título */
+        margin: auto; /* Centraliza o título */
     }
 }
