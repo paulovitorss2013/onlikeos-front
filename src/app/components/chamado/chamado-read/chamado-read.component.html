@@ -1,6 +1,6 @@
 <!-- CONTAINER PRINCIPAL -->
 <div class="container mat-elevation-z8">
-  
+
   <!-- TÍTULO DA PÁGINA -->
   <h1>Visualizar Chamado</h1>
 
@@ -61,14 +61,14 @@
       <mat-label>Cliente</mat-label>
       <input matInput formControlName="cliente" readonly title="Nome do cliente">
     </mat-form-field>
-    
+
     <mat-form-field class="full-width text" appearance="outline">
       <mat-label>Dados do Cliente</mat-label>
       <textarea class="dadosCliente" matInput formControlName="dadosCliente" readonly
         placeholder="O cliente não possui informações de endereço e contato.">
       </textarea>
-    </mat-form-field> 
-    
+    </mat-form-field>
+
     <!-- BOTÃO DE ABRIR COORDENADAS NO GOOGLE MAPS (Agora dentro do formulário) -->
     <div *ngIf="chamado.cliente?.coordenada" class="botao-coordenadas-container">
       <button mat-raised-button color="primary" (click)="abrirNoGoogleMaps(chamado.cliente.coordenada)">
@@ -87,7 +87,7 @@
      <!-- ÁREA DOS PROCEDIMENTOS -->
      <h2>Histórico dos Procedimentos</h2>
      <mat-form-field class="full-width text" appearance="outline">
-       <textarea class="procedimentos" matInput formControlName="procedimentos" 
+       <textarea class="procedimentos" matInput formControlName="procedimentos"
        placeholder="Histórico dos Procedimentos" readonly></textarea>
      </mat-form-field>
 
@@ -95,6 +95,5 @@
     <div class="button-container">
       <button mat-button class="btn-voltar" (click)="voltar()">VOLTAR</button>
     </div>
-
   </form>
 </div>

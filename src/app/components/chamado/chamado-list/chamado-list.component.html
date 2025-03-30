@@ -131,14 +131,14 @@
     </table>
 
    <!-- BARRA DE CARREGAMENTO -->
-<div *ngIf="isLoading" class="loading-container">
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-</div>
+   <div *ngIf="isLoading" class="loading-container">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+   </div>
 
-<!-- MENSAGEM APÓS O CARREGAMENTO -->
-<div *ngIf="!isLoading && dataSource.data.length === 0" class="no-data-message">
-  Nenhum chamado a exibir.
-</div>
+  <!-- MENSAGEM APÓS O CARREGAMENTO -->
+   <div *ngIf="!isLoading && dataSource.data.length === 0" class="no-data-message">
+      Nenhum chamado a exibir.
+   </div>
 
   </div>
 </div>
