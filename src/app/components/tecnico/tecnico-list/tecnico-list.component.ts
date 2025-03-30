@@ -69,10 +69,8 @@ export class TecnicoListComponent implements OnInit {
       .replace(/[\u0300-\u036f]/g, '')
       .trim()
       .toLowerCase();
-    this.dataSource.filter = filterValue;
 
-    // ATUALIZA O PAGINATOR APÓS A FILTRAGEM
-    this.updateDataSource();
+    this.dataSource.filter = filterValue;
   }
 
   // ATUALIZA OS DADOS DA TABELA E CONFIGURA O PAGINADOR
