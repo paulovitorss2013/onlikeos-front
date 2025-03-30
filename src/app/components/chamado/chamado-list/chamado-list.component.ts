@@ -185,7 +185,7 @@ export class ChamadoListComponent implements OnInit {
  applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
   this.filterText = filterValue;
-  this.dataSource.filter = filterValue; // Adiciona o filtro diretamente à dataSource
+  this.dataSource.filter = filterValue;
   this.applyFilters();
 }
 
@@ -216,7 +216,8 @@ export class ChamadoListComponent implements OnInit {
       0: 'Instalação',
       1: 'Reparo',
       2: 'Financeiro',
-      3: 'Cancelamento'
+      3: 'Cancelamento',
+      4: 'Remoção de Equipamentos'
     };
     return tipoMap[Number(tipo)] || 'Desconhecido';
   }

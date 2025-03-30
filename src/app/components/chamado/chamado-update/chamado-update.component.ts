@@ -86,7 +86,7 @@ export class ChamadoUpdateComponent implements OnInit {
       this.clientes = resposta;
     });
   }
-  
+
   // MÉTODO PARA BUSCAR TODOS OS TÉCNICOS
   findAllTecnicos(): void {
     this.tecnicoService.findAll().subscribe(resposta => {
@@ -113,22 +113,22 @@ export class ChamadoUpdateComponent implements OnInit {
     this.chamadoService.findById(this.chamado.id).subscribe({
       next: (resposta) => {
         this.chamado = resposta;
-  
+
         const tecnico = this.tecnicos.find(tecnico => tecnico.id === this.chamado.tecnico);
         const cliente = this.clientes.find(cliente => cliente.id === this.chamado.cliente);
-  
+
         this.chamado.nomeTecnico = tecnico ? `${tecnico.nome} - CPF/CNPJ: ${this.formatarCpf(tecnico.cpfCnpj)}` : '';
         this.chamado.nomeCliente = cliente ? `${cliente.login} - PPPoE: ${cliente.login}` : '';
-  
+
         const procedimentos = this.chamado.procedimentos?.trim() || 'Nenhum procedimento registrado para esse chamado.';
         const idFormatado = this.formatarId(this.chamado.id);
-  
+
         this.form.patchValue({
           tipo: this.chamado.tipo.toString(),
           dataAbertura: this.chamado.dataAbertura,
           prioridade: this.chamado.prioridade.toString(),
           status: this.chamado.status.toString(),
-          tecnico: this.chamado.tecnico,  
+          tecnico: this.chamado.tecnico,
           cliente: this.chamado.cliente,
           dataFechamento: this.chamado.dataFechamento,
           observacoes: this.chamado.observacoes,
@@ -145,12 +145,12 @@ export class ChamadoUpdateComponent implements OnInit {
   incluirProcedimento(): void {
     const novoProcedimento = this.form.get('novoProcedimento')?.value?.trim();
     let procedimentosAtuais = this.getProcedimentosAtuais();
-  
+
     if (novoProcedimento && novoProcedimento.length >= 10) {
       const emailTecnico = this.authService.getUserEmail() || 'Técnico desconhecido';
       const dataHoraAtual = this.getDataHoraAtual();
       const registro = `${emailTecnico} - ${dataHoraAtual} - ${novoProcedimento}`;
-  
+
       if (procedimentosAtuais === 'Nenhum procedimento registrado para esse chamado.' || !procedimentosAtuais) {
         procedimentosAtuais = '';
       }
@@ -161,23 +161,22 @@ export class ChamadoUpdateComponent implements OnInit {
       });
       this.toastrService.info('Agora você precisa salvar as atualizações do chamado.', 'Procedimento incluído', {
         timeOut: 5000,
-        progressBar: true, 
+        progressBar: true,
         closeButton: true,
       });
     } else {
       this.toastrService.warning('O procedimento deve conter pelo menos 10 caracteres.');
     }
   }
-  
-  
+
   // MÉTO PARA RECUPERAR OS PROCEDIMENTOS ATUAIS
   private getProcedimentosAtuais(): string {
     const procedimentos = this.form.get('procedimentos')?.value?.trim();
-    return procedimentos && procedimentos !== 'Nenhum procedimento registrado para esse chamado.' 
-      ? procedimentos 
+    return procedimentos && procedimentos !== 'Nenhum procedimento registrado para esse chamado.'
+      ? procedimentos
       : '';
   }
-  
+
   // MÉTODO PARA OBTER A DATA E HORA ATUAL FORMATADAS
   private getDataHoraAtual(): string {
     return new Date().toLocaleString('pt-BR', {
