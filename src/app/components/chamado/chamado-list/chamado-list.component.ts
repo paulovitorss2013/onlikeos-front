@@ -27,7 +27,7 @@ export class ChamadoListComponent implements OnInit {
   FILTERED_DATA: Chamado[] = [];
 
   // COLUNAS DA TABELA
-  displayedColumns: string[] = ['id', 'cliente', 'tecnico', 'tipo', 'status', 'acoes'];
+  displayedColumns: string[] = ['id', 'cliente', 'regiaoCliente', 'tecnico', 'tipo', 'status', 'acoes'];
   dataSource = new MatTableDataSource<Chamado>(this.ELEMENT_DATA);
 
 
@@ -155,6 +155,7 @@ export class ChamadoListComponent implements OnInit {
     const matchesText = this.filterText === '' ||
   normalizeText(element.nomeCliente).includes(normalizeText(this.filterText)) ||
   normalizeText(element.nomeTecnico).includes(normalizeText(this.filterText)) ||
+  normalizeText(element.regiaoCliente).includes(normalizeText(this.filterText)) ||
   normalizeText(this.returnStatus(element.status)).includes(normalizeText(this.filterText)) ||
   normalizeText(this.returnPriority(element.prioridade)).includes(normalizeText(this.filterText)) ||
   normalizeText(this.returnType(element.tipo)).includes(normalizeText(this.filterText));
@@ -218,7 +219,7 @@ export class ChamadoListComponent implements OnInit {
       1: 'Reparo',
       2: 'Financeiro',
       3: 'Cancelamento',
-      4: 'Remoção de Equipamentos'
+      4: 'Remoção'
     };
     return tipoMap[Number(tipo)] || 'Desconhecido';
   }

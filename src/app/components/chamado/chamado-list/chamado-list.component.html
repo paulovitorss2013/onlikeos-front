@@ -51,7 +51,7 @@
           <mat-radio-button (click)="orderByTipo(1)" value="1">Reparo</mat-radio-button>
           <mat-radio-button (click)="orderByTipo(2)" value="2">Financeiro</mat-radio-button>
           <mat-radio-button (click)="orderByTipo(3)" value="3">Cancelamento</mat-radio-button>
-          <mat-radio-button (click)="orderByTipo(4)" value="4">Remoção de Equipamentos</mat-radio-button>
+          <mat-radio-button (click)="orderByTipo(4)" value="4">Remoção</mat-radio-button>
         </mat-radio-group>
       </td>
     </tr>
@@ -80,6 +80,14 @@
         <td mat-cell *matCellDef="let element"
             [ngClass]="{'status-aberto': element.status === 0, 'status-encerrado': element.status === 2}">
           {{element.nomeCliente}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="regiaoCliente">
+        <th mat-header-cell *matHeaderCellDef> Região </th>
+        <td mat-cell *matCellDef="let element"
+            [ngClass]="{'status-aberto': element.status === 0, 'status-encerrado': element.status === 2}">
+          {{element.regiaoCliente}}
         </td>
       </ng-container>
 

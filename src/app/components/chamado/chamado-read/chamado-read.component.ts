@@ -28,7 +28,8 @@ export class ChamadoReadComponent implements OnInit {
     nomeTecnico: '',
     dataFechamento: '',
     observacoes: '',
-    procedimentos: ''
+    procedimentos: '',
+    regiaoCliente:''
   };
 
   // GRUPO DE FORMULÁRIOS REATIVOS

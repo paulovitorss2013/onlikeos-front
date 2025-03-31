@@ -31,6 +31,7 @@ export class ChamadoUpdateComponent implements OnInit {
     cliente: '',
     nomeCliente: '',
     nomeTecnico: '',
+    regiaoCliente:''
   }
 
   // DECLARAÇÃO DOS ARRAYS DE CLIENTE E TÉCNICOS

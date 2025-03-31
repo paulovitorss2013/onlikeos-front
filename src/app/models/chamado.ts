@@ -11,4 +11,5 @@ export interface Chamado {
     cliente: any;
     nomeTecnico: string;
     nomeCliente:string;
+    regiaoCliente: string;
 }

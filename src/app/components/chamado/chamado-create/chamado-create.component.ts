@@ -29,6 +29,7 @@ export class ChamadoCreateComponent implements OnInit {
     cliente: '',
     nomeCliente: '',
     nomeTecnico: '',
+    regiaoCliente:''
   }
 
   // DECLARAÇÃO DOS ARRAYS DE CLIENTE E
