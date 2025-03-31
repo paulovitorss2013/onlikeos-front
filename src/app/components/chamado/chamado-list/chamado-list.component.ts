@@ -14,6 +14,9 @@ export class ChamadoListComponent implements OnInit {
   // VARIÁVEL DE CONTROLE DO CARREGAMENTO
   isLoading: boolean = true;
 
+  // REFERÊNCIA AO CAMPO DE PESQUISA
+  @ViewChild('input', { static: false }) searchInput!: any;
+
   // DEFINE O DESTAQUE PADRÃO PARA O BOTÃO
   activeButton: string = 'pendentes';
 
@@ -89,6 +92,8 @@ export class ChamadoListComponent implements OnInit {
 
   // LISTA TODOS OS CHAMADOS
   findAll(): void {
+    this.clearSearchField();
+    this.clearSearchField();
     this.isLoading = true;
     this.service.findAll().subscribe({
       next: (chamados) => {
@@ -106,6 +111,7 @@ export class ChamadoListComponent implements OnInit {
 
   // LISTA APENAS OS CHAMADOS EM PROGRESSO
   findOpenAndInProgress(): void {
+    this.clearSearchField();
     this.isLoading = true;
     this.service.findOpenAndInProgress().subscribe({
       next: (chamados) => {
@@ -123,6 +129,7 @@ export class ChamadoListComponent implements OnInit {
 
   // LISTA APENAS OS CHAMADOS ENCERRADOS
   findAllClosedProgress(): void {
+    this.clearSearchField();
     this.isLoading = true;
     this.service.findAllClosedProgress().subscribe({
       next: (chamados) => {
@@ -177,7 +184,7 @@ export class ChamadoListComponent implements OnInit {
     this.applyFilters();
   }
 
-  // ORDENA PELO TIPO SELECIONADO
+ // ORDENA PELO TIPO SELECIONADO
   orderByTipo(tipo: number | null): void {
     this.selectedTipo = tipo;
     this.applyFilters();
@@ -191,6 +198,20 @@ export class ChamadoListComponent implements OnInit {
   this.applyFilters();
 }
 
+// MÉTODO PARA MOSTRAR /ESCONDER A REGIÃO
+regiaoVisivel: boolean = false;
+toggleRegiaoVisivel(): void {
+  this.regiaoVisivel = !this.regiaoVisivel;
+}
+
+// MÉTODO PARA LIMPAR A CAIXA DE PESQUISA
+clearSearchField(): void {
+  this.filterText = '';
+  if (this.searchInput) {
+    this.searchInput.nativeElement.value = '';
+  }
+  this.applyFilters();
+}
 
   // RETORNA A DESCRIÇÃO DO STATUS
   returnStatus(status: number | string): string {

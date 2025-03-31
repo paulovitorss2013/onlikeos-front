@@ -55,6 +55,14 @@ td button {
     min-width: 80px; /* Define a largura mínima do botão */
 }
 
+/* BOTÕES DENTRO DA TABELA */
+.botao-regiao {
+    width: 24px; /* Define a largura do botão para 24 pixels */
+    height: 24px;  /* Define a altura do botão para 24 pixels */
+    min-width: 24px; /* Evita que o botão fique maior que 24 pixels de largura */
+    padding: 0; /* Remove qualquer espaço interno dentro do botão */
+  }
+
 /* ÍCONE EDITAR E EXIBIR */
 .edit, .view {
     color: rgb(39, 141, 45) !important; /* Define a cor do ícone de editar e visualizar */

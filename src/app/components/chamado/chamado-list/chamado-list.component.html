@@ -83,11 +83,18 @@
         </td>
       </ng-container>
 
+      <!-- MOSTRA A REGIÃO DO CLIENTE -->
       <ng-container matColumnDef="regiaoCliente">
-        <th mat-header-cell *matHeaderCellDef> Região </th>
-        <td mat-cell *matCellDef="let element"
-            [ngClass]="{'status-aberto': element.status === 0, 'status-encerrado': element.status === 2}">
-          {{element.regiaoCliente}}
+        <th mat-header-cell *matHeaderCellDef>
+          Região
+          <button mat-icon-button class="botao-regiao" (click)="toggleRegiaoVisivel()">
+            <mat-icon>{{ regiaoVisivel ? 'expand_less' : 'expand_more' }}</mat-icon>
+          </button>
+        </th>
+
+        <!-- BOTÃO MOSTRAR E OCULTAR A REGIÃO -->
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="regiaoVisivel">{{ element.regiaoCliente }}</span>
         </td>
       </ng-container>
 
