@@ -11,7 +11,7 @@
 
         <mat-form-field class="full-width" appearance="outline">
           <mat-label>Número do Protocolo</mat-label>
-          <input matInput [value]="formatarId(chamado.id)" readonly placeholder="Número do Protocolo">
+          <input matInput [value]="formatId(chamado.id)" readonly placeholder="Número do Protocolo">
         </mat-form-field>
 
         <mat-form-field class="full-width">
@@ -48,7 +48,7 @@
         <mat-label>Técnico Responsável</mat-label>
         <mat-select formControlName="tecnico">
           <mat-option *ngFor="let tec of tecnicos" [value]="tec.id">
-            {{ tec.nome }} - CPF: {{ formatarCpf(tec.cpfCnpj) }}
+            {{ tec.nome }} - CPF: {{ formatCpf(tec.cpfCnpj) }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -78,7 +78,7 @@
     </mat-form-field>
 
      <!-- BOTÃO PARA NOVO PROCEDIMENTO -->
-     <button mat-button class="btn-novoProcedimento" (click)="incluirProcedimento()">
+     <button mat-button class="btn-novoProcedimento" (click)="insertProcedure()">
       INCLUIR PROCEDIMENTO
     </button>
 
@@ -93,8 +93,8 @@
 
 
     <!-- BOTÕES PARA CHAMADO -->
-    <button (click)="update()" [disabled]="!validaCampos()" mat-button class="btn-atualizar">ATUALIZAR CHAMADO</button>
-    <button mat-button class="btn-cancelar" (click)="cancelar()">CANCELAR ATUALIZAÇÃO</button>
+    <button (click)="update()" [disabled]="!validFiel()" mat-button class="btn-atualizar">ATUALIZAR CHAMADO</button>
+    <button mat-button class="btn-cancelar" (click)="cancelActions()">CANCELAR ATUALIZAÇÃO</button>
 
     </form>
 

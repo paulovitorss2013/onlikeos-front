@@ -176,7 +176,7 @@ export class ClienteDeleteComponent implements OnInit {
  
   
   // MÉTODO PARA CANCELAR AS AÇÕES
-  cancelar(): void {
+  cancelActions(): void {
     this.router.navigate(['clientes']);
   }
 

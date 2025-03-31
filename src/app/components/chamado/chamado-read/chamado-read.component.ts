@@ -71,12 +71,12 @@ findById(): void {
     next: (resposta) => {
       this.chamado = resposta;
       if (this.chamado.cliente) {
-        this.buscarDadosDoCliente(this.chamado.cliente);
+        this.shearchDataCliente(this.chamado.cliente);
       }
       if (this.chamado.tecnico) {
-        this.buscarDadosDoTecnico(this.chamado.tecnico);
+        this.shearchDataTecnico(this.chamado.tecnico);
       }
-      this.atualizarFormulario();
+      this.updateForm();
     },
     error: (ex) => {
       this.toastrService.error(ex.error.error);
@@ -85,11 +85,11 @@ findById(): void {
 }
 
 // MÉTODO PARA BUSCAR OS DADOS DO CLIENTE
-buscarDadosDoTecnico(tecnicoId: string): void {
+shearchDataTecnico(tecnicoId: string): void {
   this.tecnicoService.findById(tecnicoId).subscribe({
     next: (tecnico) => {
       this.chamado.tecnico = tecnico;
-      this.atualizarFormulario();
+      this.updateForm();
     },
     error: (ex) => {
       console.error('Erro ao buscar cliente:', ex);
@@ -99,11 +99,11 @@ buscarDadosDoTecnico(tecnicoId: string): void {
 }
 
   // MÉTODO PARA BUSCAR OS DADOS DO CLIENTE
-  buscarDadosDoCliente(clienteId: string): void {
+  shearchDataCliente(clienteId: string): void {
     this.clienteService.findById(clienteId).subscribe({
       next: (cliente) => {
         this.chamado.cliente = cliente;
-        this.atualizarFormulario();
+        this.updateForm();
       },
       error: (ex) => {
         console.error('Erro ao buscar cliente:', ex);
@@ -124,7 +124,7 @@ buscarDadosDoTecnico(tecnicoId: string): void {
   } 
 
   // ATUALIZAÇÃO DO FORMULÁRIO
-  atualizarFormulario(): void {
+ updateForm(): void {
     const procedimentos = this.chamado.procedimentos?.trim() || 'Nenhum procedimento registrado para esse chamado.';
   
  // INFORMAÇÕES PARA DADOS DO CLIENTE
@@ -145,8 +145,8 @@ buscarDadosDoTecnico(tecnicoId: string): void {
       dataAbertura: this.chamado.dataAbertura,
       prioridade: this.chamado.prioridade.toString(),
       status: this.chamado.status.toString(),
-      tecnico: this.formatarTecnico(),
-      cliente: this.formatarCliente(),
+      tecnico: this.formatTecnico(),
+      cliente: this.formatCliente(),
       dataFechamento: this.chamado.dataFechamento,
       observacoes: this.chamado.observacoes,
       procedimentos: procedimentos,
@@ -155,33 +155,33 @@ buscarDadosDoTecnico(tecnicoId: string): void {
   }
 
 // FORMATAR CPF DO TÉCNICO
-private formatarCPF(cpf: string): string {
+private formatCPF(cpf: string): string {
   return cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4');
 }
 
 // FORMATAR DADOS DO TÉCNICO
-private formatarTecnico(): string {
+private formatTecnico(): string {
   const cpfCnpj = this.chamado.tecnico?.cpfCnpj
-    ? ` - CPF: ${this.formatarCPF(this.chamado.tecnico.cpfCnpj)}`
+    ? ` - CPF: ${this.formatCPF(this.chamado.tecnico.cpfCnpj)}`
     : '';
   return `${this.chamado.nomeTecnico}${cpfCnpj}`;
 }
 
 // FORMATAR DADOS DO CLIENTE
-private formatarCliente(): string {
+private formatCliente(): string {
   const login = this.chamado.cliente?.login ? ` - PPPoE: ${this.chamado.cliente.login}` : '';
   return `${this.chamado.nomeCliente}${login}`;
 }
 
 // MÉTODO PARA FORMATAR O ID
-formatarId(id: string | number): string {
+formatId(id: string | number): string {
   if (!id) return ''; // Evita erro caso o ID seja indefinido ou nulo
   const anoCorrente = new Date().getFullYear(); // Obtém o ano atual
   return `${String(id).padStart(4, '0')}/${anoCorrente}`;
 }
 
  // MÉTODO PARA ABRIR GOOGLE MAPS
-  abrirNoGoogleMaps(coordenada: string): void {
+  openGoogleMaps(coordenada: string): void {
   const isGoogleMapsLink = coordenada.startsWith('https://maps.app.goo.gl/');
   if (isGoogleMapsLink) {
     window.open(coordenada, '_blank');
@@ -191,7 +191,7 @@ formatarId(id: string | number): string {
   }
 }
   // VOLTA PARA A TELA DOS CHAMADOS
-  voltar(): void {
+  return(): void {
     this.router.navigate(['chamados']);
   }
 }

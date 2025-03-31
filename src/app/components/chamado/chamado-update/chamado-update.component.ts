@@ -74,7 +74,7 @@ export class ChamadoUpdateComponent implements OnInit {
   }
 
   // MÉTODO PARA FORMATAR E CNPJ
-  formatarCpf(cpf: string): string {
+  formatCpf(cpf: string): string {
     if (!cpf) return '';
     const cleaned = cpf.replace(/\D/g, ''); // Remove tudo que não for número
     return cleaned.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4'); // Sempre formata como CPF
@@ -102,7 +102,7 @@ export class ChamadoUpdateComponent implements OnInit {
   }
 
   // MÉTODO PARA FORMATAR O ID
-  formatarId(id: string | number): string {
+  formatId(id: string | number): string {
     if (!id) return ''; // Evita erro caso o ID seja indefinido ou nulo
     const anoCorrente = new Date().getFullYear(); // Obtém o ano atual
     return `${String(id).padStart(4, '0')}/${anoCorrente}`;
@@ -117,11 +117,11 @@ export class ChamadoUpdateComponent implements OnInit {
         const tecnico = this.tecnicos.find(tecnico => tecnico.id === this.chamado.tecnico);
         const cliente = this.clientes.find(cliente => cliente.id === this.chamado.cliente);
 
-        this.chamado.nomeTecnico = tecnico ? `${tecnico.nome} - CPF/CNPJ: ${this.formatarCpf(tecnico.cpfCnpj)}` : '';
+        this.chamado.nomeTecnico = tecnico ? `${tecnico.nome} - CPF/CNPJ: ${this.formatCpf(tecnico.cpfCnpj)}` : '';
         this.chamado.nomeCliente = cliente ? `${cliente.login} - PPPoE: ${cliente.login}` : '';
 
         const procedimentos = this.chamado.procedimentos?.trim() || 'Nenhum procedimento registrado para esse chamado.';
-        const idFormatado = this.formatarId(this.chamado.id);
+        const idFormatado = this.formatId(this.chamado.id);
 
         this.form.patchValue({
           tipo: this.chamado.tipo.toString(),
@@ -142,9 +142,9 @@ export class ChamadoUpdateComponent implements OnInit {
   }
 
   // MÉTODO PARA INCLUIR UM PROCEDIMENTO
-  incluirProcedimento(): void {
+  insertProcedure(): void {
     const novoProcedimento = this.form.get('novoProcedimento')?.value?.trim();
-    let procedimentosAtuais = this.getProcedimentosAtuais();
+    let procedimentosAtuais = this.getProcedureCurrent();
 
     if (novoProcedimento && novoProcedimento.length >= 10) {
       const emailTecnico = this.authService.getUserEmail() || 'Técnico desconhecido';
@@ -170,7 +170,7 @@ export class ChamadoUpdateComponent implements OnInit {
   }
 
   // MÉTO PARA RECUPERAR OS PROCEDIMENTOS ATUAIS
-  private getProcedimentosAtuais(): string {
+  private getProcedureCurrent(): string {
     const procedimentos = this.form.get('procedimentos')?.value?.trim();
     return procedimentos && procedimentos !== 'Nenhum procedimento registrado para esse chamado.'
       ? procedimentos
@@ -210,7 +210,7 @@ update(): void {
 }
 
   // MÉTODO PARA CANCELAR AS AÇÕES
-    cancelar(): void {
+    cancelActions(): void {
       const dialogRef = this.dialog.open(ConfirmDialogComponent, {
         width: '300px',
         data: { message: 'Tem certeza de que deseja cancelar a edição?' }
@@ -223,7 +223,7 @@ update(): void {
     }
 
   // MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO
-  validaCampos(): boolean {
+  validFiel(): boolean {
     return this.form.valid;
   }
 }

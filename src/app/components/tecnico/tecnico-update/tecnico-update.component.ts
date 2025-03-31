@@ -106,7 +106,7 @@ export class TecnicoUpdateComponent implements OnInit {
   
   // MÉTÓDO PARA ATUALIZAR UM TÉCNICO
   update(): void {
-    if (!this.validaCampos()) return;
+    if (!this.validField()) return;
   
     let perfis: string[] = this.form.value.perfis || [];
     let perfisConvertidos: number[] = perfis
@@ -152,7 +152,7 @@ export class TecnicoUpdateComponent implements OnInit {
   }
   
 // MÉTODO PARA CANCELAR AS AÇÕES
-  cancelar(): void {
+  cancelActions(): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
       data: { message: 'Tem certeza que deseja cancelar a edição?' }
@@ -165,7 +165,7 @@ export class TecnicoUpdateComponent implements OnInit {
   }
 
   // MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO
-  validaCampos(): boolean {
+  validField(): boolean {
     return this.form.valid;
   }
 }

@@ -114,7 +114,7 @@ export class ClienteCreateComponent implements OnInit {
 
   // MÉTODO PARA CRIAR UM CLIENTE
   create(): void {
-    if (!this.validaCampos()) return;
+    if (!this.validField()) return;
     const cliente: Cliente = { ...this.form.value };
     this.service.create(cliente).subscribe({
       next: () => {
@@ -132,7 +132,7 @@ export class ClienteCreateComponent implements OnInit {
   }
 
   // MÉTODO PARA CANCELAR AS AÇÕES
-  cancelar(): void {
+  cancelActions(): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
       data: { message: 'Tem certeza que deseja cancelar a criação?' }
@@ -145,7 +145,7 @@ export class ClienteCreateComponent implements OnInit {
   }
 
   // MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO
-  validaCampos(): boolean {
+  validField(): boolean {
     return this.form.valid;
   }
 }

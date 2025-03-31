@@ -63,7 +63,7 @@ export class ChamadoCreateComponent implements OnInit {
   }
 
   // FORMATANDO CPF E CNPJ
-  formatarCpfCnpj(valor: string): string {
+  formatCpfCnpj(valor: string): string {
     if (!valor) return '';
     const cleaned = valor.replace(/\D/g, '');
     if (cleaned.length === 11) {
@@ -115,7 +115,7 @@ create(): void {
 }
 
   // MÉTODO PARA CANCELAR AS AÇÕES
-    cancelar(): void {
+    cancelActions(): void {
       const dialogRef = this.dialog.open(ConfirmDialogComponent, {
         width: '300px',
         data: { message: 'Tem certeza que deseja cancelar a criação?' }
@@ -128,7 +128,7 @@ create(): void {
     }
 
   // MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO
-  validaCampos(): boolean {
+  validField(): boolean {
     return this.form.valid;
   }
 }

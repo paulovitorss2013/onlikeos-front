@@ -32,7 +32,7 @@ export class ChamadoListComponent implements OnInit {
 
 
   // FORMATAÇÃO DO NÚMERO DO CHAMADO
-  formatarId(id: number): string {
+  formatId(id: number): string {
     const anoAtual = new Date().getFullYear();
     const idFormatado = id.toString().padStart(4, '0');
     return `${idFormatado}/${anoAtual}`;
@@ -79,9 +79,9 @@ export class ChamadoListComponent implements OnInit {
         data.id.toString().includes(filter) ||
         data.nomeCliente.toLowerCase().includes(filter) ||
         data.nomeTecnico.toLowerCase().includes(filter) ||
-        this.retornaStatus(data.status).toLowerCase().includes(filter) ||
-        this.retornaPrioridade(data.prioridade).toLowerCase().includes(filter) ||
-        this.retornaTipo(data.tipo).toLowerCase().includes(filter)
+        this.returnStatus(data.status).toLowerCase().includes(filter) ||
+        this.returnPriority(data.prioridade).toLowerCase().includes(filter) ||
+        this.returnType(data.tipo).toLowerCase().includes(filter)
 
       );
     };
@@ -104,6 +104,7 @@ export class ChamadoListComponent implements OnInit {
     });
   }
 
+  // LISTA APENAS OS CHAMADOS EM PROGRESSO
   findOpenAndInProgress(): void {
     this.isLoading = true;
     this.service.findOpenAndInProgress().subscribe({
@@ -154,9 +155,9 @@ export class ChamadoListComponent implements OnInit {
     const matchesText = this.filterText === '' ||
   normalizeText(element.nomeCliente).includes(normalizeText(this.filterText)) ||
   normalizeText(element.nomeTecnico).includes(normalizeText(this.filterText)) ||
-  normalizeText(this.retornaStatus(element.status)).includes(normalizeText(this.filterText)) ||
-  normalizeText(this.retornaPrioridade(element.prioridade)).includes(normalizeText(this.filterText)) ||
-  normalizeText(this.retornaTipo(element.tipo)).includes(normalizeText(this.filterText));
+  normalizeText(this.returnStatus(element.status)).includes(normalizeText(this.filterText)) ||
+  normalizeText(this.returnPriority(element.prioridade)).includes(normalizeText(this.filterText)) ||
+  normalizeText(this.returnType(element.tipo)).includes(normalizeText(this.filterText));
 
     return matchesStatus && matchesPrioridade && matchesTipo && matchesText;
   });
@@ -191,7 +192,7 @@ export class ChamadoListComponent implements OnInit {
 
 
   // RETORNA A DESCRIÇÃO DO STATUS
-  retornaStatus(status: number | string): string {
+  returnStatus(status: number | string): string {
     const statusMap: { [key: number]: string } = {
       0: 'Aberto',
       1: 'Em Andamento',
@@ -201,7 +202,7 @@ export class ChamadoListComponent implements OnInit {
   }
 
   // RETORNA A DESCRIÇÃO DA PRIORIDADE
-  retornaPrioridade(prioridade: number | string): string {
+  returnPriority(prioridade: number | string): string {
     const prioridadeMap: { [key: number]: string } = {
       0: 'Baixa',
       1: 'Média',
@@ -211,7 +212,7 @@ export class ChamadoListComponent implements OnInit {
   }
 
   // RETORNA A DESCRIÇÃO DA PRIORIDADE
-  retornaTipo(tipo: number | string): string {
+  returnType(tipo: number | string): string {
     const tipoMap: { [key: number]: string } = {
       0: 'Instalação',
       1: 'Reparo',

@@ -9,7 +9,7 @@
 
     <mat-form-field class="full-width" appearance="outline">
       <mat-label>Número do Protocolo</mat-label>
-      <input matInput [value]="formatarId(chamado.id)" readonly placeholder="Número do Protocolo">
+      <input matInput [value]="formatId(chamado.id)" readonly placeholder="Número do Protocolo">
     </mat-form-field>
 
     <mat-form-field class="full-width">
@@ -72,7 +72,7 @@
 
     <!-- BOTÃO DE ABRIR COORDENADAS NO GOOGLE MAPS (Agora dentro do formulário) -->
     <div *ngIf="chamado.cliente?.coordenada" class="botao-coordenadas-container">
-      <button mat-raised-button color="primary" (click)="abrirNoGoogleMaps(chamado.cliente.coordenada)">
+      <button mat-raised-button color="primary" (click)="openGoogleMaps(chamado.cliente.coordenada)">
         ABRIR NO MAPA
       </button>
     </div>
@@ -94,7 +94,7 @@
 
     <!-- BOTÃO VOLTAR -->
     <div class="button-container">
-      <button mat-button class="btn-voltar" (click)="voltar()">VOLTAR</button>
+      <button mat-button class="btn-voltar" (click)="return()">VOLTAR</button>
     </div>
   </form>
 </div>

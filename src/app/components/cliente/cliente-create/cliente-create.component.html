@@ -86,8 +86,8 @@
     </mat-form-field>
 
     <!-- BOTÕES DE AÇÃO -->
-    <button (click)="create()" [disabled]="!validaCampos()" mat-button class="btn-criar">CRIAR</button>
-    <button mat-button class="btn-cancelar" (click)="cancelar()">CANCELAR</button>
+    <button (click)="create()" [disabled]="!validField()" mat-button class="btn-criar">CRIAR</button>
+    <button mat-button class="btn-cancelar" (click)="cancelActions()">CANCELAR</button>
 
   </form>
 </div>

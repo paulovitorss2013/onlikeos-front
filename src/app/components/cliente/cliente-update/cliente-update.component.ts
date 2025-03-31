@@ -141,7 +141,7 @@ export class ClienteUpdateComponent implements OnInit {
 
   // MÉTÓDO PARA ATUALIZAR UM TÉCNICO
   update(): void {
-    if (!this.validaCampos()) return;  
+    if (!this.validField()) return;  
     
     const cliente: Cliente = {
       id: this.cliente.id,
@@ -181,7 +181,7 @@ export class ClienteUpdateComponent implements OnInit {
   }
 
   // MÉTODO PARA ABRIR COORDENADAS NO GOOGLE MAPS
-abrirNoGoogleMaps(coordenada: string): void {
+openGoogleMaps(coordenada: string): void {
   const isGoogleMapsLink = coordenada.startsWith('https://maps.app.goo.gl/');
   if (isGoogleMapsLink) {
     window.open(coordenada, '_blank');
@@ -193,7 +193,7 @@ abrirNoGoogleMaps(coordenada: string): void {
 }
   
 // MÉTODO PARA CANCELAR AS AÇÕES
-  cancelar(): void {
+  cancelActions(): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
       data: { message: 'Tem certeza que deseja cancelar a edição?' }
@@ -206,7 +206,7 @@ abrirNoGoogleMaps(coordenada: string): void {
   }
 
   // MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO
-  validaCampos(): boolean {
+  validField(): boolean {
     return this.form.valid;
   }
 }

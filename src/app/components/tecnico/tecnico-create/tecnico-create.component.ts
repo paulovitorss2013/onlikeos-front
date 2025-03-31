@@ -63,7 +63,7 @@ export class TecnicoCreateComponent implements OnInit {
 
  // MÉTODO PARA CRIAR UM TÉCNICO
  create(): void {
-  if (!this.validaCampos()) return;
+  if (!this.validField()) return;
   const tecnico: Tecnico = { ...this.form.value };
   this.service.create(tecnico).subscribe({
     next: () => {
@@ -84,7 +84,7 @@ export class TecnicoCreateComponent implements OnInit {
 }
 
   // MÉTODO PARA CANCELAR AS AÇÕES
-    cancelar(): void {
+    cancelActions(): void {
       const dialogRef = this.dialog.open(ConfirmDialogComponent, {
         width: '300px',
         data: { message: 'Tem certeza que deseja cancelar a criação?' }
@@ -97,7 +97,7 @@ export class TecnicoCreateComponent implements OnInit {
     }
 
   // MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO
-  validaCampos(): boolean {
+  validField(): boolean {
     return this.form.valid;
   }
 }

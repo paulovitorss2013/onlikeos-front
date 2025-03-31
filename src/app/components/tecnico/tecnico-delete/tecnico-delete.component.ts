@@ -118,7 +118,7 @@ export class TecnicoDeleteComponent implements OnInit {
   
 
   /// MÉTODO CANCELAR AS AÇÕES
-  cancelar(): void {
+  cancelActions(): void {
     this.router.navigate(['tecnicos']);
   }
   
