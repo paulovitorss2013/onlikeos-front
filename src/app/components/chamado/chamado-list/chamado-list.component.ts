@@ -11,6 +11,9 @@ import { ChamadoService } from '../../../services/chamado.service';
 })
 export class ChamadoListComponent implements OnInit {
 
+  // VARÍÁVEL PARA CONTROLE DO TÍTULO DINÂMICO
+  pageTitle: string = 'Chamados Pendentes';
+
   // VARIÁVEL DE CONTROLE DO CARREGAMENTO
   isLoading: boolean = true;
 
@@ -92,7 +95,7 @@ export class ChamadoListComponent implements OnInit {
 
   // LISTA TODOS OS CHAMADOS
   findAll(): void {
-    this.clearSearchField();
+    this.pageTitle = 'Todos os Chamados';
     this.clearSearchField();
     this.isLoading = true;
     this.service.findAll().subscribe({
@@ -108,9 +111,10 @@ export class ChamadoListComponent implements OnInit {
       }
     });
   }
-
+  
   // LISTA APENAS OS CHAMADOS EM PROGRESSO
   findOpenAndInProgress(): void {
+    this.pageTitle = 'Chamados Pendentes';
     this.clearSearchField();
     this.isLoading = true;
     this.service.findOpenAndInProgress().subscribe({
@@ -129,6 +133,7 @@ export class ChamadoListComponent implements OnInit {
 
   // LISTA APENAS OS CHAMADOS ENCERRADOS
   findAllClosedProgress(): void {
+    this.pageTitle = 'Chamados Encerrados';
     this.clearSearchField();
     this.isLoading = true;
     this.service.findAllClosedProgress().subscribe({

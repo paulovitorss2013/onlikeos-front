@@ -55,12 +55,17 @@ td button {
     min-width: 80px; /* Define a largura mínima do botão */
 }
 
-/* BOTÕES DENTRO DA TABELA */
 .botao-regiao {
-    width: 24px; /* Define a largura do botão para 24 pixels */
-    height: 24px;  /* Define a altura do botão para 24 pixels */
-    min-width: 24px; /* Evita que o botão fique maior que 24 pixels de largura */
-    padding: 0; /* Remove qualquer espaço interno dentro do botão */
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espaço entre texto e ícone */
+    padding: 4px 8px; /* Ajusta tamanho do botão */
+    min-width: 80px; /* Define um tamanho mínimo */
+  }
+  
+  .botao-texto {
+    white-space: nowrap; /* Impede quebra de linha */
+    font-size: 14px; /* Ajusta tamanho da fonte */
   }
 
 /* ÍCONE EDITAR E EXIBIR */
@@ -92,9 +97,10 @@ td button {
     background-color: rgb(39, 141, 45); /* Cor de fundo para o botão ativo */
     color: rgb(70, 66, 66) !important; /* Garantir que o texto continue visível */
     font-weight: bold; /* Deixa o texto em negrito */
-    border-radius: 5px; /* Borda arredondada */
+    border-radius: 6px; /* Borda arredondada */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adiciona sombra para destacar */
   }
+  
 
 /* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
 @media (max-width: 768px) {

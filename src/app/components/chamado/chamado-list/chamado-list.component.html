@@ -3,7 +3,7 @@
 
   <!-- CONTAINER DO TÍTULO DA PÁGINA -->
   <div class="header-container">
-    <h1>Listando os Chamados</h1>
+    <h1>{{ pageTitle }}</h1>
     <button mat-button (click)="setActiveButton('todos'); findAll()" [ngClass]="{'active': activeButton === 'todos'}">TODOS</button>
     <button mat-button (click)="setActiveButton('pendentes'); findOpenAndInProgress()" [ngClass]="{'active': activeButton === 'pendentes'}">PENDENTES</button>
     <button mat-button (click)="setActiveButton('encerrados'); findAllClosedProgress()" [ngClass]="{'active': activeButton === 'encerrados'}">ENCERRADOS</button>
@@ -86,13 +86,13 @@
       <!-- MOSTRA A REGIÃO DO CLIENTE -->
       <ng-container matColumnDef="regiaoCliente">
         <th mat-header-cell *matHeaderCellDef>
-          Região
-          <button mat-icon-button class="botao-regiao" (click)="toggleRegiaoVisivel()">
+          <button mat-button class="botao-regiao" (click)="toggleRegiaoVisivel()">
+            Região
             <mat-icon>{{ regiaoVisivel ? 'expand_less' : 'expand_more' }}</mat-icon>
           </button>
         </th>
 
-        <!-- BOTÃO MOSTRAR E OCULTAR A REGIÃO -->
+      <!-- BOTÃO MOSTRAR E OCULTAR A REGIÃO -->
         <td mat-cell *matCellDef="let element">
           <span *ngIf="regiaoVisivel">{{ element.regiaoCliente }}</span>
         </td>
