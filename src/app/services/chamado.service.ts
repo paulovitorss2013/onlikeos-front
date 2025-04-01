@@ -31,6 +31,10 @@ export class ChamadoService {
     return this.http.get<Chamado[]>(`${API_CONFIG.baseUrl}/chamados/encerrados`);
   }
 
+  findMyList(email: string): Observable<Chamado[]> {
+    return this.http.get<Chamado[]>(`${API_CONFIG.baseUrl}/chamados/tecnico/email?email=${email}`);
+  }
+
   // MÉTODO PARA CAPTURAR AS INFORMAÇÕES DO CHAMADO PELO ID
   findById(id: any): Observable<Chamado> {
     return this.http.get<Chamado>(`${API_CONFIG.baseUrl}/chamados/${id}`);

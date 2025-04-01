@@ -6,10 +6,10 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
-@Injectable()  // Declara que o serviço pode ser injetado em outros componentes
+@Injectable()
 export class AuthInterceptor implements HttpInterceptor {  // Implementa o HttpInterceptor para interceptar requisições HTTP
 
-  // Construtor com injeção de dependência para o Router e ToastrService
+  // CONSTRUTOR
   constructor(private router: Router, private toastr: ToastrService) {}
 
   /**

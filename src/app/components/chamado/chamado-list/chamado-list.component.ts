@@ -150,6 +150,31 @@ export class ChamadoListComponent implements OnInit {
     });
   }
 
+// MÉTODO PARA LISTAR CHAMADOS PELO E-MAIL DO TÉCNICO
+listMyChamados(): void {
+  const email = localStorage.getItem('userEmail'); // Recupera o e-mail do localStorage
+  if (email) {
+    this.pageTitle = 'Meus Chamados';  // Atualiza o título da página
+    this.isLoading = true;  // Ativa o carregamento da lista
+
+    // Chama o serviço para buscar os chamados relacionados ao e-mail do técnico
+    this.service.findMyList(email).subscribe({
+      next: (chamados) => {
+        this.ELEMENT_DATA = chamados;  // Armazena os dados retornados
+        this.FILTERED_DATA = chamados;  // Define os dados filtrados
+        this.updateDataSource();  // Atualiza a tabela com os dados filtrados
+        this.isLoading = false;  // Desativa o carregamento
+      },
+      error: (err) => {
+        console.error('Erro ao buscar os chamados do usuário:', err);  // Trata erros
+        this.isLoading = false;  // Desativa o carregamento mesmo em caso de erro
+      }
+    });
+  } else {
+    console.error('Email não encontrado no localStorage.');  // Se o e-mail não for encontrado
+  }
+}
+
   // ATUALIZA OS DADOS DA TABELA E CONFIGURA O PAGINADOR
   private updateDataSource(): void {
     this.FILTERED_DATA.sort((a, b) => b.id - a.id);
@@ -176,12 +201,6 @@ export class ChamadoListComponent implements OnInit {
   });
   this.updateDataSource();
 }
-
-  // ORDENA PELO STATUS SELECIONADO
-  orderByStatus(status: number | null): void {
-    this.selectedStatus = status;
-    this.applyFilters();
-  }
 
   // ORDENA PELA PRIORIDADE SELECIONADA
   orderByPrioridade(prioridade: number | null): void {

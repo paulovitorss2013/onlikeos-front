@@ -6,7 +6,7 @@
 }
 
 h1 {
-    text-align: center;
+    text-align: center; /* Alinha o texto no centro */
 }
 mat-form-field {
     width: 100% !important; /* Garante que o campo ocupe 100% da largura */
@@ -85,13 +85,14 @@ td button {
     color: red; /* Define a cor vermelha para status de aberto */
 }
 
+/* ESTILO DA MENSAGEM PARA FALTA DE DADOS */
 .no-data-message {
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    color: rgb(39, 141, 45);
-    margin-top: 20px;
-  }
+    text-align: center; /* Centraliza o texto dentro do elemento */
+    font-size: 18px; /* Define o tamanho da fonte como 18px */
+    font-weight: bold; /* Define a fonte como negrito */
+    color: rgb(39, 141, 45); /* Define a cor do texto para um tom de verde */
+    margin-top: 20px; /* Adiciona uma margem superior de 20px */
+}
 
   button.active {
     background-color: rgb(39, 141, 45); /* Cor de fundo para o botão ativo */
