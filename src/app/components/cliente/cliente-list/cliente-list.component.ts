@@ -16,7 +16,6 @@ export class ClienteListComponent implements OnInit {
   // VARIÁVEL DE CONTROLE DO CARREGAMENTO
   isLoading: boolean = true;
 
-
 // DADOS ORIGINAIS E FILTRADOS
   ELEMENT_DATA: Cliente[] = [];
 
@@ -26,7 +25,7 @@ export class ClienteListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-   // CONSTRUTOR
+  // CONSTRUTOR
   constructor(
     private service: ClienteService,
     private paginatorIntl: MatPaginatorIntl

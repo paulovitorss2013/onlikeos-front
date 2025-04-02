@@ -12,14 +12,14 @@ export class TecnicoService {
   // CONSTRUTOR
   constructor(private http: HttpClient) { }
 
-    // MÉTODO PARA CRIAR UM TÉCNICO
+  // MÉTODO PARA CRIAR UM TÉCNICO
   create(tecnico: Tecnico): Observable<Tecnico> {
     return this.http.post<Tecnico>(`${API_CONFIG.baseUrl}/tecnicos`, tecnico, {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
       });
     }
 
-    // MÉTODO PARA LISTAR TODOS OS TÉCNICOS
+  // MÉTODO PARA LISTAR TODOS OS TÉCNICOS
   findAll(): Observable<Tecnico[]> {
     return this.http.get<Tecnico[]>(`${API_CONFIG.baseUrl}/tecnicos`);
   }

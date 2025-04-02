@@ -85,7 +85,7 @@ findAllClientes(): void {
    });
  }
   
- // MÉTODO PARA LISTAR TODOS OS TÉCNICOS + CPF/CNPJ
+// MÉTODO PARA LISTAR TODOS OS TÉCNICOS + CPF/CNPJ
  findAllTecnicos(): void {
   this.tecnicoService.findAll().subscribe(resposta => {
     this.tecnicos = resposta.map(tec => ({
@@ -95,14 +95,14 @@ findAllClientes(): void {
    });
  }
 
-  // MÉTODO PARA SINCRONIZAR O FORMULÁRIO COM O OBJETO CHAMADO
+// MÉTODO PARA SINCRONIZAR O FORMULÁRIO COM O OBJETO CHAMADO
   syncChamadoComFormulario(): void {
     this.form.valueChanges.subscribe(values => {
       this.chamado = { ...this.chamado, ...values };
     });
   }
 
-  // MÉTODO PARA CRIAR UM CHAMADO
+// MÉTODO PARA CRIAR UM CHAMADO
 create(): void {
   this.chamadoService.create(this.chamado).subscribe({
     next: (resposta) => {
@@ -115,7 +115,7 @@ create(): void {
   });
 }
 
-  // MÉTODO PARA CANCELAR AS AÇÕES
+// MÉTODO PARA CANCELAR AS AÇÕES
     cancelActions(): void {
       const dialogRef = this.dialog.open(ConfirmDialogComponent, {
         width: '300px',
@@ -128,7 +128,7 @@ create(): void {
       });
     }
 
-  // MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO
+// MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO
   validField(): boolean {
     return this.form.valid;
   }

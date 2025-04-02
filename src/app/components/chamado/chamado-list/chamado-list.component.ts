@@ -154,24 +154,22 @@ export class ChamadoListComponent implements OnInit {
 listMyChamados(): void {
   const email = localStorage.getItem('userEmail'); // Recupera o e-mail do localStorage
   if (email) {
-    this.pageTitle = 'Meus Chamados';  // Atualiza o título da página
-    this.isLoading = true;  // Ativa o carregamento da lista
-
-    // Chama o serviço para buscar os chamados relacionados ao e-mail do técnico
+    this.pageTitle = 'Meus Chamados';  
+    this.isLoading = true;
     this.service.findMyList(email).subscribe({
       next: (chamados) => {
-        this.ELEMENT_DATA = chamados;  // Armazena os dados retornados
-        this.FILTERED_DATA = chamados;  // Define os dados filtrados
-        this.updateDataSource();  // Atualiza a tabela com os dados filtrados
-        this.isLoading = false;  // Desativa o carregamento
+        this.ELEMENT_DATA = chamados;  
+        this.FILTERED_DATA = chamados;
+        this.updateDataSource();
+        this.isLoading = false;
       },
       error: (err) => {
-        console.error('Erro ao buscar os chamados do usuário:', err);  // Trata erros
-        this.isLoading = false;  // Desativa o carregamento mesmo em caso de erro
+        console.error('Erro ao buscar os chamados do usuário:', err);
+        this.isLoading = false;
       }
     });
   } else {
-    console.error('Email não encontrado no localStorage.');  // Se o e-mail não for encontrado
+    console.error('Email não encontrado no localStorage.');
   }
 }
 

@@ -109,10 +109,10 @@ button.btn-cancelar {
 .mat-mdc-option {
   white-space: normal !important; /* Permite quebra de linha dentro das opções */
   word-wrap: break-word !important; /* Quebra palavras longas */
-  overflow-wrap: break-word !important;
-  display: flex !important;
-  align-items: center !important;
-  max-width: 100% !important;
+  overflow-wrap: break-word !important; /* força a quebra de palavra quando necessário para evitar estouro de conteúdo */
+  display: flex !important; /* utiliza flexbox para organizar os elementos dentro do container */
+  align-items: center !important; /* alinha os itens ao centro verticalmente dentro do container */
+  max-width: 100% !important; /* impede que o elemento ultrapasse a largura máxima disponível */
 }
 
 /* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */

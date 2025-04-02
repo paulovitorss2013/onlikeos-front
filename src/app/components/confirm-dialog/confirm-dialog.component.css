@@ -1,90 +1,89 @@
 /* --------- AJUSTES PARA TELAS GRANDES --------- */
-mat-dialog-container {
-    max-width: 400px;
-    width: 90%;
-    padding: 16px;
-  }
-  
-  mat-dialog-title {
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  mat-dialog-content {
-    font-size: 16px;
-    padding: 10px 0;
-    color: #333;
-    text-align: center;
-  }
-  
-  mat-dialog-actions {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    padding-top: 10px;
+mat-dialog-container { /* define o tamanho máximo do modal e a largura padrão */
+  max-width: 400px; /* limita a largura máxima do modal */
+  width: 90%; /* garante que o modal ocupe 90% da tela */
+  padding: 16px; /* adiciona espaçamento interno ao modal */
+}
+
+mat-dialog-title { /* estiliza o título do modal */
+  font-size: 20px; /* define o tamanho da fonte do título */
+  font-weight: bold; /* deixa o texto em negrito */
+  text-align: center; /* centraliza o texto */
+}
+
+mat-dialog-content { /* estiliza o conteúdo do modal */
+  font-size: 16px; /* define o tamanho da fonte do conteúdo */
+  padding: 10px 0; /* adiciona espaçamento vertical */
+  color: #333; /* define a cor do texto */
+  text-align: center; /* centraliza o texto */
+}
+
+mat-dialog-actions { /* estiliza a área dos botões */
+  display: flex; /* usa flexbox para organizar os botões */
+  justify-content: space-between; /* distribui os botões uniformemente */
+  gap: 10px; /* adiciona espaçamento entre os botões */
+  padding-top: 10px; /* adiciona espaço acima dos botões */
+}
+
+button { /* define propriedades gerais para os botões */
+  min-width: 90px; /* garante um tamanho mínimo para os botões */
+}
+
+button.confirm-button { /* estiliza o botão de confirmação */
+  background-color: rgb(39, 141, 45); /* define a cor de fundo verde */
+  color: white; /* define a cor do texto como branca */
+}
+
+.cancel-button { /* estiliza o botão de cancelar */
+  color: #757575; /* define uma cor neutra para o botão de cancelamento */
+}
+
+/* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
+@media (max-width: 768px) { /* aplica estilos quando a largura da tela for menor que 768px */
+  mat-dialog-container { 
+    max-width: 90%; /* aumenta a largura do modal para ocupar mais espaço */
   }
 
-  button {
-    min-width: 90px;
+  mat-dialog-title { 
+    font-size: 18px; /* reduz o tamanho do título para melhor adaptação */
   }
-  
-  button.confirm-button {
-    background-color: rgb(39, 141, 45);
-    color: white;
+
+  mat-dialog-content { 
+    font-size: 14px; /* diminui o tamanho da fonte do conteúdo */
   }
-  .cancel-button {
-    color: #757575;
+
+  mat-dialog-actions { 
+    flex-direction: column; /* empilha os botões verticalmente */
+    align-items: center; /* centraliza os botões */
   }
-  
-  
-  /* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
-  @media (max-width: 768px) {
-    mat-dialog-container {
-      max-width: 90%;
-    }
-  
-    mat-dialog-title {
-      font-size: 18px;
-    }
-  
-    mat-dialog-content {
-      font-size: 14px;
-    }
-  
-    mat-dialog-actions {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    button {
-      width: 100%;
-    }
+
+  button { 
+    width: 100%; /* faz os botões ocuparem toda a largura disponível */
   }
-  
-  /* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 480px --------- */
-  @media (max-width: 480px) {
-    mat-dialog-container {
-      max-width: 95%;
-      padding: 12px;
-    }
-  
-    mat-dialog-title {
-      font-size: 16px;
-    }
-  
-    mat-dialog-content {
-      font-size: 14px;
-    }
-  
-    mat-dialog-actions {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    button {
-      width: 100%;
-      padding: 10px;
-    }
+}
+
+/* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 480px --------- */
+@media (max-width: 480px) { /* aplica estilos quando a largura da tela for menor que 480px */
+  mat-dialog-container { 
+    max-width: 95%; /* aumenta ainda mais a largura do modal */
+    padding: 12px; /* reduz o espaçamento interno para economizar espaço */
   }
-  
+
+  mat-dialog-title { 
+    font-size: 16px; /* reduz ainda mais o tamanho da fonte do título */
+  }
+
+  mat-dialog-content { 
+    font-size: 14px; /* mantém a fonte menor para melhor ajuste */
+  }
+
+  mat-dialog-actions { 
+    flex-direction: column; /* mantém os botões empilhados */
+    align-items: center; /* mantém os botões centralizados */
+  }
+
+  button { 
+    width: 100%; /* faz os botões ocuparem toda a largura disponível */
+    padding: 10px; /* adiciona mais espaçamento interno para melhor usabilidade */
+  }
+}

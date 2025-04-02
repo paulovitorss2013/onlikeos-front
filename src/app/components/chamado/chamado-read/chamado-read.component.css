@@ -56,7 +56,7 @@ textarea {
   overflow-y: auto; /* Adiciona rolagem se necessário */
   width: 100%; /* Largura total */
   background-color: rgb(233, 233, 233)!important; /* Cor do fundo */
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem; /* adiciona um espaçamento de 0.5rem abaixo do elemento */
 }
 
 /* CONTAINER PARA O BOTÃO */

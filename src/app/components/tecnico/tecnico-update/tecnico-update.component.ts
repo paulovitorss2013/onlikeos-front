@@ -157,14 +157,14 @@ export class TecnicoUpdateComponent implements OnInit {
   }
 
   // AVISO REQUISITOS DA SENHA
-showPasswordWarning(): void {
+  showPasswordWarning(): void {
   this.toastr.warning(
     'A senha deve conter no mínimo 8 caracteres, incluindo uma letra maiúscula, um número e um símbolo.',
     'Atenção!'
   );
 }
   
-// MÉTODO PARA CANCELAR AS AÇÕES
+  // MÉTODO PARA CANCELAR AS AÇÕES
   cancelActions(): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
