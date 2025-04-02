@@ -134,6 +134,7 @@ shearchDataTecnico(tecnicoId: string): void {
     `${this.chamado.cliente.telefone ? `Telefone: ${this.aplicarMascaraDadosCliente(this.chamado.cliente.telefone, 'telefone')}` : 'Telefone: Não informado.'}\n` +
     `${this.chamado.cliente.logradouro ? `Logradouro: ${this.chamado.cliente.logradouro}.` : 'Logradouro: Não informado.'}\n` +
     `${this.chamado.cliente.numero ? `Número: ${this.chamado.cliente.numero}.` : 'Número: Não informado.'}\n` +
+    `${this.chamado.cliente.complemento ? `Complemento: ${this.chamado.cliente.complemento}.` : 'Complemento: Não informado.'}\n` +
     `${this.chamado.cliente.bairro ? `Bairro: ${this.chamado.cliente.bairro}.` : 'Bairro: Não informado.'}\n` +
     `${this.chamado.cliente.municipio ? `Município: ${this.chamado.cliente.municipio}.` : 'Município: Não informado.'}\n` +
     `${this.chamado.cliente.uf ? `Estado: ${this.chamado.cliente.uf}.` : 'Estado: Não informado.'}\n` +
@@ -141,7 +142,7 @@ shearchDataTecnico(tecnicoId: string): void {
   : 'Dados do cliente não encontrados.';
 
     this.form.patchValue({
-      id: this.chamado.id,
+      id: this.formatId(this.chamado.id),
       tipo: this.chamado.tipo.toString(),
       dataAbertura: this.chamado.dataAbertura,
       prioridade: this.chamado.prioridade.toString(),
