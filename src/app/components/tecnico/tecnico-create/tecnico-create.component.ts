@@ -137,7 +137,7 @@ private isValidCpf(cpf: string): boolean {
   return true;
 };
 
-
+// MÉTODO PARA CHECAR SE O E-MAIL ESTÁ DISPONÍVEL
 checkEmail(): void {
   const email = this.form.get('email')?.value;
 
@@ -155,9 +155,7 @@ checkEmail(): void {
   });
 }
 
-/**
- * Método para validar e-mail
- */
+// MÉTODO PARA VALIDAR O E-MAIL
 private isValidEmail(email: string): boolean {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);

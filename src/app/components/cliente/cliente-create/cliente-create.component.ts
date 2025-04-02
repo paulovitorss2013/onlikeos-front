@@ -133,6 +133,25 @@ export class ClienteCreateComponent implements OnInit {
     });
   }
 
+  // MÉTODO PARA VERIFICAR SE O LOGIN JÁ EXISTE AO DESFOCAR
+  verifyLogin(): void {
+    const login = this.form.get('login')?.value;
+    if (login) {
+      this.service.checkLoginExists(login).subscribe({
+        next: (exists) => {
+          if (exists) {
+            this.toastr.error('Este login já está em uso!', 'Erro');
+          } else {
+            this.toastr.success('Login disponível!');
+          }
+        },
+        error: () => {
+          this.toastr.error('Erro ao verificar login.', 'Erro');
+        }
+      });
+    }
+  }
+
   // MÉTODO PARA CANCELAR AS AÇÕES
   cancelActions(): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {

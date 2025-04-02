@@ -50,6 +50,5 @@ export class TecnicoService {
   delete (id: any): Observable <Tecnico> {
     return this.http.delete<Tecnico>(`${API_CONFIG.baseUrl}/tecnicos/${id}`);
   }
-
   
 }
