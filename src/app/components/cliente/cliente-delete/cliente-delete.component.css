@@ -23,6 +23,10 @@ h1 {
     width: 100%; /* Os campos ocupam a largura total do contêiner */
 }
 
+.readonly .mat-select-trigger {
+    pointer-events: none;
+    cursor: default;
+  }
 
 /* ESTILO PARA O BOTÃO "CRIAR" */
 button.btn-deletar {

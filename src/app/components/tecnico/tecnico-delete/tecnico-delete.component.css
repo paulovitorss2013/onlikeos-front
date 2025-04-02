@@ -60,7 +60,6 @@ button.btn-cancelar {
     transition: background-color 0.3s ease; /* Transição suave */
 }
 
-
 /* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
 @media (max-width: 768px) {
 

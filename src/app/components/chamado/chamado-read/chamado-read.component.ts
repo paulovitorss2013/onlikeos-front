@@ -34,17 +34,17 @@ export class ChamadoReadComponent implements OnInit {
 
   // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
-    id: new FormControl({ value: '', disabled: true }),
-    tipo: new FormControl({ value: '', disabled: true }),
-    dataAbertura: new FormControl({ value: '', disabled: true }),
-    prioridade: new FormControl({ value: '', disabled: true }),
-    status: new FormControl({ value: '', disabled: true }),
-    tecnico: new FormControl({ value: '', disabled: true }),
-    cliente: new FormControl({ value: '', disabled: true }),
-    dataFechamento: new FormControl({ value: '', disabled: true }),
-    observacoes: new FormControl({ value: '', disabled: true }),
-    procedimentos: new FormControl({ value: '', disabled: true }),
-    dadosCliente: new FormControl({ value: '', disabled: true }),
+    id: new FormControl(''),
+    tipo: new FormControl(''),
+    dataAbertura: new FormControl(''),
+    prioridade: new FormControl(''),
+    status: new FormControl(''),
+    tecnico: new FormControl(''),
+    cliente: new FormControl(''),
+    dataFechamento: new FormControl(''),
+    observacoes: new FormControl(''),
+    procedimentos: new FormControl(''),
+    dadosCliente: new FormControl('')
   });
 
   // CONSTRUTOR
@@ -192,7 +192,40 @@ formatId(id: string | number): string {
     window.open(url, '_blank');
   }
 }
-  // VOLTA PARA A TELA DOS CHAMADOS
+
+// MANIPULA O TIPO DO CHAMADO PARA EXIBIÇÃO
+getTipoChamadoLabel(valor: string | number): string {
+  const tipos: { [key: string]: string } = {
+    '0': 'Instalação',
+    '1': 'Reparo',
+    '2': 'Financeiro',
+    '3': 'Cancelamento',
+    '4': 'Remoção'
+  };
+  return tipos[valor] || 'Desconhecido';
+}
+
+// MANIPULA O STATUS DO CHAMADO PARA EXIBIÇÃO
+getStatusLabel(valor: string | number): string {
+  const status: { [key: string]: string } = {
+    '0': 'Aberto',
+    '1': 'Em Andamento',
+    '2': 'Encerrado'
+  };
+  return status[valor] || 'Desconhecido';
+}
+
+// MANIPULA A PRIORIDADE DO CHAMADO PARA EXIBIÇÃO
+getPrioridadeLabel(valor: string | number): string {
+  const prioridades: { [key: string]: string } = {
+    '0': 'Baixa',
+    '1': 'Média',
+    '2': 'Alta'
+  };
+  return prioridades[valor] || 'Desconhecido';
+}
+
+// VOLTA PARA A TELA DOS CHAMADOS
   return(): void {
     this.router.navigate(['chamados']);
   }

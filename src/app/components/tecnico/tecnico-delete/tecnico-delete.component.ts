@@ -30,11 +30,11 @@ export class TecnicoDeleteComponent implements OnInit {
 
   // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
-    nome: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.minLength(10)]),
-    cpfCnpj: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.minLength(11)]),
-    celular: new FormControl({ value: '', disabled: true }, [Validators.minLength(11)]),
-    telefone: new FormControl({ value: '', disabled: true }, [Validators.minLength(11)]),
-    email: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.email]),
+    nome: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    cpfCnpj: new FormControl('', [Validators.required, Validators.minLength(11)]),
+    celular: new FormControl('', [Validators.minLength(11)]),
+    telefone: new FormControl('', [Validators.minLength(10)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
     perfis: new FormControl([]),
     isAdmin: new FormControl({ value: false, disabled: true }),

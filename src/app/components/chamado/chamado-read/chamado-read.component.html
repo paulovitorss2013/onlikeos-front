@@ -14,13 +14,7 @@
 
     <mat-form-field class="full-width">
       <mat-label>Tipo de Chamado</mat-label>
-      <mat-select formControlName="tipo">
-        <mat-option value="0">Instalação</mat-option>
-        <mat-option value="1">Reparo</mat-option>
-        <mat-option value="2">Financeiro</mat-option>
-        <mat-option value="3">Cancelamento</mat-option>
-        <mat-option value="4">Remoção</mat-option>
-      </mat-select>
+      <input placeholder="Erro ao carregar o tipo" matInput [value]="getTipoChamadoLabel(form.get('tipo')?.value)" readonly>
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="outline">
@@ -34,23 +28,17 @@
     </mat-form-field>
 
     <div class="status-prioridade">
+      
       <mat-form-field>
         <mat-label>Status</mat-label>
-        <mat-select formControlName="status" class="readonly-select" title="Status do chamado">
-          <mat-option value="0">Aberto</mat-option>
-          <mat-option value="1">Em Andamento</mat-option>
-          <mat-option value="2">Encerrado</mat-option>
-        </mat-select>
+        <input placeholder="Erro ao carregar o status" matInput [value]="getStatusLabel(form.get('status')?.value)" readonly>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Prioridade</mat-label>
-        <mat-select formControlName="prioridade" class="readonly-select" title="Prioridade do chamado">
-          <mat-option value="0">Baixa</mat-option>
-          <mat-option value="1">Média</mat-option>
-          <mat-option value="2">Alta</mat-option>
-        </mat-select>
+        <input placeholder="Erro ao carregar a prioridade" matInput [value]="getPrioridadeLabel(form.get('prioridade')?.value)" readonly>
       </mat-form-field>
+      
     </div>
 
     <mat-form-field class="full-width">

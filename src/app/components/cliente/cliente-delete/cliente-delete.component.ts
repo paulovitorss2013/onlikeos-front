@@ -57,23 +57,23 @@ export class ClienteDeleteComponent implements OnInit {
 
   // GRUPO DE FORMULÁRIOS REATIVOS COM CAMPOS DESABILITADOS
   form: FormGroup = new FormGroup({
-    nome: new FormControl({ value: '', disabled: true }),
-    login: new FormControl({ value: '', disabled: true }),
-    cpfCnpj: new FormControl({ value: '', disabled: true }),
-    celular: new FormControl({ value: '', disabled: true }),
-    telefone: new FormControl({ value: '', disabled: true }),
-    email: new FormControl({ value: '', disabled: true }),
-    senha: new FormControl({ value: '', disabled: true }),
-    cep: new FormControl({ value: '', disabled: true }),
-    logradouro: new FormControl({ value: '', disabled: true }),
-    numero: new FormControl({ value: '', disabled: true }),
-    complemento: new FormControl({ value: '', disabled: true }),
-    bairro: new FormControl({ value: '', disabled: true }),
-    municipio: new FormControl({ value: '', disabled: true }),
-    uf: new FormControl({ value: '', disabled: true }),
-    coordenada: new FormControl({ value: '', disabled: true }),
-    tipoCliente: new FormControl({ value: '', disabled: true })
-});
+    nome: new FormControl(''),
+    login: new FormControl(''),
+    cpfCnpj: new FormControl(''),
+    celular: new FormControl(''),
+    telefone: new FormControl(''),
+    email: new FormControl(''),
+    senha: new FormControl(''),
+    cep: new FormControl(''),
+    logradouro: new FormControl(''),
+    numero: new FormControl(''),
+    complemento: new FormControl(''),
+    bairro: new FormControl(''),
+    municipio: new FormControl(''),
+    uf: new FormControl(''),
+    coordenada: new FormControl(''),
+    tipoCliente: new FormControl('')
+  });
   
   // CONSTRUTOR
   constructor(
@@ -132,18 +132,6 @@ export class ClienteDeleteComponent implements OnInit {
         this.toastr.error('Erro ao carregar os dados do cliente');
       }
     });
-  }
-
-  // MÉTODO PARA ALTERAR A MÁSCARA DE CPF/CNPJ COM BASE NA SELEÇÃO DO TIPO DE CLIENTE
-  onTipoClienteChange(): void {
-    const tipo = this.form.get('tipoCliente')?.value;
-    if (tipo === 'Pessoa Física') {
-      this.cpfCnpjMask = '000.000.000-00';
-      this.form.get('cpfCnpj')?.setValue('');
-    } else if (tipo === 'Pessoa Jurídica') {
-      this.cpfCnpjMask = '00.000.000/0000-00';
-      this.form.get('cpfCnpj')?.setValue('');
-    }
   }
 
   // MÉTODO PARA DELETAR O CLIENTE

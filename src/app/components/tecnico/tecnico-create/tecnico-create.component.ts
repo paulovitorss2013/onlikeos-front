@@ -96,22 +96,21 @@ showPasswordWarning(): void {
   );
 }
 
-
-  // MÉTODO PARA CANCELAR AS AÇÕES
-    cancelActions(): void {
-      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-        width: '300px',
-        data: { message: 'Tem certeza que deseja cancelar a criação?' }
-      });
-      dialogRef.afterClosed().subscribe(result => {
+// MÉTODO PARA CANCELAR AS AÇÕES
+  cancelActions(): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: { message: 'Tem certeza que deseja cancelar a criação?' }
+    });
+    dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.router.navigate(['tecnicos']);
         }
       });
     }
 
-  // MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO
-  validField(): boolean {
-    return this.form.valid;
-  }
+// MÉTODO PARA VALIDAR OS CAMPOS DO FORMULÁRIO
+validField(): boolean {
+  return this.form.valid;
+ }
 }
