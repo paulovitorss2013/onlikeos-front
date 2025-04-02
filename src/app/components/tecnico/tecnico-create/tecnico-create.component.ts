@@ -96,6 +96,73 @@ showPasswordWarning(): void {
   );
 }
 
+// MÉTODO PARA VERIFICAR CPF DUPLICADO AO DESFOCAR
+checkCpf(): void {
+  const cpf = this.form.get('cpfCnpj')?.value;
+
+  if (!this.isValidCpf(cpf)) {
+    this.toastr.error('CPF inválido!', 'Erro');
+    return;
+  }
+
+  this.service.existsByCpfCnpj(cpf).subscribe((exists) => {
+    if (exists) {
+      this.toastr.error('Este CPF já está cadastrado!');
+    } else {
+      this.toastr.success('CPF disponível!');
+    }
+  });
+}
+
+// MÉTODO PARA VERIFICAR SE O CPF É VÁLIDO
+private isValidCpf(cpf: string): boolean {
+  cpf = cpf.replace(/\D/g, '');
+
+  if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+  let sum = 0, remainder;
+  for (let i = 1; i <= 9; i++) {
+    sum += parseInt(cpf[i - 1]) * (11 - i);
+  }
+  remainder = (sum * 10) % 11;
+  if (remainder === 10 || remainder === 11) remainder = 0;
+  if (remainder !== parseInt(cpf[9])) return false;
+  sum = 0;
+  for (let i = 1; i <= 10; i++) {
+    sum += parseInt(cpf[i - 1]) * (12 - i);
+  }
+  remainder = (sum * 10) % 11;
+  if (remainder === 10 || remainder === 11) remainder = 0;
+  if (remainder !== parseInt(cpf[10])) return false;
+
+  return true;
+};
+
+
+checkEmail(): void {
+  const email = this.form.get('email')?.value;
+
+  if (!this.isValidEmail(email)) {
+    this.toastr.error('E-mail inválido!', 'Erro');
+    return;
+  }
+
+  this.service.existsByEmail(email).subscribe((exists) => {
+    if (exists) {
+      this.toastr.error('Este e-mail já está cadastrado!', 'Erro');
+    } else {
+      this.toastr.success('E-mail disponível!');
+    }
+  });
+}
+
+/**
+ * Método para validar e-mail
+ */
+private isValidEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
 // MÉTODO PARA CANCELAR AS AÇÕES
   cancelActions(): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {

@@ -18,6 +18,16 @@ export class TecnicoService {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
       });
     }
+  
+  // MÉTODO PARA VERIFICAR CPF DUPLICADO
+  existsByCpfCnpj(cpfCnpj: string): Observable<boolean> {
+    return this.http.get<boolean>(`${API_CONFIG.baseUrl}/tecnicos/exists/cpf/${cpfCnpj}`);
+  }
+
+  // MÉTODO PARA VERIFICAR E-MAIL DUPLICADO
+  existsByEmail(email: string): Observable<boolean> {
+  return this.http.get<boolean>(`${API_CONFIG.baseUrl}/tecnicos/exists/email/${email}`);
+}
 
   // MÉTODO PARA LISTAR TODOS OS TÉCNICOS
   findAll(): Observable<Tecnico[]> {
@@ -40,4 +50,6 @@ export class TecnicoService {
   delete (id: any): Observable <Tecnico> {
     return this.http.delete<Tecnico>(`${API_CONFIG.baseUrl}/tecnicos/${id}`);
   }
+
+  
 }

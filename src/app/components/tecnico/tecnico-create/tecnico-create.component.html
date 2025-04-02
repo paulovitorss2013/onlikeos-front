@@ -27,14 +27,14 @@
       <input matInput
         placeholder="digite apenas números"
         formControlName="cpfCnpj"
-        mask="000.000.000-00" />
+        mask="000.000.000-00" (blur)="checkCpf()">
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>E-mail</mat-label>
       <input matInput
         placeholder="Digite o e-mail"
-        formControlName="email">
+        formControlName="email" (blur)="checkEmail()">
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
