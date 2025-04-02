@@ -34,7 +34,12 @@ export class TecnicoUpdateComponent implements OnInit {
     celular: new FormControl('', [Validators.minLength(11)]),
     telefone: new FormControl('', [Validators.minLength(10)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    senha: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(64),
+      Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
+    ]),
     perfis: new FormControl([]),
     isAdmin: new FormControl(false),
     privilegios: new FormControl({ value: '', disabled: true })
@@ -150,6 +155,14 @@ export class TecnicoUpdateComponent implements OnInit {
       }
     });
   }
+
+  // AVISO REQUISITOS DA SENHA
+showPasswordWarning(): void {
+  this.toastr.warning(
+    'A senha deve conter no mínimo 8 caracteres, incluindo uma letra maiúscula, um número e um símbolo.',
+    'Atenção!'
+  );
+}
   
 // MÉTODO PARA CANCELAR AS AÇÕES
   cancelActions(): void {

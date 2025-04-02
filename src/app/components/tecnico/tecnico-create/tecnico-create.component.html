@@ -56,8 +56,8 @@
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Senha</mat-label>
       <input matInput
-        placeholder="Entre 8 e 64 caracteres"
-        formControlName="senha" maxlength="64">
+        placeholder="insira uma senha válida"
+        formControlName="senha" maxlength="64" (focus)="showPasswordWarning()">
     </mat-form-field>
 
     <!-- BOTÕES DE AÇÃO -->

@@ -117,7 +117,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 
     // CONFIGURAÇÃO DO TOASTR
     ToastrModule.forRoot({
-      timeOut: 4000,
+      timeOut: 5000,
       closeButton: true,
       progressBar: true
     })
