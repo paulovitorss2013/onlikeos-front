@@ -29,7 +29,7 @@
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>CPF/CNPJ</mat-label>
       <input matInput placeholder="digite apenas números" formControlName="cpfCnpj" 
-        [mask]="cpfCnpjMask" />
+        [mask]="cpfCnpjMask" (blur)="validarCpfCnpj()">
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">

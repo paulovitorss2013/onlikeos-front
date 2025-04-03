@@ -152,6 +152,55 @@ export class ClienteCreateComponent implements OnInit {
     }
   }
 
+  validarCpfCnpj(): void {
+    const cpfCnpjValue = this.form.get('cpfCnpj')?.value;
+  
+    if (!cpfCnpjValue) return;
+  
+    const cleanedValue = cpfCnpjValue.replace(/\D/g, ''); // Remove caracteres não numéricos
+  
+    if (!this.isValidCpf(cleanedValue) && !this.isValidCnpj(cleanedValue)) {
+      this.toastr.error('CPF ou CNPJ inválido!', 'Erro');
+    }
+  }
+
+  // Validação de CPF
+  private isValidCpf(cpf: string): boolean {
+    if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+
+    let sum = 0, remainder;
+    for (let i = 0; i < 9; i++) sum += +cpf[i] * (10 - i);
+    remainder = (sum * 10) % 11;
+    if (remainder === 10 || remainder === 11) remainder = 0;
+    if (remainder !== +cpf[9]) return false;
+
+    sum = 0;
+    for (let i = 0; i < 10; i++) sum += +cpf[i] * (11 - i);
+    remainder = (sum * 10) % 11;
+    if (remainder === 10 || remainder === 11) remainder = 0;
+    return remainder === +cpf[10];
+  }
+
+  // Validação de CNPJ
+  private isValidCnpj(cnpj: string): boolean {
+    if (cnpj.length !== 14 || /^(\d)\1+$/.test(cnpj)) return false;
+
+    const weights1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+    const weights2 = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+
+    let sum = 0, remainder;
+    for (let i = 0; i < 12; i++) sum += +cnpj[i] * weights1[i];
+    remainder = sum % 11;
+    let digit1 = remainder < 2 ? 0 : 11 - remainder;
+    if (digit1 !== +cnpj[12]) return false;
+
+    sum = 0;
+    for (let i = 0; i < 13; i++) sum += +cnpj[i] * weights2[i];
+    remainder = sum % 11;
+    let digit2 = remainder < 2 ? 0 : 11 - remainder;
+    return digit2 === +cnpj[13];
+  }
+
   // MÉTODO PARA CANCELAR AS AÇÕES
   cancelActions(): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
