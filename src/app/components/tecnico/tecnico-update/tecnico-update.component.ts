@@ -56,7 +56,7 @@ export class TecnicoUpdateComponent implements OnInit {
 
   // INICIALIZAÇÃO DO COMPONENTE
   ngOnInit(): void {
-    this.toastr.warning('Atualizar um técnico requer privilégios de administrador.', 'Atenção!');
+    this.toastr.warning('Atualizar um técnico requer privilégios de administrador.', 'Atenção!', { timeOut: 3000 });
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.tecnico.id = id;
@@ -155,13 +155,12 @@ export class TecnicoUpdateComponent implements OnInit {
       }
     });
   }
-
+  
   // AVISO REQUISITOS DA SENHA
   showPasswordWarning(): void {
   this.toastr.warning(
     'A senha deve conter no mínimo 8 caracteres, incluindo uma letra maiúscula, um número e um símbolo.',
-    'Atenção!'
-  );
+    'Atenção!', { timeOut: 5000 });
 }
   
   // MÉTODO PARA CANCELAR AS AÇÕES

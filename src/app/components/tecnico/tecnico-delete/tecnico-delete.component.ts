@@ -51,13 +51,13 @@ export class TecnicoDeleteComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.toastr.warning('Deletar um técnico requer privilégios de administrador.', 'Atenção!');
+    this.toastr.warning('Deletar um(a) técnico(a) requer privilégios de administrador(a).', 'Atenção!');
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.tecnico.id = id;
       this.findById();
     } else {
-      this.toastr.error('ID do técnico não encontrado.');
+      this.toastr.error('ID do(a) técnico(a) não encontrado.');
       this.router.navigate(['tecnicos']);
     }
   }
@@ -80,7 +80,7 @@ export class TecnicoDeleteComponent implements OnInit {
         });
       },
       error: (err) => {
-        this.toastr.error('Erro ao carregar os dados do técnico.');
+        this.toastr.error('Erro ao carregar os dados do(a) técnico(a).');
       }
     });
   }
@@ -89,14 +89,14 @@ export class TecnicoDeleteComponent implements OnInit {
   delete(): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
-      data: { message: 'Tem certeza que deseja deletar este técnico?' }
+      data: { message: 'Tem certeza que deseja deletar este(a) técnico(a)?' }
     });
   
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.service.delete(this.tecnico.id).pipe(
           tap(() => {
-            this.toastr.success('Técnico deletado com sucesso!', 'Delete');
+            this.toastr.success('Técnico(a) deletado(a) com sucesso!', 'Delete');
             this.router.navigate(['tecnicos']);
           }),
           catchError((error) => {
@@ -107,7 +107,7 @@ export class TecnicoDeleteComponent implements OnInit {
             } else if (error?.error?.message) {
               this.toastr.error(error.error.message);
             } else {
-              this.toastr.error('Erro desconhecido ao deletar o técnico.');
+              this.toastr.error('Erro desconhecido ao deletar o(a) técnico(a).');
             }
             return of(null);
           })

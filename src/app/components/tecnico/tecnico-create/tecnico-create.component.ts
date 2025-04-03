@@ -53,7 +53,7 @@ export class TecnicoCreateComponent implements OnInit {
 
   // INICIALIZAÇÃO DO COMPONENTE
   ngOnInit(): void {
-    this.toastr.warning('Cadastrar um técnico requer privilégios de administrador.', 'Atenção!');
+    this.toastr.warning('Cadastrar técnicos(as) requer privilégios de administrador.', 'Atenção!');
   }
 
   // MÉTODO PARA ADICIONAR O PERFIL DO TÉCNICO
@@ -72,7 +72,7 @@ export class TecnicoCreateComponent implements OnInit {
   const tecnico: Tecnico = { ...this.form.value };
   this.service.create(tecnico).subscribe({
     next: () => {
-      this.toastr.success('Técnico cadastrado com sucesso!', 'Cadastro');
+      this.toastr.success('Técnico(a) cadastrado(a) com sucesso!', 'Cadastro');
       this.router.navigate(['tecnicos']);
     },
     error: (ex) => {
@@ -82,7 +82,7 @@ export class TecnicoCreateComponent implements OnInit {
           this.toastr.error(element.message)
         );
       } else {
-        this.toastr.error(ex.error.message || 'Erro desconhecido ao criar técnico.');
+        this.toastr.error(ex.error.message || 'Erro desconhecido ao criar o(a) técnico(a).');
       }
     }
   });
@@ -92,8 +92,7 @@ export class TecnicoCreateComponent implements OnInit {
 showPasswordWarning(): void {
   this.toastr.warning(
     'A senha deve conter no mínimo 8 caracteres, incluindo uma letra maiúscula, um número e um símbolo.',
-    'Atenção!'
-  );
+    'Atenção!', { timeOut: 5000 });
 }
 
 // MÉTODO PARA VERIFICAR CPF DUPLICADO AO DESFOCAR
@@ -101,15 +100,15 @@ checkCpf(): void {
   const cpf = this.form.get('cpfCnpj')?.value;
 
   if (!this.isValidCpf(cpf)) {
-    this.toastr.error('CPF inválido!', 'Erro');
+    this.toastr.error('CPF inválido!', '' ,{ timeOut: 3000 });
     return;
   }
 
   this.service.existsByCpfCnpj(cpf).subscribe((exists) => {
     if (exists) {
-      this.toastr.error('Este CPF já está cadastrado!');
+      this.toastr.error('CPF já cadastrado!', '' ,{ timeOut: 3000 });
     } else {
-      this.toastr.success('CPF disponível!');
+      this.toastr.success('CPF disponível!','' ,{ timeOut: 3000 });
     }
   });
 }
@@ -142,15 +141,15 @@ checkEmail(): void {
   const email = this.form.get('email')?.value;
 
   if (!this.isValidEmail(email)) {
-    this.toastr.error('E-mail inválido!', 'Erro');
+    this.toastr.error('E-mail inválido!', '', { timeOut: 3000 });
     return;
   }
 
   this.service.existsByEmail(email).subscribe((exists) => {
     if (exists) {
-      this.toastr.error('Este e-mail já está cadastrado!', 'Erro');
+      this.toastr.error('E-mail já em uso!', '',{ timeOut: 3000 });
     } else {
-      this.toastr.success('E-mail disponível!');
+      this.toastr.success('E-mail disponível!', '',{ timeOut: 3000 } );
     }
   });
 }
