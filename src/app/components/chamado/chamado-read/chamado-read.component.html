@@ -74,11 +74,19 @@
     </mat-form-field>
 
      <!-- ÁREA DOS PROCEDIMENTOS -->
-     <h2>Histórico dos Procedimentos</h2>
-     <mat-form-field class="full-width text" appearance="outline">
-       <textarea class="procedimentos" matInput formControlName="procedimentos"
-       placeholder="Histórico dos Procedimentos" readonly></textarea>
-     </mat-form-field>
+    <h2>Histórico dos Procedimentos</h2>
+    <div class="campo-justificado">
+      <div class="justificado-box">
+        {{ form.get('procedimentos')?.value }}
+      </div>
+      <textarea 
+        matInput 
+        formControlName="procedimentos"
+        class="textarea-oculto" 
+        placeholder="Histórico dos procedimentos"
+        readonly>
+      </textarea>
+    </div>
 
     <!-- BOTÃO VOLTAR -->
     <div class="button-container">

@@ -149,7 +149,7 @@ findById(): void {
 
 // MÉTODO PARA INCLUIR UM PROCEDIMENTO
 insertProcedure(): void {
-    const novoProcedimento = this.form.get('novoProcedimento')?.value?.trim();
+  const novoProcedimento = this.form.get('novoProcedimento')?.value?.trim().replace(/[ \t]+/g, ' ');
     let procedimentosAtuais = this.getProcedureCurrent();
 
     if (novoProcedimento && novoProcedimento.length >= 10) {
@@ -165,6 +165,7 @@ insertProcedure(): void {
         procedimentos: novoHistorico,
         novoProcedimento: ''
       });
+      this.updateProcedimentosCount();
       this.toastrService.info('Agora você precisa salvar as atualizações do chamado.', 'Procedimento incluído', {
         timeOut: 5000,
         progressBar: true,
