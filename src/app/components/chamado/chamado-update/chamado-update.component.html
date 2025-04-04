@@ -97,6 +97,11 @@
       INCLUIR PROCEDIMENTO
     </button>
 
+    <!-- BOTÃO PARA REMOVER ÚLTIMO PROCEDIMENTO -->
+    <button mat-button class="btn-removerProcedimento" (click)="removeLastProcedure()" [disabled]="procedimentosTemp.length === 0">
+     REMOVER PROCEDIMENTO
+    </button>
+    
     <!-- ÁREA PARA NOVOS PROCEDIMENTOS -->
 <mat-form-field class="full-width text" appearance="outline">
   <mat-label>Novo Procedimento</mat-label>
@@ -108,8 +113,8 @@
     (input)="updateProcedimentosCount()"
     maxlength="500">
   </textarea>
-  <mat-hint [ngClass]="{'error-text': charCount < 10 || charCount > 500}">
-    Entre 10 e 500 caracteres (<strong>{{ charCount }}</strong>/500)
+  <mat-hint [ngClass]="{'error-text': charCountText < 10 || charCountText > 500}">
+    Entre 10 e 500 caracteres (<strong>{{ charCountText }}</strong>/500)
   </mat-hint>
   </mat-form-field>
 
