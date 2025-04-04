@@ -144,45 +144,55 @@ export class ClienteUpdateComponent implements OnInit {
 
   // MÉTÓDO PARA ATUALIZAR UM TÉCNICO
   update(): void {
-    if (!this.validField()) return;  
-    
-    const cliente: Cliente = {
-      id: this.cliente.id,
-      nome: this.form.value.nome,
-      login: this.form.value.login,
-      cpfCnpj: this.form.value.cpfCnpj,
-      email: this.form.value.email,
-      celular: this.form.value.celular,
-      telefone: this.form.value.telefone,
-      senha: this.form.value.senha,
-      dataCriacao: this.cliente.dataCriacao,
-      cep: this.form.value.cep,
-      logradouro: this.form.value.logradouro,
-      numero: this.form.value.numero,
-      complemento: this.form.value.complemento,
-      bairro: this.form.value.bairro,
-      municipio: this.form.value.municipio,
-      uf: this.form.value.uf,
-      coordenada: this.form.value.coordenada,
-    };
-    this.service.update(cliente).subscribe({
-      next: () => {
-        this.toastr.success('Cliente atualizado com sucesso!', 'Atualização');
-        this.router.navigate(['clientes']);
-      },
-      error: (ex) => {
-        if (ex.error?.errors) {
-          ex.error.errors.forEach((element: { message: string }) =>
-            this.toastr.error(element.message)
-          );
-        } else if (ex.error?.message) {
-          this.toastr.error(ex.error.message);
-        } else {
-          this.toastr.error('Erro desconhecido ao atualizar o cliente.');
-        }
+    if (!this.validField()) return;
+  
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: { message: 'Deseja mesmo atualizar o cliente?' }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const cliente: Cliente = {
+          id: this.cliente.id,
+          nome: this.form.value.nome,
+          login: this.form.value.login,
+          cpfCnpj: this.form.value.cpfCnpj,
+          email: this.form.value.email,
+          celular: this.form.value.celular,
+          telefone: this.form.value.telefone,
+          senha: this.form.value.senha,
+          dataCriacao: this.cliente.dataCriacao,
+          cep: this.form.value.cep,
+          logradouro: this.form.value.logradouro,
+          numero: this.form.value.numero,
+          complemento: this.form.value.complemento,
+          bairro: this.form.value.bairro,
+          municipio: this.form.value.municipio,
+          uf: this.form.value.uf,
+          coordenada: this.form.value.coordenada,
+        };
+  
+        this.service.update(cliente).subscribe({
+          next: () => {
+            this.toastr.success('Cliente atualizado com sucesso!', 'Atualização');
+            this.router.navigate(['clientes']);
+          },
+          error: (ex) => {
+            if (ex.error?.errors) {
+              ex.error.errors.forEach((element: { message: string }) =>
+                this.toastr.error(element.message)
+              );
+            } else if (ex.error?.message) {
+              this.toastr.error(ex.error.message);
+            } else {
+              this.toastr.error('Erro desconhecido ao atualizar o cliente.');
+            }
+          }
+        });
       }
     });
-  }
+  }  
 
   // MÉTODO PARA ABRIR COORDENADAS NO GOOGLE MAPS
 openGoogleMaps(coordenada: string): void {

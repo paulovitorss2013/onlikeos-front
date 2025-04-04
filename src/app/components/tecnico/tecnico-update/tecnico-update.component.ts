@@ -115,45 +115,57 @@ export class TecnicoUpdateComponent implements OnInit {
   update(): void {
     if (!this.validField()) return;
   
-    let perfis: string[] = this.form.value.perfis || [];
-    let perfisConvertidos: number[] = perfis
-      .map(perfil => Number(perfil))
-      .filter(perfil => !isNaN(perfil));
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: { message: 'Deseja mesmo atualizar o técnico?' }
+    });
   
-    if (this.form.value.isAdmin) {
-      if (!perfisConvertidos.includes(0)) {
-        perfisConvertidos.push(0);
-      }
-    } else {
-      perfisConvertidos = perfisConvertidos.filter(p => p !== 0);
-    }
-    const tecnico: Tecnico = {
-      id: this.tecnico.id,
-      nome: this.form.value.nome,
-      cpfCnpj: this.form.value.cpfCnpj,
-      email: this.form.value.email,
-      celular: this.form.value.celular,
-      telefone: this.form.value.telefone,
-      perfis: perfisConvertidos.map(p => p.toString()),
-      dataCriacao: this.tecnico.dataCriacao
-    };
-    if (this.form.value.novaSenha) {
-      tecnico.senha = this.form.value.novaSenha;
-    }
-    this.service.update(tecnico).subscribe({
-      next: () => {
-        this.toastr.success('Técnico atualizado com sucesso!', 'Atualização');
-        this.router.navigate(['tecnicos']);
-      },
-      error: (ex) => {
-        if (ex.status === 403) return;
-        if (ex.error?.errors) {
-          ex.error.errors.forEach((element: { message: string }) =>
-            this.toastr.error(element.message)
-          );
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        let perfis: string[] = this.form.value.perfis || [];
+        let perfisConvertidos: number[] = perfis
+          .map(perfil => Number(perfil))
+          .filter(perfil => !isNaN(perfil));
+  
+        if (this.form.value.isAdmin) {
+          if (!perfisConvertidos.includes(0)) {
+            perfisConvertidos.push(0);
+          }
         } else {
-          this.toastr.error(ex.error.message || 'Erro desconhecido ao atualizar o técnico.');
+          perfisConvertidos = perfisConvertidos.filter(p => p !== 0);
         }
+  
+        const tecnico: Tecnico = {
+          id: this.tecnico.id,
+          nome: this.form.value.nome,
+          cpfCnpj: this.form.value.cpfCnpj,
+          email: this.form.value.email,
+          celular: this.form.value.celular,
+          telefone: this.form.value.telefone,
+          perfis: perfisConvertidos.map(p => p.toString()),
+          dataCriacao: this.tecnico.dataCriacao
+        };
+  
+        if (this.form.value.novaSenha) {
+          tecnico.senha = this.form.value.novaSenha;
+        }
+  
+        this.service.update(tecnico).subscribe({
+          next: () => {
+            this.toastr.success('Técnico atualizado com sucesso!', 'Atualização');
+            this.router.navigate(['tecnicos']);
+          },
+          error: (ex) => {
+            if (ex.status === 403) return;
+            if (ex.error?.errors) {
+              ex.error.errors.forEach((element: { message: string }) =>
+                this.toastr.error(element.message)
+              );
+            } else {
+              this.toastr.error(ex.error.message || 'Erro desconhecido ao atualizar o técnico.');
+            }
+          }
+        });
       }
     });
   }

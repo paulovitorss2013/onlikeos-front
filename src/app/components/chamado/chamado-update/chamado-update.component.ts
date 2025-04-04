@@ -254,7 +254,7 @@ updateObservacoesCount(): void {
 update(): void {
   const dialogRef = this.dialog.open(ConfirmDialogComponent, {
     width: '300px',
-    data: { message: 'Deseja mesmo atualizar este chamado?' }
+    data: { message: 'Deseja mesmo atualizar o chamado?' }
   });
 
   dialogRef.afterClosed().subscribe(result => {
