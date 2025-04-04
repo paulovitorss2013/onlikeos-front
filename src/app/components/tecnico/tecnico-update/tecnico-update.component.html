@@ -22,13 +22,17 @@
         maxlength="60">
     </mat-form-field>
 
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>CPF</mat-label>
-      <input matInput
-        placeholder="digite apenas números"
-        formControlName="cpfCnpj"
-        mask="000.000.000-00" />
-    </mat-form-field>
+    <div class="cpf-container">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>CPF</mat-label>
+        <input matInput placeholder="Digite apenas números" formControlName="cpfCnpj" 
+          mask="000.000.000-00" (blur)="checkCpf()">
+      </mat-form-field>
+      <small class="cpf-message" *ngIf="cpfMessage"
+        [ngStyle]="{ 'color': cpfMessage === 'CPF disponível!' ? 'green' : 'red' }">
+        {{ cpfMessage }}
+      </small>
+    </div>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>E-mail</mat-label>
@@ -58,7 +62,7 @@
     <div *ngIf="mostrarNovaSenha" class="nova-senha-container">
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Nova Senha</mat-label>
-        <input matInput formControlName="novaSenha" type="password" 
+        <input matInput formControlName="novaSenha" 
                placeholder="Digite a nova senha" maxlength="64" 
                (focus)="showPasswordWarning()">
         <mat-hint *ngIf="passwordMessage" class="senha-info">
