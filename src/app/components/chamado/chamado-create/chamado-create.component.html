@@ -41,7 +41,7 @@
 
     <div class="tecnico">
       <mat-form-field class="full-width">
-        <mat-label>Selecione o Técnico</mat-label>
+        <mat-label>Selecione o(a) Técnico(a)</mat-label>
         <mat-select formControlName="tecnico">
           <mat-option *ngFor="let tec of tecnicos" [value]="tec.id">
             {{ tec.nome }}, CPF: {{ tec.cpfCnpj | mask: '000.000.000-00' }}
@@ -52,7 +52,7 @@
 
     <div class="cliente">
       <mat-form-field class="full-width">
-        <mat-label>Selecione o Cliente</mat-label>
+        <mat-label>Selecione o(a) Cliente</mat-label>
         <mat-select formControlName="cliente">
           <mat-option *ngFor="let cli of clientes" [value]="cli.id">
             {{ cli.nome }}, PPPoE: {{ cli.login }}
@@ -63,11 +63,19 @@
 
     <mat-form-field class="full-width observacoes" appearance="outline">
       <mat-label>Relato sobre o chamado</mat-label>
-      <textarea class="observacoes" matInput formControlName="observacoes"
-        placeholder="Exemplo: Cliente entra em contato relatando ..."
-        maxlength="1000">
+      <textarea 
+        class="observacoes" 
+        matInput 
+        formControlName="observacoes"
+        placeholder="Digite entre 10 e 500 caracteres. Exemplo: Cliente entra em contato relatando..."
+        (input)="updateObservacoesCount()"
+        maxlength="500">
       </textarea>
+      <mat-hint [ngClass]="{'error-text': observacoesCount < 10 || observacoesCount > 500}">
+        Entre 10 e 500 caracteres (<strong>{{ observacoesCount }}</strong>/500)
+      </mat-hint>
     </mat-form-field>
+    
 
     <!-- BOTÕES DE AÇÃO -->
     <button (click)="create()" [disabled]="!validField()" mat-button class="btn-criar">CRIAR</button>

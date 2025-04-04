@@ -45,7 +45,7 @@
       </div>
 
       <mat-form-field class="full-width">
-        <mat-label>Técnico Responsável</mat-label>
+        <mat-label>Técnico(a) Responsável</mat-label>
         <mat-select formControlName="tecnico">
           <mat-option *ngFor="let tec of tecnicos" [value]="tec.id">
             {{ tec.nome }} - CPF: {{ formatCpf(tec.cpfCnpj) }}
@@ -62,12 +62,19 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field class="full-width text" appearance="outline">
+      <mat-form-field class="full-width observacoes" appearance="outline">
         <mat-label>Relato sobre o chamado</mat-label>
-        <textarea class="observacoes" matInput formControlName="observacoes"
-          placeholder="Exemplo: Cliente entra em contato relatando ..."
-          maxlength="1000">
+        <textarea 
+          class="observacoes" 
+          matInput 
+          formControlName="observacoes"
+          placeholder="Digite entre 10 e 500 caracteres. Exemplo: Cliente entra em contato relatando..."
+          (input)="updateObservacoesCount()"
+          maxlength="500">
         </textarea>
+        <mat-hint [ngClass]="{'error-text': observacoesCount < 10 || observacoesCount > 500}">
+          Entre 10 e 500 caracteres (<strong>{{ observacoesCount }}</strong>/500)
+        </mat-hint>
       </mat-form-field>
 
     <!-- ÁREA DOS PROCEDIMENTOS -->
@@ -83,13 +90,21 @@
     </button>
 
     <!-- ÁREA PARA NOVOS PROCEDIMENTOS -->
-       <mat-form-field class="full-width text" appearance="outline">
-         <mat-label>Novo Procedimento</mat-label>
-         <textarea class="novoProcedimento" matInput formControlName="novoProcedimento"
-         placeholder="Relate o procedimento e selecione incluir procedimento. Após finalizar as alterações, clique em atualizar chamado."
-         maxlength="1000">
-         </textarea>
-       </mat-form-field>
+<mat-form-field class="full-width text" appearance="outline">
+  <mat-label>Novo Procedimento</mat-label>
+  <textarea
+    class="novoProcedimento"
+    matInput
+    formControlName="novoProcedimento"
+    placeholder="Relate o procedimento e selecione incluir procedimento. Após finalizar as alterações, clique em atualizar chamado."
+    (input)="updateProcedimentosCount()"
+    maxlength="500">
+  </textarea>
+  <mat-hint [ngClass]="{'error-text': charCount < 10 || charCount > 500}">
+    Entre 10 e 500 caracteres (<strong>{{ charCount }}</strong>/500)
+  </mat-hint>
+</mat-form-field>
+
 
 
     <!-- BOTÕES PARA CHAMADO -->

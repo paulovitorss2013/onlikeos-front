@@ -19,6 +19,10 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ChamadoUpdateComponent implements OnInit {
 
+// VARIÁVEL DE CONTROLE DO CONTADOR DE CARACTERES DO NOVO PROCEDIMENTO E OBSERVAÇÕES
+charCount: number = 0;
+observacoesCount: number = 0;
+
 // INSTÂNCIA DO CHAMADO
 chamado: Chamado = {
     id: '',
@@ -43,9 +47,9 @@ clientes: Cliente[] = [];
     tipo: new FormControl('', [Validators.required]),
     prioridade: new FormControl('', [Validators.required]),
     status: new FormControl('', [Validators.required]),
-    observacoes: new FormControl('', [Validators.required, Validators.minLength(15)]),
+    observacoes: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]),
     procedimentos: new FormControl(''),
-    novoProcedimento: new FormControl(''),
+    novoProcedimento: new FormControl('', [Validators.minLength(10), Validators.maxLength(500)]),
     tecnico: new FormControl('', [Validators.required]),
     cliente: new FormControl('', [Validators.required])
   });
@@ -135,6 +139,7 @@ findById(): void {
           observacoes: this.chamado.observacoes,
           procedimentos: procedimentos
         });
+        this.updateObservacoesCount();
       },
       error: (ex) => {
         this.toastrService.error(ex.error.error);
@@ -170,6 +175,17 @@ insertProcedure(): void {
     }
   }
 
+  // CONTADOR DE CARACTERES DO NOVO PROCEDIMENTO
+  updateProcedimentosCount(): void {
+    const novoProcedimento = this.form.get('novoProcedimento')?.value || '';
+    this.charCount = novoProcedimento.length;
+  }
+
+  // CONTADOR DAS OBSERVAÇÕES
+updateObservacoesCount(): void {
+  const observacoes = this.form.get('observacoes')?.value || '';
+  this.observacoesCount = observacoes.length;
+}
 // MÉTO PARA RECUPERAR OS PROCEDIMENTOS ATUAIS
   private getProcedureCurrent(): string {
     const procedimentos = this.form.get('procedimentos')?.value?.trim();
@@ -203,7 +219,16 @@ update(): void {
           this.router.navigate(['chamados']);
         },
         error: (ex) => {
-          this.toastrService.error(ex.error?.error || 'Erro ao atualizar chamado');
+          if (ex.error?.errors) {
+            // Caso existam múltiplos erros de validação
+            ex.error.errors.forEach((err: { message: string }) => {
+              this.toastrService.error(err.message, 'Erro de Validação');
+            });
+          } else {
+            // Caso seja um erro genérico
+            const errorMsg = ex.error?.message || ex.error?.error || 'Erro ao atualizar chamado';
+            this.toastrService.error(errorMsg, 'Erro');
+          }
         }
       });
     }

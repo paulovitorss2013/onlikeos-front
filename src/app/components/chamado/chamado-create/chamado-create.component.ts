@@ -18,6 +18,9 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ChamadoCreateComponent implements OnInit {
 
+  // VARIÁVEL PARA O CONTATOR DAS OBSERVAÇÕES
+  observacoesCount: number = 0;
+
   // INSTÂNCIA DO CHAMADO
   chamado: Chamado = {
     tipo: '',
@@ -41,7 +44,7 @@ export class ChamadoCreateComponent implements OnInit {
     tipo: new FormControl('', [Validators.required]),
     prioridade: new FormControl('', [Validators.required]),
     status: new FormControl('', [Validators.required]),
-    observacoes: new FormControl('', [Validators.required, Validators.minLength(15)]),
+    observacoes: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]),
     tecnico: new FormControl('', [Validators.required]),
     cliente: new FormControl('', [Validators.required])
   });
@@ -110,9 +113,22 @@ create(): void {
       this.router.navigate(['chamados']);
     },
     error: (ex) => {
-      this.toastrService.error(ex.error?.error || 'Erro ao criar chamado');
+      if (ex.error?.errors) {
+        ex.error.errors.forEach((err: { message: string }) => {
+          this.toastrService.error(err.message, 'Erro de Validação');
+        });
+      } else {
+        const errorMsg = ex.error?.message || ex.error?.error || 'Erro ao criar chamado';
+        this.toastrService.error(errorMsg, 'Erro');
+      }
     }
   });
+}
+
+// CONTADOR DAS OBSERVAÇÕES
+updateObservacoesCount(): void {
+  const observacoes = this.form.get('observacoes')?.value || '';
+  this.observacoesCount = observacoes.length;
 }
 
 // MÉTODO PARA CANCELAR AS AÇÕES

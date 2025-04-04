@@ -93,7 +93,7 @@
       </ng-container>
 
       <ng-container matColumnDef="tecnico">
-        <th mat-header-cell *matHeaderCellDef> Técnico </th>
+        <th mat-header-cell *matHeaderCellDef> Técnico(a) Responsável </th>
         <td mat-cell *matCellDef="let element"
             [ngClass]="{'status-aberto': element.status === 0, 'status-encerrado': element.status === 2}">
           {{element.nomeTecnico}}
