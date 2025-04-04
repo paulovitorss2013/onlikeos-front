@@ -53,13 +53,19 @@
         mask="(00) 0000-0000" />
     </mat-form-field>
 
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Senha</mat-label>
-      <input matInput
-        placeholder="insira uma senha válida"
-        formControlName="senha" maxlength="64" (focus)="showPasswordWarning()"
-        type="password" >
-    </mat-form-field>
+    <button mat-button class="btn-novaSenha" (click)="habilitarNovaSenha()">NOVA SENHA</button>
+
+    <div *ngIf="mostrarNovaSenha" class="nova-senha-container">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Nova Senha</mat-label>
+        <input matInput formControlName="novaSenha" type="password" 
+               placeholder="Digite a nova senha" maxlength="64" 
+               (focus)="showPasswordWarning()">
+        <mat-hint *ngIf="passwordMessage" class="senha-info">
+          {{ passwordMessage }}
+        </mat-hint>
+      </mat-form-field>
+    </div>
 
     <!-- BOTÕES DE AÇÃO -->
     <button (click)="update()" [disabled]="!validField()" mat-button class="btn-atualizar">ATUALIZAR</button>

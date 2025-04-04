@@ -26,6 +26,14 @@ export class TecnicoUpdateComponent implements OnInit {
     perfis: [],
     dataCriacao: ''
   };
+  
+  // VARIÁVEL DE CONTROLE CAMPO NOVA SENHA
+  mostrarNovaSenha = false;
+
+  // VARIÁVEIS DE CONTROLE DAS MENSAGENS
+  cpfMessage: string = '';
+  emailMessage: string = '';
+  passwordMessage: string = '';
 
   // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
@@ -34,12 +42,7 @@ export class TecnicoUpdateComponent implements OnInit {
     celular: new FormControl('', [Validators.minLength(11)]),
     telefone: new FormControl('', [Validators.minLength(10)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    senha: new FormControl('', [
-      Validators.required,
-      Validators.minLength(8),
-      Validators.maxLength(64),
-      Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
-    ]),
+    novaSenha: new FormControl(''),
     perfis: new FormControl([]),
     isAdmin: new FormControl(false),
     privilegios: new FormControl({ value: '', disabled: true })
@@ -79,7 +82,6 @@ export class TecnicoUpdateComponent implements OnInit {
           celular: resposta.celular,
           telefone: resposta.telefone,
           email: resposta.email,
-          senha: resposta.senha,
           perfis: resposta.perfis || [],
           isAdmin: isAdmin,
         });
@@ -125,7 +127,6 @@ export class TecnicoUpdateComponent implements OnInit {
     } else {
       perfisConvertidos = perfisConvertidos.filter(p => p !== 0);
     }
-  
     const tecnico: Tecnico = {
       id: this.tecnico.id,
       nome: this.form.value.nome,
@@ -133,11 +134,12 @@ export class TecnicoUpdateComponent implements OnInit {
       email: this.form.value.email,
       celular: this.form.value.celular,
       telefone: this.form.value.telefone,
-      senha: this.form.value.senha,
       perfis: perfisConvertidos.map(p => p.toString()),
       dataCriacao: this.tecnico.dataCriacao
     };
-  
+    if (this.form.value.novaSenha) {
+      tecnico.senha = this.form.value.novaSenha;
+    }
     this.service.update(tecnico).subscribe({
       next: () => {
         this.toastr.success('Técnico atualizado com sucesso!', 'Atualização');
@@ -156,11 +158,15 @@ export class TecnicoUpdateComponent implements OnInit {
     });
   }
   
-  // AVISO REQUISITOS DA SENHA
-  showPasswordWarning(): void {
-  this.toastr.warning(
-    'A senha deve conter no mínimo 8 caracteres, incluindo uma letra maiúscula, um número e um símbolo.',
-    'Atenção!', { timeOut: 5000 });
+  // MÉTODO PARA HABILITAR A NOVA SENHA
+  habilitarNovaSenha() {
+    this.mostrarNovaSenha = true;
+  }
+
+  // MENSAGEM REQUISITOS DA SENHA
+showPasswordWarning(): void {
+  this.passwordMessage = 
+  'A senha deve conter no mínimo 8 caracteres, incluindo uma letra maiúscula, um número e um símbolo.';
 }
   
   // MÉTODO PARA CANCELAR AS AÇÕES

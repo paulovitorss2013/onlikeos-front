@@ -60,6 +60,29 @@ button.btn-cancelar {
     transition: background-color 0.3s ease; /* Transição suave */
 }
 
+/* ESTILO PARA O BOTÃO "NOVA SENHA" */
+button.btn-novaSenha {
+    background-color: rgb(252, 154, 8); /* Cor de fundo para o botão cancelar */
+    color: white; /* Cor do texto */
+  }
+
+/* ESTILOS PARA A MENSAGEM DA SENHA" */
+.password-container {
+    display: flex;
+    flex-direction: column; /* Garante que o campo e a mensagem fiquem empilhados */
+  }
+  
+  .nova-senha-container {
+    margin-bottom: 24px; /* Espaçamento extra para evitar sobreposição */
+}
+
+.senha-info {
+    font-size: 0.875rem;
+    padding-left: 10px;
+    color: #f39c12;
+    display: block; /* Garante que ocupa espaço vertical */
+    margin-top: 4px; /* Pequeno respiro abaixo do campo */
+}
 
 /* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
 
@@ -78,6 +101,10 @@ button.btn-cancelar {
         padding: 12px; /* Aumenta o padding para maior área clicável */
         font-size: 1rem; /* Ajusta o tamanho da fonte */
     }
+
+    .nova-senha-container {
+        margin-bottom: 40px; /* Aumenta ainda mais o espaço entre senha e botões */
+      }
 }
 
 /* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
@@ -93,4 +120,8 @@ button.btn-cancelar {
     button.btn-atualizar, button.btn-cancelar {
         font-size: 1.1rem; /* Ajusta o tamanho da fonte nos botões */
     }
+
+    .nova-senha-container {
+        margin-bottom: 48px; /* Garante folga extra nas menores telas */
+      }
 }

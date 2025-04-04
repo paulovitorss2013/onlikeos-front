@@ -5,7 +5,7 @@ export interface Tecnico {
   email: string;
   celular: string;
   telefone: string;
-  senha: string;
+  senha?: string;
   perfis: string[];
   dataCriacao?: any;
 }
