@@ -59,6 +59,43 @@ button.btn-cancelar {
     transition: background-color 0.3s ease; /* Transição suave */
 }
 
+/* ESTILOS PARA A MENSAGEM DO CPF" */
+.cpf-container {
+    display: flex; /* Usa o Flexbox para organizar os elementos */
+    flex-direction: column; /* Empilha os elementos um abaixo do outro */
+  }
+
+.cpf-message {
+    margin-top: -5px; /* Ajusta o espaçamento para colar na borda inferior */
+    font-size: 0.875rem; /* Mantém a mensagem discreta */
+    padding-left: 12px; /* Alinha com o input dentro do mat-form-field */
+  }
+
+/* ESTILOS PARA A MENSAGEM DO E-MAIL" */
+.email-container {
+    display: flex; /* Usa o Flexbox para organizar os elementos */
+    flex-direction: column; /* Garante que o campo e a mensagem fiquem empilhados */
+  }
+  
+.email-message {
+    margin-top: -5px; /* Ajusta o espaçamento para ficar próximo ao campo */
+    font-size: 0.875rem; /* Mantém a mensagem discreta */
+    padding-left: 12px; /* Alinha com o input dentro do mat-form-field */
+  }
+
+  /* ESTILOS PARA A MENSAGEM DA SENHA" */
+  .password-container {
+    display: flex;
+    flex-direction: column; /* Garante que o campo e a mensagem fiquem empilhados */
+  }
+  
+  .password-message {
+    margin-top: -5px; /* Ajusta o espaçamento para ficar próximo ao campo */
+    font-size: 0.875rem; /* Mantém a mensagem discreta */
+    padding-left: 12px; /* Alinha com o input dentro do mat-form-field */
+    color: #f39c12; /* Cor laranja para destacar o aviso */
+  }
+
 /* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
 @media (max-width: 768px) {
     .container {

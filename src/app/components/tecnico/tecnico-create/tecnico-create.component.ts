@@ -26,7 +26,12 @@ export class TecnicoCreateComponent implements OnInit {
   perfis: [],
   dataCriacao:''
  }
- 
+
+  // VARIÁVEIS DE CONTROLE DAS MENSAGENS
+  cpfMessage: string = '';
+  emailMessage: string = '';
+  passwordMessage: string = '';
+
   // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
     nome: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(60)]),
@@ -88,11 +93,9 @@ export class TecnicoCreateComponent implements OnInit {
   });
 }
 
-// AVISO REQUISITOS DA SENHA
+// MENSAGEM REQUISITOS DA SENHA
 showPasswordWarning(): void {
-  this.toastr.warning(
-    'A senha deve conter no mínimo 8 caracteres, incluindo uma letra maiúscula, um número e um símbolo.',
-    'Atenção!', { timeOut: 5000 });
+  this.passwordMessage = 'A senha deve conter no mínimo 8 caracteres, incluindo uma letra maiúscula, um número e um símbolo.';
 }
 
 // MÉTODO PARA VERIFICAR CPF DUPLICADO AO DESFOCAR
@@ -100,16 +103,12 @@ checkCpf(): void {
   const cpf = this.form.get('cpfCnpj')?.value;
 
   if (!this.isValidCpf(cpf)) {
-    this.toastr.error('CPF inválido!', '' ,{ timeOut: 3000 });
+    this.cpfMessage = 'CPF inválido!';
     return;
   }
 
   this.service.existsByCpfCnpj(cpf).subscribe((exists) => {
-    if (exists) {
-      this.toastr.error('CPF já cadastrado!', '' ,{ timeOut: 3000 });
-    } else {
-      this.toastr.success('CPF disponível!','' ,{ timeOut: 3000 });
-    }
+    this.cpfMessage = exists ? 'CPF já cadastrado!' : 'CPF disponível!';
   });
 }
 
@@ -141,16 +140,12 @@ checkEmail(): void {
   const email = this.form.get('email')?.value;
 
   if (!this.isValidEmail(email)) {
-    this.toastr.error('E-mail inválido!', '', { timeOut: 3000 });
+    this.emailMessage = 'E-mail inválido!';
     return;
   }
 
   this.service.existsByEmail(email).subscribe((exists) => {
-    if (exists) {
-      this.toastr.error('E-mail já em uso!', '',{ timeOut: 3000 });
-    } else {
-      this.toastr.success('E-mail disponível!', '',{ timeOut: 3000 } );
-    }
+    this.emailMessage = exists ? 'E-mail já em uso!' : 'E-mail disponível!';
   });
 }
 

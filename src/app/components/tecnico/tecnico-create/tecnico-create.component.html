@@ -22,20 +22,31 @@
         maxlength="60">
     </mat-form-field>
 
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>CPF</mat-label>
-      <input matInput
-        placeholder="digite apenas números"
-        formControlName="cpfCnpj"
-        mask="000.000.000-00" (blur)="checkCpf()">
-    </mat-form-field>
+    <div class="cpf-container">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>CPF</mat-label>
+        <input matInput placeholder="Digite apenas números" formControlName="cpfCnpj" 
+          mask="000.000.000-00" (blur)="checkCpf()">
+      </mat-form-field>
+      <small class="cpf-message" *ngIf="cpfMessage"
+        [ngStyle]="{ 'color': cpfMessage === 'CPF disponível!' ? 'green' : 'red' }">
+        {{ cpfMessage }}
+      </small>
+    </div>
 
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>E-mail</mat-label>
-      <input matInput
-        placeholder="Digite o e-mail"
-        formControlName="email" (blur)="checkEmail()">
-    </mat-form-field>
+    <div class="email-container">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>E-mail</mat-label>
+        <input matInput 
+          placeholder="Digite o e-mail" 
+          formControlName="email" 
+          (blur)="checkEmail()">
+      </mat-form-field>
+      <small class="email-message" *ngIf="emailMessage"
+        [ngStyle]="{ 'color': emailMessage === 'E-mail disponível!' ? 'green' : 'red' }">
+        {{ emailMessage }} 
+      </small>
+    </div>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Celular</mat-label>
@@ -53,12 +64,19 @@
         mask="(00) 0000-0000" />
     </mat-form-field>
 
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Senha</mat-label>
-      <input matInput
-        placeholder="insira uma senha válida"
-        formControlName="senha" maxlength="64" (focus)="showPasswordWarning()">
-    </mat-form-field>
+    <div class="password-container">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Senha</mat-label>
+        <input matInput 
+          placeholder="Insira uma senha válida" 
+          formControlName="senha" 
+          maxlength="64" 
+          (focus)="showPasswordWarning()">
+      </mat-form-field>
+      <small class="password-message" *ngIf="passwordMessage">
+        {{ passwordMessage }}
+      </small>
+    </div>
 
     <!-- BOTÕES DE AÇÃO -->
     <button (click)="create()" [disabled]="form.invalid" mat-button class="btn-criar">CRIAR</button>
