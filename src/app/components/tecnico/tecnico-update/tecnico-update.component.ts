@@ -209,12 +209,11 @@ private isValidCpf(cpf: string): boolean {
 
   return true;
 };
-  
-  // MÉTODO PARA HABILITAR A NOVA SENHA
-  habilitarNovaSenha() {
-    this.mostrarNovaSenha = true;
-  }
 
+// MÉTODO PARA HABILITAR A NOVA SENHA
+habilitarNovaSenha() {
+ this.mostrarNovaSenha = true;
+}
   
   // MÉTODO PARA CANCELAR AS AÇÕES
   cancelActions(): void {

@@ -55,7 +55,7 @@ export class ClienteUpdateComponent implements OnInit {
   // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
     nome: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(60)]),
-    login: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    login: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(60)]),
     cpfCnpj: new FormControl('', [Validators.required, Validators.minLength(11), Validators.maxLength(18)]),
     celular: new FormControl('', [Validators.minLength(11)]),
     telefone: new FormControl('', [Validators.minLength(10)]),
