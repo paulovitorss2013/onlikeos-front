@@ -43,7 +43,7 @@ export class TecnicoCreateComponent implements OnInit {
       Validators.required,
       Validators.minLength(8),
       Validators.maxLength(64),
-      Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
+      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
     ]),
     perfis: new FormControl([])
   });
@@ -95,7 +95,7 @@ export class TecnicoCreateComponent implements OnInit {
 
 // MENSAGEM REQUISITOS DA SENHA
 showPasswordWarning(): void {
-  this.passwordMessage = 'A senha deve conter no mínimo 8 caracteres, incluindo uma letra maiúscula, um número e um símbolo.';
+  this.passwordMessage = 'A senha deve conter no mínimo 8 caracteres, incluindo uma letra minúscula, uma maiúscula, um número e um símbolo.';
 }
 
 // MÉTODO PARA VERIFICAR CPF DUPLICADO AO DESFOCAR
