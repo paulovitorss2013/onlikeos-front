@@ -13,6 +13,7 @@
     flex-direction: column; /* Empilha os itens verticalmente */
     gap: 16px; /* Espaçamento entre os campos */
     width: 100%; /* Garante que os campos ocupem toda a largura */
+    padding-bottom: 32px; /* Espaço extra na parte inferior para evitar sobreposição em telas pequenas */
 }
 
 h1 {
@@ -24,7 +25,6 @@ h1 {
 .full-width {
     width: 100%; /* Os campos ocupam a largura total do contêiner */
 }
-
 
 /* ESTILO PARA O BOTÃO "CRIAR" */
 button.btn-atualizar {
@@ -64,16 +64,16 @@ button.btn-cancelar {
 button.btn-novaSenha {
     background-color: rgb(252, 154, 8); /* Cor de fundo para o botão cancelar */
     color: white; /* Cor do texto */
-  }
+}
 
-/* ESTILOS PARA A MENSAGEM DA SENHA" */
+/* ESTILOS PARA A MENSAGEM DA SENHA */
 .password-container {
     display: flex;
     flex-direction: column; /* Garante que o campo e a mensagem fiquem empilhados */
-  }
-  
-  .nova-senha-container {
-    margin-bottom: 24px; /* Espaçamento extra para evitar sobreposição */
+}
+
+.nova-senha-container {
+    margin-bottom: 40px; /* Espaçamento extra para evitar sobreposição */
 }
 
 .senha-info {
@@ -82,10 +82,10 @@ button.btn-novaSenha {
     color: #f39c12;
     display: block; /* Garante que ocupa espaço vertical */
     margin-top: 4px; /* Pequeno respiro abaixo do campo */
+    margin-bottom: 12px; /* Adiciona espaço após o aviso */
 }
 
-/* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
-
+/* --------- AJUSTES PARA TELAS PEQUENAS (ATÉ 768px) --------- */
 @media (max-width: 768px) {
     .container {
         max-width: 100%; /* Aumenta a largura para telas menores */
@@ -96,19 +96,6 @@ button.btn-novaSenha {
         gap: 12px; /* Reduz o espaço entre os campos para telas menores */
     }
 
-    button.btn-atualizar, button.btn-cancelar {
-        width: 100%; /* Faz os botões ocuparem toda a largura */
-        padding: 12px; /* Aumenta o padding para maior área clicável */
-        font-size: 1rem; /* Ajusta o tamanho da fonte */
-    }
-
-    .nova-senha-container {
-        margin-bottom: 40px; /* Aumenta ainda mais o espaço entre senha e botões */
-      }
-}
-
-/* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
-@media (max-width: 480px) {
     h1 {
         font-size: 1.5rem; /* Ajusta o tamanho do título */
     }
@@ -117,11 +104,29 @@ button.btn-novaSenha {
         width: 100%; /* Garante que os campos de input ocupem a largura total */
     }
 
-    button.btn-atualizar, button.btn-cancelar {
-        font-size: 1.1rem; /* Ajusta o tamanho da fonte nos botões */
+    button.btn-atualizar,
+    button.btn-cancelar {
+        width: 100%; /* Faz os botões ocuparem toda a largura */
+        padding: 12px; /* Aumenta o padding para maior área clicável */
+        font-size: 1.1rem; /* Ajusta o tamanho da fonte */
     }
 
     .nova-senha-container {
-        margin-bottom: 48px; /* Garante folga extra nas menores telas */
-      }
+        margin-bottom: 60px; /* Aumenta ainda mais o espaço entre senha e botões */
+    }
+}
+
+/* --------- AJUSTES PARA TELAS MUITO PEQUENAS (ATÉ 480px) --------- */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.3rem; /* Reduz ainda mais o título */
+    }
+
+    .senha-info {
+        font-size: 0.8rem; /* Texto menor para caber melhor */
+    }
+
+    .nova-senha-container {
+        margin-bottom: 70px; /* Garante folga extra nas menores telas */
+    }
 }
