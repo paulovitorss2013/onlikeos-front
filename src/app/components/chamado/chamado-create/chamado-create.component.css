@@ -49,14 +49,25 @@ h1 {
   width: 100%; /* Faz o campo ocupar toda a largura */
 }
 
+/* AJUSTE DA ÁREA DE TEXTO */
 textarea {
-  min-height: 120px; /* Define a altura mínima do campo */
-  max-height: 200px; /* Define a altura máxima do campo */
-  resize: vertical; /* Permite ajuste de tamanho vertical */
-  overflow-y: auto; /* Adiciona rolagem vertical se necessário */
-  width: 100%; /* Faz o campo ocupar toda a largura */
-  background-color: rgb(233, 233, 233)!important; /* Cor do fundo */
+  min-height: 120px;
+  max-height: 200px;
+  resize: vertical;
+  overflow-y: auto;
+  width: 100%;
+  background-color: rgb(233, 233, 233) !important;
+  text-align: justify;
+  word-spacing: normal;
+  white-space: pre-line;
+  word-break: break-word;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.87);
+  box-sizing: border-box;
 }
+
 
 /* CONTAINER PARA OS BOTÕES */
 .button-container {
