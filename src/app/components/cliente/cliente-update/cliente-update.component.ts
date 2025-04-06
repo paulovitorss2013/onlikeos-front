@@ -54,22 +54,22 @@ export class ClienteUpdateComponent implements OnInit {
 
   // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
-    nome: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    nome: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(60)]),
     login: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    cpfCnpj: new FormControl('', [Validators.required, Validators.minLength(11)]),
+    cpfCnpj: new FormControl('', [Validators.required, Validators.minLength(11), Validators.maxLength(18)]),
     celular: new FormControl('', [Validators.minLength(11)]),
     telefone: new FormControl('', [Validators.minLength(10)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     senha: new FormControl(''),
     cep: new FormControl('', [Validators.minLength(8)]),
-    logradouro: new FormControl(''),
-    numero: new FormControl(''),
-    complemento: new FormControl(''),
-    bairro: new FormControl(''),
-    municipio: new FormControl(''),
-    uf: new FormControl(''),
-    coordenada: new FormControl(''),
-    tipoCliente: new FormControl('', Validators.required)
+    logradouro: new FormControl('', Validators.maxLength(100)),
+    numero: new FormControl('', Validators.maxLength(100)),
+    complemento: new FormControl('', Validators.maxLength(100)),
+    bairro: new FormControl('', Validators.maxLength(100)),
+    municipio: new FormControl('', Validators.maxLength(100)),
+    uf: new FormControl('', Validators.maxLength(2)),
+    coordenada: new FormControl('', Validators.maxLength(100)),
+    tipoCliente: new FormControl('Pessoa Física', [Validators.required])
   });
   
   // CONSTRUTOR

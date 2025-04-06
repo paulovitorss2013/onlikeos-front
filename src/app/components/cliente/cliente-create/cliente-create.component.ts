@@ -14,6 +14,13 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ClienteCreateComponent implements OnInit {
   
+  // VARIÁVEIS DE CONTROLE VERIFICAÇÃO DE LOGIN
+  loginDisponivel: boolean | null = null;
+  erroVerificacaoLogin: boolean = false;
+
+  // VARIÁVEL DE CONTROLE MENSAGEM DE CPF/CNPJ INVÁLIDO
+  cpfCnpjInvalido: boolean = false;
+
   // INSTÂNCIA DO CLIENTE
   cliente: Cliente = {
     id: '',
@@ -72,21 +79,21 @@ export class ClienteCreateComponent implements OnInit {
 
   // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
-    nome: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    nome: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(60)]),
     login: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    cpfCnpj: new FormControl('', [Validators.required, Validators.minLength(11)]),
+    cpfCnpj: new FormControl('', [Validators.required, Validators.minLength(11), Validators.maxLength(18)]),
     celular: new FormControl('', [Validators.minLength(11)]),
     telefone: new FormControl('', [Validators.minLength(10)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     senha: new FormControl(''),
     cep: new FormControl('', [Validators.minLength(8)]),
-    logradouro: new FormControl(''),
-    numero: new FormControl(''),
-    complemento: new FormControl(''),
-    bairro: new FormControl(''),
-    municipio: new FormControl(''),
-    uf: new FormControl(''),
-    coordenada: new FormControl(''),
+    logradouro: new FormControl('', Validators.maxLength(100)),
+    numero: new FormControl('', Validators.maxLength(100)),
+    complemento: new FormControl('', Validators.maxLength(100)),
+    bairro: new FormControl('', Validators.maxLength(100)),
+    municipio: new FormControl('', Validators.maxLength(100)),
+    uf: new FormControl('', Validators.maxLength(2)),
+    coordenada: new FormControl('', Validators.maxLength(100)),
     tipoCliente: new FormControl('Pessoa Física', [Validators.required])
   });
 
@@ -135,36 +142,57 @@ export class ClienteCreateComponent implements OnInit {
 
   // MÉTODO PARA VERIFICAR SE O LOGIN JÁ EXISTE AO DESFOCAR
   verifyLogin(): void {
-    const login = this.form.get('login')?.value;
+    const loginControl = this.form.get('login');
+    const login = loginControl?.value;
+    this.loginDisponivel = null;
+    this.erroVerificacaoLogin = false;
     if (login) {
       this.service.checkLoginExists(login).subscribe({
         next: (exists) => {
           if (exists) {
-            this.toastr.error('Este login já está em uso!', 'Erro');
+            this.loginDisponivel = false;
+            loginControl?.setErrors({ loginEmUso: true });
           } else {
-            this.toastr.success('Login disponível!');
+            this.loginDisponivel = true;
+            if (loginControl?.hasError('loginEmUso')) {
+              loginControl.setErrors(null);
+            }
           }
         },
         error: () => {
-          this.toastr.error('Erro ao verificar login.', 'Erro');
+          this.erroVerificacaoLogin = true;
+          loginControl?.setErrors({ erroVerificacao: true });
         }
       });
     }
   }
 
-  validarCpfCnpj(): void {
-    const cpfCnpjValue = this.form.get('cpfCnpj')?.value;
+  // MÉTODO PARA CHAMAR AS VALIDAÇÕES DE CPF E CNPJ
+  validCpfCnpj(): void {
+    const control = this.form.get('cpfCnpj');
+    const cpfCnpjValue = control?.value;
+  
+    this.cpfCnpjInvalido = false;
   
     if (!cpfCnpjValue) return;
   
-    const cleanedValue = cpfCnpjValue.replace(/\D/g, ''); // Remove caracteres não numéricos
+    const cleanedValue = cpfCnpjValue.replace(/\D/g, '');
   
-    if (!this.isValidCpf(cleanedValue) && !this.isValidCnpj(cleanedValue)) {
-      this.toastr.error('CPF ou CNPJ inválido!', 'Erro');
+    const isValid = this.isValidCpf(cleanedValue) || this.isValidCnpj(cleanedValue);
+  
+    if (!isValid) {
+      this.cpfCnpjInvalido = true;
+      control?.setErrors({ cpfCnpjInvalido: true });
+    } else {
+      this.cpfCnpjInvalido = false;
+      if (control?.hasError('cpfCnpjInvalido')) {
+        control.setErrors(null);
+      }
     }
   }
 
-  // Validação de CPF
+
+  // VALIDAÇÃO DO CPF
   private isValidCpf(cpf: string): boolean {
     if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
 
@@ -181,7 +209,7 @@ export class ClienteCreateComponent implements OnInit {
     return remainder === +cpf[10];
   }
 
-  // Validação de CNPJ
+  // VALIDAÇÃO DO CNPJ
   private isValidCnpj(cnpj: string): boolean {
     if (cnpj.length !== 14 || /^(\d)\1+$/.test(cnpj)) return false;
 

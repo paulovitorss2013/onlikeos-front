@@ -173,7 +173,7 @@ export class TecnicoUpdateComponent implements OnInit {
   // MENSAGEM REQUISITOS DA SENHA
  showPasswordWarning(): void {
   this.passwordMessage = 
-  'A senha deve conter no mínimo 8 caracteres, incluindo uma letra maiúscula, um número e um símbolo.';
+  'A senha deve conter no mínimo 8 caracteres, sem espaços, incluindo uma letra minúscula, uma maiúscula, um número e um símbolo.';
 }
 
 // MÉTODO PARA VERIFICAR CPF INVÁLIDO AO DESFOCAR

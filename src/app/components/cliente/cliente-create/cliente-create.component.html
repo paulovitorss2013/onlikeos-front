@@ -12,10 +12,12 @@
       <input matInput formControlName="nome" placeholder="Entre 10 e 60 caracteres" maxlength="60">
     </mat-form-field>
 
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Login PPPoE/Contrato</mat-label>
-     <input matInput formControlName="login" placeholder="Entre 6 e 64 caracteres" maxlength="64"
-     (blur)="verifyLogin()">
+    <mat-form-field appearance="fill">
+      <mat-label>Login</mat-label>
+      <input matInput formControlName="login" (blur)="verifyLogin()" required>
+      <mat-error *ngIf="loginDisponivel === false">Login já em uso.</mat-error>
+      <mat-hint *ngIf="loginDisponivel === true" style="color: #2e7d32;">Login disponível!</mat-hint>
+      <mat-error *ngIf="erroVerificacaoLogin">Erro ao verificar o login.</mat-error>
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
@@ -29,7 +31,8 @@
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>CPF/CNPJ</mat-label>
       <input matInput placeholder="digite apenas números" formControlName="cpfCnpj" 
-        [mask]="cpfCnpjMask" (blur)="validarCpfCnpj()">
+        [mask]="cpfCnpjMask" (blur)="validCpfCnpj()">
+      <mat-error *ngIf="cpfCnpjInvalido">CPF ou CNPJ inválido!</mat-error>
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
