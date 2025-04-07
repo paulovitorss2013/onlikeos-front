@@ -16,7 +16,7 @@
       <mat-label>Login</mat-label>
       <input matInput formControlName="login" (blur)="verifyLogin()" required placeholder="Entre 1 e 60 caracteres">
       <mat-error *ngIf="loginDisponivel === false">Login já em uso.</mat-error>
-      <mat-hint *ngIf="loginDisponivel === true" style="color: #2e7d32;">Login disponível!</mat-hint>
+      <mat-hint *ngIf="loginDisponivel === true" class="login-disponivel">Login disponível!</mat-hint>
       <mat-error *ngIf="erroVerificacaoLogin">Erro ao verificar o login.</mat-error>
     </mat-form-field>
 
