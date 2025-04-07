@@ -182,9 +182,12 @@ checkCpf(): void {
 
   if (!this.isValidCpf(cpf)) {
     this.cpfMessage = 'CPF inválido!';
-  } else {
-    this.cpfMessage = '';
+    return;
   }
+
+  this.service.existsByCpfCnpj(cpf).subscribe((exists) => {
+    this.cpfMessage = exists ? 'CPF já em uso!' : 'CPF disponível!';
+  });
 }
 
 // MÉTODO PARA VERIFICAR SE O CPF É VÁLIDO

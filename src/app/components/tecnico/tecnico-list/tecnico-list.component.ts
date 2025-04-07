@@ -77,8 +77,19 @@ export class TecnicoListComponent implements OnInit {
   private updateDataSource(): void {
     this.dataSource = new MatTableDataSource<Tecnico>(this.ELEMENT_DATA);
     this.dataSource.paginator = this.paginator;
-
-    // ATUALIZA A EXIBIÇÃO DO TOTAL NO PAGINATOR
+  
+    // Customizando o filtro
+    this.dataSource.filterPredicate = (data: Tecnico, filter: string) => {
+      const nome = data.nome?.toLowerCase() || '';
+      const email = data.email?.toLowerCase() || '';
+      const cpf = (data.cpfCnpj || '').replace(/\D/g, '');
+      const filtro = filter.toLowerCase();
+  
+      return nome.includes(filtro) ||
+             email.includes(filtro) ||
+             cpf.includes(filtro) ||
+             (data.cpfCnpj?.toLowerCase().includes(filtro) || false);
+    };
     this.paginatorIntl.changes.next();
   }
 }

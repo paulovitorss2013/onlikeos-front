@@ -108,7 +108,7 @@ checkCpf(): void {
   }
 
   this.service.existsByCpfCnpj(cpf).subscribe((exists) => {
-    this.cpfMessage = exists ? 'CPF já cadastrado!' : 'CPF disponível!';
+    this.cpfMessage = exists ? 'CPF já em uso por outro técnico!' : 'CPF disponível!';
   });
 }
 
