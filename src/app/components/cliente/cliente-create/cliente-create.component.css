@@ -56,11 +56,8 @@ button.btn-criar, button.btn-cancelar {
     background-color: rgb(207, 80, 63); /* tom vermelho claro */
 }
 
-.login-status {
-    margin-top: -12px; /* Aproxima a mensagem do campo de input acima */
-    margin-bottom: 12px; /* Espaço abaixo da mensagem para separar do próximo campo */
-    font-size: 14px; /* Define o tamanho da fonte da mensagem */
-    margin-top: -5px; /* Ajusta o espaçamento para ficar próximo ao campo */
+.login-message {
+    margin-top: -5px; /* Ajusta o espaçamento para colar na borda inferior */
     font-size: 0.875rem; /* Mantém a mensagem discreta */
     padding-left: 12px; /* Alinha com o input dentro do mat-form-field */
   }

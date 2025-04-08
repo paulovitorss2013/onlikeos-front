@@ -113,7 +113,7 @@ checkCpf(): void {
 }
 
 // MÉTODO PARA VERIFICAR SE O CPF É VÁLIDO
-private isValidCpf(cpf: string): boolean {
+isValidCpf(cpf: string): boolean {
   cpf = cpf.replace(/\D/g, '');
 
   if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
@@ -150,7 +150,7 @@ checkEmail(): void {
 }
 
 // MÉTODO PARA VALIDAR O E-MAIL
-private isValidEmail(email: string): boolean {
+isValidEmail(email: string): boolean {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }

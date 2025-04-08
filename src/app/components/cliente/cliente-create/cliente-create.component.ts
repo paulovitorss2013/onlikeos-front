@@ -17,7 +17,8 @@ export class ClienteCreateComponent implements OnInit {
   // VARIÁVEIS DE CONTROLE VERIFICAÇÃO DE LOGIN
   loginDisponivel: boolean | null = null;
   erroVerificacaoLogin: boolean = false;
-
+  loginMessage: string = '';
+  
   // VARIÁVEL DE CONTROLE MENSAGEM DE CPF/CNPJ INVÁLIDO
   cpfCnpjInvalido: boolean = false;
 
@@ -142,30 +143,25 @@ export class ClienteCreateComponent implements OnInit {
 
   // MÉTODO PARA VERIFICAR SE O LOGIN JÁ EXISTE AO DESFOCAR
   verifyLogin(): void {
-    const loginControl = this.form.get('login');
-    const login = loginControl?.value;
-    this.loginDisponivel = null;
-    this.erroVerificacaoLogin = false;
-    if (login) {
-      this.service.checkLoginExists(login).subscribe({
-        next: (exists) => {
-          if (exists) {
-            this.loginDisponivel = false;
-            loginControl?.setErrors({ loginEmUso: true });
-          } else {
-            this.loginDisponivel = true;
-            if (loginControl?.hasError('loginEmUso')) {
-              loginControl.setErrors(null);
-            }
-          }
-        },
-        error: () => {
-          this.erroVerificacaoLogin = true;
-          loginControl?.setErrors({ erroVerificacao: true });
-        }
-      });
+    const login = this.form.get('login')?.value;
+  
+    if (!login) {
+      this.loginMessage = '';
+      return;
     }
+    this.service.verificarLogin(login).subscribe({
+      next: (exists: boolean) => {
+        this.loginDisponivel = !exists;
+        this.loginMessage = exists ? 'Login já em uso.' : 'Login disponível!';
+      },
+      error: () => {
+        this.loginDisponivel = false;
+        this.loginMessage = 'Erro ao verificar o login.';
+      }
+    });
   }
+
+
 
   // MÉTODO PARA CHAMAR AS VALIDAÇÕES DE CPF E CNPJ
   validCpfCnpj(): void {
@@ -192,8 +188,8 @@ export class ClienteCreateComponent implements OnInit {
   }
 
 
-  // VALIDAÇÃO DO CPF
-  private isValidCpf(cpf: string): boolean {
+  // VALIDAÇÃO DO CPF/CNPJ
+isValidCpf(cpf: string): boolean {
     if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
 
     let sum = 0, remainder;
@@ -210,7 +206,7 @@ export class ClienteCreateComponent implements OnInit {
   }
 
   // VALIDAÇÃO DO CNPJ
-  private isValidCnpj(cnpj: string): boolean {
+  isValidCnpj(cnpj: string): boolean {
     if (cnpj.length !== 14 || /^(\d)\1+$/.test(cnpj)) return false;
 
     const weights1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];

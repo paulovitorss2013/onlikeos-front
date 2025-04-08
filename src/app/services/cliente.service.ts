@@ -40,8 +40,8 @@ export class ClienteService {
       return this.http.delete<Cliente>(`${API_CONFIG.baseUrl}/clientes/${id}`);
   }
 
-  // VERIFICAR SE O LOGIN JÁ EXISTE
-    checkLoginExists(login: string): Observable<boolean> {
-   return this.http.get<boolean>(`${API_CONFIG.baseUrl}/clientes/exists/${login}`);
-  }
+    // VERIFICA SE O LOGIN ESTÁ DISPONÍVEL
+  verificarLogin(login: string): Observable<boolean> {
+  return this.http.get<boolean>(`${API_CONFIG.baseUrl}/clientes/exists/${login}`);
+}
 }
