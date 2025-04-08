@@ -26,7 +26,7 @@
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>CPF</mat-label>
         <input matInput placeholder="Digite apenas números" formControlName="cpfCnpj" 
-          mask="000.000.000-00">
+          mask="000.000.000-00" (blur)="checkCpf()">
       </mat-form-field>
       <small class="cpf-message" *ngIf="cpfMessage"
         [ngStyle]="{ 'color': cpfMessage === 'CPF disponível!' ? 'green' : 'red' }">
@@ -34,12 +34,19 @@
       </small>
     </div>
 
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>E-mail</mat-label>
-      <input matInput
-        placeholder="Digite o e-mail"
-        formControlName="email">
-    </mat-form-field>
+    <div class="email-container">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>E-mail</mat-label>
+        <input matInput 
+          placeholder="Digite o e-mail" 
+          formControlName="email" 
+          (blur)="checkEmail()">
+      </mat-form-field>
+      <small class="email-message" *ngIf="emailMessage"
+        [ngStyle]="{ 'color': emailMessage === 'E-mail disponível!' ? 'green' : 'red' }">
+        {{ emailMessage }} 
+      </small>
+    </div>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Celular</mat-label>

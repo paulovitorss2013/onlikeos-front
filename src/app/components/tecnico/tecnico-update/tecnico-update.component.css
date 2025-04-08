@@ -85,6 +85,18 @@ button.btn-novaSenha {
     margin-bottom: 12px; /* Adiciona espaço após o aviso */
 }
 
+.email-message {
+    margin-top: -5px; /* Ajusta o espaçamento para ficar próximo ao campo */
+    font-size: 0.875rem; /* Mantém a mensagem discreta */
+    padding-left: 12px; /* Alinha com o input dentro do mat-form-field */
+  }
+  
+.cpf-message {
+    margin-top: -5px; /* Ajusta o espaçamento para colar na borda inferior */
+    font-size: 0.875rem; /* Mantém a mensagem discreta */
+    padding-left: 12px; /* Alinha com o input dentro do mat-form-field */
+  }
+
 /* --------- AJUSTES PARA TELAS PEQUENAS (ATÉ 768px) --------- */
 @media (max-width: 768px) {
     .container {

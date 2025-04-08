@@ -176,6 +176,70 @@ export class TecnicoUpdateComponent implements OnInit {
 'Requisitos: no mínimo 8 caracteres, sem espaços, uma letra minúscula, uma maiúscula, um número e um símbolo. Caracteres Proibídos: ´ ~ ç [ )';
 }
 
+// MÉTODO PARA VERIFICAR CPF DUPLICADO AO DESFOCAR
+checkCpf(): void {
+  const cpf = this.form.get('cpfCnpj')?.value;
+
+  if (!this.isValidCpf(cpf)) {
+    this.cpfMessage = 'CPF inválido!';
+    return;
+  }
+
+  if (cpf === this.tecnico.cpfCnpj) {
+    this.cpfMessage = '';
+    return;
+  }
+  this.service.existsByCpfCnpjUpdate(cpf, this.tecnico.id).subscribe((exists) => {
+    this.cpfMessage = exists ? 'CPF já cadastrado para um técnico!' : 'CPF disponível!';
+  });
+}
+
+// MÉTODO PARA VERIFICAR SE O CPF É VÁLIDO
+private isValidCpf(cpf: string): boolean {
+  cpf = cpf.replace(/\D/g, '');
+
+  if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+  let sum = 0, remainder;
+  for (let i = 1; i <= 9; i++) {
+    sum += parseInt(cpf[i - 1]) * (11 - i);
+  }
+  remainder = (sum * 10) % 11;
+  if (remainder === 10 || remainder === 11) remainder = 0;
+  if (remainder !== parseInt(cpf[9])) return false;
+  sum = 0;
+  for (let i = 1; i <= 10; i++) {
+    sum += parseInt(cpf[i - 1]) * (12 - i);
+  }
+  remainder = (sum * 10) % 11;
+  if (remainder === 10 || remainder === 11) remainder = 0;
+  if (remainder !== parseInt(cpf[10])) return false;
+
+  return true;
+};
+
+// MÉTODO PARA CHECAR SE O E-MAIL ESTÁ DISPONÍVEL
+checkEmail(): void {
+  const email = this.form.get('email')?.value;
+
+  if (!this.isValidEmail(email)) {
+    this.emailMessage = 'E-mail inválido!';
+    return;
+  }
+  if (email === this.tecnico.email) {
+    this.emailMessage = '';
+    return;
+  }
+  this.service.existsByEmailUpdate(email, this.tecnico.id).subscribe((exists) => {
+    this.emailMessage = exists ? 'E-mail já em uso!' : 'E-mail disponível!';
+  });
+}
+
+// MÉTODO PARA VALIDAR O E-MAIL
+private isValidEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
 // MÉTODO PARA HABILITAR A NOVA SENHA
 habilitarNovaSenha() {
  this.mostrarNovaSenha = true;

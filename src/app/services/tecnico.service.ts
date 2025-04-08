@@ -18,16 +18,6 @@ export class TecnicoService {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
       });
     }
-  
-  // MÉTODO PARA VERIFICAR CPF DUPLICADO (CREATE)
-  existsByCpfCnpjCreate(cpfCnpj: string): Observable<boolean> {
-    return this.http.get<boolean>(`${API_CONFIG.baseUrl}/tecnicos/exists/cpf/${cpfCnpj}`);
-  }
-
-  // MÉTODO PARA VERIFICAR E-MAIL DUPLICADO (CREATE)
-  existsByEmailCreate(email: string): Observable<boolean> {
-  return this.http.get<boolean>(`${API_CONFIG.baseUrl}/tecnicos/exists/email/${email}`);
-}
 
   // MÉTODO PARA LISTAR TODOS OS TÉCNICOS
   findAll(): Observable<Tecnico[]> {
@@ -50,5 +40,29 @@ export class TecnicoService {
   delete (id: any): Observable <Tecnico> {
     return this.http.delete<Tecnico>(`${API_CONFIG.baseUrl}/tecnicos/${id}`);
   }
+
+  // MÉTODO PARA VERIFICAR CPF DUPLICADO (CREATE)
+  existsByCpfCnpjCreate(cpfCnpj: string): Observable<boolean> {
+    return this.http.get<boolean>(`${API_CONFIG.baseUrl}/tecnicos/exists/cpf/${cpfCnpj}`);
+  }
+
+  // MÉTODO PARA VERIFICAR E-MAIL DUPLICADO (CREATE)
+  existsByEmailCreate(email: string): Observable<boolean> {
+  return this.http.get<boolean>(`${API_CONFIG.baseUrl}/tecnicos/exists/email/${email}`);
+ }
+
+// MÉTODO PARA VERIFICAR CPF DUPLICADO (UPDATE)
+existsByCpfCnpjUpdate(cpfCnpj: string, id: string): Observable<boolean> {
+  return this.http.get<boolean>(
+    `${API_CONFIG.baseUrl}/tecnicos/exists/cpf/${cpfCnpj}?id=${id}`
+  );
+}
+
+// MÉTODO PARA VERIFICAR E-MAIL DUPLICADO (UPDATE)
+existsByEmailUpdate(email: string, id: string): Observable<boolean> {
+  return this.http.get<boolean>(
+    `${API_CONFIG.baseUrl}/tecnicos/exists/email/${email}?id=${id}`
+  );
+}
   
 }
