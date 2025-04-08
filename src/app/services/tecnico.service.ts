@@ -19,13 +19,13 @@ export class TecnicoService {
       });
     }
   
-  // MÉTODO PARA VERIFICAR CPF DUPLICADO
-  existsByCpfCnpj(cpfCnpj: string): Observable<boolean> {
+  // MÉTODO PARA VERIFICAR CPF DUPLICADO (CREATE)
+  existsByCpfCnpjCreate(cpfCnpj: string): Observable<boolean> {
     return this.http.get<boolean>(`${API_CONFIG.baseUrl}/tecnicos/exists/cpf/${cpfCnpj}`);
   }
 
-  // MÉTODO PARA VERIFICAR E-MAIL DUPLICADO
-  existsByEmail(email: string): Observable<boolean> {
+  // MÉTODO PARA VERIFICAR E-MAIL DUPLICADO (CREATE)
+  existsByEmailCreate(email: string): Observable<boolean> {
   return this.http.get<boolean>(`${API_CONFIG.baseUrl}/tecnicos/exists/email/${email}`);
 }
 

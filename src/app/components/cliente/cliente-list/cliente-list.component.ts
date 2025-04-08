@@ -49,11 +49,16 @@ export class ClienteListComponent implements OnInit {
 
   // MÉTODO PARA LISTAR TODOS OS CLIENTES
   findAll() {
-    this.isLoading = true; // Ativa a barra de carregamento
-
+    this.isLoading = true;
+  
     this.service.findAll().subscribe({
       next: (resposta) => {
-        this.ELEMENT_DATA = resposta;
+        this.ELEMENT_DATA = resposta.sort((a, b) =>
+          a.nome.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+            .localeCompare(
+              b.nome.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+            )
+        );
         this.dataSource = new MatTableDataSource<Cliente>(this.ELEMENT_DATA);
         this.dataSource.paginator = this.paginator;
       },

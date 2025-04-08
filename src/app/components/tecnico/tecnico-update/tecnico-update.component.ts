@@ -176,43 +176,6 @@ export class TecnicoUpdateComponent implements OnInit {
 'Requisitos: no mínimo 8 caracteres, sem espaços, uma letra minúscula, uma maiúscula, um número e um símbolo. Caracteres Proibídos: ´ ~ ç [ )';
 }
 
-// MÉTODO PARA VERIFICAR CPF INVÁLIDO AO DESFOCAR
-checkCpf(): void {
-  const cpf = this.form.get('cpfCnpj')?.value;
-
-  if (!this.isValidCpf(cpf)) {
-    this.cpfMessage = 'CPF inválido!';
-    return;
-  }
-
-  this.service.existsByCpfCnpj(cpf).subscribe((exists) => {
-    this.cpfMessage = exists ? 'CPF já em uso!' : 'CPF disponível!';
-  });
-}
-
-// MÉTODO PARA VERIFICAR SE O CPF É VÁLIDO
-private isValidCpf(cpf: string): boolean {
-  cpf = cpf.replace(/\D/g, '');
-
-  if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
-  let sum = 0, remainder;
-  for (let i = 1; i <= 9; i++) {
-    sum += parseInt(cpf[i - 1]) * (11 - i);
-  }
-  remainder = (sum * 10) % 11;
-  if (remainder === 10 || remainder === 11) remainder = 0;
-  if (remainder !== parseInt(cpf[9])) return false;
-  sum = 0;
-  for (let i = 1; i <= 10; i++) {
-    sum += parseInt(cpf[i - 1]) * (12 - i);
-  }
-  remainder = (sum * 10) % 11;
-  if (remainder === 10 || remainder === 11) remainder = 0;
-  if (remainder !== parseInt(cpf[10])) return false;
-
-  return true;
-};
-
 // MÉTODO PARA HABILITAR A NOVA SENHA
 habilitarNovaSenha() {
  this.mostrarNovaSenha = true;

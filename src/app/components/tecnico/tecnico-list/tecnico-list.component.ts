@@ -50,7 +50,12 @@ export class TecnicoListComponent implements OnInit {
     this.isLoading = true;
     this.service.findAll().subscribe({
       next: (resposta) => {
-        this.ELEMENT_DATA = resposta;
+        this.ELEMENT_DATA = resposta.sort((a, b) =>
+          a.nome.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+            .localeCompare(
+              b.nome.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+            )
+        );
         this.updateDataSource();
       },
       error: (err) => {

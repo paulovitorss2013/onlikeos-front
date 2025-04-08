@@ -107,7 +107,7 @@ checkCpf(): void {
     return;
   }
 
-  this.service.existsByCpfCnpj(cpf).subscribe((exists) => {
+  this.service.existsByCpfCnpjCreate(cpf).subscribe((exists) => {
     this.cpfMessage = exists ? 'CPF já cadastrado para um técnico!' : 'CPF disponível!';
   });
 }
@@ -144,7 +144,7 @@ checkEmail(): void {
     return;
   }
 
-  this.service.existsByEmail(email).subscribe((exists) => {
+  this.service.existsByEmailCreate(email).subscribe((exists) => {
     this.emailMessage = exists ? 'E-mail já em uso!' : 'E-mail disponível!';
   });
 }
