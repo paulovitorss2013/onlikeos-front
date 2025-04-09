@@ -34,12 +34,16 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>CPF/CNPJ</mat-label>
-      <input matInput placeholder="digite apenas números" formControlName="cpfCnpj" 
-        [mask]="cpfCnpjMask" (blur)="validCpfCnpj()">
-      <mat-error *ngIf="cpfCnpjInvalido">CPF ou CNPJ inválido!</mat-error>
-    </mat-form-field>
+    <div class="cpf-container">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>CPF/CNPJ</mat-label>
+        <input matInput placeholder="digite apenas números" formControlName="cpfCnpj" 
+          [mask]="cpfCnpjMask" (blur)="validCpfCnpj()">
+      </mat-form-field>
+      <small class="cpf-message" *ngIf="cpfCnpjInvalido">
+        CPF ou CNPJ inválido!
+      </small>
+    </div>
 
     <div class="email-container">
       <mat-form-field class="full-width" appearance="fill">

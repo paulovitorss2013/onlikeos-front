@@ -58,6 +58,32 @@ button.btn-cancelar {
     transition: background-color 0.3s ease; /* Transição suave */
 }
 
+.login-message {
+    margin-top: -5.25rem;
+    font-size: 0.875rem; /* Mantém a mensagem discreta */
+    padding-left: 12px; /* Alinha com o input dentro do mat-form-field */
+  }
+
+.email-message {
+    margin-top: -5.25rem;
+    font-size: 0.875rem; /* Mantém a mensagem discreta */
+    padding-left: 12px; /* Alinha com o input dentro do mat-form-field */
+  }
+
+  .cpf-message {
+    margin-top: -5.25rem;
+    font-size: 0.875rem;
+    padding-left: 12px;
+  }
+  
+  .error-message {
+    margin-top: -5.25rem;
+    color: red;
+  }
+
+  mat-form-field {
+    margin-bottom: 0 !important;
+  }
 
 /* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
 

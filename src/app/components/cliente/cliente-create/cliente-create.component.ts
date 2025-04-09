@@ -148,10 +148,12 @@ export class ClienteCreateComponent implements OnInit {
   verifyLogin(): void {
     const login = this.form.get('login')?.value;
   
-    if (!login) {
-      this.loginMessage = '';
+    if (!login || login.trim() === '') {
+      this.loginDisponivel = false;
+      this.loginMessage = 'O login não pode ser em branco';
       return;
     }
+  
     this.service.verificarLogin(login).subscribe({
       next: (exists: boolean) => {
         this.loginDisponivel = !exists;

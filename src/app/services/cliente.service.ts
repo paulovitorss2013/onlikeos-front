@@ -40,7 +40,7 @@ export class ClienteService {
       return this.http.delete<Cliente>(`${API_CONFIG.baseUrl}/clientes/${id}`);
   }
 
-    // VERIFICA SE O LOGIN ESTÁ DISPONÍVEL
+  // VERIFICA SE O LOGIN ESTÁ DISPONÍVEL (CREATE)
   verificarLogin(login: string): Observable<boolean> {
   return this.http.get<boolean>(`${API_CONFIG.baseUrl}/clientes/exists/${login}`);
 }
@@ -49,4 +49,16 @@ export class ClienteService {
 existsByEmailCreate(email: string): Observable<boolean> {
   return this.http.get<boolean>(`${API_CONFIG.baseUrl}/clientes/exists/email/${email}`);
  }
+
+ // MÉTODO PARA VERIFICAR E-MAIL DUPLICADO (UPDATE)
+ existsByEmailUpdate(email: string, id: string): Observable<boolean> {
+  return this.http.get<boolean>(
+    `${API_CONFIG.baseUrl}/clientes/exists/email/${email}?id=${id}`
+  );
+}
+
+  // VERIFICA SE O LOGIN ESTÁ DISPONÍVEL (CREATE)
+  existsByLoginUpdate(login: string, id: string): Observable<boolean> {
+    return this.http.get<boolean>(`${API_CONFIG.baseUrl}/clientes/exists/login/${login}/id/${id}`);
+  }
 }

@@ -63,6 +63,6 @@ existsByEmailUpdate(email: string, id: string): Observable<boolean> {
   return this.http.get<boolean>(
     `${API_CONFIG.baseUrl}/tecnicos/exists/email/${email}?id=${id}`
   );
-}
+ }
   
 }

@@ -15,10 +15,19 @@
         maxlength="60">
     </mat-form-field>
 
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Login PPPoE/Contrato</mat-label>
-      <input matInput formControlName="login" placeholder="Entre 1 e 64 caracteres" maxlength="64">
-    </mat-form-field>
+    <div class="login-container">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Login</mat-label>
+        <input matInput
+          formControlName="login"
+          (blur)="verifyLogin()"
+          placeholder="Digite o login desejado" />
+      </mat-form-field>
+      <small class="login-message" *ngIf="loginMessage"
+        [ngStyle]="{ 'color': loginMessage === 'Login disponível!' ? 'green' : 'red' }">
+        {{ loginMessage }}
+      </small>
+    </div>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Tipo de Cliente</mat-label>
@@ -28,19 +37,30 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>CPF/CNPJ</mat-label>
-      <input matInput placeholder="digite apenas números" formControlName="cpfCnpj" 
-        [mask]="cpfCnpjMask" />
-    </mat-form-field>
+    <div class="cpf-container">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>CPF/CNPJ</mat-label>
+        <input matInput placeholder="digite apenas números" formControlName="cpfCnpj" 
+          [mask]="cpfCnpjMask" (blur)="validCpfCnpj()">
+      </mat-form-field>
+      <small class="cpf-message error-message" *ngIf="cpfCnpjInvalido">
+        CPF ou CNPJ inválido!
+      </small>
+    </div>
 
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>E-mail</mat-label>
-      <input matInput
-        placeholder="Digite o e-mail"
-        formControlName="email"
-        maxlength="60">
-    </mat-form-field>
+    <div class="email-container">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>E-mail</mat-label>
+        <input matInput 
+          placeholder="Digite o e-mail" 
+          formControlName="email" 
+          (blur)="checkEmail()">
+      </mat-form-field>
+      <small class="email-message" *ngIf="emailMessage"
+        [ngStyle]="{ 'color': emailMessage === 'E-mail disponível!' ? 'green' : 'red' }">
+        {{ emailMessage }} 
+      </small>
+    </div>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Celular</mat-label>

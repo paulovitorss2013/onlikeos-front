@@ -14,6 +14,17 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ClienteUpdateComponent implements OnInit {
   
+  // VARIÁVEIS DE CONTROLE VERIFICAÇÃO DE LOGIN
+  loginDisponivel: boolean | null = null;
+  erroVerificacaoLogin: boolean = false;
+  loginMessage: string = '';
+  
+  // VARIÁVEL DE CONTROLE MENSAGEM DE CPF/CNPJ INVÁLIDO
+  cpfCnpjInvalido: boolean = false;
+
+   // VARIÁVEL DE CONTROLE MENSAGEM DE E-MAIL INDISPONÍVEL
+  emailMessage: string = '';
+
   // INSTÂNCIA DO TÉCNICO
   cliente: Cliente = {
     id: '',
@@ -193,6 +204,118 @@ export class ClienteUpdateComponent implements OnInit {
       }
     });
   }  
+
+  // MÉTODO PARA VERIFICAR SE O LOGIN JÁ EXISTE AO DESFOCAR
+verifyLogin(): void {
+  const login = this.form.get('login')?.value;
+
+  if (!login || login.trim() === '') {
+    this.loginDisponivel = false;
+    this.loginMessage = 'O login não pode ser em branco.';
+    return;
+  }
+
+  if (login === this.cliente.login) {
+    this.loginDisponivel = true;
+    this.loginMessage = '';
+    return;
+  }
+
+  this.service.existsByLoginUpdate(login, this.cliente.id).subscribe({
+    next: (exists: boolean) => {
+      this.loginDisponivel = !exists;
+      this.loginMessage = exists ? 'Login já em uso.' : 'Login disponível!';
+    },
+    error: () => {
+      this.loginDisponivel = false;
+      this.loginMessage = 'Erro ao verificar o login.';
+    }
+  });
+}
+
+  // MÉTODO PARA CHAMAR AS VALIDAÇÕES DE CPF E CNPJ
+validCpfCnpj(): void {
+  const control = this.form.get('cpfCnpj');
+  const cpfCnpjValue = control?.value;
+  
+    this.cpfCnpjInvalido = false;
+  
+    if (!cpfCnpjValue) return;
+  
+    const cleanedValue = cpfCnpjValue.replace(/\D/g, '');
+  
+    const isValid = this.isValidCpf(cleanedValue) || this.isValidCnpj(cleanedValue);
+  
+    if (!isValid) {
+      this.cpfCnpjInvalido = true;
+      control?.setErrors({ cpfCnpjInvalido: true });
+    } else {
+      this.cpfCnpjInvalido = false;
+      if (control?.hasError('cpfCnpjInvalido')) {
+        control.setErrors(null);
+      }
+    }
+  }
+
+// VALIDAÇÃO DO CPF/CNPJ
+isValidCpf(cpf: string): boolean {
+    if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+
+    let sum = 0, remainder;
+    for (let i = 0; i < 9; i++) sum += +cpf[i] * (10 - i);
+    remainder = (sum * 10) % 11;
+    if (remainder === 10 || remainder === 11) remainder = 0;
+    if (remainder !== +cpf[9]) return false;
+
+    sum = 0;
+    for (let i = 0; i < 10; i++) sum += +cpf[i] * (11 - i);
+    remainder = (sum * 10) % 11;
+    if (remainder === 10 || remainder === 11) remainder = 0;
+    return remainder === +cpf[10];
+  }
+
+  // VALIDAÇÃO DO CNPJ
+  isValidCnpj(cnpj: string): boolean {
+    if (cnpj.length !== 14 || /^(\d)\1+$/.test(cnpj)) return false;
+
+    const weights1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+    const weights2 = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+
+    let sum = 0, remainder;
+    for (let i = 0; i < 12; i++) sum += +cnpj[i] * weights1[i];
+    remainder = sum % 11;
+    let digit1 = remainder < 2 ? 0 : 11 - remainder;
+    if (digit1 !== +cnpj[12]) return false;
+
+    sum = 0;
+    for (let i = 0; i < 13; i++) sum += +cnpj[i] * weights2[i];
+    remainder = sum % 11;
+    let digit2 = remainder < 2 ? 0 : 11 - remainder;
+    return digit2 === +cnpj[13];
+  }
+
+  // MÉTODO PARA CHECAR SE O E-MAIL ESTÁ DISPONÍVEL
+  checkEmail(): void {
+    const email = this.form.get('email')?.value;
+    if (!this.isValidEmail(email)) {
+      this.emailMessage = 'E-mail inválido!';
+      return;
+    }
+    if (email === this.cliente.email) {
+      this.emailMessage = '';
+      return;
+    }
+  
+    this.service.existsByEmailUpdate(email, this.cliente.id).subscribe((exists) => {
+      this.emailMessage = exists ? 'E-mail já cadastrado para um técnico!' : '';
+    });
+  }
+
+// MÉTODO PARA VALIDAR O E-MAIL
+isValidEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
 
   // MÉTODO PARA ABRIR COORDENADAS NO GOOGLE MAPS
 openGoogleMaps(coordenada: string): void {

@@ -56,17 +56,27 @@ button.btn-criar, button.btn-cancelar {
     background-color: rgb(207, 80, 63); /* tom vermelho claro */
 }
 
-.login-message {
-    margin-top: -5px; /* Ajusta o espaçamento para colar na borda inferior */
-    font-size: 0.875rem; /* Mantém a mensagem discreta */
-    padding-left: 12px; /* Alinha com o input dentro do mat-form-field */
-  }
+.cpf-container,
+.email-container,
+.login-container {
+  margin-bottom: 0; /* zera margem inferior padrão */
+}
 
-.email-message {
-    margin-top: -5px; /* Ajusta o espaçamento para ficar próximo ao campo */
-    font-size: 0.875rem; /* Mantém a mensagem discreta */
-    padding-left: 12px; /* Alinha com o input dentro do mat-form-field */
-  }
+.cpf-container mat-form-field,
+.email-container mat-form-field,
+.login-container mat-form-field {
+  margin-bottom: 0 !important; /* força o form-field a não criar espaço */
+}
+
+.cpf-message,
+.email-message,
+.login-message {
+  margin-top: -4px; /* ajusta para ficar colado, sem sobrepor */
+  font-size: 0.875rem;
+  padding-left: 12px;
+  color: red;
+  display: block;
+}
 
 /* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
 @media (max-width: 768px) {
