@@ -44,4 +44,9 @@ export class ClienteService {
   verificarLogin(login: string): Observable<boolean> {
   return this.http.get<boolean>(`${API_CONFIG.baseUrl}/clientes/exists/${login}`);
 }
+
+// MÉTODO PARA VERIFICAR E-MAIL DUPLICADO (CREATE)
+existsByEmailCreate(email: string): Observable<boolean> {
+  return this.http.get<boolean>(`${API_CONFIG.baseUrl}/clientes/exists/email/${email}`);
+ }
 }

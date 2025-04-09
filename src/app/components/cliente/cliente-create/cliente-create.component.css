@@ -61,7 +61,12 @@ button.btn-criar, button.btn-cancelar {
     font-size: 0.875rem; /* Mantém a mensagem discreta */
     padding-left: 12px; /* Alinha com o input dentro do mat-form-field */
   }
-  
+
+.email-message {
+    margin-top: -5px; /* Ajusta o espaçamento para ficar próximo ao campo */
+    font-size: 0.875rem; /* Mantém a mensagem discreta */
+    padding-left: 12px; /* Alinha com o input dentro do mat-form-field */
+  }
 
 /* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
 @media (max-width: 768px) {

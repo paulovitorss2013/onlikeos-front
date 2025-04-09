@@ -22,6 +22,9 @@ export class ClienteCreateComponent implements OnInit {
   // VARIÁVEL DE CONTROLE MENSAGEM DE CPF/CNPJ INVÁLIDO
   cpfCnpjInvalido: boolean = false;
 
+   // VARIÁVEL DE CONTROLE MENSAGEM DE E-MAIL INDISPONÍVEL
+  emailMessage: string = '';
+
   // INSTÂNCIA DO CLIENTE
   cliente: Cliente = {
     id: '',
@@ -162,11 +165,10 @@ export class ClienteCreateComponent implements OnInit {
   }
 
 
-
-  // MÉTODO PARA CHAMAR AS VALIDAÇÕES DE CPF E CNPJ
-  validCpfCnpj(): void {
-    const control = this.form.get('cpfCnpj');
-    const cpfCnpjValue = control?.value;
+// MÉTODO PARA CHAMAR AS VALIDAÇÕES DE CPF E CNPJ
+validCpfCnpj(): void {
+  const control = this.form.get('cpfCnpj');
+  const cpfCnpjValue = control?.value;
   
     this.cpfCnpjInvalido = false;
   
@@ -188,7 +190,7 @@ export class ClienteCreateComponent implements OnInit {
   }
 
 
-  // VALIDAÇÃO DO CPF/CNPJ
+// VALIDAÇÃO DO CPF/CNPJ
 isValidCpf(cpf: string): boolean {
     if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
 
@@ -224,6 +226,26 @@ isValidCpf(cpf: string): boolean {
     let digit2 = remainder < 2 ? 0 : 11 - remainder;
     return digit2 === +cnpj[13];
   }
+
+  // MÉTODO PARA CHECAR SE O E-MAIL ESTÁ DISPONÍVEL
+checkEmail(): void {
+  const email = this.form.get('email')?.value;
+
+  if (!this.isValidEmail(email)) {
+    this.emailMessage = 'E-mail inválido!';
+    return;
+  }
+
+  this.service.existsByEmailCreate(email).subscribe((exists) => {
+    this.emailMessage = exists ? 'E-mail já cadastrado para um técnico!' : 'E-mail disponível!';
+  });
+}
+
+// MÉTODO PARA VALIDAR O E-MAIL
+isValidEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
 
   // MÉTODO PARA CANCELAR AS AÇÕES
   cancelActions(): void {

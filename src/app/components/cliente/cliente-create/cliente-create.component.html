@@ -41,10 +41,19 @@
       <mat-error *ngIf="cpfCnpjInvalido">CPF ou CNPJ inválido!</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>E-mail</mat-label>
-      <input matInput placeholder="Digite o e-mail" formControlName="email" maxlength="60">
-    </mat-form-field>
+    <div class="email-container">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>E-mail</mat-label>
+        <input matInput 
+          placeholder="Digite o e-mail" 
+          formControlName="email" 
+          (blur)="checkEmail()">
+      </mat-form-field>
+      <small class="email-message" *ngIf="emailMessage"
+        [ngStyle]="{ 'color': emailMessage === 'E-mail disponível!' ? 'green' : 'red' }">
+        {{ emailMessage }} 
+      </small>
+    </div>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Celular</mat-label>
