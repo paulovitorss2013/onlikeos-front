@@ -59,7 +59,7 @@ export class TecnicoUpdateComponent implements OnInit {
 
   // INICIALIZAÇÃO DO COMPONENTE
   ngOnInit(): void {
-    this.toastr.warning('Atualizar um técnico requer privilégios de administrador(a).', 'Atenção!');
+    this.toastr.warning('Atualizar um(a) técnico(a) requer privilégios de administrador(a).', 'Atenção!');
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.tecnico.id = id;
