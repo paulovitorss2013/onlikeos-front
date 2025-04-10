@@ -88,14 +88,14 @@ export class ClienteCreateComponent implements OnInit {
     cpfCnpj: new FormControl('', [Validators.required, Validators.minLength(11), Validators.maxLength(18)]),
     celular: new FormControl('', [Validators.minLength(11)]),
     telefone: new FormControl('', [Validators.minLength(10)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(100)]),
     senha: new FormControl(''),
     cep: new FormControl('', [Validators.minLength(8)]),
     logradouro: new FormControl('', Validators.maxLength(100)),
-    numero: new FormControl('', Validators.maxLength(100)),
-    complemento: new FormControl('', Validators.maxLength(100)),
-    bairro: new FormControl('', Validators.maxLength(100)),
-    municipio: new FormControl('', Validators.maxLength(100)),
+    numero: new FormControl('', Validators.maxLength(15)),
+    complemento: new FormControl('', Validators.maxLength(40)),
+    bairro: new FormControl('', Validators.maxLength(60)),
+    municipio: new FormControl('', Validators.maxLength(60)),
     uf: new FormControl('', Validators.maxLength(2)),
     coordenada: new FormControl('', Validators.maxLength(100)),
     tipoCliente: new FormControl('Pessoa Física', [Validators.required])
@@ -150,18 +150,18 @@ export class ClienteCreateComponent implements OnInit {
   
     if (!login || login.trim() === '') {
       this.loginDisponivel = false;
-      this.loginMessage = 'O login não pode ser em branco';
+      this.loginMessage = 'O login não pode ser em branco!';
       return;
     }
   
     this.service.verificarLogin(login).subscribe({
       next: (exists: boolean) => {
         this.loginDisponivel = !exists;
-        this.loginMessage = exists ? 'Login já em uso.' : 'Login disponível!';
+        this.loginMessage = exists ? 'Login já em uso!' : 'Login disponível!';
       },
       error: () => {
         this.loginDisponivel = false;
-        this.loginMessage = 'Erro ao verificar o login.';
+        this.loginMessage = 'Erro ao verificar o login!';
       }
     });
   }
@@ -239,7 +239,7 @@ checkEmail(): void {
   }
 
   this.service.existsByEmailCreate(email).subscribe((exists) => {
-    this.emailMessage = exists ? 'E-mail já cadastrado para um técnico!' : 'E-mail disponível!';
+    this.emailMessage = exists ? 'E-mail já cadastrado para um(a) técnico(a)!' : 'E-mail disponível!';
   });
 }
 

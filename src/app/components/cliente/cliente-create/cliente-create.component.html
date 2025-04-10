@@ -9,16 +9,17 @@
     
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Nome</mat-label>
-      <input matInput formControlName="nome" placeholder="Entre 10 e 60 caracteres" maxlength="60">
+      <input matInput formControlName="nome" placeholder="Entre 10 e 60 caracteres." maxlength="60">
     </mat-form-field>
 
     <div class="login-container">
       <mat-form-field class="full-width" appearance="fill">
-        <mat-label>Login</mat-label>
+        <mat-label>Login/Contrato</mat-label>
         <input matInput
           formControlName="login"
           (blur)="verifyLogin()"
-          placeholder="Digite o login desejado" />
+          placeholder="Login PPPoE ou número do contrato."
+          maxlength="60">
       </mat-form-field>
       <small class="login-message" *ngIf="loginMessage"
         [ngStyle]="{ 'color': loginMessage === 'Login disponível!' ? 'green' : 'red' }">
@@ -37,7 +38,7 @@
     <div class="cpf-container">
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>CPF/CNPJ</mat-label>
-        <input matInput placeholder="digite apenas números" formControlName="cpfCnpj" 
+        <input matInput placeholder="digite apenas números." formControlName="cpfCnpj" 
           [mask]="cpfCnpjMask" (blur)="validCpfCnpj()">
       </mat-form-field>
       <small class="cpf-message" *ngIf="cpfCnpjInvalido">
@@ -49,9 +50,10 @@
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>E-mail</mat-label>
         <input matInput 
-          placeholder="Digite o e-mail" 
+          placeholder="Digite um e-mail válido." 
           formControlName="email" 
-          (blur)="checkEmail()">
+          (blur)="checkEmail()"
+          maxlength="100">
       </mat-form-field>
       <small class="email-message" *ngIf="emailMessage"
         [ngStyle]="{ 'color': emailMessage === 'E-mail disponível!' ? 'green' : 'red' }">
@@ -61,42 +63,42 @@
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Celular</mat-label>
-      <input matInput placeholder="digite apenas números" formControlName="celular" mask="(00) 00000-0000" />
+      <input matInput placeholder="digite apenas números." formControlName="celular" mask="(00) 00000-0000">
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Telefone</mat-label>
-      <input matInput placeholder="digite apenas números" formControlName="telefone" mask="(00) 0000-0000" />
+      <input matInput placeholder="digite apenas números." formControlName="telefone" mask="(00) 0000-0000">
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>CEP</mat-label>
-      <input matInput placeholder="digite apenas números" formControlName="cep" mask="00000-000" />
+      <input matInput placeholder="digite apenas números." formControlName="cep" mask="00000-000">
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Logradouro</mat-label>
-      <input matInput placeholder="Exemplo: Rua Nezinho Ferreira" formControlName="logradouro" maxlength="60"/>
+      <input matInput placeholder="Exemplo: Rua Nezinho Ferreira." formControlName="logradouro" maxlength="100">
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Número</mat-label>
-      <input matInput placeholder="761-A" formControlName="numero" maxlength="15"/>
+      <input matInput placeholder="Exemplo: 761-A." formControlName="numero" maxlength="15">
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Complemento</mat-label>
-      <input matInput placeholder="Apartamento 405" formControlName="complemento" maxlength="30"/>
+      <input matInput placeholder="Exemplo: Apartamento 405." formControlName="complemento" maxlength="60">
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Bairro</mat-label>
-      <input matInput placeholder="Exemplo: Lava Pés" formControlName="bairro" maxlength="40"/>
+      <input matInput placeholder="Exemplo: Lava Pés." formControlName="bairro" maxlength="60">
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Município</mat-label>
-      <input matInput placeholder="Exemplo: Santo Antônio do Aventureiro" formControlName="municipio" maxlength="50"/>
+      <input matInput placeholder="Exemplo: Santo Antônio do Aventureiro." formControlName="municipio" maxlength="60">
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
@@ -110,7 +112,7 @@
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Localização</mat-label>
-      <input matInput formControlName="coordenada" placeholder="Link ou coordenada em texto" maxlength="100"/>
+      <input matInput formControlName="coordenada" placeholder="Link ou coordenada em texto." maxlength="100">
     </mat-form-field>
 
     <!-- BOTÕES DE AÇÃO -->

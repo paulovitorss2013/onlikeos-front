@@ -115,10 +115,10 @@ create(): void {
     error: (ex) => {
       if (ex.error?.errors) {
         ex.error.errors.forEach((err: { message: string }) => {
-          this.toastrService.error(err.message, 'Erro de Validação');
+          this.toastrService.error(err.message, 'Erro de Validação.');
         });
       } else {
-        const errorMsg = ex.error?.message || ex.error?.error || 'Erro ao criar chamado';
+        const errorMsg = ex.error?.message || ex.error?.error || 'Erro ao criar chamado.';
         this.toastrService.error(errorMsg, 'Erro');
       }
     }

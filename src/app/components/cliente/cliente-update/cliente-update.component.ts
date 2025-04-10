@@ -98,7 +98,7 @@ export class ClienteUpdateComponent implements OnInit {
       this.cliente.id = id;
       this.findById();
     } else {
-      this.toastr.error('ID do cliente não encontrado');
+      this.toastr.error('ID do(a) cliente não encontrado');
       this.router.navigate(['clientes']);
     }
   }
@@ -135,7 +135,7 @@ export class ClienteUpdateComponent implements OnInit {
         });
       },
       error: (err) => {
-        this.toastr.error('Erro ao carregar os dados do cliente');
+        this.toastr.error('Erro ao carregar os dados do(a) cliente!');
       }
     });
   }
@@ -159,7 +159,7 @@ export class ClienteUpdateComponent implements OnInit {
   
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
-      data: { message: 'Deseja mesmo atualizar o cliente?' }
+      data: { message: 'Deseja mesmo atualizar o(a) cliente?' }
     });
   
     dialogRef.afterClosed().subscribe(result => {
@@ -197,7 +197,7 @@ export class ClienteUpdateComponent implements OnInit {
             } else if (ex.error?.message) {
               this.toastr.error(ex.error.message);
             } else {
-              this.toastr.error('Erro desconhecido ao atualizar o cliente.');
+              this.toastr.error('Erro desconhecido ao atualizar o(a) cliente!');
             }
           }
         });
@@ -211,7 +211,7 @@ verifyLogin(): void {
 
   if (!login || login.trim() === '') {
     this.loginDisponivel = false;
-    this.loginMessage = 'O login não pode ser em branco.';
+    this.loginMessage = 'O login não pode ser em branco!';
     return;
   }
 
@@ -224,11 +224,11 @@ verifyLogin(): void {
   this.service.existsByLoginUpdate(login, this.cliente.id).subscribe({
     next: (exists: boolean) => {
       this.loginDisponivel = !exists;
-      this.loginMessage = exists ? 'Login já em uso.' : 'Login disponível!';
+      this.loginMessage = exists ? 'Login já em uso!' : 'Login disponível!';
     },
     error: () => {
       this.loginDisponivel = false;
-      this.loginMessage = 'Erro ao verificar o login.';
+      this.loginMessage = 'Erro ao verificar o login!';
     }
   });
 }
@@ -307,7 +307,7 @@ isValidCpf(cpf: string): boolean {
     }
   
     this.service.existsByEmailUpdate(email, this.cliente.id).subscribe((exists) => {
-      this.emailMessage = exists ? 'E-mail já cadastrado para um técnico!' : '';
+      this.emailMessage = exists ? 'E-mail já cadastrado para um(a) técnico(a)!' : '';
     });
   }
 

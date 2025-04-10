@@ -2,226 +2,226 @@
 
 /* ESTILIZA O CONTAINER PRINCIPAL */
 .container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 16px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
+  max-width: 600px; /* Define a largura máxima do container como 600px */
+  margin: 0 auto; /* Centraliza o container horizontalmente */
+  padding: 16px; /* Adiciona espaçamento interno de 16px em todos os lados */
+  box-sizing: border-box; /* Inclui padding e borda no cálculo total da largura/altura */
+  display: flex; /* Ativa o modelo de layout flexível */
+  flex-direction: column; /* Organiza os elementos filhos em coluna */
 }
 
 /* ESTILIZA O FORMULÁRIO */
 .form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 100%;
+  display: flex; /* Usa flexbox para layout dos elementos internos */
+  flex-direction: column; /* Organiza os elementos em coluna (verticalmente) */
+  gap: 16px; /* Espaçamento de 16px entre os elementos filhos */
+  width: 100%; /* Ocupa toda a largura disponível do elemento pai */
 }
 
 /* ESTILIZA O TÍTULO H1 */
 h1 {
-  width: 100%;
-  text-align: center;
-  margin-bottom: 1.5rem;
+  width: 100%; /* Ocupa toda a largura disponível */
+  text-align: center; /* Centraliza o texto */
+  margin-bottom: 1.5rem; /* Espaçamento inferior de 1.5rem */
 }
 
 /* ESTILIZA O TÍTULO H2 */
 h2 {
-  width: 100%;
-  text-align: center;
-  border: 0;
-  margin: 0;
-  color: rgb(39, 141, 45);
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  font-size: 1.25rem;
-  font-weight: 500;
+  width: 100%; /* Ocupa toda a largura disponível */
+  text-align: center; /* Centraliza o texto */
+  border: 0; /* Remove borda padrão */
+  margin: 0; /* Remove margem padrão */
+  color: rgb(39, 141, 45); /* Cor verde personalizada */
+  font-family: Roboto, "Helvetica Neue", sans-serif; /* Define a fonte */
+  font-size: 1.25rem; /* Tamanho da fonte */
+  font-weight: 500; /* Peso da fonte médio */
 }
 
 /* LARGURA TOTAL PARA OS CAMPOS */
 .full-width {
-  width: 100%;
+  width: 100%; /* Ocupa toda a largura disponível */
 }
 
 /* ESTILIZA O CONTAINER DE STATUS E PRIORIDADE */
 .status-prioridade {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
+  display: flex; /* Usa flexbox para layout interno */
+  justify-content: space-between; /* Espaça os elementos igualmente */
+  flex-direction: column; /* Organiza os elementos em coluna */
 }
 .status-prioridade mat-form-field {
-  width: 100%;
+  width: 100%; /* Campos ocupam toda a largura */
 }
 
 /* CONTAINER PARA O CAMPO DE OBSERVAÇÕES */
 .text-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  display: flex; /* Usa flexbox para layout */
+  flex-direction: column; /* Organiza em coluna */
+  width: 100%; /* Ocupa toda a largura disponível */
 }
 
 /* AJUSTA O TAMANHO DO CAMPO OBSERVAÇÕES */
 .mat-form-field.observacoes {
-  width: 100%;
+  width: 100%; /* Ocupa toda a largura disponível */
 }
 
 /* AJUSTE DA ÁREA DE TEXTO */
 textarea {
-  min-height: 120px;
-  max-height: 200px;
-  resize: vertical;
-  overflow-y: auto;
-  width: 100%;
-  background-color: rgb(233, 233, 233) !important;
-  text-align: justify;
-  word-spacing: normal;
-  white-space: pre-line;
-  word-break: break-word;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  color: rgba(0, 0, 0, 0.87);
-  box-sizing: border-box;
+  min-height: 120px; /* Altura mínima de 120px */
+  max-height: 200px; /* Altura máxima de 200px */
+  resize: vertical; /* Permite redimensionamento apenas vertical */
+  overflow-y: auto; /* Adiciona rolagem vertical quando necessário */
+  width: 100%; /* Ocupa toda a largura do elemento pai */
+  background-color: rgb(233, 233, 233) !important; /* Cor de fundo com prioridade */
+  text-align: justify; /* Texto justificado nas bordas */
+  word-spacing: normal; /* Espaçamento padrão entre palavras */
+  white-space: pre-line; /* Mantém quebras de linha e espaços extras */
+  word-break: break-word; /* Quebra palavras longas automaticamente */
+  font-family: Roboto, "Helvetica Neue", sans-serif; /* Fonte utilizada no texto */
+  font-size: 16px; /* Tamanho da fonte */
+  line-height: 1.5; /* Espaçamento entre linhas */
+  color: rgba(0, 0, 0, 0.87); /* Cor preta com leve transparência */
+  box-sizing: border-box; /* Inclui padding e borda no cálculo total */
 }
 
 /* ÁREA JUSTIFICADA COM TEXTO RENDERIZADO */
 .campo-justificado {
-  position: relative;
+  position: relative; /* Define posicionamento relativo */
 }
 
 /* TEXTAREA OCULTO PARA EDIÇÃO */
 .textarea-oculto {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  resize: none;
-  pointer-events: none;
-  z-index: 2;
+  position: absolute; /* Posiciona de forma absoluta dentro do pai */
+  top: 0; /* Alinha no topo */
+  left: 0; /* Alinha à esquerda */
+  width: 100%; /* Ocupa toda a largura */
+  height: 100%; /* Ocupa toda a altura */
+  opacity: 0; /* Torna invisível */
+  resize: none; /* Desativa redimensionamento */
+  pointer-events: none; /* Impede interações do usuário */
+  z-index: 2; /* Coloca acima de outros elementos */
 }
 
 /* CAIXA VISUAL COM TEXTO JUSTIFICADO */
 .justificado-box {
-  text-align: justify;
-  white-space: pre-line;
-  padding: 16px 12px;
-  border: 1px solid rgba(0, 0, 0, 0.23);
-  border-radius: 4px;
-  min-height: 150px;
-  background-color: white;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  color: rgba(0, 0, 0, 0.87);
-  box-sizing: border-box;
-  height: 200px; /* Ajuste conforme necessário */
-  overflow-y: auto; /* Adiciona scroll quando necessário */
+  text-align: justify; /* Texto justificado */
+  white-space: pre-line; /* Mantém quebras de linha */
+  padding: 16px 12px; /* Espaçamento interno (topo/baixo: 16px, lados: 12px) */
+  border: 1px solid rgba(0, 0, 0, 0.23); /* Borda com leve transparência */
+  border-radius: 4px; /* Bordas levemente arredondadas */
+  min-height: 150px; /* Altura mínima de 150px */
+  background-color: white; /* Fundo branco */
+  font-family: Roboto, "Helvetica Neue", sans-serif; /* Fonte usada */
+  font-size: 16px; /* Tamanho da fonte */
+  line-height: 1.5; /* Espaçamento entre linhas */
+  color: rgba(0, 0, 0, 0.87); /* Cor do texto */
+  box-sizing: border-box; /* Inclui padding e borda na dimensão total */
+  height: 200px; /* Altura fixa de 200px */
+  overflow-y: auto; /* Adiciona rolagem vertical quando necessário */
 }
 
 /* CONTAINER PARA OS BOTÕES */
 .button-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 1rem;
+  display: flex; /* Usa flexbox para layout */
+  flex-direction: column; /* Organiza os botões em coluna */
+  gap: 1rem; /* Espaçamento entre os botões */
+  margin-top: 1rem; /* Espaço superior de 1rem */
 }
 
 /* ESTILIZAÇÃO DOS BOTÕES */
 button.btn-atualizar,
 button.btn-cancelar {
-  width: 100%;
-  padding: 0.75rem;
-  font-size: 1rem;
-  text-align: center;
-  border: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  cursor: pointer;
+  width: 100%; /* Botões ocupam toda a largura */
+  padding: 0.75rem; /* Espaçamento interno */
+  font-size: 1rem; /* Tamanho da fonte */
+  text-align: center; /* Alinha o texto ao centro */
+  border: none; /* Remove a borda padrão */
+  border-radius: 5px; /* Bordas arredondadas */
+  transition: background-color 0.3s ease; /* Transição suave de cor */
+  cursor: pointer; /* Cursor em forma de ponteiro */
 }
 
 /* ESTILO PARA O BOTÃO "ATUALIZAR" */
 button.btn-atualizar {
-  background-color: rgb(39, 141, 45);
-  color: white;
+  background-color: rgb(39, 141, 45); /* Cor de fundo verde */
+  color: white; /* Texto branco */
 }
 
 /* ESTILO PARA O BOTÃO "ATUALIZAR" QUANDO DESABILITADO */
 .btn-atualizar:disabled {
-  background-color: rgb(200, 200, 200);
-  color: rgb(100, 100, 100);
-  cursor: not-allowed;
-  opacity: 0.7;
+  background-color: rgb(200, 200, 200); /* Cinza claro */
+  color: rgb(100, 100, 100); /* Texto cinza escuro */
+  cursor: not-allowed; /* Cursor indica que está desabilitado */
+  opacity: 0.7; /* Reduz opacidade */
 }
 
 /* ESTILO PARA O BOTÃO "CANCELAR" */
 button.btn-cancelar {
-  background-color: rgb(207, 80, 63);
-  color: white;
+  background-color: rgb(207, 80, 63); /* Cor de fundo vermelha */
+  color: white; /* Texto branco */
 }
 
 /* ESTILO PARA O BOTÃO "INCLUIR PROCEDIMENTO" */
 button.btn-novoProcedimento {
   background-color: rgb(39, 141, 45); /* Verde */
-  color: white;
+  color: white; /* Texto branco */
 }
 
 /* ESTILO PARA O BOTÃO "REMOVER PROCEDIMENTO" */
 button.btn-removerProcedimento {
   background-color: rgb(252, 154, 8); /* Amarelo */
-  color: white;
+  color: white; /* Texto branco */
 }
 
 /* ESTILO QUANDO O BOTÃO DE REMOVER ESTIVER DESATIVADO */
 button.btn-removerProcedimento:disabled {
-  background-color: #ccc;
-  color: #666;
-  cursor: not-allowed;
-  opacity: 0.7;
+  background-color: #ccc; /* Cinza claro */
+  color: #666; /* Texto cinza escuro */
+  cursor: not-allowed; /* Cursor indica que está desabilitado */
+  opacity: 0.7; /* Reduz opacidade */
 }
 
 /* AJUSTE BOTÃO DAS COORDENADAS */
 .botao-coordenadas-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1rem;
-  padding: 0 !important;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
+  display: flex; /* Usa flexbox */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  margin-bottom: 1rem; /* Espaçamento inferior de 1rem */
+  padding: 0 !important; /* Remove padding com prioridade */
+  width: 100%; /* Ocupa toda a largura */
+  height: 100%; /* Ocupa toda a altura */
+  box-sizing: border-box; /* Inclui padding e borda no cálculo total */
 }
 
 /* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
 @media (max-width: 768px) {
   .container {
-    padding: 12px;
+    padding: 12px; /* Reduz o padding do container */
   }
   .form {
-    gap: 12px;
+    gap: 12px; /* Reduz o espaçamento entre elementos do formulário */
   }
   button.btn-atualizar,
   button.btn-cancelar {
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* Reduz tamanho da fonte dos botões */
   }
   textarea {
-    min-height: 100px;
+    min-height: 100px; /* Reduz altura mínima da área de texto */
   }
 }
 
 /* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 480px --------- */
 @media (max-width: 480px) {
   .container {
-    padding: 8px;
+    padding: 8px; /* Reduz ainda mais o padding do container */
   }
   .form {
-    gap: 8px;
+    gap: 8px; /* Reduz o espaçamento entre elementos do formulário */
   }
   button.btn-atualizar,
   button.btn-cancelar {
-    font-size: 0.875rem;
+    font-size: 0.875rem; /* Reduz mais o tamanho da fonte dos botões */
   }
   textarea {
-    min-height: 80px;
+    min-height: 80px; /* Reduz altura mínima da área de texto */
   }
 }

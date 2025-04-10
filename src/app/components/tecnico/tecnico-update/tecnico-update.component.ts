@@ -41,7 +41,7 @@ export class TecnicoUpdateComponent implements OnInit {
     cpfCnpj: new FormControl('', [Validators.required, Validators.minLength(11)]),
     celular: new FormControl('', [Validators.minLength(11)]),
     telefone: new FormControl('', [Validators.minLength(10)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(100)]),
     novaSenha: new FormControl(''),
     perfis: new FormControl([]),
     isAdmin: new FormControl(false),
@@ -59,7 +59,7 @@ export class TecnicoUpdateComponent implements OnInit {
 
   // INICIALIZAÇÃO DO COMPONENTE
   ngOnInit(): void {
-    this.toastr.warning('Atualizar um técnico requer privilégios de administrador.', 'Atenção!', { timeOut: 3000 });
+    this.toastr.warning('Atualizar um técnico requer privilégios de administrador(a).', 'Atenção!');
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.tecnico.id = id;

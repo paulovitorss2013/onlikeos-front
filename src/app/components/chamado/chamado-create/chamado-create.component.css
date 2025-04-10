@@ -51,21 +51,21 @@ h1 {
 
 /* AJUSTE DA ÁREA DE TEXTO */
 textarea {
-  min-height: 120px;
-  max-height: 200px;
-  resize: vertical;
-  overflow-y: auto;
-  width: 100%;
-  background-color: rgb(233, 233, 233) !important;
-  text-align: justify;
-  word-spacing: normal;
-  white-space: pre-line;
-  word-break: break-word;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  color: rgba(0, 0, 0, 0.87);
-  box-sizing: border-box;
+min-height: 120px; /* Altura mínima de 120px para garantir espaço inicial */
+max-height: 200px; /* Altura máxima de 200px para limitar o crescimento */
+resize: vertical; /* Permite redimensionamento vertical pelo usuário */
+overflow-y: auto; /* Adiciona rolagem vertical quando necessário */
+width: 100%; /* Ocupa 100% da largura do elemento pai */
+background-color: rgb(233, 233, 233) !important; /* Define cor de fundo clara, com prioridade */
+text-align: justify; /* Alinha o texto justificado nas bordas */
+word-spacing: normal; /* Espaçamento normal entre as palavras */
+white-space: pre-line; /* Mantém quebras de linha e espaços extras no texto */
+word-break: break-word; /* Quebra palavras longas para evitar estouro do layout */
+font-family: Roboto, "Helvetica Neue", sans-serif; /* Define as fontes usadas no texto */
+font-size: 16px; /* Tamanho da fonte de 16 pixels */
+line-height: 1.5; /* Altura da linha proporcional para melhor legibilidade */
+color: rgba(0, 0, 0, 0.87); /* Cor do texto em preto com leve transparência */
+box-sizing: border-box; /* Inclui padding e borda no cálculo total da largura/altura */
 }
 
 

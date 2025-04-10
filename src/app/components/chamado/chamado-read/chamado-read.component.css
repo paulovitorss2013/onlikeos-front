@@ -87,20 +87,20 @@ textarea {
 
 /* CAIXA VISUAL COM TEXTO JUSTIFICADO */
 .justificado-box {
-  text-align: justify;
-  white-space: pre-line;
-  padding: 16px 12px;
-  border: 1px solid rgba(0, 0, 0, 0.23);
-  border-radius: 4px;
-  min-height: 150px;
-  background-color: white;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  color: rgba(0, 0, 0, 0.87);
-  box-sizing: border-box;
-  height: 200px; /* Ajuste conforme necessário */
-  overflow-y: auto; /* Adiciona scroll quando necessário */
+text-align: justify; /* Alinha o texto de forma justificada nas bordas */
+white-space: pre-line; /* Mantém quebras de linha e espaços extras no texto */
+padding: 16px 12px; /* Espaçamento interno de 16px no topo/baixo e 12px nas laterais */
+border: 1px solid rgba(0, 0, 0, 0.23); /* Borda fina com cor preta semi-transparente */
+border-radius: 4px; /* Bordas levemente arredondadas */
+min-height: 150px; /* Altura mínima de 150px */
+background-color: white; /* Cor de fundo branca */
+font-family: Roboto, "Helvetica Neue", sans-serif; /* Define a família de fontes usada no texto */
+font-size: 16px; /* Tamanho da fonte de 16 pixels */
+line-height: 1.5; /* Altura da linha proporcional para melhorar a legibilidade */
+color: rgba(0, 0, 0, 0.87); /* Cor do texto preta com leve transparência */
+box-sizing: border-box; /* Inclui padding e borda no cálculo total de largura/altura */
+height: 200px; /* Ajuste conforme necessário */
+overflow-y: auto; /* Adiciona scroll quando necessário */
 }
 
 /* CONTAINER PARA O BOTÃO */

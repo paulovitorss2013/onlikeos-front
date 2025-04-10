@@ -23,9 +23,10 @@ h1 {
     width: 100%; /* Os campos ocupam a largura total do contêiner */
 }
 
+/* DESABILITA INTERAÇÕES COM O MAT-SELECT QUANDO ESTIVER EM MODO READONLY */
 .readonly .mat-select-trigger {
-    pointer-events: none;
-    cursor: default;
+    pointer-events: none; /* Impede cliques e interações */
+    cursor: default; /* Altera o cursor para padrão */
   }
 
 /* ESTILO PARA O BOTÃO "CRIAR" */

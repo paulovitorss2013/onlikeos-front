@@ -58,32 +58,38 @@ button.btn-cancelar {
     transition: background-color 0.3s ease; /* Transição suave */
 }
 
+/* MENSAGEM DE LOGIN – EXIBE MENSAGEM VISUAL DISCRETA DE ERRO OU ALERTA */
 .login-message {
-    margin-top: -5.25rem;
+    margin-top: -5.25rem; /* Posiciona a mensagem acima para alinhar com o campo */
     font-size: 0.875rem; /* Mantém a mensagem discreta */
     padding-left: 12px; /* Alinha com o input dentro do mat-form-field */
-  }
-
-.email-message {
-    margin-top: -5.25rem;
-    font-size: 0.875rem; /* Mantém a mensagem discreta */
-    padding-left: 12px; /* Alinha com o input dentro do mat-form-field */
-  }
-
-  .cpf-message {
-    margin-top: -5.25rem;
-    font-size: 0.875rem;
-    padding-left: 12px;
   }
   
+  /* MENSAGEM DE E-MAIL – EXIBE MENSAGEM VISUAL DISCRETA DE ERRO OU ALERTA */
+  .email-message {
+    margin-top: -5.25rem; /* Posiciona a mensagem acima para alinhar com o campo */
+    font-size: 0.875rem; /* Mantém a mensagem discreta */
+    padding-left: 12px; /* Alinha com o input dentro do mat-form-field */
+  }
+  
+  /* MENSAGEM DE CPF – EXIBE MENSAGEM VISUAL DISCRETA DE ERRO OU ALERTA */
+  .cpf-message {
+    margin-top: -5.25rem; /* Posiciona a mensagem acima para alinhar com o campo */
+    font-size: 0.875rem; /* Mantém a mensagem discreta */
+    padding-left: 12px; /* Alinha com o input dentro do mat-form-field */
+  }
+  
+  /* MENSAGEM DE ERRO GENÉRICA – EM VERMELHO PARA DESTAQUE */
   .error-message {
-    margin-top: -5.25rem;
-    color: red;
+    margin-top: -5.25rem; /* Posiciona a mensagem acima para alinhar com o campo */
+    color: red; /* Destaca o texto como erro */
   }
-
+  
+  /* REMOVE O ESPAÇAMENTO INFERIOR PADRÃO DO mat-form-field */
   mat-form-field {
-    margin-bottom: 0 !important;
+    margin-bottom: 0 !important; /* Garante que o espaçamento inferior não afete o layout */
   }
+  
 
 /* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */
 

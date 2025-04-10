@@ -38,7 +38,7 @@ export class TecnicoCreateComponent implements OnInit {
     cpfCnpj: new FormControl('', [Validators.required, Validators.minLength(11), Validators.maxLength(18)]),
     celular: new FormControl('', [Validators.minLength(11)]),
     telefone: new FormControl('', [Validators.minLength(10)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(100)]),
     senha: new FormControl('', [
       Validators.required,
       Validators.minLength(8),
@@ -58,7 +58,7 @@ export class TecnicoCreateComponent implements OnInit {
 
   // INICIALIZAÇÃO DO COMPONENTE
   ngOnInit(): void {
-    this.toastr.warning('Cadastrar técnicos(as) requer privilégios de administrador.', 'Atenção!');
+    this.toastr.warning('Cadastrar técnicos(as) requer privilégios de administrador(a).', 'Atenção!');
   }
 
   // MÉTODO PARA ADICIONAR O PERFIL DO TÉCNICO

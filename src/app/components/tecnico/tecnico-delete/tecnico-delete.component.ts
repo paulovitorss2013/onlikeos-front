@@ -30,12 +30,12 @@ export class TecnicoDeleteComponent implements OnInit {
 
   // GRUPO DE FORMULÁRIOS REATIVOS
   form: FormGroup = new FormGroup({
-    nome: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    cpfCnpj: new FormControl('', [Validators.required, Validators.minLength(11)]),
-    celular: new FormControl('', [Validators.minLength(11)]),
-    telefone: new FormControl('', [Validators.minLength(10)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    nome: new FormControl(''),
+    cpfCnpj: new FormControl(''),
+    celular: new FormControl(''),
+    telefone: new FormControl(''),
+    email: new FormControl(''),
+    senha: new FormControl(''),
     perfis: new FormControl([]),
     isAdmin: new FormControl({ value: false, disabled: true }),
     privilegios: new FormControl({ value: '', disabled: true })
@@ -57,7 +57,7 @@ export class TecnicoDeleteComponent implements OnInit {
       this.tecnico.id = id;
       this.findById();
     } else {
-      this.toastr.error('ID do(a) técnico(a) não encontrado.');
+      this.toastr.error('ID do(a) técnico(a) não encontrado!');
       this.router.navigate(['tecnicos']);
     }
   }
@@ -80,7 +80,7 @@ export class TecnicoDeleteComponent implements OnInit {
         });
       },
       error: (err) => {
-        this.toastr.error('Erro ao carregar os dados do(a) técnico(a).');
+        this.toastr.error('Erro ao carregar os dados do(a) técnico(a)!');
       }
     });
   }
@@ -89,7 +89,7 @@ export class TecnicoDeleteComponent implements OnInit {
   delete(): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
-      data: { message: 'Tem certeza que deseja deletar este(a) técnico(a)?' }
+      data: { message: 'Tem certeza que deseja deletar o(a) técnico(a)?' }
     });
   
     dialogRef.afterClosed().subscribe(result => {
@@ -107,7 +107,7 @@ export class TecnicoDeleteComponent implements OnInit {
             } else if (error?.error?.message) {
               this.toastr.error(error.error.message);
             } else {
-              this.toastr.error('Erro desconhecido ao deletar o(a) técnico(a).');
+              this.toastr.error('Erro desconhecido ao deletar o(a) técnico(a)!');
             }
             return of(null);
           })

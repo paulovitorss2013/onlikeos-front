@@ -72,10 +72,10 @@ button.btn-criar, button.btn-cancelar {
 .email-message,
 .login-message {
   margin-top: -4px; /* ajusta para ficar colado, sem sobrepor */
-  font-size: 0.875rem;
-  padding-left: 12px;
-  color: red;
-  display: block;
+  font-size: 0.875rem; /* Tamanho de fonte pequeno para manter a mensagem discreta */
+  padding-left: 12px; /* Espaçamento à esquerda para alinhar com o conteúdo do campo */
+  color: red; /* Cor vermelha para indicar erro ou alerta */
+  display: block; /* Garante que o elemento ocupe uma linha inteira */
 }
 
 /* --------- AJUSTES PARA TELAS PEQUENAS MAX-WIDTH: 768px --------- */

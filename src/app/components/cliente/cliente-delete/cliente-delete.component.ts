@@ -91,7 +91,7 @@ export class ClienteDeleteComponent implements OnInit {
       this.cliente.id = id;
       this.findById();
     } else {
-      this.toastr.error('ID do cliente não encontrado');
+      this.toastr.error('ID do cliente não encontrado!');
       this.router.navigate(['clientes']);
     }
   }
@@ -129,7 +129,7 @@ export class ClienteDeleteComponent implements OnInit {
         });
       },
       error: (err) => {
-        this.toastr.error('Erro ao carregar os dados do cliente');
+        this.toastr.error('Erro ao carregar os dados do cliente!');
       }
     });
   }
@@ -138,7 +138,7 @@ export class ClienteDeleteComponent implements OnInit {
   delete(): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
-      data: { message: 'Tem certeza que deseja deletar este cliente?' }
+      data: { message: 'Tem certeza que deseja deletar o(a) cliente?' }
     });
   
     dialogRef.afterClosed().subscribe(result => {
@@ -156,7 +156,7 @@ export class ClienteDeleteComponent implements OnInit {
             } else if (error?.error?.message) {
               this.toastr.error(error.error.message);
             } else {
-              this.toastr.error('Erro desconhecido ao deletar o cliente.');
+              this.toastr.error('Erro desconhecido ao deletar o(a) cliente.');
             }
             return of(null);
           })
@@ -165,7 +165,6 @@ export class ClienteDeleteComponent implements OnInit {
     });
   }
  
-  
   // MÉTODO PARA CANCELAR AS AÇÕES
   cancelActions(): void {
     this.router.navigate(['clientes']);

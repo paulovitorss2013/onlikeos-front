@@ -18,14 +18,14 @@
       <mat-label>Nome</mat-label>
       <input matInput
         formControlName="nome"
-        placeholder="Entre 10 e 60 caracteres"
+        placeholder="Entre 10 e 60 caracteres."
         maxlength="60">
     </mat-form-field>
 
     <div class="cpf-container">
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>CPF</mat-label>
-        <input matInput placeholder="Digite apenas números" formControlName="cpfCnpj" 
+        <input matInput placeholder="Digite apenas números." formControlName="cpfCnpj" 
           mask="000.000.000-00" (blur)="checkCpf()">
       </mat-form-field>
       <small class="cpf-message" *ngIf="cpfMessage"
@@ -38,9 +38,10 @@
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>E-mail</mat-label>
         <input matInput 
-          placeholder="Digite o e-mail" 
+          placeholder="Digite um e-mail válido." 
           formControlName="email" 
-          (blur)="checkEmail()">
+          (blur)="checkEmail()"
+          maxlength="100">
       </mat-form-field>
       <small class="email-message" *ngIf="emailMessage"
         [ngStyle]="{ 'color': emailMessage === 'E-mail disponível!' ? 'green' : 'red' }">
@@ -51,7 +52,7 @@
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Celular</mat-label>
       <input matInput
-        placeholder="digite apenas números"
+        placeholder="digite apenas números."
         formControlName="celular"
         mask="(00) 00000-0000" />
     </mat-form-field>
@@ -59,7 +60,7 @@
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Telefone</mat-label>
       <input matInput
-        placeholder="digite apenas números"
+        placeholder="digite apenas números."
         formControlName="telefone"
         mask="(00) 0000-0000" />
     </mat-form-field>
@@ -70,7 +71,7 @@
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Nova Senha</mat-label>
         <input matInput formControlName="novaSenha" 
-               placeholder="Digite a nova senha" maxlength="64" 
+               placeholder="Digite uma senha válida." maxlength="64" 
                (focus)="showPasswordWarning()">
         <mat-hint *ngIf="passwordMessage" class="senha-info">
           {{ passwordMessage }}
