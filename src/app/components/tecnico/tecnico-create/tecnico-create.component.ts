@@ -87,7 +87,7 @@ export class TecnicoCreateComponent implements OnInit {
           this.toastr.error(element.message)
         );
       } else {
-        this.toastr.error(ex.error.message || 'Erro desconhecido ao criar o(a) técnico(a).');
+        this.toastr.error(ex.error.message || 'Erro desconhecido ao criar o(a) técnico(a)!');
       }
     }
   });

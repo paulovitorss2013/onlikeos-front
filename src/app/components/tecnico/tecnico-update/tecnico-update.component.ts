@@ -65,7 +65,7 @@ export class TecnicoUpdateComponent implements OnInit {
       this.tecnico.id = id;
       this.findById();
     } else {
-      this.toastr.error('ID do técnico não encontrado');
+      this.toastr.error('ID do(a) técnico(a) não encontrado!');
       this.router.navigate(['tecnicos']);
     }
   }
@@ -87,7 +87,7 @@ export class TecnicoUpdateComponent implements OnInit {
         });
       },
       error: (err) => {
-        this.toastr.error('Erro ao carregar os dados do técnico');
+        this.toastr.error('Erro ao carregar os dados do(a) técnico(a)!');
       }
     });
   }
@@ -117,7 +117,7 @@ export class TecnicoUpdateComponent implements OnInit {
   
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
-      data: { message: 'Deseja mesmo atualizar o técnico?' }
+      data: { message: 'Deseja mesmo atualizar o(a) técnico(a)?' }
     });
   
     dialogRef.afterClosed().subscribe(result => {
@@ -152,7 +152,7 @@ export class TecnicoUpdateComponent implements OnInit {
   
         this.service.update(tecnico).subscribe({
           next: () => {
-            this.toastr.success('Técnico atualizado com sucesso!', 'Atualização');
+            this.toastr.success('Técnico(a) atualizado(a) com sucesso!', 'Atualização');
             this.router.navigate(['tecnicos']);
           },
           error: (ex) => {
@@ -162,7 +162,7 @@ export class TecnicoUpdateComponent implements OnInit {
                 this.toastr.error(element.message)
               );
             } else {
-              this.toastr.error(ex.error.message || 'Erro desconhecido ao atualizar o técnico.');
+              this.toastr.error(ex.error.message || 'Erro desconhecido ao atualizar o(a) técnico(a)!.');
             }
           }
         });
